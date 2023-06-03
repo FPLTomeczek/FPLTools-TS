@@ -1,21 +1,35 @@
-import React from "react";
+import { handleSettingPages } from "./utils";
+import { Direction } from "../enums/pages";
+import { ListProps } from "../types/list";
 
-const ListButtons = ({ handleSettingPages }) => {
+const ListButtons = ({
+  setPage,
+  numOfPages,
+}: Pick<ListProps, "setPage" | "numOfPages">) => {
   return (
     <div className="buttons">
       <button
         className="switchPage"
-        onClick={() => handleSettingPages("first")}
+        onClick={() => handleSettingPages(setPage, Direction.FIRST, numOfPages)}
       >
         <i className="fa-solid fa-angles-left"></i>
       </button>
-      <button className="switchPage" onClick={() => handleSettingPages("prev")}>
+      <button
+        className="switchPage"
+        onClick={() => handleSettingPages(setPage, Direction.PREV, numOfPages)}
+      >
         <i className="fa-solid fa-arrow-left"></i>
       </button>
-      <button className="switchPage" onClick={() => handleSettingPages("next")}>
+      <button
+        className="switchPage"
+        onClick={() => handleSettingPages(setPage, Direction.NEXT, numOfPages)}
+      >
         <i className="fa-solid fa-arrow-right"></i>
       </button>
-      <button className="switchPage" onClick={() => handleSettingPages("last")}>
+      <button
+        className="switchPage"
+        onClick={() => handleSettingPages(setPage, Direction.LAST, numOfPages)}
+      >
         <i className="fa-solid fa-angles-right"></i>
       </button>
     </div>

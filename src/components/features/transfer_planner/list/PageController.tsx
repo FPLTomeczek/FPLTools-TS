@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
 import ListButtons from "./ListButtons";
+import { ListProps } from "../types/list";
 
-const PageController = ({ handleSettingPages, page, numOfPages }) => {
+const PageController = ({ setPage, page, numOfPages }: ListProps) => {
   return (
     <Box
       sx={{
@@ -17,7 +17,7 @@ const PageController = ({ handleSettingPages, page, numOfPages }) => {
       <Typography variant="h5" width={"fit-content"}>
         {page} / {numOfPages}
       </Typography>
-      <ListButtons handleSettingPages={handleSettingPages} />
+      <ListButtons setPage={setPage} numOfPages={numOfPages} />
     </Box>
   );
 };

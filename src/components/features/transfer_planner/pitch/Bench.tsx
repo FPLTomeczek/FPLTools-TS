@@ -1,15 +1,12 @@
-import React from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import PlayerPick from "./PlayerPick";
+import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 
-const Bench = ({ picks }) => {
-  let index = 11;
+const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
   return (
     <Wrapper>
       {picks.map((player) => {
-        return (
-          <PlayerPick key={player.position} player={player} index={index++} />
-        );
+        return <PlayerPick key={player.position} player={player} />;
       })}
     </Wrapper>
   );

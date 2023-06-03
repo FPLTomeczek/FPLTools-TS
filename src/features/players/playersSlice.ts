@@ -10,7 +10,7 @@ import {
   PlayerHistory,
   FilterOptions,
   SortOptions,
-} from "../../components/features/transfer_planner/interfaces/player";
+} from "../../components/features/transfer_planner/interfaces/players";
 
 interface PlayersSlice {
   playersList: Player[];

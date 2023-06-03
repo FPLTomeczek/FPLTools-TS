@@ -4,6 +4,7 @@ import { screen } from "@testing-library/react";
 import { renderComponent, proxyHandler } from "./utils";
 import PlayersList from "../list/PlayersList";
 import configureStore from "redux-mock-store";
+import { mockPlayer } from "./utils";
 
 describe("fetching players", () => {
   it("team players are fetched", async () => {
@@ -15,7 +16,7 @@ describe("fetching players", () => {
 describe("list filtering", () => {
   const mockStore = configureStore();
 
-  const mockPlayers = [
+  const mockPlayers: mockPlayer[] = [
     { id: 1, web_name: "Raya", team: "BRE" },
     { id: 2, web_name: "Trippier", team: "NEW" },
     { id: 3, web_name: "Estupiñán", team: "BHA" },

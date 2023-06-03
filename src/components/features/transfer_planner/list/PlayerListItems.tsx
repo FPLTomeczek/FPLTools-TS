@@ -1,14 +1,20 @@
-import React from "react";
 import PlayerListItem from "./PlayerListItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { SortOptions, Player } from "../interfaces/players";
 
+type PlayerListItemsProps = {
+  pagesData: Array<Array<Player>>;
+  page: number;
+  sortOptions: SortOptions;
+  handleSortChange: (sortOptions: SortOptions) => void;
+};
 const PlayerListItems = ({
   pagesData,
   page,
   sortOptions,
   handleSortChange,
-}) => {
+}: PlayerListItemsProps) => {
   const { type: sortType, value: sortValue } = sortOptions;
 
   return (

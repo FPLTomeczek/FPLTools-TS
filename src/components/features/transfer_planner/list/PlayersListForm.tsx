@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   MenuItem,
@@ -11,42 +11,32 @@ import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../../features/players/playersSlice";
 import { teamsList, roles } from "./data";
 import PageController from "./PageController";
-import { FilterOptions } from "../interfaces/player";
-import { Direction, SelectChangeEvent } from "@mui/material";
+import { FilterOptions } from "../interfaces/players";
+import { SelectChangeEvent } from "@mui/material";
+import { ListProps } from "../types/list";
 
 enum Filter {
   NAME = "name",
   TEAM = "team",
   ROLE = "role",
 }
-type Props = {
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-  page: number;
-  numOfPages: number;
-  handleSettingPages: (
-    callback: React.Dispatch<React.SetStateAction<number>>,
-    type: Direction,
-    numOfPages: number
-  ) => (value: React.SetStateAction<number>) => void;
-};
 
-const PlayersListForm = ({
-  setPage,
-  page,
-  numOfPages,
-  handleSettingPages,
-}: Props) => {
+const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
   const dispatch = useDispatch();
 
-  let filterValues: FilterOptions = { name: "", team: "ALL", role: "ALL" };
+  const [filterValues, setFilterValues] = useState<FilterOptions>({
+    name: "",
+    team: "ALL",
+    role: "ALL",
+  });
 
   const handleSelectOnChange = (
     e: SelectChangeEvent<unknown> | React.ChangeEvent<HTMLInputElement>,
     type: Filter
   ) => {
     const value = e.target.value as string;
-    filterValues = { ...filterValues, [type]: value };
     setPage(1);
+    setFilterValues({ ...filterValues, [type]: value });
 
     switch (type) {
       case "team":
@@ -116,11 +106,7 @@ const PlayersListForm = ({
           </Select>
         </FormControl>
       </Box>
-      <PageController
-        handleSettingPages={handleSettingPages}
-        page={page}
-        numOfPages={numOfPages}
-      />
+      <PageController setPage={setPage} page={page} numOfPages={numOfPages} />
     </Box>
   );
 };

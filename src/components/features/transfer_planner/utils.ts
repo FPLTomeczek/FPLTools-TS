@@ -1,4 +1,7 @@
-import { axiosInstance } from "../../../utils";
+import { PlayerPick, Transfer } from "./interfaces/managerTeam";
+import { ensure } from "../../../helper/helper";
+import { useAppSelector } from "../../../app/hooks";
+import { PlayerHistory } from "./interfaces/players";
 
 export function roleToIndex(role: string) {
   switch (role) {
@@ -15,7 +18,13 @@ export function roleToIndex(role: string) {
   }
 }
 
-export const assignPositionsToPlayers = (positionObjects, playerObjects) => {
+export const assignPositionsToPlayers = (
+  positionObjects: {
+    position: number;
+    element: number;
+  }[],
+  playerObjects: PlayerPick[]
+) => {
   const ids = positionObjects.map((element) => {
     return element.element;
   });
@@ -26,12 +35,29 @@ export const assignPositionsToPlayers = (positionObjects, playerObjects) => {
   return players;
 };
 
-export const calculateSellingCost = (players, transfers) => {
+export const calculateSellingCost = (
+  players: PlayerPick[],
+  transfers: Transfer[],
+  playersHistory: PlayerHistory[]
+) => {
   const playersSellCost = players.map((player) => {
     const { id } = player;
+
+    let element_in_cost;
+
     const transfer = transfers.find((transfer) => transfer.element_in === id);
-    const element_in_cost = transfer.element_in_cost;
-    const now_cost = players.find((player) => player.id === id).now_cost;
+    if (typeof transfer === "undefined") {
+      element_in_cost = ensure(
+        playersHistory.find((player) => player.id === id)
+      ).cost_history[0];
+    } else {
+      element_in_cost = transfer.element_in_cost;
+    }
+
+    const now_cost = ensure(
+      players.find((player) => player.id === id)
+    ).now_cost;
+
     const sell_cost =
       now_cost > element_in_cost
         ? Math.floor((now_cost - element_in_cost) / 2 + element_in_cost)

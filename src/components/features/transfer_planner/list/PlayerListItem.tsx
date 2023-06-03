@@ -1,11 +1,11 @@
-import React from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useSelector, useDispatch } from "react-redux";
 import { teamsList } from "./data";
 import { addPick } from "../../../../features/managerTeam/managerTeamSlice";
+import { Player } from "../interfaces/players";
+import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
 
-const PlayerListItem = ({ player }) => {
-  const managerPicks = useSelector((state) => state.managerTeam.picks);
+const PlayerListItem = ({ player }: { player: Player }) => {
+  const managerPicks = useAppSelector((state) => state.managerTeam.picks);
 
   const availablePositions = [
     ...new Set(
@@ -14,9 +14,12 @@ const PlayerListItem = ({ player }) => {
         .map((pick) => pick.element_type)
     ),
   ];
-  let color = teamsList.find((team) => team.value === player.team).color;
 
-  const dispatch = useDispatch();
+  const foundTeam = teamsList.find((team) => team.value === player.team);
+
+  const color = foundTeam ? foundTeam.color : "#000000";
+
+  const dispatch = useAppDispatch();
 
   const addPlayerToTeam = () => {
     dispatch(addPick(player));

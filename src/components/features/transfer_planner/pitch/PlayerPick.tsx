@@ -1,9 +1,8 @@
-import React from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../../../app/hooks";
 import {
   removePick,
   retrievePick,
@@ -11,8 +10,9 @@ import {
 } from "../../../../features/managerTeam/managerTeamSlice";
 import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
+import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 
-const PlayerPick = ({ player, index }) => {
+const PlayerPick = ({ player }: { player: IPlayerPick }) => {
   const {
     id,
     web_name: name,
@@ -23,7 +23,7 @@ const PlayerPick = ({ player, index }) => {
     team,
   } = player;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const removePlayer = () => {
     dispatch(removePick({ id, position, element_type, sellCost, cost }));

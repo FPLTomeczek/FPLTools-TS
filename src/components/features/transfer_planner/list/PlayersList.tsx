@@ -1,25 +1,12 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks.ts";
 import styled from "styled-components";
-import {
-  paginate,
-  filterPlayers,
-  handleSettingPages,
-  sortPlayers,
-} from "./utils";
+import { paginate, filterPlayers, sortPlayers } from "./utils";
 import { sortPlayers as sortPlayersSlice } from "../../../../features/players/playersSlice";
 import PlayersListForm from "./PlayersListForm.tsx";
 import ListButtons from "./ListButtons";
 import PlayerListItems from "./PlayerListItems";
-import { SortOptions, Player } from "../interfaces/player.ts";
-import { Direction } from "../enums/pages.ts";
-
-function curryPages(
-  callback: React.Dispatch<React.SetStateAction<number>>,
-  numOfPages: number
-): (type: Direction) => void {
-  return (type: Direction) => handleSettingPages(callback, type, numOfPages);
-}
+import { SortOptions, Player } from "../interfaces/players.ts";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -30,8 +17,12 @@ const PlayersList = () => {
   const [page, setPage] = useState(1);
   const dispatch = useAppDispatch();
 
-  const { pagesData, numOfPages }: { pagesData: Player[]; numOfPages: number } =
-    paginate(sortPlayers(filterPlayers(players, filters), sortOptions));
+  const {
+    pagesData,
+    numOfPages,
+  }: { pagesData: Array<Array<Player>>; numOfPages: number } = paginate(
+    sortPlayers(filterPlayers(players, filters), sortOptions)
+  );
 
   const handleSortChange = (sortOptions: SortOptions) => {
     dispatch(sortPlayersSlice({ ...sortOptions }));
@@ -51,19 +42,14 @@ const PlayersList = () => {
 
   return (
     <Wrapper>
-      <PlayersListForm
-        setPage={setPage}
-        page={page}
-        numOfPages={numOfPages}
-        handleSettingPages={curryPages(setPage, numOfPages)}
-      />
+      <PlayersListForm setPage={setPage} page={page} numOfPages={numOfPages} />
       <PlayerListItems
         pagesData={pagesData}
         page={page}
         sortOptions={sortOptions}
         handleSortChange={handleSortChange}
       />
-      <ListButtons handleSettingPages={curryPages(setPage, numOfPages)} />
+      <ListButtons setPage={setPage} numOfPages={numOfPages} />
     </Wrapper>
   );
 };
