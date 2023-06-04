@@ -70,6 +70,9 @@ const managerTeamSlice = createSlice({
     },
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
+      state.bank = action.payload.current[CURRENT_GW - 1].bank;
+      state.transfers =
+        action.payload.current[CURRENT_GW - 1].event_transfers > 0 ? 1 : 2;
     },
     addTransfersHistory(state, action) {
       state.transfersHistory = action.payload;
