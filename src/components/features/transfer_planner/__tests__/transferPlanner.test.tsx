@@ -34,6 +34,9 @@ describe("list filtering", () => {
       filterOptions: { name: "", team: "BRE", role: "" },
       sortOptions: { type: "price", value: "desc" },
     },
+    managerTeam: {
+      picks: [],
+    },
   };
 
   describe("team filtering", () => {
@@ -134,6 +137,9 @@ describe("sorting table", () => {
       error: null,
       filterOptions: { name: "", team: "ALL", role: "ALL" },
       sortOptions: { type: "points", value: "desc" },
+    },
+    managerTeam: {
+      picks: [],
     },
   };
 
