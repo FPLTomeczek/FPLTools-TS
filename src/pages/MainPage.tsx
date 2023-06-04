@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   getManagerTeam,
   getManagerHistory,
@@ -10,7 +10,7 @@ import {
   addTransfersHistory,
 } from "../features/managerTeam/managerTeamSlice";
 import TransferPlanner from "../components/features/transfer_planner/TransferPlanner";
-import { Button, TextField, Box } from "@mui/material";
+import { Button, TextField, Box, Alert, Snackbar } from "@mui/material";
 import { calculateSellingCost } from "../components/features/transfer_planner/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { AppDispatch } from "../app/store";
@@ -20,11 +20,30 @@ import { PlayerHistory } from "../components/features/transfer_planner/interface
 const getManagerData = async (
   id: number,
   dispatch: AppDispatch,
-  playersHistory: PlayerHistory[]
+  playersHistory: PlayerHistory[],
+  setError: React.Dispatch<
+    React.SetStateAction<{
+      value: boolean;
+      msg: string;
+    }>
+  >
 ) => {
-  let picks: PlayerPick[] = await getManagerTeam(id);
-  const managerHistory = await getManagerHistory(id);
-  const transfers = await getTransfers(id);
+  let picks: PlayerPick[];
+  let managerHistory;
+  let transfers;
+  setError({ value: false, msg: "" });
+
+  try {
+    picks = await getManagerTeam(id);
+    managerHistory = await getManagerHistory(id);
+    transfers = await getTransfers(id);
+  } catch (error) {
+    setError({
+      value: true,
+      msg: `Error trying to fetch user data with id: ${id}`,
+    });
+    return;
+  }
   const sellCosts = calculateSellingCost(picks, transfers, playersHistory);
   picks = picks.map((player: PlayerPick, ind: number) => {
     return { ...player, sellCost: sellCosts[ind] };
@@ -40,6 +59,8 @@ const getManagerData = async (
 const MainPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [error, setError] = useState({ value: false, msg: "" });
+
   const playersHistory = useAppSelector(
     (state) => state.players.playersHistory
   );
@@ -48,7 +69,7 @@ const MainPage = () => {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = inputRef.current ? Number(inputRef.current.value) : 0;
     e.preventDefault();
-    getManagerData(id, dispatch, playersHistory);
+    getManagerData(id, dispatch, playersHistory, setError);
   };
 
   return (
@@ -61,6 +82,16 @@ const MainPage = () => {
         maxWidth: "100vw",
       }}
     >
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        open={error.value}
+        autoHideDuration={6000}
+        onClose={() => setError({ value: false, msg: "" })}
+      >
+        <Alert variant="filled" severity="error">
+          {error.msg}
+        </Alert>
+      </Snackbar>
       <form>
         <TextField
           id="outlined-basic"

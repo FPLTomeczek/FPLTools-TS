@@ -15,6 +15,7 @@ export const getManagerTeam = async (id: number) => {
   const { data: teamInfo } = await axiosInstance.get("/team", {
     params: { userID: id },
   });
+
   const teamIDs = teamInfo.picks.map((pick: APIPick) => pick.element);
 
   const playersPositions = getPlayersPositions(teamInfo.picks);
@@ -56,5 +57,7 @@ export const getTeamPicks = async (teamIDs: number[]) => {
   } = await axiosInstance.get(
     `/players/getTeamManagerPlayers?ids=[${teamIDs.map((id) => id)}]`
   );
+  console.log(teamPicks);
+
   return teamPicks;
 };
