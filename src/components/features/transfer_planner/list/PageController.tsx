@@ -8,13 +8,14 @@ const PageController = ({ setPage, page, numOfPages }: ListProps) => {
       sx={{
         width: "100%",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "flex-end",
-        alignItems: "center",
+        alignItems: "end",
         gap: "1rem",
       }}
     >
       <Typography variant="h5" width={"fit-content"}>
-        {page} / {numOfPages}
+        Page {page} / {numOfPages}
       </Typography>
       <ListButtons setPage={setPage} numOfPages={numOfPages} />
     </Box>
