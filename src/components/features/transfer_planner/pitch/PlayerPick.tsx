@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import { useAppDispatch } from "../../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import {
   removePick,
   retrievePick,
@@ -10,7 +10,9 @@ import {
 } from "../../../../features/managerTeam/managerTeamSlice";
 import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
+import { isEmpty } from "lodash";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import { useState } from "react";
 
 const PlayerPick = ({ player }: { player: IPlayerPick }) => {
   const {
@@ -23,6 +25,9 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
     team,
   } = player;
 
+  const playerToChange = useAppSelector(
+    (state) => state.managerTeam.playerToChange
+  );
   const dispatch = useAppDispatch();
 
   const removePlayer = () => {
@@ -41,7 +46,13 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
 
   return (
     <Wrapper>
-      <div className="player-pick">
+      <div
+        className={`player-pick ${
+          !isEmpty(playerToChange) && playerToChange.id === player.id
+            ? "change-pick"
+            : null
+        }`}
+      >
         <div className="buttons">
           <button onClick={enableChange}>
             <ChangeCircleIcon color="warning" />
@@ -79,6 +90,9 @@ const Wrapper = styled.div`
   }
   .player-pick > i {
     font-size: 4rem;
+  }
+  .change-pick {
+    background-color: yellow;
   }
   .buttons {
     display: flex;
