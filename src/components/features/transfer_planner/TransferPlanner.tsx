@@ -3,7 +3,7 @@ import PlayerList from "./list/PlayersList";
 import { Grid } from "@mui/material";
 import Pitch from "./pitch/Pitch";
 
-const TransferPlanner = () => {
+const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <Wrapper>
       <Grid container mt={2}>
@@ -18,7 +18,7 @@ const TransferPlanner = () => {
             alignItems: "start",
           }}
         >
-          <Pitch />
+          <Pitch isLoading={isLoading} />
         </Grid>
 
         <Grid item xs={12} lg={6}>

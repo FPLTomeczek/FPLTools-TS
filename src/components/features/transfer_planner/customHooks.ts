@@ -57,7 +57,6 @@ export const getTeamPicks = async (teamIDs: number[]) => {
   } = await axiosInstance.get(
     `/players/getTeamManagerPlayers?ids=[${teamIDs.map((id) => id)}]`
   );
-  console.log(teamPicks);
 
   return teamPicks;
 };

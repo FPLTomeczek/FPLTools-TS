@@ -51,7 +51,12 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "end",
+      }}
+    >
       <Box
         sx={{ display: "flex", gap: "1rem", width: "100%", alignItems: "end" }}
       >

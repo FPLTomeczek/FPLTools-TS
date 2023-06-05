@@ -14,7 +14,7 @@ const storage = {
   transfersHistory: localStorage.getItem("transfersHistory"),
 };
 
-type ManagerTeamState = {
+interface ManagerTeamState {
   picks: PlayerPick[];
   initialPicks: PlayerPick[];
   value: number;
@@ -24,7 +24,7 @@ type ManagerTeamState = {
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
-};
+}
 
 const initialState: ManagerTeamState = {
   picks:
@@ -84,8 +84,6 @@ const managerTeamSlice = createSlice({
 
       const removedPickIndex = state.picks.indexOf(playerToRemove);
 
-      console.log(removedPickIndex);
-
       if (state.initialPicks.find((initialPick) => initialPick.id === id)) {
         state.transfers -= 1;
         state.removedPicks.push({
@@ -109,7 +107,6 @@ const managerTeamSlice = createSlice({
       const retrievedPick = state.removedPicks.find(
         (removedPick) => removedPick.position === position
       ) as PlayerPick;
-      console.log(retrievedPick);
 
       const blankPick = state.picks.find((pick) => pick.position === position);
       if (blankPick) {

@@ -26,7 +26,8 @@ const getManagerData = async (
       value: boolean;
       msg: string;
     }>
-  >
+  >,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   let picks: PlayerPick[];
   let managerHistory;
@@ -54,22 +55,26 @@ const getManagerData = async (
   dispatch(addPicks(picks));
   dispatch(addManagerHistory(managerHistory));
   dispatch(addTransfersHistory(transfers));
+  setIsLoading(false);
 };
 
 const MainPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState({ value: false, msg: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const playersHistory = useAppSelector(
     (state) => state.players.playersHistory
   );
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsLoading(true);
     const id = inputRef.current ? Number(inputRef.current.value) : 0;
     e.preventDefault();
-    getManagerData(id, dispatch, playersHistory, setError);
+    getManagerData(id, dispatch, playersHistory, setError, setIsLoading);
   };
 
   return (
@@ -109,7 +114,7 @@ const MainPage = () => {
           Submit
         </Button>
       </form>
-      <TransferPlanner />
+      <TransferPlanner isLoading={isLoading} />
     </Box>
   );
 };

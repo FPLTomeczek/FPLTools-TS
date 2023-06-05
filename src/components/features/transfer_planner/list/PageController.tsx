@@ -11,7 +11,6 @@ const PageController = ({ setPage, page, numOfPages }: ListProps) => {
         justifyContent: "flex-end",
         alignItems: "center",
         gap: "1rem",
-        marginRight: "4rem",
       }}
     >
       <Typography variant="h5" width={"fit-content"}>
