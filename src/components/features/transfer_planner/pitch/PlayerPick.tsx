@@ -12,7 +12,6 @@ import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
 import { isEmpty } from "lodash";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
-import { useState } from "react";
 
 const PlayerPick = ({ player }: { player: IPlayerPick }) => {
   const {
@@ -35,11 +34,11 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
   };
 
   const retrievePlayer = () => {
-    dispatch(retrievePick(player.removedPickIndex));
+    dispatch(retrievePick(position));
   };
 
   const enableChange = () => {
-    dispatch(makeChange(player.id));
+    dispatch(makeChange(id));
   };
 
   const shirt = teamsList.find((teamItem) => teamItem.value === team)?.img;
@@ -48,7 +47,7 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
     <Wrapper>
       <div
         className={`player-pick ${
-          !isEmpty(playerToChange) && playerToChange.id === player.id
+          !isEmpty(playerToChange) && playerToChange.id === id
             ? "change-pick"
             : null
         }`}

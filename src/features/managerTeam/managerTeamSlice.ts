@@ -22,7 +22,6 @@ type ManagerTeamState = {
   transfers: number;
   removedPicks: PlayerPick[];
   playerToChange: PlayerPick | Record<string, never>;
-  playersAvailableToChange: PlayerPick[];
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
 };
@@ -50,7 +49,6 @@ const initialState: ManagerTeamState = {
       : 1,
   removedPicks: [],
   playerToChange: {},
-  playersAvailableToChange: [],
   managerHistory:
     typeof storage.managerHistory === "string"
       ? JSON.parse(storage.managerHistory)
@@ -88,7 +86,7 @@ const managerTeamSlice = createSlice({
 
       console.log(removedPickIndex);
 
-      if (!state.removedPicks.find((removedPick) => removedPick.id === id)) {
+      if (state.initialPicks.find((initialPick) => initialPick.id === id)) {
         state.transfers -= 1;
         state.removedPicks.push({
           ...state.picks[removedPickIndex],
@@ -107,16 +105,21 @@ const managerTeamSlice = createSlice({
       };
     },
     retrievePick(state, action) {
-      const index = action.payload;
+      const position = action.payload;
       const retrievedPick = state.removedPicks.find(
-        (removedPick) => removedPick.removedPickIndex === index
+        (removedPick) => removedPick.position === position
       ) as PlayerPick;
       console.log(retrievedPick);
-      state.picks[index] = { ...retrievedPick };
-      const removedPickIndex = state.removedPicks.indexOf(retrievedPick);
-      state.removedPicks.splice(removedPickIndex, 1);
-      state.bank -= retrievedPick.sellCost;
-      state.transfers += 1;
+
+      const blankPick = state.picks.find((pick) => pick.position === position);
+      if (blankPick) {
+        const index = state.picks.indexOf(blankPick);
+        state.picks[index] = { ...retrievedPick };
+        const removedPickIndex = state.removedPicks.indexOf(retrievedPick);
+        state.removedPicks.splice(removedPickIndex, 1);
+        state.bank -= retrievedPick.sellCost;
+        state.transfers += 1;
+      }
     },
     addPick(state, action) {
       const newPlayer = action.payload;
@@ -126,9 +129,11 @@ const managerTeamSlice = createSlice({
           pick.web_name == "Blank"
       );
       if (blankPlayerMatch) {
+        const position = blankPlayerMatch.position;
         if (typeof blankPlayerMatch.removedPickIndex === "number") {
           state.picks[blankPlayerMatch.removedPickIndex] = {
             ...newPlayer,
+            position,
           };
           state.bank -= newPlayer.now_cost;
         }

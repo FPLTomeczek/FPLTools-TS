@@ -29,7 +29,7 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
           return (
             <div key={ind} className="picks-row">
               {players.map((player) => {
-                return <PlayerPick key={player.position} player={player} />;
+                return <PlayerPick key={player.id} player={player} />;
               })}
             </div>
           );
