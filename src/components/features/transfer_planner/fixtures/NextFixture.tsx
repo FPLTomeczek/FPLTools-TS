@@ -16,11 +16,7 @@ const NextFixture = ({ team }: { team: string }) => {
     return teamText + place;
   });
 
-  return (
-    <div>
-      <p>{nextFixtureText.join(", ")}</p>
-    </div>
-  );
+  return <p>{nextFixtureText.join(", ")}</p>;
 };
 
 export default NextFixture;

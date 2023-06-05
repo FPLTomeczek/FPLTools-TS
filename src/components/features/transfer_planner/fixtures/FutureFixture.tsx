@@ -1,23 +1,10 @@
+import { setBackgroundColor } from "./utils";
+
 type FixtureProps = {
   opponent: string;
   isHome: boolean;
   difficulty: number;
 };
-
-function setBackgroundColor(difficulty: number) {
-  switch (difficulty) {
-    case 2:
-      return "#b0ff73";
-    case 3:
-      return "#FFFFFF";
-    case 4:
-      return "#ff6303";
-    case 5:
-      return "#ff0000";
-    default:
-      break;
-  }
-}
 
 const FutureFixture = ({ opponent, isHome, difficulty }: FixtureProps) => {
   const bgColor = setBackgroundColor(difficulty);
@@ -28,6 +15,11 @@ const FutureFixture = ({ opponent, isHome, difficulty }: FixtureProps) => {
         textTransform: isHome ? "none" : "lowercase",
         backgroundColor: bgColor,
         fontWeight: "700",
+        width: "20px",
+        boxSizing: "border-box",
+        textAlign: "center",
+        padding: "0.25rem 0",
+        maxHeight: "16px",
       }}
     >
       {opponent}

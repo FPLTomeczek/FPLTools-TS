@@ -91,6 +91,11 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  .player-pick > p {
+    width: 100px;
+    box-sizing: border-box;
+    text-align: center;
+  }
   .player-pick > i {
     font-size: 4rem;
   }
