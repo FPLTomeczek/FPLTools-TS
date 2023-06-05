@@ -92,7 +92,7 @@ const Wrapper = styled.div`
     align-items: center;
   }
   .player-pick > p {
-    width: 100px;
+    min-width: 100px;
     box-sizing: border-box;
     text-align: center;
   }
