@@ -12,6 +12,8 @@ import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
 import { isEmpty } from "lodash";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import FutureFixtures from "../fixtures/FutureFixtures";
+import NextFixture from "../fixtures/NextFixture";
 
 const PlayerPick = ({ player }: { player: IPlayerPick }) => {
   const {
@@ -49,7 +51,7 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
         className={`player-pick ${
           !isEmpty(playerToChange) && playerToChange.id === id
             ? "change-pick"
-            : null
+            : ""
         }`}
       >
         <div className="buttons">
@@ -71,6 +73,9 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
         ) : (
           <img src={blank} alt="default-shirt" />
         )}
+
+        <NextFixture team={team} />
+        <FutureFixtures team={team} />
         <p>{name}</p>
       </div>
     </Wrapper>
@@ -85,7 +90,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
   }
   .player-pick > i {
     font-size: 4rem;
@@ -104,6 +108,7 @@ const Wrapper = styled.div`
   p {
     background-color: white;
     padding: 0.25rem;
+    margin: 2px 0;
   }
 `;
 
