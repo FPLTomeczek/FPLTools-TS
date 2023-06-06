@@ -14,6 +14,10 @@ const storage = {
   transfersHistory: localStorage.getItem("transfersHistory"),
 };
 
+type ValidationError = {
+  isError: boolean;
+  message: string;
+};
 interface ManagerTeamState {
   picks: PlayerPick[];
   initialPicks: PlayerPick[];
@@ -24,6 +28,7 @@ interface ManagerTeamState {
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
+  validationError: ValidationError;
 }
 
 const initialState: ManagerTeamState = {
@@ -57,6 +62,7 @@ const initialState: ManagerTeamState = {
     typeof storage.transfersHistory === "string"
       ? JSON.parse(storage.transfersHistory)
       : [],
+  validationError: { isError: false, message: "" },
 };
 
 const managerTeamSlice = createSlice({
@@ -77,6 +83,10 @@ const managerTeamSlice = createSlice({
     },
     removePick(state, action) {
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
+
+      if (!isEmpty(state.playerToChange) && state.playerToChange.id === id) {
+        state.playerToChange = {};
+      }
 
       const playerToRemove = state.picks.find(
         (pick) => pick.id === id
@@ -151,6 +161,13 @@ const managerTeamSlice = createSlice({
       }
       state.playerToChange = state.picks[index];
     },
+    validatePicks(state, action) {
+      const { isError, message } = action.payload;
+      state.validationError = { isError, message };
+      if (isError) {
+        Object.assign(state, initialState);
+      }
+    },
   },
 });
 
@@ -162,6 +179,7 @@ export const {
   makeChange,
   addManagerHistory,
   addTransfersHistory,
+  validatePicks,
 } = managerTeamSlice.actions;
 
 export default managerTeamSlice.reducer;

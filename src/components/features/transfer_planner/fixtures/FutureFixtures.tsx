@@ -49,6 +49,7 @@ const FutureFixtures = ({ team }: { team: string }) => {
             doubleEvent = 0;
             return (
               <DoubleFutureFixture
+                key={event}
                 duplicatesFixtures={duplicatesFixtures.filter(
                   (fixture) => fixture.event === event
                 )}

@@ -11,13 +11,14 @@ const DoubleFutureFixture = ({
 }) => {
   return (
     <Box>
-      {duplicatesFixtures.map((fixture) => {
+      {duplicatesFixtures.map((fixture, index) => {
         const isHome = fixture.team_a === team ? true : false;
         const bgColor = isHome
           ? setBackgroundColor(fixture.team_a_difficulty)
           : setBackgroundColor(fixture.team_h_difficulty);
         return (
           <p
+            key={index}
             style={{
               textTransform: isHome ? "none" : "lowercase",
               backgroundColor: bgColor,

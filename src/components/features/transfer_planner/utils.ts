@@ -1,6 +1,5 @@
 import { PlayerPick, Transfer } from "./interfaces/managerTeam";
 import { ensure } from "../../../helper/helper";
-import { useAppSelector } from "../../../app/hooks";
 import { PlayerHistory } from "./interfaces/players";
 
 export function roleToIndex(role: string) {
@@ -65,4 +64,22 @@ export const calculateSellingCost = (
     return sell_cost;
   });
   return playersSellCost;
+};
+
+export const splittingPicksByRoles = (picks: PlayerPick[]) => {
+  const splittedPicks = picks.reduce(
+    (accumulator: Array<Array<PlayerPick>>, value: PlayerPick) => {
+      const index = roleToIndex(value.element_type);
+      if (typeof index !== "undefined") {
+        if (accumulator[index] === undefined) {
+          accumulator[index] = [value];
+        } else {
+          accumulator[index] = [...accumulator[index], value];
+        }
+      }
+      return accumulator;
+    },
+    []
+  );
+  return splittedPicks;
 };
