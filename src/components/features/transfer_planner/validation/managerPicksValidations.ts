@@ -6,7 +6,6 @@ import {
   FIRST_ELEVEN_DEF_MAX,
   FIRST_ELEVEN_MID_MIN,
   FIRST_ELEVEN_MID_MAX,
-  FIRST_ELEVEN_FWD_MIN,
   FIRST_ELEVEN_FWD_MAX,
 } from "../../../../constants";
 
@@ -40,7 +39,7 @@ const validateFormation = (picks: PlayerPick[]) => {
     splittedPicks[1].length > FIRST_ELEVEN_DEF_MAX ||
     splittedPicks[2].length < FIRST_ELEVEN_MID_MIN ||
     splittedPicks[2].length > FIRST_ELEVEN_MID_MAX ||
-    splittedPicks[3].length < FIRST_ELEVEN_FWD_MIN ||
+    !splittedPicks[3] ||
     splittedPicks[3].length > FIRST_ELEVEN_FWD_MAX
   )
     return false;
