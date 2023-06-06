@@ -1,5 +1,5 @@
 import { CURRENT_GW } from "../../../../constants";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Alert } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
 import { PlayerPick } from "../interfaces/managerTeam";
@@ -20,6 +20,9 @@ const PitchHeader = () => {
   return (
     <div>
       <Box sx={{ display: "flex", justifyContent: "center" }} mb={2}>
+        {managerTeam.validationError.isError ? (
+          <Alert severity="error">{managerTeam.validationError.message}</Alert>
+        ) : null}
         <Button
           variant="contained"
           size="medium"
