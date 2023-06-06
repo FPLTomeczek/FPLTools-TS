@@ -1,23 +1,10 @@
 import PlayerPick from "./PlayerPick";
 import styled from "styled-components";
-import { roleToIndex } from "../utils";
+import { splittingPicksByRoles } from "../utils";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 
 const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
-  const picksByRole = picks.reduce(
-    (accumulator: Array<Array<IPlayerPick>>, value: IPlayerPick) => {
-      const index = roleToIndex(value.element_type);
-      if (typeof index !== "undefined") {
-        if (accumulator[index] === undefined) {
-          accumulator[index] = [value];
-        } else {
-          accumulator[index] = [...accumulator[index], value];
-        }
-      }
-      return accumulator;
-    },
-    []
-  );
+  const picksByRole = splittingPicksByRoles(picks);
 
   let playerIndex = 0;
   // <a href="https://www.vecteezy.com/free-vector/football-pitch">
