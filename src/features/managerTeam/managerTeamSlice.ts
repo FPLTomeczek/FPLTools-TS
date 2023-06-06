@@ -163,9 +163,11 @@ const managerTeamSlice = createSlice({
     },
     validatePicks(state, action) {
       const { isError, message } = action.payload;
-      state.validationError = { isError, message };
       if (isError) {
-        Object.assign(state, initialState);
+        Object.assign(state, {
+          ...initialState,
+          validationError: { isError, message },
+        });
       }
     },
   },
