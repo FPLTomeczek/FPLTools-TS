@@ -78,6 +78,10 @@ const managerTeamSlice = createSlice({
     removePick(state, action) {
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
 
+      if (!isEmpty(state.playerToChange) && state.playerToChange.id === id) {
+        state.playerToChange = {};
+      }
+
       const playerToRemove = state.picks.find(
         (pick) => pick.id === id
       ) as PlayerPick;
