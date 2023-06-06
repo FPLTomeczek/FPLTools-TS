@@ -19,7 +19,7 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
               {players.map((player) => {
                 return (
                   <PlayerPick
-                    key={player.id}
+                    key={player.position}
                     player={player}
                     index={playerIndex++}
                   />
