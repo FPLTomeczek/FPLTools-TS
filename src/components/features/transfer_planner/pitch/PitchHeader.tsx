@@ -10,7 +10,7 @@ const PitchHeader = () => {
     <div>
       <Box sx={{ display: "flex", justifyContent: "center" }} mb={2}>
         <Button variant="contained" size="medium">
-          Save Draft
+          Save Team
         </Button>
       </Box>
 

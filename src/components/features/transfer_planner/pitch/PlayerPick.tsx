@@ -15,7 +15,13 @@ import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
 
-const PlayerPick = ({ player }: { player: IPlayerPick }) => {
+const PlayerPick = ({
+  player,
+  index,
+}: {
+  player: IPlayerPick;
+  index: number;
+}) => {
   const {
     id,
     web_name: name,
@@ -55,13 +61,18 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
         }`}
       >
         <div className="buttons">
-          <button onClick={enableChange}>
-            <ChangeCircleIcon color="warning" />
-          </button>
           {name !== "Blank" ? (
-            <button onClick={removePlayer}>
-              <CancelIcon color="error" />
-            </button>
+            <div className="manipulate-player-buttons">
+              <button
+                data-testid={`change-button-${index}`}
+                onClick={enableChange}
+              >
+                <ChangeCircleIcon color="warning" />
+              </button>
+              <button onClick={removePlayer}>
+                <CancelIcon color="error" />
+              </button>
+            </div>
           ) : (
             <button onClick={retrievePlayer}>
               <ArrowCircleLeftRoundedIcon color="success" />
@@ -76,7 +87,7 @@ const PlayerPick = ({ player }: { player: IPlayerPick }) => {
 
         <NextFixture team={team} />
         <FutureFixtures team={team} />
-        <p>{name}</p>
+        <p data-testid={`player-name-${index}`}>{name}</p>
       </div>
     </Wrapper>
   );
@@ -102,12 +113,12 @@ const Wrapper = styled.div`
   .change-pick {
     background-color: yellow;
   }
-  .buttons {
+  .manipulate-player-buttons {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.25rem;
   }
-  .buttons > * {
+  button {
     cursor: pointer;
   }
   p {

@@ -3,10 +3,17 @@ import PlayerPick from "./PlayerPick";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 
 const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
+  let playerStartIndex = 11;
   return (
     <Wrapper>
       {picks.map((player) => {
-        return <PlayerPick key={player.position} player={player} />;
+        return (
+          <PlayerPick
+            key={player.position}
+            player={player}
+            index={playerStartIndex++}
+          />
+        );
       })}
     </Wrapper>
   );

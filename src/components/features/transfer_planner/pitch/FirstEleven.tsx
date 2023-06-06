@@ -19,17 +19,24 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
     []
   );
 
+  let playerIndex = 0;
   // <a href="https://www.vecteezy.com/free-vector/football-pitch">
   //   Football Pitch Vectors by Vecteezy
   // </a>;
   return (
     <Wrapper>
-      <div className="pitch">
+      <div className="pitch" data-testid="pitch">
         {picksByRole.map((players, ind) => {
           return (
             <div key={ind} className="picks-row">
               {players.map((player) => {
-                return <PlayerPick key={player.id} player={player} />;
+                return (
+                  <PlayerPick
+                    key={player.id}
+                    player={player}
+                    index={playerIndex++}
+                  />
+                );
               })}
             </div>
           );
