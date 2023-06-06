@@ -5,6 +5,7 @@ import {
   fetchPlayers,
   fetchPlayersHistory,
 } from "./features/players/playersSlice";
+import { fetchFixtures } from "./features/fixtures/fixturesSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchPlayers());
     dispatch(fetchPlayersHistory());
+    dispatch(fetchFixtures());
   }, []);
 
   return (

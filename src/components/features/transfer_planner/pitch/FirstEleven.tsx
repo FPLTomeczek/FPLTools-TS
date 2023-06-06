@@ -44,9 +44,8 @@ const Wrapper = styled.div`
   justify-content: center;
   .pitch {
     background-image: url("src/assets/FOOTBALL_FIELD_portrait.jpg");
-    width: 500px;
-    height: 750px;
-    background-size: contain;
+    width: 800px;
+    background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
@@ -57,6 +56,7 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-around;
+    padding: 2rem 0;
   }
 `;
 

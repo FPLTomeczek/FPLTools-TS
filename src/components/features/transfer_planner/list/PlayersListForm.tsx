@@ -51,14 +51,15 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "end",
-      }}
-    >
+    <Box sx={{ display: "flex", alignItems: "end" }}>
       <Box
-        sx={{ display: "flex", gap: "1rem", width: "100%", alignItems: "end" }}
+        sx={{
+          display: "flex",
+          gap: "1rem",
+          width: "100%",
+          alignItems: "start",
+          flexDirection: "column",
+        }}
       >
         <FormControl>
           <TextField
@@ -71,45 +72,47 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
             }
           ></TextField>
         </FormControl>
-        <FormControl>
-          <FormLabel>Team</FormLabel>
-          <Select
-            id="team"
-            name="team"
-            label="Team"
-            value={filterValues.team}
-            onChange={(e: SelectChangeEvent<unknown>) =>
-              handleSelectOnChange(e, Filter.TEAM)
-            }
-            data-testid="select-button"
-          >
-            <MenuItem value="ALL">-</MenuItem>
-            {teamsList.map((team) => (
-              <MenuItem value={team.value} key={team.value}>
-                {team.value}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Role</FormLabel>
-          <Select
-            id="role"
-            name="role"
-            label="Role"
-            value={filterValues.role}
-            onChange={(e: SelectChangeEvent<unknown>) =>
-              handleSelectOnChange(e, Filter.ROLE)
-            }
-          >
-            <MenuItem value="ALL">-</MenuItem>
-            {roles.map((role) => (
-              <MenuItem value={role.role} key={role.role}>
-                {role.value}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Box sx={{ display: "flex", gap: "1rem" }}>
+          <FormControl>
+            <FormLabel>Team</FormLabel>
+            <Select
+              id="team"
+              name="team"
+              label="Team"
+              value={filterValues.team}
+              onChange={(e: SelectChangeEvent<unknown>) =>
+                handleSelectOnChange(e, Filter.TEAM)
+              }
+              data-testid="select-button"
+            >
+              <MenuItem value="ALL">-</MenuItem>
+              {teamsList.map((team) => (
+                <MenuItem value={team.value} key={team.value}>
+                  {team.value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Role</FormLabel>
+            <Select
+              id="role"
+              name="role"
+              label="Role"
+              value={filterValues.role}
+              onChange={(e: SelectChangeEvent<unknown>) =>
+                handleSelectOnChange(e, Filter.ROLE)
+              }
+            >
+              <MenuItem value="ALL">-</MenuItem>
+              {roles.map((role) => (
+                <MenuItem value={role.role} key={role.role}>
+                  {role.value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
       </Box>
       <PageController setPage={setPage} page={page} numOfPages={numOfPages} />
     </Box>

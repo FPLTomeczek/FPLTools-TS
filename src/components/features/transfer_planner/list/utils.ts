@@ -1,6 +1,7 @@
 import { Direction } from "../enums/pages";
+import { Player, FilterOptions, SortOptions } from "../interfaces/players";
 
-export const filterPlayers = (players, filters) => {
+export const filterPlayers = (players: Player[], filters: FilterOptions) => {
   return players
     .filter((player) => {
       if (filters.team === "ALL") {
@@ -33,7 +34,7 @@ export const filterPlayers = (players, filters) => {
     });
 };
 
-export const sortPlayers = (players, sortOptions) => {
+export const sortPlayers = (players: Player[], sortOptions: SortOptions) => {
   return players.sort((playerA, playerB) => {
     if (sortOptions.type === "points") {
       return sortOptions.value === "desc"
@@ -43,11 +44,13 @@ export const sortPlayers = (players, sortOptions) => {
       return sortOptions.value === "desc"
         ? playerB.now_cost - playerA.now_cost
         : playerA.now_cost - playerB.now_cost;
+    } else {
+      return 0;
     }
   });
 };
 
-export const paginate = (list) => {
+export const paginate = (list: Player[]) => {
   const divider = 20;
   const numOfPages =
     list.length % divider === 0

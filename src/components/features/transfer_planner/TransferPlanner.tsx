@@ -10,7 +10,7 @@ const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
         <Grid
           item
           xs={12}
-          lg={6}
+          lg={7}
           mt={12}
           sx={{
             display: "flex",
@@ -21,7 +21,7 @@ const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
           <Pitch isLoading={isLoading} />
         </Grid>
 
-        <Grid item xs={12} lg={6}>
+        <Grid item xs={12} lg={5}>
           <div className="player-list">
             <PlayerList />
           </div>
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   .planner-picks {
-    max-width: 500px;
+    width: 100%;
   }
 `;
 
