@@ -2,6 +2,7 @@ import PlayerPick from "./PlayerPick";
 import styled from "styled-components";
 import { splittingPicksByRoles } from "../utils";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import pitch_image from "../../../../assets/FOOTBALL_FIELD_portrait.jpg";
 
 const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
   const picksByRole = splittingPicksByRoles(picks);
@@ -12,7 +13,11 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
   // </a>;
   return (
     <Wrapper>
-      <div className="pitch" data-testid="pitch">
+      <div
+        className="pitch"
+        style={{ backgroundImage: pitch_image }}
+        data-testid="pitch"
+      >
         {picksByRole.map((players, ind) => {
           return (
             <div key={ind} className="picks-row">
@@ -37,7 +42,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   .pitch {
-    background-image: url("src/assets/FOOTBALL_FIELD_portrait.jpg");
     width: 800px;
     background-size: cover;
     background-repeat: no-repeat;
