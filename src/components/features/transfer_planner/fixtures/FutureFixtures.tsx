@@ -6,14 +6,14 @@ import { Fixture } from "../interfaces/fixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 
 const FutureFixtures = ({ team }: { team: string }) => {
-  const futureFixtures = useAppSelector(
-    (state) => state.fixtures.fixtureList
-  ).filter(
-    (fixture) =>
-      fixture.event > CURRENT_GW &&
-      fixture.event < CURRENT_GW + 6 &&
-      (fixture.team_a === team || fixture.team_h === team)
-  );
+  const futureFixtures = useAppSelector((state) => state.fixtures.fixtureList)
+    .filter(
+      (fixture) =>
+        fixture.event > CURRENT_GW &&
+        fixture.event < CURRENT_GW + 6 &&
+        (fixture.team_a === team || fixture.team_h === team)
+    )
+    .sort((a, b) => a.event - b.event);
 
   const findDuplicateFixtures = (arr: Fixture[]) => {
     const duplicates = arr.map((fixture) => fixture.event);
@@ -36,6 +36,8 @@ const FutureFixtures = ({ team }: { team: string }) => {
   );
 
   let doubleEvent = 0;
+
+  console.log(futureFixtures);
 
   return (
     <Box sx={{ display: "flex", fontSize: "0.5rem", width: "100px" }}>
