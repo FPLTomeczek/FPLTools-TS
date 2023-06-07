@@ -37,8 +37,6 @@ const FutureFixtures = ({ team }: { team: string }) => {
 
   let doubleEvent = 0;
 
-  console.log(futureFixtures);
-
   return (
     <Box sx={{ display: "flex", fontSize: "0.5rem", width: "100px" }}>
       {futureFixtures.map((fixture, id) => {
