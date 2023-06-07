@@ -31,9 +31,9 @@ const FutureFixtures = ({ team }: { team: string }) => {
   }
 
   const duplicatesFixtures = findDuplicateFixtures(futureFixtures);
-  const blankEvents = GWArray.filter(
-    (event) => !futureFixtures.map((fixture) => fixture.event).includes(event)
-  );
+  // const blankEvents = GWArray.filter(
+  //   (event) => !futureFixtures.map((fixture) => fixture.event).includes(event)
+  // );
 
   let doubleEvent = 0;
 
