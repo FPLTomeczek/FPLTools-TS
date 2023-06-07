@@ -3,7 +3,7 @@ const dev = {
 };
 
 const prod = {
-  url: "/prod/url",
+  url: "https://fpltools-api.onrender.com/api/",
 };
 
 export const config = process.env.NODE_ENV === "development" ? dev : prod;
