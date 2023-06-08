@@ -9,8 +9,8 @@ const FutureFixtures = ({ team }: { team: string }) => {
   const futureFixtures = useAppSelector((state) => state.fixtures.fixtureList)
     .filter(
       (fixture) =>
-        fixture.event > CURRENT_GW &&
-        fixture.event < CURRENT_GW + 6 &&
+        fixture.event >= CURRENT_GW &&
+        fixture.event < CURRENT_GW + 5 &&
         (fixture.team_a === team || fixture.team_h === team)
     )
     .sort((a, b) => a.event - b.event);
@@ -23,10 +23,10 @@ const FutureFixtures = ({ team }: { team: string }) => {
     return arr.filter((fixture) => duplicatesEvents.includes(fixture.event));
   };
 
-  const maxGW = CURRENT_GW + 6 > LAST_GW ? LAST_GW : CURRENT_GW + 6;
+  const maxGW = CURRENT_GW + 5 > LAST_GW ? LAST_GW : CURRENT_GW + 4;
 
   const GWArray: number[] = [];
-  for (let i = CURRENT_GW + 1; i <= maxGW; i++) {
+  for (let i = CURRENT_GW; i <= maxGW; i++) {
     GWArray.push(i);
   }
 

@@ -18,8 +18,14 @@ type ValidationError = {
   isError: boolean;
   message: string;
 };
+
+interface PicksByGameweeks {
+  [gameweek: number]: PlayerPick[];
+}
+
 interface ManagerTeamState {
   picks: PlayerPick[];
+  picksByGameweeks: PicksByGameweeks;
   initialPicks: PlayerPick[];
   value: number;
   bank: number;
@@ -36,6 +42,7 @@ const initialState: ManagerTeamState = {
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
       : [],
+  picksByGameweeks: [],
   initialPicks:
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
@@ -43,11 +50,11 @@ const initialState: ManagerTeamState = {
   value: 0,
   bank:
     typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 1].bank
+      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2].bank
       : 0,
   transfers:
     typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 1]
+      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2]
           .event_transfers > 0
         ? 1
         : 2
@@ -71,12 +78,13 @@ const managerTeamSlice = createSlice({
   reducers: {
     addPicks(state, action) {
       state.picks = action.payload;
+      state.picksByGameweeks[35] = action.payload;
     },
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
-      state.bank = action.payload.current[CURRENT_GW - 1].bank;
+      state.bank = action.payload.current[CURRENT_GW - 2].bank;
       state.transfers =
-        action.payload.current[CURRENT_GW - 1].event_transfers > 0 ? 1 : 2;
+        action.payload.current[CURRENT_GW - 2].event_transfers > 0 ? 1 : 2;
     },
     addTransfersHistory(state, action) {
       state.transfersHistory = action.payload;

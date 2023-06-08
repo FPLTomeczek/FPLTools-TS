@@ -6,7 +6,7 @@ const NextFixture = ({ team }: { team: string }) => {
     (state) => state.fixtures.fixtureList
   ).filter(
     (fixtures) =>
-      fixtures.event === CURRENT_GW + 1 &&
+      fixtures.event === CURRENT_GW &&
       (fixtures.team_a === team || fixtures.team_h === team)
   );
 

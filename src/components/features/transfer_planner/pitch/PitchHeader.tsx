@@ -34,7 +34,7 @@ const PitchHeader = () => {
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" component="h3">
-          Gameweek: {CURRENT_GW + 1}
+          Gameweek: {CURRENT_GW}
         </Typography>
         <Typography variant="h6" component="h3">
           Bank: {(bank / 10).toFixed(1)} £
