@@ -181,6 +181,8 @@ const managerTeamSlice = createSlice({
           ...initialState,
           validationError: { isError, message },
         });
+      } else {
+        state.validationError = { isError, message };
       }
     },
     updatePicks(state, action) {

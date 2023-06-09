@@ -23,7 +23,7 @@ const PitchHeader = () => {
   const dispatch = useAppDispatch();
 
   const validateSaveTeam = (picks: PlayerPick[], bankValue: number) => {
-    const { isError, message } = picksValidation(picks, bankValue);
+    const { isError, message } = picksValidation(picks, bankValue, gameweek);
 
     dispatch(validatePicks({ isError, message }));
     if (!isError)
@@ -53,6 +53,10 @@ const PitchHeader = () => {
       <Box sx={{ display: "flex", justifyContent: "center" }} mb={2}>
         {managerTeam.validationError.isError ? (
           <Alert severity="error">{managerTeam.validationError.message}</Alert>
+        ) : managerTeam.validationError.message !== "" ? (
+          <Alert severity="success">
+            {managerTeam.validationError.message}
+          </Alert>
         ) : null}
         <Button
           variant="contained"
