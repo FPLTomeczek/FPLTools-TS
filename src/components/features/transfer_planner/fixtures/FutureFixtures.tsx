@@ -1,4 +1,4 @@
-import { CURRENT_GW, LAST_GW } from "../../../../constants";
+import { LAST_GW } from "../../../../constants";
 import { useAppSelector } from "../../../../app/hooks";
 import FutureFixture from "./FutureFixture";
 import { Box } from "@mui/material";
@@ -6,11 +6,13 @@ import { Fixture } from "../interfaces/fixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 
 const FutureFixtures = ({ team }: { team: string }) => {
+  const gameweek = useAppSelector((state) => state.managerTeam.gameweek);
+
   const futureFixtures = useAppSelector((state) => state.fixtures.fixtureList)
     .filter(
       (fixture) =>
-        fixture.event > CURRENT_GW &&
-        fixture.event < CURRENT_GW + 6 &&
+        fixture.event >= gameweek &&
+        fixture.event < gameweek + 5 &&
         (fixture.team_a === team || fixture.team_h === team)
     )
     .sort((a, b) => a.event - b.event);
@@ -23,10 +25,10 @@ const FutureFixtures = ({ team }: { team: string }) => {
     return arr.filter((fixture) => duplicatesEvents.includes(fixture.event));
   };
 
-  const maxGW = CURRENT_GW + 6 > LAST_GW ? LAST_GW : CURRENT_GW + 6;
+  const maxGW = gameweek + 5 > LAST_GW ? LAST_GW : gameweek + 4;
 
   const GWArray: number[] = [];
-  for (let i = CURRENT_GW + 1; i <= maxGW; i++) {
+  for (let i = gameweek; i <= maxGW; i++) {
     GWArray.push(i);
   }
 

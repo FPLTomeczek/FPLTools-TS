@@ -4,6 +4,8 @@ import PitchHeader from "./PitchHeader";
 import { Box } from "@mui/material";
 import { useAppSelector } from "../../../../app/hooks";
 import { CircularProgress } from "@mui/material";
+import { useState } from "react";
+import { CURRENT_GW } from "../../../../constants";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
   const picks = managerTeam.picks;

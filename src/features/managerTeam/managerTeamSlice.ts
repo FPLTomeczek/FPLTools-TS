@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CURRENT_GW } from "../../constants";
+import { CURRENT_GW, LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
 import {
   PlayerPick,
@@ -7,24 +7,32 @@ import {
   ManagerHistory,
   Transfer,
 } from "../../components/features/transfer_planner/interfaces/managerTeam";
-
-const storage = {
-  fetchedPlayers: localStorage.getItem("fetchedPlayers"),
-  managerHistory: localStorage.getItem("managerHistory"),
-  transfersHistory: localStorage.getItem("transfersHistory"),
-};
+import {
+  PicksByGameweeks,
+  TransfersByGameweeks,
+  InitialPicksByGameweeks,
+  RemovedPicksByGameweeks,
+  storage,
+  initializeInitialPicksByGameweeks,
+  initializePicksByGameweeks,
+  initializeRemovedPicksByGameweeks,
+  initializeTransfersByGameweeks,
+} from "./initializers";
 
 type ValidationError = {
   isError: boolean;
   message: string;
 };
+
 interface ManagerTeamState {
   picks: PlayerPick[];
-  initialPicks: PlayerPick[];
+  picksByGameweeks: PicksByGameweeks;
+  transfersByGameweeks: TransfersByGameweeks;
+  initialPicksByGameweeks: InitialPicksByGameweeks;
+  gameweek: number;
   value: number;
   bank: number;
-  transfers: number;
-  removedPicks: PlayerPick[];
+  removedPicksByGameweeks: RemovedPicksByGameweeks;
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
@@ -36,23 +44,16 @@ const initialState: ManagerTeamState = {
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
       : [],
-  initialPicks:
-    typeof storage.fetchedPlayers === "string"
-      ? JSON.parse(storage.fetchedPlayers)
-      : [],
+  picksByGameweeks: initializePicksByGameweeks(),
+  transfersByGameweeks: initializeTransfersByGameweeks(),
+  initialPicksByGameweeks: initializeInitialPicksByGameweeks(),
+  gameweek: CURRENT_GW,
   value: 0,
   bank:
     typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 1].bank
+      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2].bank
       : 0,
-  transfers:
-    typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 1]
-          .event_transfers > 0
-        ? 1
-        : 2
-      : 1,
-  removedPicks: [],
+  removedPicksByGameweeks: initializeRemovedPicksByGameweeks(),
   playerToChange: {},
   managerHistory:
     typeof storage.managerHistory === "string"
@@ -71,12 +72,13 @@ const managerTeamSlice = createSlice({
   reducers: {
     addPicks(state, action) {
       state.picks = action.payload;
+      for (let i = CURRENT_GW; i <= LAST_GW; i++) {
+        state.picksByGameweeks[i] = action.payload;
+      }
     },
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
-      state.bank = action.payload.current[CURRENT_GW - 1].bank;
-      state.transfers =
-        action.payload.current[CURRENT_GW - 1].event_transfers > 0 ? 1 : 2;
+      state.bank = action.payload.current[CURRENT_GW - 2].bank;
     },
     addTransfersHistory(state, action) {
       state.transfersHistory = action.payload;
@@ -94,15 +96,19 @@ const managerTeamSlice = createSlice({
 
       const removedPickIndex = state.picks.indexOf(playerToRemove);
 
-      if (state.initialPicks.find((initialPick) => initialPick.id === id)) {
-        state.transfers -= 1;
-        state.removedPicks.push({
+      if (
+        state.initialPicksByGameweeks[state.gameweek].find(
+          (initialPick) => initialPick.id === id
+        )
+      ) {
+        state.transfersByGameweeks[state.gameweek] -= 1;
+
+        state.removedPicksByGameweeks[state.gameweek].push({
           ...state.picks[removedPickIndex],
           removedPickIndex,
         });
-        state.bank += sellCost;
-      } else {
-        state.bank += cost;
+
+        state.bank += sellCost || cost;
       }
       state.picks[removedPickIndex] = {
         ...playerBlankTemplate,
@@ -114,18 +120,25 @@ const managerTeamSlice = createSlice({
     },
     retrievePick(state, action) {
       const position = action.payload;
-      const retrievedPick = state.removedPicks.find(
-        (removedPick) => removedPick.position === position
-      ) as PlayerPick;
+
+      const retrievedPickByGameweek = state.removedPicksByGameweeks[
+        state.gameweek
+      ].find((removedPick) => removedPick.position === position) as PlayerPick;
 
       const blankPick = state.picks.find((pick) => pick.position === position);
       if (blankPick) {
         const index = state.picks.indexOf(blankPick);
-        state.picks[index] = { ...retrievedPick };
-        const removedPickIndex = state.removedPicks.indexOf(retrievedPick);
-        state.removedPicks.splice(removedPickIndex, 1);
-        state.bank -= retrievedPick.sellCost;
-        state.transfers += 1;
+        state.picks[index] = { ...retrievedPickByGameweek };
+        const removedPicksByGameweeksIndex = state.removedPicksByGameweeks[
+          state.gameweek
+        ].indexOf(retrievedPickByGameweek);
+        state.removedPicksByGameweeks[state.gameweek].splice(
+          removedPicksByGameweeksIndex,
+          1
+        );
+        state.bank -=
+          retrievedPickByGameweek.sellCost || retrievedPickByGameweek.now_cost;
+        state.transfersByGameweeks[state.gameweek] += 1;
       }
     },
     addPick(state, action) {
@@ -170,6 +183,25 @@ const managerTeamSlice = createSlice({
         });
       }
     },
+    updatePicks(state, action) {
+      const gameweek = action.payload;
+      state.picks = state.picksByGameweeks[gameweek];
+      state.gameweek = gameweek;
+    },
+    updatePicksByGameweekAndTransfers(state, action) {
+      const { picks, gameweek, transfers } = action.payload;
+      state.transfersByGameweeks[gameweek] = transfers;
+      for (let i = gameweek; i <= LAST_GW; i++) {
+        state.picksByGameweeks[i] = picks;
+        if (i != LAST_GW) {
+          state.transfersByGameweeks[i + 1] =
+            state.transfersByGameweeks[i] < 1 ? 1 : 2;
+        }
+        if (i != gameweek) {
+          state.initialPicksByGameweeks[i] = picks;
+        }
+      }
+    },
   },
 });
 
@@ -182,6 +214,8 @@ export const {
   addManagerHistory,
   addTransfersHistory,
   validatePicks,
+  updatePicks,
+  updatePicksByGameweekAndTransfers,
 } = managerTeamSlice.actions;
 
 export default managerTeamSlice.reducer;

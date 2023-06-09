@@ -1,12 +1,12 @@
 import { useAppSelector } from "../../../../app/hooks";
-import { CURRENT_GW } from "../../../../constants";
 
 const NextFixture = ({ team }: { team: string }) => {
+  const gameweek = useAppSelector((state) => state.managerTeam.gameweek);
   const nextFixture = useAppSelector(
     (state) => state.fixtures.fixtureList
   ).filter(
     (fixtures) =>
-      fixtures.event === CURRENT_GW + 1 &&
+      fixtures.event === gameweek &&
       (fixtures.team_a === team || fixtures.team_h === team)
   );
 
