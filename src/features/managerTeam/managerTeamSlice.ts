@@ -7,70 +7,37 @@ import {
   ManagerHistory,
   Transfer,
 } from "../../components/features/transfer_planner/interfaces/managerTeam";
-
-const storage = {
-  fetchedPlayers: localStorage.getItem("fetchedPlayers"),
-  managerHistory: localStorage.getItem("managerHistory"),
-  transfersHistory: localStorage.getItem("transfersHistory"),
-};
+import {
+  PicksByGameweeks,
+  TransfersByGameweeks,
+  InitialPicksByGameweeks,
+  RemovedPicksByGameweeks,
+  storage,
+  initializeInitialPicksByGameweeks,
+  initializePicksByGameweeks,
+  initializeRemovedPicksByGameweeks,
+  initializeTransfersByGameweeks,
+} from "./initializers";
 
 type ValidationError = {
   isError: boolean;
   message: string;
 };
 
-interface PicksByGameweeks {
-  [gameweek: number]: PlayerPick[];
-}
-
-interface TransfersByGameweeks {
-  [gameweek: number]: number;
-}
-
 interface ManagerTeamState {
   picks: PlayerPick[];
   picksByGameweeks: PicksByGameweeks;
   transfersByGameweeks: TransfersByGameweeks;
-  initialPicks: PlayerPick[];
+  initialPicksByGameweeks: InitialPicksByGameweeks;
   gameweek: number;
   value: number;
   bank: number;
-  removedPicks: PlayerPick[];
+  removedPicksByGameweeks: RemovedPicksByGameweeks;
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
   validationError: ValidationError;
 }
-
-const initializePicksByGameweeks = () => {
-  const picksByGameweeks: PicksByGameweeks = [];
-  for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    if (typeof storage.fetchedPlayers === "string") {
-      picksByGameweeks[i] = JSON.parse(storage.fetchedPlayers);
-    } else {
-      return [];
-    }
-  }
-  return picksByGameweeks;
-};
-
-const initializeTransfersByGameweeks = () => {
-  const transfersByGameweeks: TransfersByGameweeks = [];
-
-  transfersByGameweeks[CURRENT_GW] =
-    typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2]
-          .event_transfers > 0
-        ? 1
-        : 2
-      : 1;
-
-  for (let i = CURRENT_GW; i < LAST_GW; i++) {
-    transfersByGameweeks[i + 1] = transfersByGameweeks[i] < 1 ? 1 : 2;
-  }
-
-  return transfersByGameweeks;
-};
 
 const initialState: ManagerTeamState = {
   picks:
@@ -79,17 +46,14 @@ const initialState: ManagerTeamState = {
       : [],
   picksByGameweeks: initializePicksByGameweeks(),
   transfersByGameweeks: initializeTransfersByGameweeks(),
-  initialPicks:
-    typeof storage.fetchedPlayers === "string"
-      ? JSON.parse(storage.fetchedPlayers)
-      : [],
+  initialPicksByGameweeks: initializeInitialPicksByGameweeks(),
   gameweek: CURRENT_GW,
   value: 0,
   bank:
     typeof storage.managerHistory === "string"
       ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2].bank
       : 0,
-  removedPicks: [],
+  removedPicksByGameweeks: initializeRemovedPicksByGameweeks(),
   playerToChange: {},
   managerHistory:
     typeof storage.managerHistory === "string"
@@ -132,15 +96,19 @@ const managerTeamSlice = createSlice({
 
       const removedPickIndex = state.picks.indexOf(playerToRemove);
 
-      if (state.initialPicks.find((initialPick) => initialPick.id === id)) {
+      if (
+        state.initialPicksByGameweeks[state.gameweek].find(
+          (initialPick) => initialPick.id === id
+        )
+      ) {
         state.transfersByGameweeks[state.gameweek] -= 1;
-        state.removedPicks.push({
+
+        state.removedPicksByGameweeks[state.gameweek].push({
           ...state.picks[removedPickIndex],
           removedPickIndex,
         });
-        state.bank += sellCost;
-      } else {
-        state.bank += cost;
+
+        state.bank += sellCost || cost;
       }
       state.picks[removedPickIndex] = {
         ...playerBlankTemplate,
@@ -152,17 +120,24 @@ const managerTeamSlice = createSlice({
     },
     retrievePick(state, action) {
       const position = action.payload;
-      const retrievedPick = state.removedPicks.find(
-        (removedPick) => removedPick.position === position
-      ) as PlayerPick;
+
+      const retrievedPickByGameweek = state.removedPicksByGameweeks[
+        state.gameweek
+      ].find((removedPick) => removedPick.position === position) as PlayerPick;
 
       const blankPick = state.picks.find((pick) => pick.position === position);
       if (blankPick) {
         const index = state.picks.indexOf(blankPick);
-        state.picks[index] = { ...retrievedPick };
-        const removedPickIndex = state.removedPicks.indexOf(retrievedPick);
-        state.removedPicks.splice(removedPickIndex, 1);
-        state.bank -= retrievedPick.sellCost;
+        state.picks[index] = { ...retrievedPickByGameweek };
+        const removedPicksByGameweeksIndex = state.removedPicksByGameweeks[
+          state.gameweek
+        ].indexOf(retrievedPickByGameweek);
+        state.removedPicksByGameweeks[state.gameweek].splice(
+          removedPicksByGameweeksIndex,
+          1
+        );
+        state.bank -=
+          retrievedPickByGameweek.sellCost || retrievedPickByGameweek.now_cost;
         state.transfersByGameweeks[state.gameweek] += 1;
       }
     },
@@ -221,6 +196,9 @@ const managerTeamSlice = createSlice({
         if (i != LAST_GW) {
           state.transfersByGameweeks[i + 1] =
             state.transfersByGameweeks[i] < 1 ? 1 : 2;
+        }
+        if (i != gameweek) {
+          state.initialPicksByGameweeks[i] = picks;
         }
       }
     },
