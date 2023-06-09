@@ -1,5 +1,5 @@
 import { handleSettingPages } from "./utils";
-import { Direction } from "../enums/pages";
+import { Direction } from "../enums/transferPlanner";
 import { ListProps } from "../types/list";
 
 const ListButtons = ({

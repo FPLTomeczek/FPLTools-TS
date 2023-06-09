@@ -1,4 +1,4 @@
-import { Direction } from "../enums/pages";
+import { Direction } from "../enums/transferPlanner";
 import { Player, FilterOptions, SortOptions } from "../interfaces/players";
 
 export const filterPlayers = (players: Player[], filters: FilterOptions) => {

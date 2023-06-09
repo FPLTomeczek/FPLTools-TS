@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CURRENT_GW } from "../../constants";
+import { CURRENT_GW, LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
 import {
   PlayerPick,
@@ -78,7 +78,9 @@ const managerTeamSlice = createSlice({
   reducers: {
     addPicks(state, action) {
       state.picks = action.payload;
-      state.picksByGameweeks[35] = action.payload;
+      for (let i = CURRENT_GW; i <= LAST_GW; i++) {
+        state.picksByGameweeks[i] = action.payload;
+      }
     },
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
@@ -178,6 +180,16 @@ const managerTeamSlice = createSlice({
         });
       }
     },
+    updatePicks(state, action) {
+      const gameweek = action.payload;
+      state.picks = state.picksByGameweeks[gameweek];
+    },
+    updatePicksByGameweek(state, action) {
+      const { picks, gameweek } = action.payload;
+      for (let i = gameweek; i <= LAST_GW; i++) {
+        state.picksByGameweeks[i] = picks;
+      }
+    },
   },
 });
 
@@ -190,6 +202,8 @@ export const {
   addManagerHistory,
   addTransfersHistory,
   validatePicks,
+  updatePicks,
+  updatePicksByGameweek,
 } = managerTeamSlice.actions;
 
 export default managerTeamSlice.reducer;

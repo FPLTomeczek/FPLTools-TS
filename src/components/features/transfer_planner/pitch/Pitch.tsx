@@ -4,14 +4,17 @@ import PitchHeader from "./PitchHeader";
 import { Box } from "@mui/material";
 import { useAppSelector } from "../../../../app/hooks";
 import { CircularProgress } from "@mui/material";
+import { useState } from "react";
+import { CURRENT_GW } from "../../../../constants";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
   const picks = managerTeam.picks;
+  const [gameweek, setGameweek] = useState(CURRENT_GW);
 
   function getPlannerPicksContainer() {
     return (
       <div className="planner-picks">
-        <PitchHeader />
+        <PitchHeader gameweek={gameweek} setGameweek={setGameweek} />
         <FirstEleven picks={picks.slice(0, 11)} />
         <Bench picks={picks.slice(11, 15)} />
       </div>
