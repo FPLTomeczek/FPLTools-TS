@@ -35,7 +35,6 @@ interface ManagerTeamState {
   gameweek: number;
   value: number;
   bank: number;
-  transfers: number;
   removedPicks: PlayerPick[];
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
@@ -44,7 +43,7 @@ interface ManagerTeamState {
 }
 
 const initializePicksByGameweeks = () => {
-  const picksByGameweeks = [];
+  const picksByGameweeks: PicksByGameweeks = [];
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     if (typeof storage.fetchedPlayers === "string") {
       picksByGameweeks[i] = JSON.parse(storage.fetchedPlayers);
@@ -55,13 +54,31 @@ const initializePicksByGameweeks = () => {
   return picksByGameweeks;
 };
 
+const initializeTransfersByGameweeks = () => {
+  const transfersByGameweeks: TransfersByGameweeks = [];
+
+  transfersByGameweeks[CURRENT_GW] =
+    typeof storage.managerHistory === "string"
+      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2]
+          .event_transfers > 0
+        ? 1
+        : 2
+      : 1;
+
+  for (let i = CURRENT_GW; i < LAST_GW; i++) {
+    transfersByGameweeks[i + 1] = transfersByGameweeks[i] < 1 ? 1 : 2;
+  }
+
+  return transfersByGameweeks;
+};
+
 const initialState: ManagerTeamState = {
   picks:
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
       : [],
   picksByGameweeks: initializePicksByGameweeks(),
-  transfersByGameweeks: [],
+  transfersByGameweeks: initializeTransfersByGameweeks(),
   initialPicks:
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
@@ -72,13 +89,6 @@ const initialState: ManagerTeamState = {
     typeof storage.managerHistory === "string"
       ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2].bank
       : 0,
-  transfers:
-    typeof storage.managerHistory === "string"
-      ? JSON.parse(storage.managerHistory).current[CURRENT_GW - 2]
-          .event_transfers > 0
-        ? 1
-        : 2
-      : 1,
   removedPicks: [],
   playerToChange: {},
   managerHistory:
@@ -105,8 +115,6 @@ const managerTeamSlice = createSlice({
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
       state.bank = action.payload.current[CURRENT_GW - 2].bank;
-      state.transfers =
-        action.payload.current[CURRENT_GW - 2].event_transfers > 0 ? 1 : 2;
     },
     addTransfersHistory(state, action) {
       state.transfersHistory = action.payload;
@@ -125,7 +133,7 @@ const managerTeamSlice = createSlice({
       const removedPickIndex = state.picks.indexOf(playerToRemove);
 
       if (state.initialPicks.find((initialPick) => initialPick.id === id)) {
-        state.transfers -= 1;
+        state.transfersByGameweeks[state.gameweek] -= 1;
         state.removedPicks.push({
           ...state.picks[removedPickIndex],
           removedPickIndex,
@@ -155,7 +163,7 @@ const managerTeamSlice = createSlice({
         const removedPickIndex = state.removedPicks.indexOf(retrievedPick);
         state.removedPicks.splice(removedPickIndex, 1);
         state.bank -= retrievedPick.sellCost;
-        state.transfers += 1;
+        state.transfersByGameweeks[state.gameweek] += 1;
       }
     },
     addPick(state, action) {
@@ -205,10 +213,15 @@ const managerTeamSlice = createSlice({
       state.picks = state.picksByGameweeks[gameweek];
       state.gameweek = gameweek;
     },
-    updatePicksByGameweek(state, action) {
-      const { picks, gameweek } = action.payload;
+    updatePicksByGameweekAndTransfers(state, action) {
+      const { picks, gameweek, transfers } = action.payload;
+      state.transfersByGameweeks[gameweek] = transfers;
       for (let i = gameweek; i <= LAST_GW; i++) {
         state.picksByGameweeks[i] = picks;
+        if (i != LAST_GW) {
+          state.transfersByGameweeks[i + 1] =
+            state.transfersByGameweeks[i] < 1 ? 1 : 2;
+        }
       }
     },
   },
@@ -224,7 +237,7 @@ export const {
   addTransfersHistory,
   validatePicks,
   updatePicks,
-  updatePicksByGameweek,
+  updatePicksByGameweekAndTransfers,
 } = managerTeamSlice.actions;
 
 export default managerTeamSlice.reducer;

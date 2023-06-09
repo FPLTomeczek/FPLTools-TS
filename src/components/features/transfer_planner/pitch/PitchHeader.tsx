@@ -6,25 +6,34 @@ import { validatePicks as picksValidation } from "../validation/managerPicksVali
 import { PlayerPick } from "../interfaces/managerTeam";
 import {
   validatePicks,
-  updatePicksByGameweek,
+  updatePicksByGameweekAndTransfers,
   updatePicks,
 } from "../../../../features/managerTeam/managerTeamSlice";
 import { Direction } from "../enums/transferPlanner";
 import { CURRENT_GW, LAST_GW } from "../../../../constants";
+import { isEmpty } from "lodash";
 
 const PitchHeader = () => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
   const bank = managerTeam.bank;
-  const transfers = managerTeam.transfers;
   const gameweek = managerTeam.gameweek;
+  const transfers = managerTeam.transfersByGameweeks[gameweek];
+  const picksByGameweeks = managerTeam.picksByGameweeks;
 
   const dispatch = useAppDispatch();
 
   const validateSaveTeam = (picks: PlayerPick[], bankValue: number) => {
     const { isError, message } = picksValidation(picks, bankValue);
+
     dispatch(validatePicks({ isError, message }));
     if (!isError)
-      dispatch(updatePicksByGameweek({ picks: managerTeam.picks, gameweek }));
+      dispatch(
+        updatePicksByGameweekAndTransfers({
+          picks: managerTeam.picks,
+          gameweek,
+          transfers,
+        })
+      );
   };
 
   const handleSettingGameweeks = (direction: Direction) => {
@@ -59,13 +68,19 @@ const PitchHeader = () => {
           Bank: {(bank / 10).toFixed(1)} £
         </Typography>
         <Box sx={{ display: "flex" }}>
-          <IconButton onClick={() => handleSettingGameweeks(Direction.PREV)}>
+          <IconButton
+            onClick={() => handleSettingGameweeks(Direction.PREV)}
+            disabled={isEmpty(picksByGameweeks)}
+          >
             <ArrowLeftIcon />
           </IconButton>
           <Typography variant="h6" component="h3">
             Gameweek: {gameweek}
           </Typography>
-          <IconButton onClick={() => handleSettingGameweeks(Direction.NEXT)}>
+          <IconButton
+            onClick={() => handleSettingGameweeks(Direction.NEXT)}
+            disabled={isEmpty(picksByGameweeks)}
+          >
             <ArrowRightIcon />
           </IconButton>
         </Box>
