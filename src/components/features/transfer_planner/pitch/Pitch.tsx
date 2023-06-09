@@ -9,12 +9,11 @@ import { CURRENT_GW } from "../../../../constants";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
   const picks = managerTeam.picks;
-  const [gameweek, setGameweek] = useState(CURRENT_GW);
 
   function getPlannerPicksContainer() {
     return (
       <div className="planner-picks">
-        <PitchHeader gameweek={gameweek} setGameweek={setGameweek} />
+        <PitchHeader />
         <FirstEleven picks={picks.slice(0, 11)} />
         <Bench picks={picks.slice(11, 15)} />
       </div>

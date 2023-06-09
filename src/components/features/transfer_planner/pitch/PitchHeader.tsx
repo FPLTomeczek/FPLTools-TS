@@ -12,16 +12,11 @@ import {
 import { Direction } from "../enums/transferPlanner";
 import { CURRENT_GW, LAST_GW } from "../../../../constants";
 
-const PitchHeader = ({
-  gameweek,
-  setGameweek,
-}: {
-  gameweek: number;
-  setGameweek: React.Dispatch<React.SetStateAction<number>>;
-}) => {
+const PitchHeader = () => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
   const bank = managerTeam.bank;
   const transfers = managerTeam.transfers;
+  const gameweek = managerTeam.gameweek;
 
   const dispatch = useAppDispatch();
 
@@ -34,22 +29,13 @@ const PitchHeader = ({
 
   const handleSettingGameweeks = (direction: Direction) => {
     if (direction === Direction.PREV) {
-      setGameweek((prev) => {
-        if (gameweek - 1 >= CURRENT_GW) {
-          dispatch(updatePicks(gameweek - 1));
-          return prev - 1;
-        }
-        return prev;
-      });
+      if (gameweek - 1 >= CURRENT_GW) {
+        dispatch(updatePicks(gameweek - 1));
+      }
     } else if (direction === Direction.NEXT) {
-      setGameweek((next) => {
-        if (gameweek + 1 <= LAST_GW) {
-          dispatch(updatePicks(gameweek + 1));
-
-          return next + 1;
-        }
-        return next;
-      });
+      if (gameweek + 1 <= LAST_GW) {
+        dispatch(updatePicks(gameweek + 1));
+      }
     }
   };
 

@@ -23,10 +23,16 @@ interface PicksByGameweeks {
   [gameweek: number]: PlayerPick[];
 }
 
+interface TransfersByGameweeks {
+  [gameweek: number]: number;
+}
+
 interface ManagerTeamState {
   picks: PlayerPick[];
   picksByGameweeks: PicksByGameweeks;
+  transfersByGameweeks: TransfersByGameweeks;
   initialPicks: PlayerPick[];
+  gameweek: number;
   value: number;
   bank: number;
   transfers: number;
@@ -37,16 +43,30 @@ interface ManagerTeamState {
   validationError: ValidationError;
 }
 
+const initializePicksByGameweeks = () => {
+  const picksByGameweeks = [];
+  for (let i = CURRENT_GW; i <= LAST_GW; i++) {
+    if (typeof storage.fetchedPlayers === "string") {
+      picksByGameweeks[i] = JSON.parse(storage.fetchedPlayers);
+    } else {
+      return [];
+    }
+  }
+  return picksByGameweeks;
+};
+
 const initialState: ManagerTeamState = {
   picks:
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
       : [],
-  picksByGameweeks: [],
+  picksByGameweeks: initializePicksByGameweeks(),
+  transfersByGameweeks: [],
   initialPicks:
     typeof storage.fetchedPlayers === "string"
       ? JSON.parse(storage.fetchedPlayers)
       : [],
+  gameweek: CURRENT_GW,
   value: 0,
   bank:
     typeof storage.managerHistory === "string"
@@ -183,6 +203,7 @@ const managerTeamSlice = createSlice({
     updatePicks(state, action) {
       const gameweek = action.payload;
       state.picks = state.picksByGameweeks[gameweek];
+      state.gameweek = gameweek;
     },
     updatePicksByGameweek(state, action) {
       const { picks, gameweek } = action.payload;
