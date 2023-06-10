@@ -71,10 +71,10 @@ const managerTeamSlice = createSlice({
   initialState,
   reducers: {
     addPicks(state, action) {
+      Object.assign(state, {
+        ...initialState,
+      });
       state.picks = action.payload;
-      for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-        state.picksByGameweeks[i] = action.payload;
-      }
     },
     addManagerHistory(state, action) {
       state.managerHistory = action.payload;
