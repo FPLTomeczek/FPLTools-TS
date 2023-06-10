@@ -56,9 +56,13 @@ const validateBankValue = (bankValue: number) => {
   return bankValue >= 0 ? true : false;
 };
 
-export const validatePicks = (picks: PlayerPick[], bankValue: number) => {
+export const validatePicks = (
+  picks: PlayerPick[],
+  bankValue: number,
+  gameweek: number
+) => {
   let isError = false;
-  let message = "";
+  let message = `Successfully saved picks for gameweek: ${gameweek}`;
   if (!validatePicksFromOneTeam(picks)) {
     isError = true;
     message = `Too many players from one team: ${teamOverpicked} (MAX 3)`;
