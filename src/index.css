@@ -7,6 +7,10 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+:root {
+  --primary-color: #101820;
+  --secondary-color: #fee715;
+}
 
 html {
   line-height: 1.15; /* 1 */
@@ -23,7 +27,7 @@ html {
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: #36454f;
+  background: var(--primary-color);
   color: white;
 }
 

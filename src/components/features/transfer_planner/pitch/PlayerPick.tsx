@@ -101,6 +101,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: black;
   }
   .player-pick > p {
     min-width: 100px;

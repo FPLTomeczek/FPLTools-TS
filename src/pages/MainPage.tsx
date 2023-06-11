@@ -10,7 +10,7 @@ import {
   addTransfersHistory,
 } from "../features/managerTeam/managerTeamSlice";
 import TransferPlanner from "../components/features/transfer_planner/TransferPlanner";
-import { Button, TextField, Box, Alert, Snackbar } from "@mui/material";
+import { Button, TextField, Box, Alert, Snackbar, Input } from "@mui/material";
 import { calculateSellingCost } from "../components/features/transfer_planner/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { AppDispatch } from "../app/store";
@@ -99,18 +99,22 @@ const MainPage = () => {
         </Alert>
       </Snackbar>
       <form>
-        <TextField
-          id="outlined-basic"
-          label="Enter Your ID"
-          variant="outlined"
+        <Input
+          id="filled-basic"
+          placeholder="Enter your ID"
           inputRef={inputRef}
-          size="small"
+          sx={{ background: "white", padding: "0.5rem" }}
         />
         <Button
           variant="contained"
           type="submit"
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
-          sx={{ fontSize: "1rem" }}
+          sx={{
+            fontSize: "1rem",
+            background: "var(--secondary-color)",
+            color: "var(--primary-color)",
+            fontWeight: "600",
+          }}
         >
           Submit
         </Button>

@@ -6,6 +6,7 @@ import {
   FormControl,
   Box,
   FormLabel,
+  Input,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../../features/players/playersSlice";
@@ -62,19 +63,20 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
         }}
       >
         <FormControl>
-          <TextField
+          <Input
             id="name"
             name="name"
-            label="Name"
+            placeholder="Enter player Name"
             value={filterValues.name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleSelectOnChange(e, Filter.NAME)
             }
-          ></TextField>
+            sx={{ background: "white", padding: "0.5rem" }}
+          />
         </FormControl>
         <Box sx={{ display: "flex", gap: "1rem" }}>
           <FormControl>
-            <FormLabel>Team</FormLabel>
+            <FormLabel sx={{ color: "white" }}>Team</FormLabel>
             <Select
               id="team"
               name="team"
@@ -84,6 +86,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
                 handleSelectOnChange(e, Filter.TEAM)
               }
               data-testid="select-button"
+              sx={{ background: "white" }}
             >
               <MenuItem value="ALL">-</MenuItem>
               {teamsList.map((team) => (
@@ -94,7 +97,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
             </Select>
           </FormControl>
           <FormControl>
-            <FormLabel>Role</FormLabel>
+            <FormLabel sx={{ color: "white" }}>Role</FormLabel>
             <Select
               id="role"
               name="role"
@@ -103,6 +106,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
               onChange={(e: SelectChangeEvent<unknown>) =>
                 handleSelectOnChange(e, Filter.ROLE)
               }
+              sx={{ background: "white", color: "white" }}
             >
               <MenuItem value="ALL">-</MenuItem>
               {roles.map((role) => (

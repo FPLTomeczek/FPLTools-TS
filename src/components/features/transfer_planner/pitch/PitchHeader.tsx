@@ -62,6 +62,11 @@ const PitchHeader = () => {
           variant="contained"
           size="medium"
           onClick={() => validateSaveTeam(managerTeam.picks, managerTeam.bank)}
+          sx={{
+            background: "var(--secondary-color)",
+            color: "var(--primary-color)",
+            fontWeight: "600",
+          }}
         >
           Save Team
         </Button>
@@ -75,6 +80,7 @@ const PitchHeader = () => {
           <IconButton
             onClick={() => handleSettingGameweeks(Direction.PREV)}
             disabled={isEmpty(picksByGameweeks)}
+            sx={{ color: "white" }}
           >
             <ArrowLeftIcon />
           </IconButton>
@@ -84,6 +90,7 @@ const PitchHeader = () => {
           <IconButton
             onClick={() => handleSettingGameweeks(Direction.NEXT)}
             disabled={isEmpty(picksByGameweeks)}
+            sx={{ color: "white" }}
           >
             <ArrowRightIcon />
           </IconButton>

@@ -95,6 +95,7 @@ const Wrapper = styled.div`
     border: 1px solid gray;
     cursor: pointer;
     padding: 0.5rem;
+    color: white;
   }
   .buttons {
     display: flex;
