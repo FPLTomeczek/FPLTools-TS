@@ -190,6 +190,7 @@ const managerTeamSlice = createSlice({
       const gameweek = action.payload;
       state.picks = state.picksByGameweeks[gameweek];
       state.gameweek = gameweek;
+      state.validationError = { isError: false, message: "" };
     },
     updatePicksByGameweekAndTransfers(state, action) {
       const { picks, gameweek, transfers } = action.payload;
