@@ -43,6 +43,7 @@ const getManagerData = async (
       value: true,
       msg: `Error trying to fetch user data with id: ${id}`,
     });
+    setIsLoading(false);
     return;
   }
   const sellCosts = calculateSellingCost(picks, transfers, playersHistory);

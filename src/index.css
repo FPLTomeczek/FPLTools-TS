@@ -23,7 +23,8 @@ html {
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: #f1f1f1;
+  background: #36454f;
+  color: white;
 }
 
 /**
