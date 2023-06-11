@@ -107,9 +107,10 @@ const managerTeamSlice = createSlice({
           ...state.picks[removedPickIndex],
           removedPickIndex,
         });
-
-        state.bank += sellCost || cost;
       }
+
+      state.bank += sellCost !== 0 ? sellCost : cost;
+
       state.picks[removedPickIndex] = {
         ...playerBlankTemplate,
         web_name: "Blank",
