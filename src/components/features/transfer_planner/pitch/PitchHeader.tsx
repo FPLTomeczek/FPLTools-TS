@@ -12,6 +12,7 @@ import {
 import { Direction } from "../enums/transferPlanner";
 import { CURRENT_GW, LAST_GW } from "../../../../constants";
 import { isEmpty } from "lodash";
+import styled from "styled-components";
 
 const PitchHeader = () => {
   const managerTeam = useAppSelector((state) => state.managerTeam);
@@ -49,8 +50,8 @@ const PitchHeader = () => {
   };
 
   return (
-    <div>
-      <Box sx={{ display: "flex", justifyContent: "center" }} mb={2}>
+    <Wrapper>
+      <div className="save-team">
         {managerTeam.validationError.isError ? (
           <Alert severity="error">{managerTeam.validationError.message}</Alert>
         ) : managerTeam.validationError.message !== "" ? (
@@ -58,50 +59,82 @@ const PitchHeader = () => {
             {managerTeam.validationError.message}
           </Alert>
         ) : null}
-        <Button
-          variant="contained"
-          size="medium"
+        <button
+          className="primary-button"
           onClick={() => validateSaveTeam(managerTeam.picks, managerTeam.bank)}
-          sx={{
-            background: "var(--secondary-color)",
-            color: "var(--primary-color)",
-            fontWeight: "600",
-          }}
         >
           Save Team
-        </Button>
-      </Box>
+        </button>
+      </div>
 
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6" component="h3">
-          Bank: {(bank / 10).toFixed(1)} £
-        </Typography>
-        <Box sx={{ display: "flex" }}>
-          <IconButton
+      <div className="pitch-header-info">
+        <p>
+          Bank:{" "}
+          <span className={`${bank < 0 ? "error-value" : ""} `}>
+            {(bank / 10).toFixed(1)}
+          </span>{" "}
+          £
+        </p>
+        <div className="gameweek-container">
+          <button
+            className="direction-button"
             onClick={() => handleSettingGameweeks(Direction.PREV)}
             disabled={isEmpty(picksByGameweeks)}
-            sx={{ color: "white" }}
           >
-            <ArrowLeftIcon />
-          </IconButton>
-          <Typography variant="h6" component="h3">
-            Gameweek: {gameweek}
-          </Typography>
-          <IconButton
+            <i className="fa-solid fa-arrow-left"></i>
+          </button>
+          <p>Gameweek: {gameweek}</p>
+          <button
+            className="direction-button"
             onClick={() => handleSettingGameweeks(Direction.NEXT)}
             disabled={isEmpty(picksByGameweeks)}
-            sx={{ color: "white" }}
           >
-            <ArrowRightIcon />
-          </IconButton>
-        </Box>
-        <Typography variant="h6" component="h3">
+            <i className="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <p id="transfers-info">
           {" "}
-          Transfers: {transfers}/2
-        </Typography>
-      </Box>
-    </div>
+          Transfers:{" "}
+          <span className={`${transfers < 0 ? "error-value" : ""} `}>
+            {transfers}
+          </span>
+          /2
+        </p>
+      </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  .save-team {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  .gameweek-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .pitch-header-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .pitch-header-info > * {
+    flex: 1;
+    max-width: 100%;
+    font-size: 1.3rem;
+  }
+  i {
+    font-size: 1rem;
+  }
+  #transfers-info {
+    text-align: right;
+  }
+  .error-value {
+    color: #ff0f0f;
+  }
+`;
 
 export default PitchHeader;

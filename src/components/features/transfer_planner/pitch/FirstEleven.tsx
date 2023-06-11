@@ -56,6 +56,9 @@ const Wrapper = styled.div`
     justify-content: space-around;
     padding: 2rem 0;
   }
+  .picks-row > * {
+    flex: 1;
+  }
 `;
 
 export default FirstEleven;
