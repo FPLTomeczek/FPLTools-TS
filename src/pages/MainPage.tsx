@@ -10,7 +10,8 @@ import {
   addTransfersHistory,
 } from "../features/managerTeam/managerTeamSlice";
 import TransferPlanner from "../components/features/transfer_planner/TransferPlanner";
-import { Button, TextField, Box, Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
+import styled from "styled-components";
 import { calculateSellingCost } from "../components/features/transfer_planner/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { AppDispatch } from "../app/store";
@@ -43,6 +44,7 @@ const getManagerData = async (
       value: true,
       msg: `Error trying to fetch user data with id: ${id}`,
     });
+    setIsLoading(false);
     return;
   }
   const sellCosts = calculateSellingCost(picks, transfers, playersHistory);
@@ -71,22 +73,14 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setIsLoading(true);
     const id = inputRef.current ? Number(inputRef.current.value) : 0;
-    e.preventDefault();
     getManagerData(id, dispatch, playersHistory, setError, setIsLoading);
   };
 
   return (
-    <Box
-      mt={2}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        maxWidth: "100vw",
-      }}
-    >
+    <Wrapper>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         open={error.value}
@@ -98,25 +92,30 @@ const MainPage = () => {
         </Alert>
       </Snackbar>
       <form>
-        <TextField
-          id="outlined-basic"
-          label="Enter Your ID"
-          variant="outlined"
-          inputRef={inputRef}
-          size="small"
-        />
-        <Button
-          variant="contained"
-          type="submit"
+        <input placeholder="Enter your ID" ref={inputRef} />
+        <button
+          className="primary-button"
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
-          sx={{ fontSize: "1rem" }}
         >
           Submit
-        </Button>
+        </button>
       </form>
       <TransferPlanner isLoading={isLoading} />
-    </Box>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100vw;
+  input {
+    background: "white";
+    padding: 0.5rem;
+    margin-right: 4px;
+  }
+`;
 
 export default MainPage;

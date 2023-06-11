@@ -6,7 +6,9 @@ import {
   FormControl,
   Box,
   FormLabel,
+  Input,
 } from "@mui/material";
+import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../../features/players/playersSlice";
 import { teamsList, roles } from "./data";
@@ -14,6 +16,7 @@ import PageController from "./PageController";
 import { FilterOptions } from "../interfaces/players";
 import { SelectChangeEvent } from "@mui/material";
 import { ListProps } from "../types/list";
+import ListButtons from "./ListButtons";
 
 enum Filter {
   NAME = "name",
@@ -31,7 +34,9 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
   });
 
   const handleSelectOnChange = (
-    e: SelectChangeEvent<unknown> | React.ChangeEvent<HTMLInputElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
     type: Filter
   ) => {
     const value = e.target.value as string;
@@ -51,72 +56,75 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "end" }}>
+    <Wrapper>
       <Box
         sx={{
           display: "flex",
           gap: "1rem",
-          width: "100%",
           alignItems: "start",
           flexDirection: "column",
         }}
       >
-        <FormControl>
-          <TextField
-            id="name"
-            name="name"
-            label="Name"
-            value={filterValues.name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleSelectOnChange(e, Filter.NAME)
-            }
-          ></TextField>
-        </FormControl>
+        <input
+          id="name"
+          name="name"
+          placeholder="Enter Player Name"
+          value={filterValues.name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleSelectOnChange(e, Filter.NAME)
+          }
+        />
+
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <FormControl>
-            <FormLabel>Team</FormLabel>
-            <Select
+          <div className="filter-players">
+            <label htmlFor="team">Team</label>
+            <select
               id="team"
               name="team"
-              label="Team"
               value={filterValues.team}
-              onChange={(e: SelectChangeEvent<unknown>) =>
-                handleSelectOnChange(e, Filter.TEAM)
-              }
+              onChange={(e) => handleSelectOnChange(e, Filter.TEAM)}
               data-testid="select-button"
             >
-              <MenuItem value="ALL">-</MenuItem>
+              <option value="ALL">-</option>
               {teamsList.map((team) => (
-                <MenuItem value={team.value} key={team.value}>
+                <option value={team.value} key={team.value}>
                   {team.value}
-                </MenuItem>
+                </option>
               ))}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Role</FormLabel>
-            <Select
+            </select>
+          </div>
+
+          <div className="filter-players">
+            <label htmlFor="role">Role</label>
+            <select
               id="role"
               name="role"
-              label="Role"
               value={filterValues.role}
-              onChange={(e: SelectChangeEvent<unknown>) =>
-                handleSelectOnChange(e, Filter.ROLE)
-              }
+              onChange={(e) => handleSelectOnChange(e, Filter.ROLE)}
             >
-              <MenuItem value="ALL">-</MenuItem>
+              <option value="ALL">-</option>
               {roles.map((role) => (
-                <MenuItem value={role.role} key={role.role}>
+                <option value={role.role} key={role.role}>
                   {role.value}
-                </MenuItem>
+                </option>
               ))}
-            </Select>
-          </FormControl>
+            </select>
+          </div>
         </Box>
       </Box>
-      <PageController setPage={setPage} page={page} numOfPages={numOfPages} />
-    </Box>
+      <ListButtons setPage={setPage} page={page} numOfPages={numOfPages} />
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  .filter-players {
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 export default PlayersListForm;

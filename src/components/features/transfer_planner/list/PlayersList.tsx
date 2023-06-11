@@ -49,7 +49,7 @@ const PlayersList = () => {
         sortOptions={sortOptions}
         handleSortChange={handleSortChange}
       />
-      <ListButtons setPage={setPage} numOfPages={numOfPages} />
+      <ListButtons setPage={setPage} numOfPages={numOfPages} page={page} />
     </Wrapper>
   );
 };
@@ -90,18 +90,7 @@ const Wrapper = styled.div`
   #player-list-price {
     cursor: pointer;
   }
-  .switchPage {
-    border-radius: 50%;
-    border: 1px solid gray;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0.5rem 0;
-  }
+
   .team-color {
     width: 20px;
     border-radius: 50%;
