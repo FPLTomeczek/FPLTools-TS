@@ -1,20 +1,9 @@
 import React, { useState } from "react";
-import {
-  Select,
-  MenuItem,
-  TextField,
-  FormControl,
-  Box,
-  FormLabel,
-  Input,
-} from "@mui/material";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../../features/players/playersSlice";
 import { teamsList, roles } from "./data";
-import PageController from "./PageController";
 import { FilterOptions } from "../interfaces/players";
-import { SelectChangeEvent } from "@mui/material";
 import { ListProps } from "../types/list";
 import ListButtons from "./ListButtons";
 
@@ -57,14 +46,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
 
   return (
     <Wrapper>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "1rem",
-          alignItems: "start",
-          flexDirection: "column",
-        }}
-      >
+      <div className="filters-form">
         <input
           id="name"
           name="name"
@@ -75,7 +57,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
           }
         />
 
-        <Box sx={{ display: "flex", gap: "1rem" }}>
+        <div className="filter-players-container">
           <div className="filter-players">
             <label htmlFor="team">Team</label>
             <select
@@ -110,8 +92,8 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
               ))}
             </select>
           </div>
-        </Box>
-      </Box>
+        </div>
+      </div>
       <ListButtons setPage={setPage} page={page} numOfPages={numOfPages} />
     </Wrapper>
   );
@@ -121,9 +103,22 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
+  .filters-form {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+    flex-direction: column;
+  }
+  .filter-players-container {
+    display: flex;
+    gap: 1rem;
+  }
   .filter-players {
     display: flex;
     flex-direction: column;
+  }
+  label {
+    margin-bottom: 4px;
   }
 `;
 

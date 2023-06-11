@@ -1,6 +1,4 @@
-import { Box, Typography, Button, Alert, IconButton } from "@mui/material";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { Alert } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
 import { PlayerPick } from "../interfaces/managerTeam";

@@ -53,13 +53,7 @@ const PlayerPick = ({
 
   return (
     <Wrapper>
-      <div
-        className={`player-pick ${
-          !isEmpty(playerToChange) && playerToChange.id === id
-            ? "change-pick"
-            : ""
-        }`}
-      >
+      <div className="player-pick">
         <div className="buttons">
           {name !== "Blank" ? (
             <div className="manipulate-player-buttons">
@@ -80,7 +74,15 @@ const PlayerPick = ({
           )}
         </div>
         {shirt ? (
-          <img src={shirt} alt="shirt" />
+          <img
+            src={shirt}
+            alt="shirt"
+            className={`${
+              !isEmpty(playerToChange) && playerToChange.id === id
+                ? "change-pick"
+                : ""
+            }`}
+          />
         ) : (
           <img src={blank} alt="default-shirt" />
         )}
