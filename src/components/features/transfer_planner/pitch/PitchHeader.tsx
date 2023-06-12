@@ -113,7 +113,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   .pitch-header-info {
     display: flex;
@@ -122,7 +122,6 @@ const Wrapper = styled.div`
   .pitch-header-info > * {
     flex: 1;
     max-width: 100%;
-    font-size: 1.3rem;
   }
   i {
     font-size: 1rem;

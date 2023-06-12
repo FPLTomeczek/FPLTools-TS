@@ -14,15 +14,9 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
   return (
     <Wrapper>
       <div
+        className="pitch"
         style={{
           backgroundImage: `url(${pitch_image})`,
-          width: "800px",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-around",
-          alignItems: "center",
         }}
         data-testid="pitch"
       >
@@ -50,6 +44,16 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 
+  .pitch {
+    width: 800px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
   .picks-row {
     width: 100%;
     display: flex;
@@ -58,6 +62,13 @@ const Wrapper = styled.div`
   }
   .picks-row > * {
     flex: 1;
+  }
+
+  @media screen and (max-width: 480px) {
+    .pitch {
+      width: 100vw;
+      background-size: 100% 100%;
+    }
   }
 `;
 

@@ -7,6 +7,7 @@ import PlayersListForm from "./PlayersListForm.tsx";
 import ListButtons from "./ListButtons";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
+import { CircularProgress } from "@mui/material";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -29,7 +30,16 @@ const PlayersList = () => {
   };
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (status === "error") {
@@ -56,7 +66,7 @@ const PlayersList = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 4rem;
+  padding: 0 2rem;
   box-sizing: border-box;
 
   .player-list-item,
