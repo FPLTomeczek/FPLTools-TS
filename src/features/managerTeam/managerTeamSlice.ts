@@ -138,7 +138,10 @@ const managerTeamSlice = createSlice({
           1
         );
         state.bank -=
-          retrievedPickByGameweek.sellCost || retrievedPickByGameweek.now_cost;
+          typeof retrievedPickByGameweek.sellCost !== "undefined"
+            ? retrievedPickByGameweek.sellCost
+            : retrievedPickByGameweek.now_cost;
+
         state.transfersByGameweeks[state.gameweek] += 1;
       }
     },
