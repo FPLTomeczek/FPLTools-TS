@@ -28,6 +28,7 @@ const DoubleFutureFixture = ({
               textAlign: "center",
               padding: "0.25rem 0",
               maxHeight: "16px",
+              margin: "0",
             }}
           >
             {isHome ? fixture.team_h : fixture.team_a}

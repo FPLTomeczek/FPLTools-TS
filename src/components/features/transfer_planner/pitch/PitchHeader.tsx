@@ -113,16 +113,20 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   .pitch-header-info {
     display: flex;
     justify-content: space-between;
+    margin-top: 1rem;
   }
   .pitch-header-info > * {
     flex: 1;
     max-width: 100%;
-    font-size: 1.3rem;
+  }
+  .pitch-header-info > p,
+  .gameweek-container {
+    font-size: clamp(0.75rem, calc(0.45rem + 1.25vw), 1rem);
   }
   i {
     font-size: 1rem;
@@ -132,6 +136,16 @@ const Wrapper = styled.div`
   }
   .error-value {
     color: #ff0f0f;
+  }
+  @media screen and (max-width: 600px) {
+    .gameweek-container {
+      flex: 2;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .pitch-header-info {
+      padding: 0 1rem;
+    }
   }
 `;
 

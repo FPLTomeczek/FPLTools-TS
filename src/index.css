@@ -9,7 +9,11 @@
  */
 :root {
   --primary-color: #101820;
+  --primary-color-light: #88919c;
+
   --secondary-color: #fee715;
+  --secondary-color-dark: #fba200;
+  --secondary-color-light: #fff395;
 }
 
 html {
@@ -195,10 +199,19 @@ textarea {
   border: 1px solid var(--primary-color);
   border-radius: 5px;
   cursor: pointer;
-  color: white;
   padding: 0.5rem;
   background-color: var(--secondary-color);
   color: var(--primary-color);
+}
+
+.primary-button,
+.direction-button {
+  transition: background-color 0.3s;
+}
+
+.direction-button:hover,
+.primary-button:hover {
+  background-color: var(--secondary-color-dark);
 }
 
 /**

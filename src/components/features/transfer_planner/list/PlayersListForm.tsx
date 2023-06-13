@@ -120,6 +120,13 @@ const Wrapper = styled.div`
   label {
     margin-bottom: 4px;
   }
+  @media screen and (max-width: 520px) {
+    flex-direction: column;
+    align-items: start;
+    .filters-form {
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 export default PlayersListForm;

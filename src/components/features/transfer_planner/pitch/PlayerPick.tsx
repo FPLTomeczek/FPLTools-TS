@@ -106,9 +106,12 @@ const Wrapper = styled.div`
     color: black;
   }
   .player-pick > p {
-    min-width: 100px;
+    width: 100px;
     box-sizing: border-box;
     text-align: center;
+    background-color: white;
+    padding: 0.25rem;
+    margin: 2px 0;
   }
   .player-pick > i {
     font-size: 4rem;
@@ -124,10 +127,13 @@ const Wrapper = styled.div`
   button {
     cursor: pointer;
   }
-  p {
-    background-color: white;
-    padding: 0.25rem;
-    margin: 2px 0;
+
+  @media screen and (max-width: 480px) {
+    .player-pick > p {
+      font-size: 0.75rem;
+      max-width: 100px;
+      width: auto;
+    }
   }
 `;
 

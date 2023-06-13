@@ -7,6 +7,7 @@ import PlayersListForm from "./PlayersListForm.tsx";
 import ListButtons from "./ListButtons";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
+import { CircularProgress } from "@mui/material";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -29,7 +30,16 @@ const PlayersList = () => {
   };
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (status === "error") {
@@ -56,7 +66,7 @@ const PlayersList = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 4rem;
+  padding: 0 2rem;
   box-sizing: border-box;
 
   .player-list-item,
@@ -64,22 +74,23 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: clamp(0.75rem, calc(0.24rem + 2.35vw), 1rem);
   }
   .player-list-item {
     border-top: 1px solid gray;
   }
   .player-list-number {
-    min-width: 10%;
+    min-width: 12%;
   }
   .player-list-name {
-    min-width: 50%;
+    min-width: 35%;
   }
   .player-add-button-color {
     display: flex;
     align-items: center;
     justify-content: space-around;
 
-    min-width: 10%;
+    min-width: 15%;
   }
 
   .player-list-number {
@@ -96,6 +107,12 @@ const Wrapper = styled.div`
     border-radius: 50%;
     background-color: black;
     height: 20px;
+  }
+  @media screen and (max-width: 1400px) {
+    padding: 1rem 4rem;
+  }
+  @media screen and (max-width: 800px) {
+    padding: 1rem;
   }
 `;
 
