@@ -32,7 +32,7 @@ const PitchHeader = () => {
         updatePicksByGameweekAndTransfers({
           picks,
           gameweek,
-          transfers,
+          transfers: transfers[gameweek],
         })
       );
   };
