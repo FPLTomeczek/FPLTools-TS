@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import PlayerList from "./list/PlayersList";
-import { Grid } from "@mui/material";
 import Pitch from "./pitch/Pitch";
 
 const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
@@ -19,7 +18,8 @@ const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
+  margin-top: 2rem;
   width: 100%;
   .planner-picks {
     width: 100%;
@@ -30,8 +30,16 @@ const Wrapper = styled.div`
     align-items: start;
     width: 60%;
   }
+  .player-list {
+    width: 40%;
+  }
+
   @media screen and (max-width: 1400px) {
     flex-direction: column;
+    .player-list,
+    .pitch-container {
+      width: 100%;
+    }
   }
 `;
 

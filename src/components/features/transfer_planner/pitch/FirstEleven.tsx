@@ -64,10 +64,16 @@ const Wrapper = styled.div`
     flex: 1;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 800px) {
     .pitch {
       width: 100vw;
       background-size: 100% 100%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .picks-row {
+      padding: 0.25rem 0;
     }
   }
 `;
