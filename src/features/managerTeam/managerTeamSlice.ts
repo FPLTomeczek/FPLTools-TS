@@ -144,6 +144,10 @@ const managerTeamSlice = createSlice({
     },
     addPick(state, action) {
       const newPlayer = action.payload;
+      const initialPicksIDs = state.picksByGameweeks[state.gameweek].map(
+        (pick) => pick.id
+      );
+
       const blankPlayerMatch = state.picks.find(
         (pick) =>
           pick.element_type === newPlayer.element_type &&
@@ -157,6 +161,9 @@ const managerTeamSlice = createSlice({
             position,
           };
           state.bank -= newPlayer.now_cost;
+          if (initialPicksIDs.includes(newPlayer.id)) {
+            state.transfersByGameweeks[state.gameweek] += 1;
+          }
         }
       }
     },

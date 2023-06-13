@@ -1,7 +1,6 @@
 import { LAST_GW } from "../../../../constants";
 import { useAppSelector } from "../../../../app/hooks";
 import FutureFixture from "./FutureFixture";
-import { Box } from "@mui/material";
 import { Fixture } from "../interfaces/fixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 import styled from "styled-components";
