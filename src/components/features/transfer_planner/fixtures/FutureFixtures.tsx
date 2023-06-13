@@ -1,12 +1,13 @@
 import { LAST_GW } from "../../../../constants";
 import { useAppSelector } from "../../../../app/hooks";
+import { useDraft } from "../../../../app/customHooks";
 import FutureFixture from "./FutureFixture";
 import { Fixture } from "../interfaces/fixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 import styled from "styled-components";
 
 const FutureFixtures = ({ team }: { team: string }) => {
-  const gameweek = useAppSelector((state) => state.managerTeam.gameweek);
+  const gameweek = useDraft("gameweek");
 
   const futureFixtures = useAppSelector((state) => state.fixtures.fixtureList)
     .filter(

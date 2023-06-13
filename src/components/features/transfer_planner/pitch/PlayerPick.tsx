@@ -7,13 +7,14 @@ import {
   removePick,
   retrievePick,
   makeChange,
-} from "../../../../features/managerTeam/managerTeamSlice";
+} from "../../../../features/drafts/draftsSlice";
 import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
 import { isEmpty } from "lodash";
 import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
+import { useDraft } from "../../../../app/customHooks";
 
 const PlayerPick = ({
   player,
@@ -32,9 +33,7 @@ const PlayerPick = ({
     team,
   } = player;
 
-  const playerToChange = useAppSelector(
-    (state) => state.managerTeam.playerToChange
-  );
+  const playerToChange = useDraft("playerToChange");
   const dispatch = useAppDispatch();
 
   const removePlayer = () => {

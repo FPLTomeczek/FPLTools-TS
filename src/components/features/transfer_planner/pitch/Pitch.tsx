@@ -2,11 +2,10 @@ import FirstEleven from "./FirstEleven";
 import Bench from "./Bench";
 import PitchHeader from "./PitchHeader";
 import { Box } from "@mui/material";
-import { useAppSelector } from "../../../../app/hooks";
 import { CircularProgress } from "@mui/material";
+import { useDraft } from "../../../../app/customHooks";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
-  const managerTeam = useAppSelector((state) => state.managerTeam);
-  const picks = managerTeam.picks;
+  const picks = useDraft("picks");
 
   function getPlannerPicksContainer() {
     return (

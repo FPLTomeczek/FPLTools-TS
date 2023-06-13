@@ -6,18 +6,20 @@ import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
   updatePicks,
-} from "../../../../features/managerTeam/managerTeamSlice";
+} from "../../../../features/drafts/draftsSlice";
 import { Direction } from "../enums/transferPlanner";
 import { CURRENT_GW, LAST_GW } from "../../../../constants";
 import { isEmpty } from "lodash";
 import styled from "styled-components";
+import { useDraft } from "../../../../app/customHooks";
 
 const PitchHeader = () => {
-  const managerTeam = useAppSelector((state) => state.managerTeam);
-  const bank = managerTeam.bank;
-  const gameweek = managerTeam.gameweek;
-  const transfers = managerTeam.transfersByGameweeks[gameweek];
-  const picksByGameweeks = managerTeam.picksByGameweeks;
+  const bank = useDraft("bank");
+  const gameweek = useDraft("gameweek");
+  const transfers = useDraft("transfersByGameweeks");
+  const picks = useDraft("picks");
+  const picksByGameweeks = useDraft("picksByGameweeks");
+  const validationError = useDraft("validationError");
 
   const dispatch = useAppDispatch();
 
@@ -28,7 +30,7 @@ const PitchHeader = () => {
     if (!isError)
       dispatch(
         updatePicksByGameweekAndTransfers({
-          picks: managerTeam.picks,
+          picks,
           gameweek,
           transfers,
         })
@@ -50,16 +52,14 @@ const PitchHeader = () => {
   return (
     <Wrapper>
       <div className="save-team">
-        {managerTeam.validationError.isError ? (
-          <Alert severity="error">{managerTeam.validationError.message}</Alert>
-        ) : managerTeam.validationError.message !== "" ? (
-          <Alert severity="success">
-            {managerTeam.validationError.message}
-          </Alert>
+        {validationError.isError ? (
+          <Alert severity="error">{validationError.message}</Alert>
+        ) : validationError.message !== "" ? (
+          <Alert severity="success">{validationError.message}</Alert>
         ) : null}
         <button
           className="primary-button"
-          onClick={() => validateSaveTeam(managerTeam.picks, managerTeam.bank)}
+          onClick={() => validateSaveTeam(picks, bank)}
         >
           Save Team
         </button>
@@ -93,8 +93,8 @@ const PitchHeader = () => {
         <p id="transfers-info">
           {" "}
           Transfers:{" "}
-          <span className={`${transfers < 0 ? "error-value" : ""} `}>
-            {transfers}
+          <span className={`${transfers[gameweek] < 0 ? "error-value" : ""} `}>
+            {transfers[gameweek]}
           </span>
           /2
         </p>

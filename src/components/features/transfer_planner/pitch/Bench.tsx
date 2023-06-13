@@ -6,7 +6,7 @@ const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
   let playerStartIndex = 11;
 
   if (picks.length === 0) {
-    return;
+    return null;
   }
 
   return (

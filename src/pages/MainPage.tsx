@@ -8,7 +8,7 @@ import {
   addPicks,
   addManagerHistory,
   addTransfersHistory,
-} from "../features/managerTeam/managerTeamSlice";
+} from "../features/drafts/draftsSlice";
 import TransferPlanner from "../components/features/transfer_planner/TransferPlanner";
 import { Alert, Snackbar } from "@mui/material";
 import styled from "styled-components";

@@ -1,7 +1,8 @@
+import { useDraft } from "../../../../app/customHooks";
 import { useAppSelector } from "../../../../app/hooks";
 
 const NextFixture = ({ team }: { team: string }) => {
-  const gameweek = useAppSelector((state) => state.managerTeam.gameweek);
+  const gameweek = useDraft("gameweek");
   const nextFixture = useAppSelector(
     (state) => state.fixtures.fixtureList
   ).filter(

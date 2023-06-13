@@ -1,14 +1,15 @@
 import { teamsList } from "./data";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
-import { addPick } from "../../../../features/managerTeam/managerTeamSlice";
+import { useAppDispatch } from "../../../../app/hooks";
+import { addPick } from "../../../../features/drafts/draftsSlice";
 import { Player } from "../interfaces/players";
+import { useDraft } from "../../../../app/customHooks";
 
 const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   const dispatch = useAppDispatch();
   const foundTeam = teamsList.find((team) => team.value === player.team);
   const color = foundTeam ? foundTeam.color : "#000000";
-  const managerPicks = useAppSelector((state) => state.managerTeam.picks);
+  const managerPicks = useDraft("picks");
 
   const availablePositions = [
     ...new Set(
