@@ -19,7 +19,7 @@ const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
 const Wrapper = styled.div`
   display: flex;
   align-items: start;
-  margin-top: 2rem;
+  padding: 2rem 0;
   width: 100%;
   .planner-picks {
     width: 100%;

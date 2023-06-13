@@ -91,7 +91,7 @@ const MainPage = () => {
           {error.msg}
         </Alert>
       </Snackbar>
-      <form>
+      <form id="user-id-form">
         <input placeholder="Enter your ID" ref={inputRef} />
         <button
           className="primary-button"
@@ -115,6 +115,9 @@ const Wrapper = styled.div`
     background: "white";
     padding: 0.5rem;
     margin-right: 4px;
+  }
+  #user-id-form {
+    display: flex;
   }
 `;
 

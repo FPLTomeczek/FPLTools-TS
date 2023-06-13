@@ -106,7 +106,7 @@ const Wrapper = styled.div`
     color: black;
   }
   .player-pick > p {
-    width: 100px;
+    min-width: 100px;
     box-sizing: border-box;
     text-align: center;
     background-color: white;
@@ -132,7 +132,7 @@ const Wrapper = styled.div`
     .player-pick > p {
       font-size: 0.75rem;
       max-width: 100px;
-      width: auto;
+      min-width: auto;
     }
   }
 `;

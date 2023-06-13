@@ -12,11 +12,11 @@ FplTools is hosted through [render](https://render.com) on free subscribtion, th
 
 ### Done
 
-:o:
+:white_check_mark: Transfer Planner - The main feature of the app, it enables to manipulate on users exactly like on official FPL app, but the team for every gameweek can be saved and user can make changes to their team for actual and future gameweeks
 
 ### In Progress
 
-:large_orange_diamond: Transfer Planner - The main feature of the app, it enables to manipulate on users exactly like on official FPL app, but the team for every gameweek can be saved and user can make changes to their team for actual and future gameweeks
+:large_orange_diamond: Transfer Planner - Creating Drafts for different scenarios of making changes to the team
 
 ### Plans
 
