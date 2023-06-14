@@ -4,18 +4,14 @@ import {
   getManagerHistory,
   getTransfers,
 } from "../components/features/transfer_planner/customHooks";
-import {
-  addPicks,
-  addManagerHistory,
-  addTransfersHistory,
-} from "../features/drafts/draftsSlice";
+import { setData } from "../features/drafts/draftsSlice";
 import TransferPlanner from "../components/features/transfer_planner/TransferPlanner";
 import { Alert, Snackbar } from "@mui/material";
 import styled from "styled-components";
 import { calculateSellingCost } from "../components/features/transfer_planner/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { AppDispatch } from "../app/store";
-import { PlayerPick } from "../components/features/transfer_planner/interfaces/managerTeam";
+import { PlayerPick } from "../components/features/transfer_planner/interfaces/drafts";
 import { PlayerHistory } from "../components/features/transfer_planner/interfaces/players";
 
 const getManagerData = async (
@@ -32,13 +28,13 @@ const getManagerData = async (
 ) => {
   let picks: PlayerPick[];
   let managerHistory;
-  let transfers;
+  let transfersHistory;
   setError({ value: false, msg: "" });
 
   try {
     picks = await getManagerTeam(id);
     managerHistory = await getManagerHistory(id);
-    transfers = await getTransfers(id);
+    transfersHistory = await getTransfers(id);
   } catch (error) {
     setError({
       value: true,
@@ -47,16 +43,15 @@ const getManagerData = async (
     setIsLoading(false);
     return;
   }
-  const sellCosts = calculateSellingCost(picks, transfers, playersHistory);
+  const sellCosts = calculateSellingCost(
+    picks,
+    transfersHistory,
+    playersHistory
+  );
   picks = picks.map((player: PlayerPick, ind: number) => {
     return { ...player, sellCost: sellCosts[ind] };
   });
-  localStorage.setItem("fetchedPlayers", JSON.stringify(picks));
-  localStorage.setItem("managerHistory", JSON.stringify(managerHistory));
-  localStorage.setItem("transfersHistory", JSON.stringify(transfers));
-  dispatch(addPicks(picks));
-  dispatch(addManagerHistory(managerHistory));
-  dispatch(addTransfersHistory(transfers));
+  dispatch(setData({ picks, managerHistory, transfersHistory }));
   setIsLoading(false);
 };
 

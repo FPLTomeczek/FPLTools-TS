@@ -11,7 +11,7 @@ import {
 import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
 import { isEmpty } from "lodash";
-import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
 import { useDraft } from "../../../../app/customHooks";

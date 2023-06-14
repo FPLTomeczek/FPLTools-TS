@@ -1,14 +1,18 @@
 import { Alert } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+import { useAppDispatch } from "../../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
-import { PlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick } from "../interfaces/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
   updatePicks,
 } from "../../../../features/drafts/draftsSlice";
 import { Direction } from "../enums/transferPlanner";
-import { CURRENT_GW, LAST_GW } from "../../../../constants";
+import {
+  CURRENT_GW,
+  LAST_GW,
+  MAX_AVAILABLE_FREE_TRANSFERS,
+} from "../../../../constants";
 import { isEmpty } from "lodash";
 import styled from "styled-components";
 import { useDraft } from "../../../../app/customHooks";
@@ -94,9 +98,9 @@ const PitchHeader = () => {
           {" "}
           Transfers:{" "}
           <span className={`${transfers[gameweek] < 0 ? "error-value" : ""} `}>
-            {transfers[gameweek]}
+            {transfers[gameweek] ? transfers[gameweek] : 0}
           </span>
-          /2
+          /{MAX_AVAILABLE_FREE_TRANSFERS}
         </p>
       </div>
     </Wrapper>

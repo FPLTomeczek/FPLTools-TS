@@ -2,7 +2,7 @@ import { LAST_GW } from "../../../../constants";
 import { useAppSelector } from "../../../../app/hooks";
 import { useDraft } from "../../../../app/customHooks";
 import FutureFixture from "./FutureFixture";
-import { Fixture } from "../interfaces/fixture";
+import { Fixture } from "../interfaces/fixtures";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 import styled from "styled-components";
 

@@ -8,3 +8,4 @@ export const FIRST_ELEVEN_DEF_MAX = 5;
 export const FIRST_ELEVEN_MID_MIN = 2;
 export const FIRST_ELEVEN_MID_MAX = 5;
 export const FIRST_ELEVEN_FWD_MAX = 3;
+export const MAX_AVAILABLE_FREE_TRANSFERS = 2;
