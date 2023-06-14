@@ -34,6 +34,7 @@ const validatePicksFromOneTeam = (picks: PlayerPick[]) => {
 const validateFormation = (picks: PlayerPick[]) => {
   const splittedPicks = splittingPicksByRoles(picks.slice(0, 11));
   if (
+    !splittedPicks[0] ||
     splittedPicks[0].length !== FIRST_ELEVEN_GK ||
     splittedPicks[1].length < FIRST_ELEVEN_DEF_MIN ||
     splittedPicks[1].length > FIRST_ELEVEN_DEF_MAX ||
