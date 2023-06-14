@@ -5,13 +5,13 @@ import Pitch from "./pitch/Pitch";
 const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <Wrapper>
-      <div className="pitch-container">
+      <section className="pitch-container">
         <Pitch isLoading={isLoading} />
-      </div>
+      </section>
 
-      <div className="player-list">
+      <section className="player-list">
         <PlayerList />
-      </div>
+      </section>
     </Wrapper>
   );
 };

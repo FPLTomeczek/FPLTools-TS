@@ -67,12 +67,14 @@ const PlayerListItems = ({
           </span>
         </p>
       </div>
-      {pagesData.length > 0
-        ? pagesData[page - 1].map((player) => {
-            const { id } = player;
-            return <PlayerListItem player={player} key={id} />;
-          })
-        : null}
+      <ul>
+        {pagesData.length > 0
+          ? pagesData[page - 1].map((player) => {
+              const { id } = player;
+              return <PlayerListItem player={player} key={id} />;
+            })
+          : null}
+      </ul>
     </div>
   );
 };

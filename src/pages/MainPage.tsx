@@ -113,6 +113,7 @@ const Wrapper = styled.div`
   }
   #user-id-form {
     display: flex;
+    max-width: 300px;
   }
 `;
 
