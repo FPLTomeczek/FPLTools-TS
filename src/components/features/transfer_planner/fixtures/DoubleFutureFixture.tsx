@@ -1,4 +1,4 @@
-import { Fixture } from "../interfaces/fixture";
+import { Fixture } from "../interfaces/fixtures";
 import { Box } from "@mui/material";
 import { setBackgroundColor } from "./utils";
 

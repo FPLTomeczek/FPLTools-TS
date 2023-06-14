@@ -1,7 +1,7 @@
 import PlayerPick from "./PlayerPick";
 import styled from "styled-components";
 import { splittingPicksByRoles } from "../utils";
-import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
 import pitch_image from "../../../../assets/FOOTBALL_FIELD_portrait.jpg";
 
 const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {

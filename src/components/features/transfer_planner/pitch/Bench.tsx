@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import PlayerPick from "./PlayerPick";
-import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
 
 const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
   let playerStartIndex = 11;
 
   if (picks.length === 0) {
-    return;
+    return null;
   }
 
   return (

@@ -2,7 +2,7 @@ import { assignPositionsToPlayers } from "./utils";
 
 import { axiosInstance } from "../../../utils";
 
-import { PlayerPick } from "./interfaces/managerTeam";
+import { PlayerPick } from "./interfaces/drafts";
 interface APIPick {
   element: number;
   position: 1;

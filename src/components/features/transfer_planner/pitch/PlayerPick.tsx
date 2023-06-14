@@ -2,18 +2,19 @@ import styled from "styled-components";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+import { useAppDispatch } from "../../../../app/hooks";
 import {
   removePick,
   retrievePick,
   makeChange,
-} from "../../../../features/managerTeam/managerTeamSlice";
+} from "../../../../features/drafts/draftsSlice";
 import blank from "../../../../assets/shirts/blank.png";
 import { teamsList } from "../list/data";
 import { isEmpty } from "lodash";
-import { PlayerPick as IPlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
+import { useDraft } from "../../../../app/customHooks";
 
 const PlayerPick = ({
   player,
@@ -32,9 +33,7 @@ const PlayerPick = ({
     team,
   } = player;
 
-  const playerToChange = useAppSelector(
-    (state) => state.managerTeam.playerToChange
-  );
+  const playerToChange = useDraft("playerToChange");
   const dispatch = useAppDispatch();
 
   const removePlayer = () => {
@@ -69,7 +68,7 @@ const PlayerPick = ({
             </div>
           ) : (
             <button onClick={retrievePlayer}>
-              <ArrowCircleLeftRoundedIcon color="success" />
+              <ArrowCircleLeftRoundedIcon color="action" />
             </button>
           )}
         </div>

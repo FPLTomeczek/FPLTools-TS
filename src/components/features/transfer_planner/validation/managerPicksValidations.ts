@@ -1,4 +1,4 @@
-import { PlayerPick } from "../interfaces/managerTeam";
+import { PlayerPick } from "../interfaces/drafts";
 import { splittingPicksByRoles } from "../utils";
 import {
   FIRST_ELEVEN_GK,

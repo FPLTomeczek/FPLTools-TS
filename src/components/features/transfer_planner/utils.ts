@@ -1,4 +1,4 @@
-import { PlayerPick, Transfer } from "./interfaces/managerTeam";
+import { PlayerPick, Transfer } from "./interfaces/drafts";
 import { ensure } from "../../../helper/helper";
 import { PlayerHistory } from "./interfaces/players";
 

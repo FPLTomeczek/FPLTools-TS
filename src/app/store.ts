@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import managerTeamReducer from "../features/managerTeam/managerTeamSlice";
+import draftsReducer from "../features/drafts/draftsSlice";
 import playersReducer from "../features/players/playersSlice";
 import fixturesReducer from "../features/fixtures/fixturesSlice";
 
 const store = configureStore({
   reducer: {
-    managerTeam: managerTeamReducer,
+    drafts: draftsReducer,
     players: playersReducer,
     fixtures: fixturesReducer,
   },
