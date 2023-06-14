@@ -113,7 +113,9 @@ const Wrapper = styled.div`
   }
   #user-id-form {
     display: flex;
-    max-width: 300px;
+  }
+  #user-id-form > input {
+    max-width: 200px;
   }
 `;
 
