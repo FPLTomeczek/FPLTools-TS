@@ -112,6 +112,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     gap: 4px;
+    margin-top: 1rem;
   }
   .gameweek-container {
     display: flex;
