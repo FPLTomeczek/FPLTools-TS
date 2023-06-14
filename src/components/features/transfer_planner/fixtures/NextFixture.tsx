@@ -1,7 +1,16 @@
 import { useDraft } from "../../../../app/customHooks";
 import { useAppSelector } from "../../../../app/hooks";
+import { FIRST_ELEVEN_PLAYERS } from "../../../../constants";
 
-const NextFixture = ({ team }: { team: string }) => {
+const NextFixture = ({
+  team,
+  sellCost,
+  index,
+}: {
+  team: string;
+  sellCost: number;
+  index: number;
+}) => {
   const gameweek = useDraft("gameweek");
   const nextFixture = useAppSelector(
     (state) => state.fixtures.fixtureList
@@ -17,7 +26,20 @@ const NextFixture = ({ team }: { team: string }) => {
     return teamText + place;
   });
 
-  return <p>{nextFixtureText.join(", ")}</p>;
+  return (
+    <p className="player-pick-text" id="player-pick-next-fixture">
+      {nextFixtureText.join(", ")}
+      {sellCost > 0 ? (
+        <span
+          className={`${
+            index > FIRST_ELEVEN_PLAYERS - 1 ? "bench-price" : ""
+          } player-pick-price`}
+        >
+          {sellCost / 10} £
+        </span>
+      ) : null}
+    </p>
+  );
 };
 
 export default NextFixture;

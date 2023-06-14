@@ -86,9 +86,15 @@ const PlayerPick = ({
           <img src={blank} alt="default-shirt" />
         )}
 
-        <NextFixture team={team} />
+        <NextFixture
+          team={team}
+          sellCost={typeof sellCost === "undefined" ? cost : sellCost}
+          index={index}
+        />
         <FutureFixtures team={team} />
-        <p data-testid={`player-name-${index}`}>{name}</p>
+        <p className="player-pick-text" data-testid={`player-name-${index}`}>
+          {name}
+        </p>
       </div>
     </Wrapper>
   );
@@ -104,7 +110,7 @@ const Wrapper = styled.div`
     align-items: center;
     color: black;
   }
-  .player-pick > p {
+  .player-pick-text {
     min-width: 100px;
     box-sizing: border-box;
     text-align: center;
@@ -126,9 +132,22 @@ const Wrapper = styled.div`
   button {
     cursor: pointer;
   }
+  .player-pick-price {
+    position: absolute;
+    right: 0;
+    top: -15px;
+    background-color: var(--light-green);
+    font-size: 0.8rem;
+  }
+  #player-pick-next-fixture {
+    position: relative;
+  }
+  .bench-price {
+    background-color: var(--secondary-color);
+  }
 
   @media screen and (max-width: 480px) {
-    .player-pick > p {
+    .player-pick-text {
       font-size: 0.75rem;
       max-width: 100px;
       min-width: auto;

@@ -27,7 +27,7 @@ const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(114, 207, 159, 0.9);
+  background-color: var(--light-green);
   padding: 1rem 2rem;
 `;
 export default Bench;

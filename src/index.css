@@ -14,6 +14,8 @@
   --secondary-color: #fee715;
   --secondary-color-dark: #fba200;
   --secondary-color-light: #fff395;
+
+  --light-green: rgba(114, 207, 159, 0.9);
 }
 
 html {
@@ -186,7 +188,7 @@ textarea {
 .primary-button {
   background-color: var(--secondary-color);
   color: var(--primary-color);
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.5rem;
   cursor: pointer;
 }
