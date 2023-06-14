@@ -1,5 +1,5 @@
 import { useAppSelector } from "./hooks";
-import { ManagerTeamState } from "../features/drafts/draftsSlice";
+import { ManagerTeamState } from "../features/drafts/initializers";
 
 export const useDraft = <K extends keyof ManagerTeamState>(key: K) => {
   //handle no key
