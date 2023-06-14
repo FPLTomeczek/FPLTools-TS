@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+import { useAppDispatch } from "../../../../app/hooks";
 import {
   removePick,
   retrievePick,
@@ -68,7 +68,7 @@ const PlayerPick = ({
             </div>
           ) : (
             <button onClick={retrievePlayer}>
-              <ArrowCircleLeftRoundedIcon color="success" />
+              <ArrowCircleLeftRoundedIcon color="action" />
             </button>
           )}
         </div>

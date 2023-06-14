@@ -5,11 +5,8 @@ import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { useDraft } from "../../../../app/customHooks";
 import DraftButtons from "./DraftButtons";
-import { useAppSelector } from "../../../../app/hooks";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
-  const picks = useAppSelector(
-    (state) => state.drafts.managerTeam[state.drafts.draftNumber].picks
-  );
+  const picks = useDraft("picks");
 
   function getPlannerPicksContainer() {
     return (
