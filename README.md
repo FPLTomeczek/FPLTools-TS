@@ -16,7 +16,7 @@ FplTools is hosted through [render](https://render.com) on free subscribtion, th
 
 ### In Progress
 
-:large_orange_diamond: Predict player chances to score or keep a clean sheet - Chances to score or keep a clean sheet shown in percentages
+:large_orange_diamond: Predict player chances to score or keep a clean sheet - Chances to score or keep a clean sheet shown in percentages<br>
 :large_orange_diamond: Maintain and develop Transfer Planner (Adding Chips: Wildcard, FreeHit, Triple Captain), Add captaincy
 
 ### Plans
