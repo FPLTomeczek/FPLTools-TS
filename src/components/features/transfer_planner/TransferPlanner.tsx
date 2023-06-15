@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PlayerList from "./list/PlayersList";
 import Pitch from "./pitch/Pitch";
-import GameweeksTransfersContainer from "./pitch/GameweeksTransfersContainer";
+import GameweeksTransfersContainer from "./gameweeks_transfers/GameweeksTransfersContainer";
 
 const TransferPlanner = ({ isLoading }: { isLoading: boolean }) => {
   return (

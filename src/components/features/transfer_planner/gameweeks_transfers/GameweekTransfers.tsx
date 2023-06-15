@@ -1,6 +1,9 @@
 import { PlayerPick } from "../interfaces/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
 import styled from "styled-components";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useAppDispatch } from "../../../../app/hooks";
+import { updatePicks } from "../../../../features/drafts/draftsSlice";
 
 const GameweekTransfers = ({
   removedPicks,
@@ -11,9 +14,24 @@ const GameweekTransfers = ({
   addedPicks: PlayerPick[];
   gameweek: number;
 }) => {
+  const dispatch = useAppDispatch();
+
+  const setGameweek = (gameweek: number) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch(updatePicks(gameweek));
+  };
+
   return (
     <Wrapper>
-      <h2>GW: {gameweek}</h2>
+      <div className="gameweek-transfers-header">
+        <h2>GW: {gameweek}</h2>
+        <button
+          className="direction-button"
+          onClick={() => setGameweek(gameweek)}
+        >
+          <KeyboardArrowUpIcon />
+        </button>
+      </div>
       <div className="gameweek-transfers-picks">
         <div className="removed-picks">
           <span id="picks-out" className="picks-transfer-status">
@@ -45,8 +63,15 @@ const Wrapper = styled.div`
   border: 2px solid var(--secondary-color);
   border-radius: var(--primary-border-radius);
   height: fit-content;
+  .gameweek-transfers-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
   .gameweek-transfers-picks {
     display: flex;
+    justify-content: center;
     gap: 1rem;
   }
   .picks-transfer-status {
@@ -65,6 +90,9 @@ const Wrapper = styled.div`
   }
   #picks-out {
     background-color: var(--warning-color);
+  }
+  @media screen and (max-width: 800px) {
+    padding: 1rem;
   }
 `;
 

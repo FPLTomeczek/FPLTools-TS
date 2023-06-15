@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material";
 import { useAppDispatch } from "../../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
-import { PlayerPick, Transfer } from "../interfaces/drafts";
+import { PlayerPick } from "../interfaces/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
@@ -162,6 +162,9 @@ const Wrapper = styled.div`
   }
   #transfers-info {
     justify-content: end;
+  }
+  #transfers-info > p {
+    text-align: right;
   }
   .error-value {
     color: #ff0f0f;
