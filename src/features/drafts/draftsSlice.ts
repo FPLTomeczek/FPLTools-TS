@@ -99,12 +99,12 @@ const draftSlice = createSlice({
         state.managerTeam[state.draftNumber].gameweek
       ].find((removedPick) => removedPick.position === position) as PlayerPick;
 
-      const blankPick = state.managerTeam[state.draftNumber].picks.find(
+      const blankPickFound = state.managerTeam[state.draftNumber].picks.find(
         (pick) => pick.position === position
       );
-      if (blankPick) {
+      if (blankPickFound) {
         const index =
-          state.managerTeam[state.draftNumber].picks.indexOf(blankPick);
+          state.managerTeam[state.draftNumber].picks.indexOf(blankPickFound);
         state.managerTeam[state.draftNumber].picks[index] = {
           ...retrievedPickByGameweek,
         };
@@ -116,6 +116,7 @@ const draftSlice = createSlice({
         state.managerTeam[state.draftNumber].removedPicksByGameweeks[
           state.managerTeam[state.draftNumber].gameweek
         ].splice(removedPicksByGameweeksIndex, 1);
+
         state.managerTeam[state.draftNumber].bank -=
           typeof retrievedPickByGameweek.sellCost !== "undefined"
             ? retrievedPickByGameweek.sellCost
@@ -127,32 +128,38 @@ const draftSlice = createSlice({
       }
     },
     addPick(state, action) {
+      const gameweek = state.managerTeam[state.draftNumber].gameweek;
+
       const newPlayer = action.payload;
       const initialPicksIDs = state.managerTeam[
         state.draftNumber
-      ].picksByGameweeks[state.managerTeam[state.draftNumber].gameweek].map(
-        (pick) => pick.id
-      );
+      ].picksByGameweeks[gameweek].map((pick) => pick.id);
 
-      const blankPlayerMatch = state.managerTeam[state.draftNumber].picks.find(
+      const blankPlayerMatchRole = state.managerTeam[
+        state.draftNumber
+      ].picks.find(
         (pick) =>
           pick.element_type === newPlayer.element_type &&
           pick.web_name == "Blank"
       );
-      if (blankPlayerMatch) {
-        const position = blankPlayerMatch.position;
-        if (typeof blankPlayerMatch.removedPickIndex === "number") {
+      if (blankPlayerMatchRole) {
+        const position = blankPlayerMatchRole.position;
+        if (typeof blankPlayerMatchRole.removedPickIndex === "number") {
           state.managerTeam[state.draftNumber].picks[
-            blankPlayerMatch.removedPickIndex
+            blankPlayerMatchRole.removedPickIndex
           ] = {
             ...newPlayer,
             position,
           };
-          state.managerTeam[state.draftNumber].bank -= newPlayer.now_cost;
           if (initialPicksIDs.includes(newPlayer.id)) {
-            state.managerTeam[state.draftNumber].transfersByGameweeks[
-              state.managerTeam[state.draftNumber].gameweek
-            ] += 1;
+            console.log(position);
+
+            draftSlice.caseReducers.retrievePick(state, {
+              payload: position,
+              type: "retrieve_pick",
+            });
+          } else {
+            state.managerTeam[state.draftNumber].bank -= newPlayer.now_cost;
           }
         }
       }

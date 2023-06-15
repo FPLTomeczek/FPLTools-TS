@@ -13,14 +13,6 @@ export interface TransfersByGameweeks {
   [gameweek: number]: number;
 }
 
-export interface RemovedPicksByGameweeks {
-  [gameweek: number]: PlayerPick[];
-}
-
-export interface InitialPicksByGameweeks {
-  [gameweek: number]: PlayerPick[];
-}
-
 type ValidationError = {
   isError: boolean;
   message: string;
@@ -30,10 +22,11 @@ export interface ManagerTeamState {
   picks: PlayerPick[];
   picksByGameweeks: PicksByGameweeks;
   transfersByGameweeks: TransfersByGameweeks;
-  initialPicksByGameweeks: InitialPicksByGameweeks;
+  initialPicksByGameweeks: PicksByGameweeks;
   gameweek: number;
   bank: number;
-  removedPicksByGameweeks: RemovedPicksByGameweeks;
+  removedPicksByGameweeks: PicksByGameweeks;
+  addedPicksByGameweeks: PicksByGameweeks;
   playerToChange: PlayerPick | Record<string, never>;
   managerHistory: ManagerHistory;
   transfersHistory: Transfer[];
@@ -66,8 +59,8 @@ const initializeTransfersByGameweeks = (managerHistory: ManagerHistory) => {
   return transfersByGameweeks;
 };
 
-const initializeRemovedPicksByGameweeks = () => {
-  const removedPicksByGameweeks: RemovedPicksByGameweeks = [];
+const initializeBlankPicksByGameweeks = () => {
+  const removedPicksByGameweeks: PicksByGameweeks = [];
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     removedPicksByGameweeks[i] = [];
   }
@@ -81,7 +74,8 @@ export const initialManagerTeamState: ManagerTeamState = {
   initialPicksByGameweeks: [],
   gameweek: CURRENT_GW,
   bank: 0,
-  removedPicksByGameweeks: initializeRemovedPicksByGameweeks(),
+  removedPicksByGameweeks: initializeBlankPicksByGameweeks(),
+  addedPicksByGameweeks: initializeBlankPicksByGameweeks(),
   playerToChange: {},
   managerHistory: { current: [], past: [], chips: [] },
   transfersHistory: [],
@@ -100,7 +94,8 @@ export function setManagerTeam(
     initialPicksByGameweeks: initializePicksByGameweeks(picks),
     gameweek: CURRENT_GW,
     bank: managerHistory.current[CURRENT_GW - 2].bank,
-    removedPicksByGameweeks: initializeRemovedPicksByGameweeks(),
+    removedPicksByGameweeks: initializeBlankPicksByGameweeks(),
+    addedPicksByGameweeks: initializeBlankPicksByGameweeks(),
     playerToChange: {},
     managerHistory,
     transfersHistory,
