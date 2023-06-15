@@ -26,7 +26,7 @@ const DoubleFutureFixture = ({
               width: "20px",
               boxSizing: "border-box",
               textAlign: "center",
-              padding: "0.25rem 0",
+              padding: "0.1rem 0",
               maxHeight: "16px",
               margin: "0",
             }}
