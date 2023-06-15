@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { useDraft } from "../../../../app/customHooks";
 import PitchHeader from "./PitchHeader";
-import GameweeksTransfersContainer from "./GameweeksTransfersContainer";
+import GameweeksTransfersContainer from "../gameweeks_transfers/GameweeksTransfersContainer";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const picks = useDraft("picks");
 
