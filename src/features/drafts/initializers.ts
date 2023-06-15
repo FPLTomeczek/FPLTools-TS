@@ -60,11 +60,11 @@ const initializeTransfersByGameweeks = (managerHistory: ManagerHistory) => {
 };
 
 const initializeBlankPicksByGameweeks = () => {
-  const removedPicksByGameweeks: PicksByGameweeks = [];
+  const blankPicksByGameweeks: PicksByGameweeks = [];
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    removedPicksByGameweeks[i] = [];
+    blankPicksByGameweeks[i] = [];
   }
-  return removedPicksByGameweeks;
+  return blankPicksByGameweeks;
 };
 
 export const initialManagerTeamState: ManagerTeamState = {

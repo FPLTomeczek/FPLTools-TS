@@ -16,6 +16,9 @@
   --secondary-color-light: #fff395;
 
   --light-green: rgba(114, 207, 159, 0.9);
+  --warning-color: #ff0f0f;
+
+  --primary-border-radius: 4px;
 }
 
 html {
@@ -161,6 +164,9 @@ sup {
 img {
   border-style: none;
 }
+.player-shirt {
+  width: 50px;
+}
 
 /* Forms
    ========================================================================== */
@@ -199,7 +205,6 @@ textarea {
   justify-content: center;
   align-items: center;
   border: 1px solid var(--primary-color);
-  border-radius: 5px;
   cursor: pointer;
   padding: 0.5rem;
   background-color: var(--secondary-color);

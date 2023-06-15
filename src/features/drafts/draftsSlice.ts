@@ -142,6 +142,7 @@ const draftSlice = createSlice({
           pick.element_type === newPlayer.element_type &&
           pick.web_name == "Blank"
       );
+
       if (blankPlayerMatchRole) {
         const position = blankPlayerMatchRole.position;
         if (typeof blankPlayerMatchRole.removedPickIndex === "number") {
@@ -152,8 +153,6 @@ const draftSlice = createSlice({
             position,
           };
           if (initialPicksIDs.includes(newPlayer.id)) {
-            console.log(position);
-
             draftSlice.caseReducers.retrievePick(state, {
               payload: position,
               type: "retrieve_pick",
@@ -210,9 +209,21 @@ const draftSlice = createSlice({
       };
     },
     updatePicksByGameweekAndTransfers(state, action) {
-      const { picks, gameweek, transfers } = action.payload;
+      const { picks, gameweek, transfers, initialPicksByGameweeks } =
+        action.payload;
       state.managerTeam[state.draftNumber].transfersByGameweeks[gameweek] =
         transfers;
+
+      const addedPlayers = picks.filter(
+        (pick: PlayerPick) =>
+          !initialPicksByGameweeks[gameweek].some(
+            (initialPick: PlayerPick) => initialPick._id === pick._id
+          )
+      );
+
+      state.managerTeam[state.draftNumber].addedPicksByGameweeks[gameweek] =
+        addedPlayers;
+
       for (let i = gameweek; i <= LAST_GW; i++) {
         state.managerTeam[state.draftNumber].picksByGameweeks[i] = picks;
         if (i != LAST_GW) {

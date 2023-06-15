@@ -24,6 +24,7 @@ const ManagerTeamInfo = () => {
   const picks = useDraft("picks");
   const picksByGameweeks = useDraft("picksByGameweeks");
   const validationError = useDraft("validationError");
+  const initialPicksByGameweeks = useDraft("initialPicksByGameweeks");
 
   const dispatch = useAppDispatch();
 
@@ -37,6 +38,7 @@ const ManagerTeamInfo = () => {
           picks,
           gameweek,
           transfers: transfers[gameweek],
+          initialPicksByGameweeks,
         })
       );
   };
