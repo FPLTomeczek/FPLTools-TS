@@ -133,7 +133,7 @@ const draftSlice = createSlice({
       const newPlayer = action.payload;
       const initialPicksIDs = state.managerTeam[
         state.draftNumber
-      ].picksByGameweeks[gameweek].map((pick) => pick.id);
+      ].initialPicksByGameweeks[gameweek].map((pick) => pick.id);
 
       const blankPlayerMatchRole = state.managerTeam[
         state.draftNumber
@@ -153,6 +153,8 @@ const draftSlice = createSlice({
             position,
           };
           if (initialPicksIDs.includes(newPlayer.id)) {
+            console.log("if");
+
             draftSlice.caseReducers.retrievePick(state, {
               payload: position,
               type: "retrieve_pick",
@@ -235,6 +237,8 @@ const draftSlice = createSlice({
         if (i != gameweek) {
           state.managerTeam[state.draftNumber].initialPicksByGameweeks[i] =
             picks;
+          state.managerTeam[state.draftNumber].removedPicksByGameweeks[i] = [];
+          state.managerTeam[state.draftNumber].addedPicksByGameweeks[i] = [];
         }
       }
       localStorage.setItem("drafts", JSON.stringify(state.managerTeam));
