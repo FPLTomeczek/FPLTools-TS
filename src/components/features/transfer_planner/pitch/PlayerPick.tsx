@@ -76,14 +76,14 @@ const PlayerPick = ({
           <img
             src={shirt}
             alt="shirt"
-            className={`${
+            className={`player-shirt ${
               !isEmpty(playerToChange) && playerToChange.id === id
                 ? "change-pick"
                 : ""
             }`}
           />
         ) : (
-          <img src={blank} alt="default-shirt" />
+          <img src={blank} alt="default-shirt" className="player-shirt" />
         )}
 
         <NextFixture
@@ -101,9 +101,6 @@ const PlayerPick = ({
 };
 
 const Wrapper = styled.div`
-  img {
-    width: 50px;
-  }
   .player-pick {
     display: flex;
     flex-direction: column;
@@ -135,7 +132,7 @@ const Wrapper = styled.div`
   .player-pick-price {
     position: absolute;
     right: 0;
-    top: -15px;
+    top: -20px;
     background-color: var(--light-green);
     font-size: 0.8rem;
   }

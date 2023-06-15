@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material";
 import { useAppDispatch } from "../../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
-import { PlayerPick } from "../interfaces/drafts";
+import { PlayerPick, Transfer } from "../interfaces/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
@@ -24,6 +24,18 @@ const ManagerTeamInfo = () => {
   const picks = useDraft("picks");
   const picksByGameweeks = useDraft("picksByGameweeks");
   const validationError = useDraft("validationError");
+  const initialPicksByGameweeks = useDraft("initialPicksByGameweeks");
+
+  const transfersArray = [];
+
+  for (let i = CURRENT_GW; i <= LAST_GW; i++) {
+    transfersArray.push(transfers[i]);
+  }
+
+  const cost =
+    transfersArray
+      .filter((transfers) => transfers < 0)
+      .reduce((prev, curr) => (curr += prev), 0) * 4;
 
   const dispatch = useAppDispatch();
 
@@ -37,6 +49,7 @@ const ManagerTeamInfo = () => {
           picks,
           gameweek,
           transfers: transfers[gameweek],
+          initialPicksByGameweeks,
         })
       );
   };
@@ -70,13 +83,15 @@ const ManagerTeamInfo = () => {
       </div>
 
       <div className="pitch-header-info">
-        <p>
-          Bank:{" "}
-          <span className={`${bank < 0 ? "error-value" : ""} `}>
-            {(bank / 10).toFixed(1)}
-          </span>{" "}
-          £
-        </p>
+        <div className="info-container">
+          <p>
+            Bank:{" "}
+            <span className={`${bank < 0 ? "error-value" : ""} `}>
+              {(bank / 10).toFixed(1)}
+            </span>{" "}
+            £
+          </p>
+        </div>
         <div className="gameweek-container">
           <button
             className="direction-button"
@@ -94,14 +109,18 @@ const ManagerTeamInfo = () => {
             <i className="fa-solid fa-arrow-right"></i>
           </button>
         </div>
-        <p id="transfers-info">
-          {" "}
-          Transfers:{" "}
-          <span className={`${transfers[gameweek] < 0 ? "error-value" : ""} `}>
-            {transfers[gameweek] ? transfers[gameweek] : 0}
-          </span>
-          /{MAX_AVAILABLE_FREE_TRANSFERS}
-        </p>
+        <div className="info-container" id="transfers-info">
+          <p>
+            Transfers:{" "}
+            <span
+              className={`${transfers[gameweek] < 0 ? "error-value" : ""} `}
+            >
+              {transfers[gameweek] ? transfers[gameweek] : 0}
+            </span>
+            /{MAX_AVAILABLE_FREE_TRANSFERS} <br />
+            Cost: {cost}
+          </p>
+        </div>
       </div>
     </Wrapper>
   );
@@ -129,15 +148,20 @@ const Wrapper = styled.div`
     flex: 1;
     max-width: 100%;
   }
-  .pitch-header-info > p,
+  .info-container > p,
   .gameweek-container {
     font-size: clamp(0.75rem, calc(0.45rem + 1.25vw), 1rem);
+  }
+  .info-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
   i {
     font-size: 1rem;
   }
   #transfers-info {
-    text-align: right;
+    justify-content: end;
   }
   .error-value {
     color: #ff0f0f;
