@@ -11,7 +11,11 @@ import styled from "styled-components";
 import { calculateSellingCost } from "../components/features/transfer_planner/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { AppDispatch } from "../app/store";
-import { PlayerPick } from "../components/features/transfer_planner/interfaces/drafts";
+import {
+  ManagerHistory,
+  PlayerPick,
+  Transfer,
+} from "../components/features/transfer_planner/interfaces/drafts";
 import { PlayerHistory } from "../components/features/transfer_planner/interfaces/players";
 
 const getManagerData = async (
@@ -27,8 +31,8 @@ const getManagerData = async (
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   let picks: PlayerPick[];
-  let managerHistory;
-  let transfersHistory;
+  let managerHistory: ManagerHistory;
+  let transfersHistory: Transfer[];
   setError({ value: false, msg: "" });
 
   try {
@@ -51,7 +55,7 @@ const getManagerData = async (
   picks = picks.map((player: PlayerPick, ind: number) => {
     return { ...player, sellCost: sellCosts[ind] };
   });
-  dispatch(setData({ picks, managerHistory, transfersHistory }));
+  dispatch(setData({ picks, managerHistory }));
   setIsLoading(false);
 };
 

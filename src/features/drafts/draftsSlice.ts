@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
 import {
+  ManagerHistory,
   PlayerPick,
+  Transfer,
   playerBlankTemplate,
 } from "../../components/features/transfer_planner/interfaces/drafts";
 import {
@@ -16,6 +18,7 @@ interface Draft {
   managerTeam: ManagerTeamState[];
   draftNumber: number;
   initManagerTeam: ManagerTeamState;
+  managerHistory: ManagerHistory;
 }
 
 const initialState: Draft = {
@@ -28,6 +31,10 @@ const initialState: Draft = {
     typeof storage.initDraft === "string"
       ? JSON.parse(storage.initDraft)
       : initialManagerTeamState,
+  managerHistory:
+    typeof storage.managerHistory === "string"
+      ? JSON.parse(storage.managerHistory)
+      : { current: [], past: [], chips: [] },
 };
 
 const draftSlice = createSlice({
@@ -35,15 +42,16 @@ const draftSlice = createSlice({
   initialState,
   reducers: {
     setData(state, action) {
-      const { picks, managerHistory, transfersHistory } = action.payload;
+      const { picks, managerHistory } = action.payload;
       const managerTeam: ManagerTeamState = setManagerTeam(
         picks,
-        managerHistory,
-        transfersHistory
+        managerHistory
       );
       localStorage.setItem("initDraft", JSON.stringify(managerTeam));
+      localStorage.setItem("managerHistory", JSON.stringify(managerHistory));
       state.managerTeam = [managerTeam, managerTeam];
       state.initManagerTeam = managerTeam;
+      state.managerHistory = managerHistory;
     },
     removePick(state, action) {
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
