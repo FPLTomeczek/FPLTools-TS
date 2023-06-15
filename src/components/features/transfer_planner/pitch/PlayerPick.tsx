@@ -132,7 +132,7 @@ const Wrapper = styled.div`
   .player-pick-price {
     position: absolute;
     right: 0;
-    top: -15px;
+    top: -20px;
     background-color: var(--light-green);
     font-size: 0.8rem;
   }

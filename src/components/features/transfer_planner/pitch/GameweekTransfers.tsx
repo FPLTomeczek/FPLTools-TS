@@ -41,9 +41,10 @@ const GameweekTransfers = ({
 };
 
 const Wrapper = styled.div`
-  padding: 1rem;
+  padding: 2rem;
   border: 2px solid var(--secondary-color);
   border-radius: var(--primary-border-radius);
+  height: fit-content;
   .gameweek-transfers-picks {
     display: flex;
     gap: 1rem;
