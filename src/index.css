@@ -16,7 +16,9 @@
   --secondary-color-light: #fff395;
 
   --light-green: rgba(114, 207, 159, 0.9);
+
   --warning-color: #ff0f0f;
+  --disabled-color: #88919c;
 
   --primary-border-radius: 4px;
 }

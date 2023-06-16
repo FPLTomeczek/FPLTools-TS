@@ -28,7 +28,7 @@ const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
       {managerPicks.find((pick) => pick.id === player.id) ||
       !availablePositions.includes(player.element_type) ? (
         <button style={{ display: "flex", alignItems: "center" }} disabled>
-          <AddCircleIcon sx={{ color: "#88919c" }} />
+          <AddCircleIcon sx={{ color: "var(--disabled-color)" }} />
         </button>
       ) : (
         <button

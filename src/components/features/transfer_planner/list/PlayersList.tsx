@@ -37,7 +37,7 @@ const PlayersList = () => {
           justifyContent: "center",
         }}
       >
-        <CircularProgress />
+        <CircularProgress sx={{ color: "var(--secondary-color)" }} />
       </div>
     );
   }

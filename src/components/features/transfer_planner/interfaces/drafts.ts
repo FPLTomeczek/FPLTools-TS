@@ -56,7 +56,7 @@ interface SeasonDetail {
   rank: number;
 }
 
-interface Chip {
+export interface Chip {
   name: string;
   time: string;
   event: number;

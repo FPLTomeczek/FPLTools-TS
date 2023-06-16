@@ -5,6 +5,7 @@ import { CircularProgress } from "@mui/material";
 import { useDraft } from "../../../../app/customHooks";
 import PitchHeader from "./PitchHeader";
 import GameweeksTransfersContainer from "../gameweeks_transfers/GameweeksTransfersContainer";
+import Chips from "./Chips";
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const picks = useDraft("picks");
 
@@ -14,6 +15,7 @@ const Pitch = ({ isLoading }: { isLoading: boolean }) => {
         <PitchHeader />
         <FirstEleven picks={picks.slice(0, 11)} />
         <Bench picks={picks.slice(11, 15)} />
+        <Chips />
         <div className="gameweek-transfer-container-planner-picks">
           <GameweeksTransfersContainer />
         </div>
@@ -23,7 +25,11 @@ const Pitch = ({ isLoading }: { isLoading: boolean }) => {
 
   return (
     <Box sx={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-      {isLoading ? <CircularProgress /> : getPlannerPicksContainer()}
+      {isLoading ? (
+        <CircularProgress sx={{ color: "var(--secondary-color)" }} />
+      ) : (
+        getPlannerPicksContainer()
+      )}
     </Box>
   );
 };
