@@ -1,3 +1,4 @@
+import { useAppDispatch } from "../../../../app/hooks";
 import { FilteredChip } from "./Chips";
 
 const SingleChip = ({ chip }: { chip: FilteredChip }) => {
@@ -16,6 +17,12 @@ const SingleChip = ({ chip }: { chip: FilteredChip }) => {
     }
   };
 
+  const dispatch = useAppDispatch();
+
+  const handlePlayingChip = (chip: FilteredChip) => {
+    dispatch;
+  };
+
   const chipName = switchName(chip.name);
 
   return (
@@ -24,6 +31,7 @@ const SingleChip = ({ chip }: { chip: FilteredChip }) => {
       className={`chip-button ${
         chip.played ? "chip-unavailable" : "chip-available"
       }`}
+      onClick={() => handlePlayingChip(chip)}
     >
       {chipName}
     </button>

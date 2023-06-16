@@ -20,16 +20,14 @@ import { useDraft } from "../../../../app/customHooks";
 const ManagerTeamInfo = () => {
   const bank = useDraft("bank");
   const gameweek = useDraft("gameweek");
-  const transfers = useDraft("transfersByGameweeks");
   const picks = useDraft("picks");
-  const picksByGameweeks = useDraft("picksByGameweeks");
   const validationError = useDraft("validationError");
-  const initialPicksByGameweeks = useDraft("initialPicksByGameweeks");
+  const dataByGameweeks = useDraft("dataByGameweeks");
 
   const transfersArray = [];
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    transfersArray.push(transfers[i]);
+    transfersArray.push(dataByGameweeks[i]?.transfersByGameweeks);
   }
 
   const cost =
@@ -48,8 +46,9 @@ const ManagerTeamInfo = () => {
         updatePicksByGameweekAndTransfers({
           picks,
           gameweek,
-          transfers: transfers[gameweek],
-          initialPicksByGameweeks,
+          transfers: dataByGameweeks[gameweek].transfersByGameweeks,
+          initialPicksByGameweeks:
+            dataByGameweeks[gameweek].initialPicksByGameweeks,
         })
       );
   };
@@ -96,7 +95,7 @@ const ManagerTeamInfo = () => {
           <button
             className="direction-button"
             onClick={() => handleSettingGameweeks(Direction.PREV)}
-            disabled={isEmpty(picksByGameweeks)}
+            disabled={isEmpty(dataByGameweeks[gameweek]?.picksByGameweeks)}
           >
             <i className="fa-solid fa-arrow-left"></i>
           </button>
@@ -104,7 +103,7 @@ const ManagerTeamInfo = () => {
           <button
             className="direction-button"
             onClick={() => handleSettingGameweeks(Direction.NEXT)}
-            disabled={isEmpty(picksByGameweeks)}
+            disabled={isEmpty(dataByGameweeks[gameweek]?.picksByGameweeks)}
           >
             <i className="fa-solid fa-arrow-right"></i>
           </button>
@@ -113,9 +112,15 @@ const ManagerTeamInfo = () => {
           <p>
             Transfers:{" "}
             <span
-              className={`${transfers[gameweek] < 0 ? "error-value" : ""} `}
+              className={`${
+                dataByGameweeks[gameweek]?.transfersByGameweeks < 0
+                  ? "error-value"
+                  : ""
+              } `}
             >
-              {transfers[gameweek] ? transfers[gameweek] : 0}
+              {dataByGameweeks[gameweek]?.transfersByGameweeks
+                ? dataByGameweeks[gameweek]?.transfersByGameweeks
+                : 0}
             </span>
             /{MAX_AVAILABLE_FREE_TRANSFERS} <br />
             Cost: {cost}

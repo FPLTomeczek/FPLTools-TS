@@ -4,12 +4,15 @@ import {
   PlayerPick,
 } from "../../components/features/transfer_planner/interfaces/drafts";
 
-export interface PicksByGameweeks {
-  [gameweek: number]: PlayerPick[];
-}
-
-export interface TransfersByGameweeks {
-  [gameweek: number]: number;
+export interface DataByGameweeks {
+  [gameweek: number]: {
+    picksByGameweeks: PlayerPick[];
+    transfersByGameweeks: number;
+    initialPicksByGameweeks: PlayerPick[];
+    removedPicksByGameweeks: PlayerPick[];
+    addedPicksByGameweeks: PlayerPick[];
+    chipByGameweeks: string;
+  };
 }
 
 type ValidationError = {
@@ -19,14 +22,10 @@ type ValidationError = {
 
 export interface ManagerTeamState {
   picks: PlayerPick[];
-  picksByGameweeks: PicksByGameweeks;
-  transfersByGameweeks: TransfersByGameweeks;
-  initialPicksByGameweeks: PicksByGameweeks;
   gameweek: number;
   bank: number;
-  removedPicksByGameweeks: PicksByGameweeks;
-  addedPicksByGameweeks: PicksByGameweeks;
   playerToChange: PlayerPick | Record<string, never>;
+  dataByGameweeks: DataByGameweeks;
   validationError: ValidationError;
 }
 
@@ -36,45 +35,35 @@ export const storage = {
   managerHistory: localStorage.getItem("managerHistory"),
 };
 
-const initializePicksByGameweeks = (picks: PlayerPick[]) => {
-  const picksByGameweeks: PicksByGameweeks = [];
-  for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    picksByGameweeks[i] = picks;
-  }
-  return picksByGameweeks;
-};
-
-const initializeTransfersByGameweeks = (managerHistory: ManagerHistory) => {
-  const transfersByGameweeks: TransfersByGameweeks = [];
-
-  transfersByGameweeks[CURRENT_GW] =
+const initializeDataByGameweeks = (
+  picks: PlayerPick[],
+  managerHistory: ManagerHistory
+) => {
+  let transferAmount =
     managerHistory.current[CURRENT_GW - 2].event_transfers > 0 ? 1 : 2;
 
-  for (let i = CURRENT_GW; i < LAST_GW; i++) {
-    transfersByGameweeks[i + 1] = transfersByGameweeks[i] < 1 ? 1 : 2;
-  }
+  const dataByGameweeks: DataByGameweeks = [];
 
-  return transfersByGameweeks;
-};
-
-const initializeBlankPicksByGameweeks = () => {
-  const blankPicksByGameweeks: PicksByGameweeks = [];
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    blankPicksByGameweeks[i] = [];
+    dataByGameweeks[i] = {
+      picksByGameweeks: picks,
+      initialPicksByGameweeks: picks,
+      removedPicksByGameweeks: [],
+      addedPicksByGameweeks: [],
+      transfersByGameweeks: transferAmount,
+      chipByGameweeks: "",
+    };
+    transferAmount = 2;
   }
-  return blankPicksByGameweeks;
+  return dataByGameweeks;
 };
 
 export const initialManagerTeamState: ManagerTeamState = {
   picks: [],
-  picksByGameweeks: [],
-  transfersByGameweeks: [],
-  initialPicksByGameweeks: [],
   gameweek: CURRENT_GW,
   bank: 0,
-  removedPicksByGameweeks: initializeBlankPicksByGameweeks(),
-  addedPicksByGameweeks: initializeBlankPicksByGameweeks(),
   playerToChange: {},
+  dataByGameweeks: [],
   validationError: { isError: false, message: "" },
 };
 
@@ -84,14 +73,10 @@ export function setManagerTeam(
 ) {
   const managerTeam: ManagerTeamState = {
     picks,
-    picksByGameweeks: initializePicksByGameweeks(picks),
-    transfersByGameweeks: initializeTransfersByGameweeks(managerHistory),
-    initialPicksByGameweeks: initializePicksByGameweeks(picks),
     gameweek: CURRENT_GW,
     bank: managerHistory.current[CURRENT_GW - 2].bank,
-    removedPicksByGameweeks: initializeBlankPicksByGameweeks(),
-    addedPicksByGameweeks: initializeBlankPicksByGameweeks(),
     playerToChange: {},
+    dataByGameweeks: initializeDataByGameweeks(picks, managerHistory),
     validationError: { isError: false, message: "" },
   };
 

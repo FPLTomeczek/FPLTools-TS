@@ -4,15 +4,14 @@ import GameweekTransfers from "./GameweekTransfers";
 import styled from "styled-components";
 
 const GameweeksTransfersContainer = () => {
-  const removedPicksByGameweeks = useDraft("removedPicksByGameweeks");
-  const addedPicksByGameweeks = useDraft("addedPicksByGameweeks");
+  const dataByGameweeks = useDraft("dataByGameweeks");
 
   const gameweeksWithTransfers = [];
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     if (
-      removedPicksByGameweeks[i].length > 0 &&
-      addedPicksByGameweeks[i].length > 0
+      dataByGameweeks[i]?.removedPicksByGameweeks.length > 0 &&
+      dataByGameweeks[i]?.addedPicksByGameweeks.length > 0
     ) {
       gameweeksWithTransfers.push(i);
     }
@@ -24,8 +23,8 @@ const GameweeksTransfersContainer = () => {
         return (
           <GameweekTransfers
             key={gameweek}
-            removedPicks={removedPicksByGameweeks[gameweek]}
-            addedPicks={addedPicksByGameweeks[gameweek]}
+            removedPicks={dataByGameweeks[gameweek].removedPicksByGameweeks}
+            addedPicks={dataByGameweeks[gameweek].addedPicksByGameweeks}
             gameweek={gameweek}
           />
         );
