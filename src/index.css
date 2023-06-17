@@ -23,6 +23,12 @@
   --primary-border-radius: 4px;
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Regular.ttf) format("truetype"),
+    url(./assets/fonts/Poppins-Bold.ttf) format("truetype");
+}
+
 html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -36,7 +42,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: Poppins, serif;
   background: var(--primary-color);
   color: white;
 }

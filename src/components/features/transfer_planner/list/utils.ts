@@ -67,29 +67,29 @@ export const paginate = (list: Player[]) => {
 };
 
 export const handleSettingPages = (
-  callback: React.Dispatch<React.SetStateAction<number>>,
+  setPage: React.Dispatch<React.SetStateAction<number>>,
   type: Direction,
   numOfPages: number
 ) => {
   switch (type) {
-    case "first":
-      return callback(1);
-    case "prev":
-      return callback((prev) => {
+    case Direction.FIRST:
+      return setPage(1);
+    case Direction.PREV:
+      return setPage((prev) => {
         if (prev > 1) {
           return prev - 1;
         }
         return prev;
       });
-    case "next":
-      return callback((prev) => {
+    case Direction.NEXT:
+      return setPage((prev) => {
         if (prev < numOfPages) {
           return prev + 1;
         }
         return prev;
       });
-    case "last":
-      return callback(numOfPages);
+    case Direction.LAST:
+      return setPage(numOfPages);
     default:
       break;
   }

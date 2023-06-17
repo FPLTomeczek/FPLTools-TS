@@ -1,38 +1,18 @@
-import { handleSettingPages } from "./utils";
 import { Direction } from "../enums/transferPlanner";
 import { ListProps } from "../types/list";
 import styled from "styled-components";
+import DirectionButtonPage from "../direction_buttons/DirectionButtonPage";
 
-const ListButtons = ({ setPage, numOfPages, page }: ListProps) => {
+const ListButtons = (props: ListProps) => {
   return (
     <Wrapper>
-      <button
-        className="direction-button"
-        onClick={() => handleSettingPages(setPage, Direction.FIRST, numOfPages)}
-      >
-        <i className="fa-solid fa-angles-left"></i>
-      </button>
-      <button
-        className="direction-button"
-        onClick={() => handleSettingPages(setPage, Direction.PREV, numOfPages)}
-      >
-        <i className="fa-solid fa-arrow-left"></i>
-      </button>
+      <DirectionButtonPage direction={Direction.FIRST} callbackProps={props} />
+      <DirectionButtonPage direction={Direction.PREV} callbackProps={props} />
       <p>
-        {page} / {numOfPages}
+        {props.page} / {props.numOfPages}
       </p>
-      <button
-        className="direction-button"
-        onClick={() => handleSettingPages(setPage, Direction.NEXT, numOfPages)}
-      >
-        <i className="fa-solid fa-arrow-right"></i>
-      </button>
-      <button
-        className="direction-button"
-        onClick={() => handleSettingPages(setPage, Direction.LAST, numOfPages)}
-      >
-        <i className="fa-solid fa-angles-right"></i>
-      </button>
+      <DirectionButtonPage direction={Direction.NEXT} callbackProps={props} />
+      <DirectionButtonPage direction={Direction.LAST} callbackProps={props} />
     </Wrapper>
   );
 };
@@ -43,6 +23,9 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 1rem;
   height: 30px;
+  .direction-button > svg {
+    font-size: 1rem;
+  }
 `;
 
 export default ListButtons;
