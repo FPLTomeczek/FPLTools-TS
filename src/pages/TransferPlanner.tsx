@@ -1,0 +1,126 @@
+import { useRef, useState } from "react";
+import {
+  getManagerTeam,
+  getManagerHistory,
+  getTransfers,
+} from "../features/transfer_planner/customHooks";
+import { setData } from "../store_features/drafts/draftsSlice";
+import TransferPlannerContent from "../features/transfer_planner/TransferPlannerContent";
+import { Alert, Snackbar } from "@mui/material";
+import styled from "styled-components";
+import { calculateSellingCost } from "../features/transfer_planner/utils";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { AppDispatch } from "../app/store";
+import {
+  ManagerHistory,
+  PlayerPick,
+  Transfer,
+} from "../features/transfer_planner/interfaces/drafts";
+import { PlayerHistory } from "../features/transfer_planner/interfaces/players";
+
+const getManagerData = async (
+  id: number,
+  dispatch: AppDispatch,
+  playersHistory: PlayerHistory[],
+  setError: React.Dispatch<
+    React.SetStateAction<{
+      value: boolean;
+      msg: string;
+    }>
+  >,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  let picks: PlayerPick[];
+  let managerHistory: ManagerHistory;
+  let transfersHistory: Transfer[];
+  setError({ value: false, msg: "" });
+
+  try {
+    picks = await getManagerTeam(id);
+    managerHistory = await getManagerHistory(id);
+    transfersHistory = await getTransfers(id);
+  } catch (error) {
+    setError({
+      value: true,
+      msg: `Error trying to fetch user data with id: ${id}`,
+    });
+    setIsLoading(false);
+    return;
+  }
+  const sellCosts = calculateSellingCost(
+    picks,
+    transfersHistory,
+    playersHistory
+  );
+  picks = picks.map((player: PlayerPick, ind: number) => {
+    return { ...player, sellCost: sellCosts[ind] };
+  });
+  dispatch(setData({ picks, managerHistory }));
+  setIsLoading(false);
+};
+
+const TransferPlanner = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [error, setError] = useState({ value: false, msg: "" });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const playersHistory = useAppSelector(
+    (state) => state.players.playersHistory
+  );
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const id = inputRef.current ? Number(inputRef.current.value) : 0;
+    getManagerData(id, dispatch, playersHistory, setError, setIsLoading);
+  };
+
+  return (
+    <Wrapper>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        open={error.value}
+        autoHideDuration={6000}
+        onClose={() => setError({ value: false, msg: "" })}
+      >
+        <Alert variant="filled" severity="error">
+          {error.msg}
+        </Alert>
+      </Snackbar>
+      <form id="user-id-form">
+        <input placeholder="Enter your ID" ref={inputRef} />
+        <button
+          className="primary-button"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
+        >
+          Submit
+        </button>
+      </form>
+      <TransferPlannerContent isLoading={isLoading} />
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100vw;
+  input {
+    background: "white";
+    padding: 0.5rem;
+    margin-right: 4px;
+  }
+  #user-id-form {
+    display: flex;
+  }
+  #user-id-form > input {
+    max-width: 200px;
+  }
+`;
+
+export default TransferPlanner;
