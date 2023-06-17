@@ -1,14 +1,18 @@
 import { Player } from "../interfaces/players";
-import AddPlayerToTeamButton from "./AddPlayerToTeamButton";
-import PlayerListItemInfo from "./PlayerListItemInfo";
+import AddPlayerToTeamButton from "./PlayerListItemButton";
+import PlayerListItemInfo from "./PlayerListItemData";
+import PlayerTeamColor from "./PlayerListItemColor";
 
-const PlayerListItem = ({ player }: { player: Player }) => {
+const PlayerListItemButton = ({ player }: { player: Player }) => {
   return (
     <li key={player.id} className="player-list-item">
-      <AddPlayerToTeamButton player={player} />
+      <div className="player-add-button-color">
+        <AddPlayerToTeamButton player={player} />
+        <PlayerTeamColor player={player} />
+      </div>
       <PlayerListItemInfo player={player} />
     </li>
   );
 };
 
-export default PlayerListItem;
+export default PlayerListItemButton;

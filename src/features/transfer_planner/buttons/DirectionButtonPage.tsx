@@ -1,6 +1,6 @@
 import { Direction } from "../enums/transferPlanner";
 import { handleSettingPages } from "../list/utils";
-import { ListProps } from "../types/list";
+import { ListData } from "../interfaces/list";
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 import DoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -8,7 +8,7 @@ import DoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 interface DirectionButtonPage {
   direction: Direction;
-  callbackProps: ListProps;
+  callbackProps: ListData;
 }
 
 const DirectionButtonPage = ({

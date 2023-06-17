@@ -1,6 +1,6 @@
 import { Player } from "../interfaces/players";
 
-const PlayerListItemInfo = ({ player }: { player: Player }) => {
+const PlayerListItemData = ({ player }: { player: Player }) => {
   return (
     <>
       <p className="player-list-name">{player.web_name}</p>
@@ -18,4 +18,4 @@ const PlayerListItemInfo = ({ player }: { player: Player }) => {
   );
 };
 
-export default PlayerListItemInfo;
+export default PlayerListItemData;

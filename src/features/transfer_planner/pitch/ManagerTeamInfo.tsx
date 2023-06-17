@@ -15,7 +15,7 @@ import {
 import { isEmpty } from "lodash";
 import styled from "styled-components";
 import { useDraft } from "../../../app/customHooks";
-import DirectionButtonGameweek from "../direction_buttons/DirectionButtonGameweek";
+import DirectionButtonGameweek from "../buttons/DirectionButtonGameweek";
 
 const ManagerTeamInfo = () => {
   const bank = useDraft("bank");

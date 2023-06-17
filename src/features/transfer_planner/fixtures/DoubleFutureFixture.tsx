@@ -1,6 +1,5 @@
 import { Fixture } from "../interfaces/fixtures";
-import { Box } from "@mui/material";
-import { setBackgroundColor } from "./utils";
+import { FixtureItem } from "./Fixture.styled";
 
 const DoubleFutureFixture = ({
   duplicatesFixtures,
@@ -10,32 +9,22 @@ const DoubleFutureFixture = ({
   team: string;
 }) => {
   return (
-    <Box>
+    <div>
       {duplicatesFixtures.map((fixture, index) => {
         const isHome = fixture.team_a === team ? true : false;
-        const bgColor = isHome
-          ? setBackgroundColor(fixture.team_a_difficulty)
-          : setBackgroundColor(fixture.team_h_difficulty);
         return (
-          <p
+          <FixtureItem
             key={index}
-            style={{
-              textTransform: isHome ? "none" : "lowercase",
-              backgroundColor: bgColor,
-              fontWeight: "700",
-              width: "20px",
-              boxSizing: "border-box",
-              textAlign: "center",
-              padding: "0.1rem 0",
-              maxHeight: "16px",
-              margin: "0",
-            }}
+            isHome={isHome}
+            difficulty={
+              isHome ? fixture.team_a_difficulty : fixture.team_h_difficulty
+            }
           >
             {isHome ? fixture.team_h : fixture.team_a}
-          </p>
+          </FixtureItem>
         );
       })}
-    </Box>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-import { teamsList } from "./data";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useAppDispatch } from "../../../app/hooks";
 import { addPick } from "../../../store_features/drafts/draftsSlice";
@@ -8,8 +7,6 @@ import { PlayerPick } from "../interfaces/drafts";
 
 const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   const dispatch = useAppDispatch();
-  const foundTeam = teamsList.find((team) => team.value === player.team);
-  const color = foundTeam ? foundTeam.color : "#000000";
   const managerPicks: PlayerPick[] = useDraft("picks");
 
   const availablePositions = [
@@ -25,7 +22,7 @@ const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   };
 
   return (
-    <div className="player-add-button-color">
+    <>
       {managerPicks.find((pick) => pick.id === player.id) ||
       !availablePositions.includes(player.element_type) ? (
         <button style={{ display: "flex", alignItems: "center" }} disabled>
@@ -39,15 +36,7 @@ const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
           <AddCircleIcon color="success" />
         </button>
       )}
-      <div
-        className="team-color"
-        style={{
-          background: Array.isArray(color)
-            ? `linear-gradient(to right, ${color[0]} 0%, ${color[0]} 50%, ${color[1]} 50%, ${color[1]} 100%)`
-            : color,
-        }}
-      ></div>
-    </div>
+    </>
   );
 };
 

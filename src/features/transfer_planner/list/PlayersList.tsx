@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { paginate, filterPlayers, sortPlayers } from "./utils";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
 import PlayersListForm from "./PlayersListForm.tsx";
-import ListButtons from "./ListButtons";
+import ListButtons from "../buttons/ListButtons.tsx";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
 import { CircularProgress } from "@mui/material";

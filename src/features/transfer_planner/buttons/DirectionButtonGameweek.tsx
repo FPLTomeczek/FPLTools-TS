@@ -3,6 +3,8 @@ import { useDraft } from "../../../app/customHooks";
 import { CURRENT_GW, LAST_GW } from "../../../constants";
 import { useAppDispatch } from "../../../app/hooks";
 import { updatePicks } from "../../../store_features/drafts/draftsSlice";
+import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
+import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 
 interface DirectionButtonPage {
   direction: Direction;
@@ -28,13 +30,14 @@ const DirectionButtonGameweek = ({
       }
     }
   };
+
   return (
     <button
       className="direction-button"
       onClick={() => handleSettingGameweeks(direction)}
       disabled={disabled}
     >
-      <i className="fa-solid fa-arrow-left"></i>
+      {direction === Direction.PREV ? <ArrowPrevIcon /> : <ArrowNextIcon />}
     </button>
   );
 };

@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../store_features/players/playersSlice";
 import { teamsList, roles } from "./data";
 import { FilterOptions } from "../interfaces/players";
-import { ListProps } from "../types/list";
-import ListButtons from "./ListButtons";
+import { ListData } from "../interfaces/list";
+import ListButtons from "../buttons/ListButtons";
 
 enum Filter {
   NAME = "name",
@@ -13,7 +13,7 @@ enum Filter {
   ROLE = "role",
 }
 
-const PlayersListForm = ({ setPage, page, numOfPages }: ListProps) => {
+const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
   const dispatch = useDispatch();
 
   const [filterValues, setFilterValues] = useState<FilterOptions>({
