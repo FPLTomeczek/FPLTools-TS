@@ -3,12 +3,12 @@ import { useAppDispatch } from "../../../app/hooks";
 import { addPick } from "../../../store_features/drafts/draftsSlice";
 import { Player } from "../interfaces/players";
 import { useDraft } from "../../../app/customHooks";
-import { PlayerPick } from "../interfaces/drafts";
+import { Pick } from "../interfaces/drafts";
 import { AddPlayerToTeamButtonStyled } from "./List.styled";
 
 const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   const dispatch = useAppDispatch();
-  const managerPicks: PlayerPick[] = useDraft().picks;
+  const managerPicks: Pick[] = useDraft().picks;
 
   const availablePositions = [
     ...new Set(

@@ -1,10 +1,10 @@
-import PlayerPick from "./PlayerPick";
+import Pick from "./Pick";
 import { FirstElevenStyled } from "./Pitch.styled";
 import { splittingPicksByRoles } from "../utils";
-import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
+import { Pick as IPick } from "../interfaces/drafts";
 import pitch_img from "../../../assets/FOOTBALL_FIELD_portrait.jpg";
 
-const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
+const FirstEleven = ({ picks }: { picks: IPick[] }) => {
   const picksByRole = splittingPicksByRoles(picks);
 
   let playerIndex = 0;
@@ -17,7 +17,7 @@ const FirstEleven = ({ picks }: { picks: IPlayerPick[] }) => {
             <div key={ind} className="picks-row">
               {players.map((player) => {
                 return (
-                  <PlayerPick
+                  <Pick
                     key={player.position}
                     player={player}
                     index={playerIndex++}

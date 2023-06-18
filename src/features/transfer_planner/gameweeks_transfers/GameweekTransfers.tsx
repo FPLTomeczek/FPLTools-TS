@@ -1,4 +1,4 @@
-import { PlayerPick } from "../interfaces/drafts";
+import { Pick } from "../interfaces/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
 import styled from "styled-components";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -10,8 +10,8 @@ const GameweekTransfers = ({
   addedPicks,
   gameweek,
 }: {
-  removedPicks: PlayerPick[];
-  addedPicks: PlayerPick[];
+  removedPicks: Pick[];
+  addedPicks: Pick[];
   gameweek: number;
 }) => {
   const dispatch = useAppDispatch();

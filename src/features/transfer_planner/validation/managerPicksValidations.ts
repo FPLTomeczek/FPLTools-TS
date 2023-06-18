@@ -1,4 +1,4 @@
-import { PlayerPick } from "../interfaces/drafts";
+import { Pick } from "../interfaces/drafts";
 import { splittingPicksByRoles } from "../utils";
 import {
   FIRST_ELEVEN_GK,
@@ -14,7 +14,7 @@ type Teams = {
 };
 
 let teamOverpicked = "";
-const validatePicksFromOneTeam = (picks: PlayerPick[]) => {
+const validatePicksFromOneTeam = (picks: Pick[]) => {
   const teams = picks.map((pick) => pick.team);
 
   const teamsObj = teams.reduce((obj: Teams, team: string) => {
@@ -31,7 +31,7 @@ const validatePicksFromOneTeam = (picks: PlayerPick[]) => {
   return true;
 };
 
-const validateFormation = (picks: PlayerPick[]) => {
+const validateFormation = (picks: Pick[]) => {
   const picksByRole = splittingPicksByRoles(picks.slice(0, 11));
   if (
     !picksByRole[0] ||
@@ -47,7 +47,7 @@ const validateFormation = (picks: PlayerPick[]) => {
   return true;
 };
 
-const validatePicksNotBlank = (picks: PlayerPick[]) => {
+const validatePicksNotBlank = (picks: Pick[]) => {
   return picks.filter((pick) => pick.web_name === "Blank").length === 0
     ? true
     : false;
@@ -58,7 +58,7 @@ const validateBankValue = (bankValue: number) => {
 };
 
 export const validatePicks = (
-  picks: PlayerPick[],
+  picks: Pick[],
   bankValue: number,
   gameweek: number
 ) => {

@@ -1,16 +1,16 @@
 import { CURRENT_GW, LAST_GW } from "../../constants";
 import {
   ManagerHistory,
-  PlayerPick,
+  Pick,
 } from "../../features/transfer_planner/interfaces/drafts";
 
 export interface DataByGameweeks {
   [gameweek: number]: {
-    picksByGameweeks: PlayerPick[];
+    picksByGameweeks: Pick[];
     transfersByGameweeks: number;
-    initialPicksByGameweeks: PlayerPick[];
-    removedPicksByGameweeks: PlayerPick[];
-    addedPicksByGameweeks: PlayerPick[];
+    initialPicksByGameweeks: Pick[];
+    removedPicksByGameweeks: Pick[];
+    addedPicksByGameweeks: Pick[];
     chipByGameweeks: string;
   };
 }
@@ -21,10 +21,10 @@ type ValidationError = {
 };
 
 export interface ManagerTeamState {
-  picks: PlayerPick[];
+  picks: Pick[];
   gameweek: number;
   bank: number;
-  playerToChange: PlayerPick | Record<string, never>;
+  pickToChange: Pick | Record<string, never>;
   dataByGameweeks: DataByGameweeks;
   validationError: ValidationError;
 }
@@ -36,7 +36,7 @@ export const storage = {
 };
 
 const initializeDataByGameweeks = (
-  picks: PlayerPick[],
+  picks: Pick[],
   managerHistory: ManagerHistory
 ) => {
   let transferAmount =
@@ -62,20 +62,17 @@ export const initialManagerTeamState: ManagerTeamState = {
   picks: [],
   gameweek: CURRENT_GW,
   bank: 0,
-  playerToChange: {},
+  pickToChange: {},
   dataByGameweeks: [],
   validationError: { isError: false, message: "" },
 };
 
-export function setManagerTeam(
-  picks: PlayerPick[],
-  managerHistory: ManagerHistory
-) {
+export function setManagerTeam(picks: Pick[], managerHistory: ManagerHistory) {
   const managerTeam: ManagerTeamState = {
     picks,
     gameweek: CURRENT_GW,
     bank: managerHistory.current[CURRENT_GW - 2].bank,
-    playerToChange: {},
+    pickToChange: {},
     dataByGameweeks: initializeDataByGameweeks(picks, managerHistory),
     validationError: { isError: false, message: "" },
   };

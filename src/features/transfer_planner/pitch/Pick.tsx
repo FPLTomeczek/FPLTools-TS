@@ -10,19 +10,13 @@ import {
 import blank from "../../../assets/shirts/blank.png";
 import { TEAMS_LIST } from "../list/data";
 import { isEmpty } from "lodash";
-import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
+import { Pick as IPick } from "../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
 import { useDraft } from "../../../app/customHooks";
-import { PlayerPickStyled } from "./Pitch.styled";
+import { PickStyled } from "./Pitch.styled";
 
-const PlayerPick = ({
-  player,
-  index,
-}: {
-  player: IPlayerPick;
-  index: number;
-}) => {
+const Pick = ({ player, index }: { player: IPick; index: number }) => {
   const {
     id,
     web_name: name,
@@ -33,7 +27,7 @@ const PlayerPick = ({
     team,
   } = player;
 
-  const playerToChange = useDraft().picks;
+  const pickToChange = useDraft().picks;
   const dispatch = useAppDispatch();
 
   const removePlayer = () => {
@@ -51,7 +45,7 @@ const PlayerPick = ({
   const shirt = TEAMS_LIST.find((teamItem) => teamItem.value === team)?.img;
 
   return (
-    <PlayerPickStyled>
+    <PickStyled>
       <div className="player-pick">
         <div className="buttons">
           {name !== "Blank" ? (
@@ -77,7 +71,7 @@ const PlayerPick = ({
             src={shirt}
             alt="shirt"
             className={`player-shirt ${
-              !isEmpty(playerToChange) && playerToChange.id === id
+              !isEmpty(pickToChange) && pickToChange.id === id
                 ? "change-pick"
                 : ""
             }`}
@@ -96,8 +90,8 @@ const PlayerPick = ({
           {name}
         </p>
       </div>
-    </PlayerPickStyled>
+    </PickStyled>
   );
 };
 
-export default PlayerPick;
+export default Pick;

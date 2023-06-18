@@ -1,6 +1,6 @@
 import { assignPositionsToPlayers, calculateSellingCost } from "./utils";
 import { axiosInstance } from "../../utils";
-import { ManagerHistory, PlayerPick, Transfer } from "./interfaces/drafts";
+import { ManagerHistory, Pick, Transfer } from "./interfaces/drafts";
 import { AppDispatch } from "../../app/store";
 import { PlayerHistory } from "./interfaces/players";
 import { setData } from "../../store_features/drafts/draftsSlice";
@@ -25,7 +25,7 @@ export const getManagerData = async (
   >,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  let picks: PlayerPick[];
+  let picks: Pick[];
   let managerHistory: ManagerHistory;
   let transfersHistory: Transfer[];
   setError({ value: false, msg: "" });
@@ -47,7 +47,7 @@ export const getManagerData = async (
     transfersHistory,
     playersHistory
   );
-  picks = picks.map((player: PlayerPick, ind: number) => {
+  picks = picks.map((player: Pick, ind: number) => {
     return { ...player, sellCost: sellCosts[ind] };
   });
   dispatch(setData({ picks, managerHistory }));
@@ -63,7 +63,7 @@ export const getManagerTeam = async (id: number) => {
 
   const playersPositions = getPlayersPositions(teamInfo.picks);
 
-  const teamPicks: PlayerPick[] = await getTeamPicks(teamIDs);
+  const teamPicks: Pick[] = await getTeamPicks(teamIDs);
 
   return assignPositionsToPlayers(playersPositions, teamPicks).sort(
     (a, b) => a.position - b.position

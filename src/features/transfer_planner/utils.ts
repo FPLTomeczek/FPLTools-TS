@@ -1,4 +1,4 @@
-import { PlayerPick, Transfer } from "./interfaces/drafts";
+import { Pick, Transfer } from "./interfaces/drafts";
 import { ensure } from "../../helper/helper";
 import { PlayerHistory } from "./interfaces/players";
 
@@ -22,7 +22,7 @@ export const assignPositionsToPlayers = (
     position: number;
     element: number;
   }[],
-  playerObjects: PlayerPick[]
+  playerObjects: Pick[]
 ) => {
   const ids = positionObjects.map((element) => {
     return element.element;
@@ -35,7 +35,7 @@ export const assignPositionsToPlayers = (
 };
 
 export const calculateSellingCost = (
-  players: PlayerPick[],
+  players: Pick[],
   transfers: Transfer[],
   playersHistory: PlayerHistory[]
 ) => {
@@ -66,9 +66,9 @@ export const calculateSellingCost = (
   return playersSellCost;
 };
 
-export const splittingPicksByRoles = (picks: PlayerPick[]) => {
+export const splittingPicksByRoles = (picks: Pick[]) => {
   const splittedPicks = picks.reduce(
-    (accumulator: Array<Array<PlayerPick>>, value: PlayerPick) => {
+    (accumulator: Array<Array<Pick>>, value: Pick) => {
       const index = roleToIndex(value.element_type);
       if (typeof index !== "undefined") {
         if (accumulator[index] === undefined) {

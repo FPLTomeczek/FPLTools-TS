@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material";
 import { useAppDispatch } from "../../../app/hooks";
 import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
-import { PlayerPick } from "../interfaces/drafts";
+import { Pick } from "../interfaces/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
@@ -34,7 +34,7 @@ const ManagerTeamInfo = () => {
 
   const dispatch = useAppDispatch();
 
-  const validateSaveTeam = (picks: PlayerPick[], bankValue: number) => {
+  const validateSaveTeam = (picks: Pick[], bankValue: number) => {
     const { isError, message } = picksValidation(picks, bankValue, gameweek);
 
     dispatch(validatePicks({ isError, message }));

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { PlayerPick } from "../interfaces/drafts";
+import { Pick } from "../interfaces/drafts";
 import { TEAMS_LIST } from "../list/data";
 
-const SingleGameweekTransfer = ({ pick }: { pick: PlayerPick }) => {
+const SingleGameweekTransfer = ({ pick }: { pick: Pick }) => {
   const shirt = TEAMS_LIST.find(
     (teamItem) => teamItem.value === pick.team
   )?.img;

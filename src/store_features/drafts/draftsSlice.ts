@@ -3,7 +3,7 @@ import { LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
 import {
   ManagerHistory,
-  PlayerPick,
+  Pick,
   playerBlankTemplate,
 } from "../../features/transfer_planner/interfaces/drafts";
 import {
@@ -56,15 +56,13 @@ const draftSlice = createSlice({
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
       const draft = state.managerTeam[state.draftNumber];
 
-      if (!isEmpty(draft.playerToChange) && draft.playerToChange.id === id) {
-        draft.playerToChange = {};
+      if (draft.pickToChange.id === id) {
+        draft.pickToChange = {};
       }
 
-      const playerToRemove = draft.picks.find(
-        (pick) => pick.id === id
-      ) as PlayerPick;
+      const pickToRemove = draft.picks.find((pick) => pick.id === id) as Pick;
 
-      const removedPickIndex = draft.picks.indexOf(playerToRemove);
+      const removedPickIndex = draft.picks.indexOf(pickToRemove);
 
       if (
         draft.dataByGameweeks[draft.gameweek].initialPicksByGameweeks.find(
@@ -101,7 +99,7 @@ const draftSlice = createSlice({
         draft.gameweek
       ].removedPicksByGameweeks.find(
         (removedPick) => removedPick.position === position
-      ) as PlayerPick;
+      ) as Pick;
 
       const blankPickFound = draft.picks.find(
         (pick) => pick.position === position
@@ -170,16 +168,16 @@ const draftSlice = createSlice({
         .map((pick) => pick.id)
         .indexOf(id);
 
-      if (!isEmpty(draft.playerToChange)) {
-        const playerToChangeIndex = draft.picks
+      if (!isEmpty(draft.pickToChange)) {
+        const pickToChangeIndex = draft.picks
           .map((pick) => pick.id)
-          .indexOf(draft.playerToChange.id);
-        draft.picks[playerToChangeIndex] = draft.picks[index];
-        draft.picks[index] = draft.playerToChange as PlayerPick;
-        draft.playerToChange = {};
+          .indexOf(draft.pickToChange.id);
+        draft.picks[pickToChangeIndex] = draft.picks[index];
+        draft.picks[index] = draft.pickToChange as Pick;
+        draft.pickToChange = {};
         return;
       }
-      draft.playerToChange = draft.picks[index];
+      draft.pickToChange = draft.picks[index];
     },
     validatePicks(state, action) {
       const { isError, message } = action.payload;
@@ -221,9 +219,9 @@ const draftSlice = createSlice({
       dataByGameweek.transfersByGameweeks = transfers;
 
       const addedPlayers = picks.filter(
-        (pick: PlayerPick) =>
+        (pick: Pick) =>
           !initialPicksByGameweeks.some(
-            (initialPick: PlayerPick) => initialPick._id === pick._id
+            (initialPick: Pick) => initialPick._id === pick._id
           )
       );
 

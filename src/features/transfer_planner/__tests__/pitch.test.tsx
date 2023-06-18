@@ -12,7 +12,7 @@
 //   // const initialState = {
 //   //   managerTeam: {
 //   //     picks,
-//   //     playerToChange: {},
+//   //     pickToChange: {},
 //   //   },
 //   //   fixtures: {
 //   //     fixtureList: [],

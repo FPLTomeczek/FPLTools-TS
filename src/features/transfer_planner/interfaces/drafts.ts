@@ -1,12 +1,12 @@
 import { Player } from "./players";
 
-export interface PlayerPick extends Player {
+export interface Pick extends Player {
   position: number;
   sellCost: number;
   removedPickIndex?: number;
 }
 
-export const playerBlankTemplate: PlayerPick = {
+export const playerBlankTemplate: Pick = {
   _id: "",
   id: -1,
   web_name: "",

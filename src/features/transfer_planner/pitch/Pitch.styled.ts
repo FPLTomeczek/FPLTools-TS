@@ -175,7 +175,7 @@ export const ManagerTeamInfoStyled = styled.div`
   }
 `;
 
-export const PlayerPickStyled = styled.div`
+export const PickStyled = styled.div`
   .player-pick {
     display: flex;
     flex-direction: column;
