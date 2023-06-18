@@ -6,7 +6,7 @@ import { FutureFixturesStyled } from "./Fixtures.styled";
 import { useNextFixtures, findDoubleFixtures } from "./utils";
 
 const FutureFixtures = ({ team }: { team: string }) => {
-  const gameweek = useDraft("gameweek");
+  const gameweek = useDraft().gameweek;
 
   const next5FutureFixtures = useNextFixtures(
     gameweek,

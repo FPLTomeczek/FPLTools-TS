@@ -4,7 +4,7 @@ import { filterPlayers } from "../../../store_features/players/playersSlice";
 import { TEAMS_LIST, ROLES } from "./data";
 import { FilterOptions } from "../interfaces/players";
 import { ListData } from "../interfaces/list";
-import ListButtons from "../buttons/ListButtons";
+import ListButtons from "../direction_buttons/ListButtons";
 import { PlayersListFiltersStyled } from "./List.styled";
 
 enum Filter {

@@ -13,16 +13,13 @@ import {
   MAX_AVAILABLE_FREE_TRANSFERS,
 } from "../../../constants";
 import { isEmpty } from "lodash";
-import styled from "styled-components";
 import { useDraft } from "../../../app/customHooks";
-import DirectionButtonGameweek from "../buttons/DirectionButtonGameweek";
+import DirectionButtonGameweek from "../direction_buttons/DirectionButtonGameweek";
+import { ManagerTeamInfoStyled } from "./Pitch.styled";
 
 const ManagerTeamInfo = () => {
-  const bank = useDraft("bank");
-  const gameweek = useDraft("gameweek");
-  const picks = useDraft("picks");
-  const validationError = useDraft("validationError");
-  const dataByGameweeks = useDraft("dataByGameweeks");
+  const { bank, gameweek, picks, validationError, dataByGameweeks } =
+    useDraft();
 
   const transfersArray = [];
 
@@ -54,7 +51,7 @@ const ManagerTeamInfo = () => {
   };
 
   return (
-    <Wrapper>
+    <ManagerTeamInfoStyled>
       <div className="save-team">
         {validationError.isError ? (
           <Alert severity="error">{validationError.message}</Alert>
@@ -109,58 +106,8 @@ const ManagerTeamInfo = () => {
           </p>
         </div>
       </div>
-    </Wrapper>
+    </ManagerTeamInfoStyled>
   );
 };
-
-const Wrapper = styled.div`
-  .save-team {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 1rem;
-  }
-  .gameweek-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .pitch-header-info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-  }
-  .pitch-header-info > * {
-    flex: 1;
-    max-width: 100%;
-  }
-  .info-container > p,
-  .gameweek-container {
-    font-size: clamp(0.75rem, calc(0.45rem + 1.25vw), 1rem);
-  }
-  .info-container {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-  i {
-    font-size: 1rem;
-  }
-  #transfers-info {
-    justify-content: end;
-  }
-  #transfers-info > p {
-    text-align: right;
-  }
-  .error-value {
-    color: #ff0f0f;
-  }
-  @media screen and (max-width: 600px) {
-    .gameweek-container {
-      flex: 2;
-    }
-  }
-`;
 
 export default ManagerTeamInfo;

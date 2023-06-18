@@ -1,13 +1,14 @@
 import FirstEleven from "./FirstEleven";
 import Bench from "./Bench";
-import { Box } from "@mui/material";
-import { CircularProgress } from "@mui/material";
 import { useDraft } from "../../../app/customHooks";
 import PitchHeader from "./PitchHeader";
 import GameweeksTransfersContainer from "../gameweeks_transfers/GameweeksTransfersContainer";
 import Chips from "../chips/Chips";
+import { PitchStyled } from "./Pitch.styled";
+import Loading from "../../../components/Loading";
+
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
-  const picks = useDraft("picks");
+  const picks = useDraft().picks;
 
   function getPlannerPicksContainer() {
     return (
@@ -24,13 +25,9 @@ const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   }
 
   return (
-    <Box sx={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-      {isLoading ? (
-        <CircularProgress sx={{ color: "var(--secondary-color)" }} />
-      ) : (
-        getPlannerPicksContainer()
-      )}
-    </Box>
+    <PitchStyled>
+      {isLoading ? <Loading /> : getPlannerPicksContainer()}
+    </PitchStyled>
   );
 };
 

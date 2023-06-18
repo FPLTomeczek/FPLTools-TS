@@ -1,20 +1,14 @@
-import styled from "styled-components";
 import ManagerTeamInfo from "./ManagerTeamInfo";
 import DraftButtons from "./DraftButtons";
+import { PitchHeaderStyled } from "./Pitch.styled";
 
 const PitchHeader = () => {
   return (
-    <Wrapper>
+    <PitchHeaderStyled>
       <DraftButtons />
       <ManagerTeamInfo />
-    </Wrapper>
+    </PitchHeaderStyled>
   );
 };
-
-const Wrapper = styled.div`
-  @media screen and (max-width: 800px) {
-    padding: 0 1rem;
-  }
-`;
 
 export default PitchHeader;

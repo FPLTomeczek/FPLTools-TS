@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { updateDraftNumber } from "../../../store_features/drafts/draftsSlice";
+import { DraftButtonsStyled } from "./Pitch.styled";
 
 const DraftButtons = () => {
   const draftNumber = useAppSelector((state) => state.drafts.draftNumber);
@@ -11,7 +11,7 @@ const DraftButtons = () => {
   };
 
   return (
-    <Wrapper>
+    <DraftButtonsStyled>
       <button
         className={`primary-button ${draftNumber === 0 ? "selected" : ""}`}
         onClick={() => handleDraftChange(0)}
@@ -24,17 +24,8 @@ const DraftButtons = () => {
       >
         Draft 2
       </button>
-    </Wrapper>
+    </DraftButtonsStyled>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: start;
-  gap: 1rem;
-  .selected {
-    background-color: var(--secondary-color-dark);
-  }
-`;
 
 export default DraftButtons;

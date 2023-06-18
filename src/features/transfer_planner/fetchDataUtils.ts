@@ -1,8 +1,10 @@
-import { assignPositionsToPlayers } from "./utils";
-
+import { assignPositionsToPlayers, calculateSellingCost } from "./utils";
 import { axiosInstance } from "../../utils";
+import { ManagerHistory, PlayerPick, Transfer } from "./interfaces/drafts";
+import { AppDispatch } from "../../app/store";
+import { PlayerHistory } from "./interfaces/players";
+import { setData } from "../../store_features/drafts/draftsSlice";
 
-import { PlayerPick } from "./interfaces/drafts";
 interface APIPick {
   element: number;
   position: 1;
@@ -10,6 +12,47 @@ interface APIPick {
   is_captain: false;
   is_vice_captain: false;
 }
+
+export const getManagerData = async (
+  id: number,
+  dispatch: AppDispatch,
+  playersHistory: PlayerHistory[],
+  setError: React.Dispatch<
+    React.SetStateAction<{
+      value: boolean;
+      msg: string;
+    }>
+  >,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  let picks: PlayerPick[];
+  let managerHistory: ManagerHistory;
+  let transfersHistory: Transfer[];
+  setError({ value: false, msg: "" });
+
+  try {
+    picks = await getManagerTeam(id);
+    managerHistory = await getManagerHistory(id);
+    transfersHistory = await getTransfers(id);
+  } catch (error) {
+    setError({
+      value: true,
+      msg: `Error trying to fetch user data with id: ${id}`,
+    });
+    setIsLoading(false);
+    return;
+  }
+  const sellCosts = calculateSellingCost(
+    picks,
+    transfersHistory,
+    playersHistory
+  );
+  picks = picks.map((player: PlayerPick, ind: number) => {
+    return { ...player, sellCost: sellCosts[ind] };
+  });
+  dispatch(setData({ picks, managerHistory }));
+  setIsLoading(false);
+};
 
 export const getManagerTeam = async (id: number) => {
   const { data: teamInfo } = await axiosInstance.get("/team", {

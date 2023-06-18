@@ -4,10 +4,11 @@ import { addPick } from "../../../store_features/drafts/draftsSlice";
 import { Player } from "../interfaces/players";
 import { useDraft } from "../../../app/customHooks";
 import { PlayerPick } from "../interfaces/drafts";
+import { AddPlayerToTeamButtonStyled } from "./List.styled";
 
 const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   const dispatch = useAppDispatch();
-  const managerPicks: PlayerPick[] = useDraft("picks");
+  const managerPicks: PlayerPick[] = useDraft().picks;
 
   const availablePositions = [
     ...new Set(
@@ -22,21 +23,18 @@ const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
   };
 
   return (
-    <>
+    <AddPlayerToTeamButtonStyled>
       {managerPicks.find((pick) => pick.id === player.id) ||
       !availablePositions.includes(player.element_type) ? (
-        <button style={{ display: "flex", alignItems: "center" }} disabled>
+        <button className="add-button disabled" disabled>
           <AddCircleIcon sx={{ color: "var(--disabled-color)" }} />
         </button>
       ) : (
-        <button
-          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
-          onClick={addPlayerToTeam}
-        >
+        <button className="add-button" onClick={addPlayerToTeam}>
           <AddCircleIcon color="success" />
         </button>
       )}
-    </>
+    </AddPlayerToTeamButtonStyled>
   );
 };
 

@@ -11,7 +11,7 @@ const NextFixture = ({
   sellCost: number;
   index: number;
 }) => {
-  const gameweek = useDraft("gameweek");
+  const gameweek = useDraft().gameweek;
 
   const nextFixture = useAppSelector(
     (state) => state.fixtures.fixtureList

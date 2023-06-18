@@ -1,4 +1,4 @@
-import { getManagerTeam } from "../customHooks";
+import { getManagerTeam } from "../fetchDataUtils";
 import { it, expect, describe } from "vitest";
 import { screen } from "@testing-library/react";
 import { renderComponent, proxyHandler } from "./utils";

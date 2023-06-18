@@ -77,7 +77,6 @@ const playersSlice = createSlice({
           state.status = "success";
         }
       )
-      /// action type
       .addMatcher(
         isAnyOf(fetchPlayers.rejected, fetchPlayersHistory.rejected),
         (state, action) => {

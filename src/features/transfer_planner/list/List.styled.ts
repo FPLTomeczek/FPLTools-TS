@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const PlayersListStyled = styled.div`
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 1400px) {
+    padding: 1rem 4rem;
+  }
+  @media screen and (max-width: 800px) {
+    padding: 1rem;
+  }
+`;
+
 export const PlayersListFiltersStyled = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,5 +75,29 @@ export const PlayersListItemsStyled = styled.div`
   #player-list-points,
   #player-list-price {
     cursor: pointer;
+  }
+`;
+
+export const PlayerListItemColorStyled = styled.div<{
+  listItemColor: string[];
+}>`
+  width: 20px;
+  border-radius: 50%;
+  background-color: black;
+  background: ${(props) =>
+    props.listItemColor.length > 1
+      ? `linear-gradient(to right, ${props.listItemColor[0]} 0%, ${props.listItemColor[0]} 50%, ${props.listItemColor[1]} 50%, ${props.listItemColor[1]} 100%)`
+      : props.listItemColor[0]};
+  height: 20px;
+`;
+
+export const AddPlayerToTeamButtonStyled = styled.div`
+  .add-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .disabled {
+    cursor: default;
   }
 `;

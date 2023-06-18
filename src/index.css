@@ -232,6 +232,11 @@ textarea {
   font-size: 1rem;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+}
+
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.

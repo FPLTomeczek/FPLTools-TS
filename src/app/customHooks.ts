@@ -1,8 +1,7 @@
 import { useAppSelector } from "./hooks";
-import { ManagerTeamState } from "../store_features/drafts/initializers";
 
-export const useDraft = <K extends keyof ManagerTeamState>(key: K) => {
+export const useDraft = () => {
   return useAppSelector(
-    (state) => state.drafts?.managerTeam[state.drafts.draftNumber][key]
+    (state) => state.drafts?.managerTeam[state.drafts.draftNumber]
   );
 };

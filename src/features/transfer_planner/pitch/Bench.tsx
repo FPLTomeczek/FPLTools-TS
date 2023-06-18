@@ -1,16 +1,17 @@
-import styled from "styled-components";
 import PlayerPick from "./PlayerPick";
 import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
+import { BenchStyled } from "./Pitch.styled";
+import { FIRST_ELEVEN_PLAYERS } from "../../../constants";
 
 const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
-  let playerStartIndex = 11;
+  let playerStartIndex = FIRST_ELEVEN_PLAYERS;
 
   if (picks.length === 0) {
     return null;
   }
 
   return (
-    <Wrapper>
+    <BenchStyled>
       {picks.map((player) => {
         return (
           <PlayerPick
@@ -20,14 +21,8 @@ const Bench = ({ picks }: { picks: IPlayerPick[] }) => {
           />
         );
       })}
-    </Wrapper>
+    </BenchStyled>
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--light-green);
-  padding: 1rem 2rem;
-`;
 export default Bench;

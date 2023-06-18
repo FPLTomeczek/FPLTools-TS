@@ -15,7 +15,7 @@ const DirectionButtonGameweek = ({
   direction,
   disabled,
 }: DirectionButtonPage) => {
-  const gameweek = useDraft("gameweek");
+  const gameweek = useDraft().gameweek;
 
   const dispatch = useAppDispatch();
 

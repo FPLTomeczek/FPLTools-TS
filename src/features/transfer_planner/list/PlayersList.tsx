@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
-import styled from "styled-components";
 import { paginate, filterPlayers, sortPlayers } from "./utils";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
 import PlayersListForm from "./PlayersListFilters.tsx";
-import ListButtons from "../buttons/ListButtons.tsx";
+import ListButtons from "../direction_buttons/ListButtons.tsx";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
-import { CircularProgress } from "@mui/material";
+import { PlayersListStyled } from "./List.styled.ts";
+import Loading from "../../../components/Loading.tsx";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -30,16 +30,7 @@ const PlayersList = () => {
   };
 
   if (status === "loading") {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <CircularProgress sx={{ color: "var(--secondary-color)" }} />
-      </div>
-    );
+    return <Loading />;
   }
 
   if (status === "error") {
@@ -63,24 +54,5 @@ const PlayersList = () => {
     </PlayersListStyled>
   );
 };
-
-const PlayersListStyled = styled.div`
-  width: 100%;
-  padding: 0 2rem;
-  box-sizing: border-box;
-
-  .team-color {
-    width: 20px;
-    border-radius: 50%;
-    background-color: black;
-    height: 20px;
-  }
-  @media screen and (max-width: 1400px) {
-    padding: 1rem 4rem;
-  }
-  @media screen and (max-width: 800px) {
-    padding: 1rem;
-  }
-`;
 
 export default PlayersList;

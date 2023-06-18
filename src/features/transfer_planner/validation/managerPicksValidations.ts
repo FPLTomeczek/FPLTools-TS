@@ -15,15 +15,15 @@ type Teams = {
 
 let teamOverpicked = "";
 const validatePicksFromOneTeam = (picks: PlayerPick[]) => {
-  const playerTeams = picks.map((pick) => pick.team);
+  const teams = picks.map((pick) => pick.team);
 
-  const picksObject = playerTeams.reduce((obj: Teams, team: string) => {
+  const teamsObj = teams.reduce((obj: Teams, team: string) => {
     obj[team] = (obj[team] || 0) + 1;
     return obj;
   }, {} as Teams);
 
-  for (const key in picksObject) {
-    if (picksObject[key] > 3) {
+  for (const key in teamsObj) {
+    if (teamsObj[key] > 3) {
       teamOverpicked = key;
       return false;
     }
@@ -32,16 +32,16 @@ const validatePicksFromOneTeam = (picks: PlayerPick[]) => {
 };
 
 const validateFormation = (picks: PlayerPick[]) => {
-  const splittedPicks = splittingPicksByRoles(picks.slice(0, 11));
+  const picksByRole = splittingPicksByRoles(picks.slice(0, 11));
   if (
-    !splittedPicks[0] ||
-    splittedPicks[0].length !== FIRST_ELEVEN_GK ||
-    splittedPicks[1].length < FIRST_ELEVEN_DEF_MIN ||
-    splittedPicks[1].length > FIRST_ELEVEN_DEF_MAX ||
-    splittedPicks[2].length < FIRST_ELEVEN_MID_MIN ||
-    splittedPicks[2].length > FIRST_ELEVEN_MID_MAX ||
-    !splittedPicks[3] ||
-    splittedPicks[3].length > FIRST_ELEVEN_FWD_MAX
+    !picksByRole[0] ||
+    picksByRole[0].length !== FIRST_ELEVEN_GK ||
+    picksByRole[1].length < FIRST_ELEVEN_DEF_MIN ||
+    picksByRole[1].length > FIRST_ELEVEN_DEF_MAX ||
+    picksByRole[2].length < FIRST_ELEVEN_MID_MIN ||
+    picksByRole[2].length > FIRST_ELEVEN_MID_MAX ||
+    !picksByRole[3] ||
+    picksByRole[3].length > FIRST_ELEVEN_FWD_MAX
   )
     return false;
   return true;
