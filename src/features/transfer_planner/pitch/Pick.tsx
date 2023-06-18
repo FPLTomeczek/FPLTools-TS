@@ -27,7 +27,7 @@ const Pick = ({ player, index }: { player: IPick; index: number }) => {
     team,
   } = player;
 
-  const pickToChange = useDraft().picks;
+  const pickToChange = useDraft().pickToChange;
   const dispatch = useAppDispatch();
 
   const removePlayer = () => {
