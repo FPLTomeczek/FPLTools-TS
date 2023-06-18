@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import styled from "styled-components";
 import { paginate, filterPlayers, sortPlayers } from "./utils";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
-import PlayersListForm from "./PlayersListForm.tsx";
+import PlayersListForm from "./PlayersListFilters.tsx";
 import ListButtons from "../buttons/ListButtons.tsx";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
@@ -51,7 +51,7 @@ const PlayersList = () => {
   }
 
   return (
-    <Wrapper>
+    <PlayersListStyled>
       <PlayersListForm setPage={setPage} page={page} numOfPages={numOfPages} />
       <PlayerListItems
         pagesData={pagesData}
@@ -60,47 +60,14 @@ const PlayersList = () => {
         handleSortChange={handleSortChange}
       />
       <ListButtons setPage={setPage} numOfPages={numOfPages} page={page} />
-    </Wrapper>
+    </PlayersListStyled>
   );
 };
 
-const Wrapper = styled.div`
+const PlayersListStyled = styled.div`
   width: 100%;
   padding: 0 2rem;
   box-sizing: border-box;
-
-  .player-list-item,
-  .player-list-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: clamp(0.75rem, calc(0.24rem + 2.35vw), 1rem);
-  }
-  .player-list-item {
-    border-top: 1px solid gray;
-  }
-  .player-list-number {
-    min-width: 12%;
-  }
-  .player-list-name {
-    min-width: 35%;
-  }
-  .player-add-button-color {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-    min-width: 15%;
-  }
-
-  .player-list-number {
-    display: flex;
-    align-items: center;
-  }
-  #player-list-points,
-  #player-list-price {
-    cursor: pointer;
-  }
 
   .team-color {
     width: 20px;

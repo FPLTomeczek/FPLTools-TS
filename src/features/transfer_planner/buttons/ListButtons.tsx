@@ -6,26 +6,13 @@ import DirectionButtonPage from "./DirectionButtonPage";
 const ListButtons = (props: ListData) => {
   return (
     <ListButtonsStyled>
-      {Object.keys(Direction).map((direction, index) =>
-        index !== 1 ? (
-          <DirectionButtonPage
-            key={direction}
-            direction={Direction[direction as keyof typeof Direction]}
-            callbackProps={props}
-          />
-        ) : (
-          <>
-            <DirectionButtonPage
-              key={direction}
-              direction={Direction[direction as keyof typeof Direction]}
-              callbackProps={props}
-            />
-            <p>
-              {props.page} / {props.numOfPages}
-            </p>
-          </>
-        )
-      )}
+      <DirectionButtonPage direction={Direction.FIRST} callbackProps={props} />
+      <DirectionButtonPage direction={Direction.PREV} callbackProps={props} />
+      <p>
+        {props.page} / {props.numOfPages}
+      </p>
+      <DirectionButtonPage direction={Direction.NEXT} callbackProps={props} />
+      <DirectionButtonPage direction={Direction.LAST} callbackProps={props} />
     </ListButtonsStyled>
   );
 };

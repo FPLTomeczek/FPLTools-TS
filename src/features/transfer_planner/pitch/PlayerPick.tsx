@@ -9,7 +9,7 @@ import {
   makeChange,
 } from "../../../store_features/drafts/draftsSlice";
 import blank from "../../../assets/shirts/blank.png";
-import { teamsList } from "../list/data";
+import { TEAMS_LIST } from "../list/data";
 import { isEmpty } from "lodash";
 import { PlayerPick as IPlayerPick } from "../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
@@ -48,7 +48,7 @@ const PlayerPick = ({
     dispatch(makeChange(id));
   };
 
-  const shirt = teamsList.find((teamItem) => teamItem.value === team)?.img;
+  const shirt = TEAMS_LIST.find((teamItem) => teamItem.value === team)?.img;
 
   return (
     <Wrapper>

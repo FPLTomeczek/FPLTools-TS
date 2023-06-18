@@ -1,16 +1,17 @@
-import { FixtureItem } from "./Fixture.styled";
+import { FixtureItem } from "./Fixtures.styled";
 
-type FixtureProps = {
+const FutureFixture = ({
+  opponent,
+  isHome,
+  difficulty,
+}: {
   opponent: string;
-
   isHome: boolean;
   difficulty: number;
-};
-
-const FutureFixture = ({ opponent, isHome, difficulty }: FixtureProps) => {
+}) => {
   return (
     <FixtureItem isHome={isHome} difficulty={difficulty}>
-      {opponent}{" "}
+      {opponent}
     </FixtureItem>
   );
 };

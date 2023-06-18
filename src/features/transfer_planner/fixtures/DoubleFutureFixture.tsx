@@ -1,5 +1,5 @@
 import { Fixture } from "../interfaces/fixtures";
-import { FixtureItem } from "./Fixture.styled";
+import { FixtureItem } from "./Fixtures.styled";
 
 const DoubleFutureFixture = ({
   duplicatesFixtures,

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../store_features/players/playersSlice";
-import { teamsList, roles } from "./data";
+import { TEAMS_LIST, ROLES } from "./data";
 import { FilterOptions } from "../interfaces/players";
 import { ListData } from "../interfaces/list";
 import ListButtons from "../buttons/ListButtons";
+import { PlayersListFiltersStyled } from "./List.styled";
 
 enum Filter {
   NAME = "name",
@@ -13,7 +13,7 @@ enum Filter {
   ROLE = "role",
 }
 
-const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
+const PlayersListFilters = ({ setPage, page, numOfPages }: ListData) => {
   const dispatch = useDispatch();
 
   const [filterValues, setFilterValues] = useState<FilterOptions>({
@@ -22,7 +22,7 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
     role: "ALL",
   });
 
-  const handleSelectOnChange = (
+  const handleChangeEvent = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>,
@@ -33,11 +33,11 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
     setFilterValues({ ...filterValues, [type]: value });
 
     switch (type) {
-      case "team":
+      case Filter.TEAM:
         return dispatch(filterPlayers({ ...filterValues, team: value }));
-      case "name":
+      case Filter.NAME:
         return dispatch(filterPlayers({ ...filterValues, name: value }));
-      case "role":
+      case Filter.ROLE:
         return dispatch(filterPlayers({ ...filterValues, role: value }));
       default:
         break;
@@ -45,30 +45,30 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
   };
 
   return (
-    <Wrapper>
-      <div className="filters-form">
+    <PlayersListFiltersStyled>
+      <div className="filters-container">
         <input
           id="name"
           name="name"
           placeholder="Enter Player Name"
           value={filterValues.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleSelectOnChange(e, Filter.NAME)
+            handleChangeEvent(e, Filter.NAME)
           }
         />
 
-        <div className="filter-players-container">
-          <div className="filter-players">
+        <div className="select-filters-container">
+          <div className="select-filter">
             <label htmlFor="team">Team</label>
             <select
               id="team"
               name="team"
               value={filterValues.team}
-              onChange={(e) => handleSelectOnChange(e, Filter.TEAM)}
+              onChange={(e) => handleChangeEvent(e, Filter.TEAM)}
               data-testid="select-button"
             >
               <option value="ALL">-</option>
-              {teamsList.map((team) => (
+              {TEAMS_LIST.map((team) => (
                 <option value={team.value} key={team.value}>
                   {team.value}
                 </option>
@@ -76,16 +76,16 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
             </select>
           </div>
 
-          <div className="filter-players">
+          <div className="select-filter">
             <label htmlFor="role">Role</label>
             <select
               id="role"
               name="role"
               value={filterValues.role}
-              onChange={(e) => handleSelectOnChange(e, Filter.ROLE)}
+              onChange={(e) => handleChangeEvent(e, Filter.ROLE)}
             >
               <option value="ALL">-</option>
-              {roles.map((role) => (
+              {ROLES.map((role) => (
                 <option value={role.role} key={role.role}>
                   {role.value}
                 </option>
@@ -95,38 +95,8 @@ const PlayersListForm = ({ setPage, page, numOfPages }: ListData) => {
         </div>
       </div>
       <ListButtons setPage={setPage} page={page} numOfPages={numOfPages} />
-    </Wrapper>
+    </PlayersListFiltersStyled>
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  .filters-form {
-    display: flex;
-    gap: 1rem;
-    align-items: start;
-    flex-direction: column;
-  }
-  .filter-players-container {
-    display: flex;
-    gap: 1rem;
-  }
-  .filter-players {
-    display: flex;
-    flex-direction: column;
-  }
-  label {
-    margin-bottom: 4px;
-  }
-  @media screen and (max-width: 520px) {
-    flex-direction: column;
-    align-items: start;
-    .filters-form {
-      margin-bottom: 1rem;
-    }
-  }
-`;
-
-export default PlayersListForm;
+export default PlayersListFilters;

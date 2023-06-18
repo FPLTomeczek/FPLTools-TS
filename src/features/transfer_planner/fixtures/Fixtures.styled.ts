@@ -25,3 +25,13 @@ export const FixtureItem = styled.p<FixtureItemProps>`
     padding: 0.25rem 0.5px;
   }
 `;
+
+export const FutureFixturesStyled = styled.div`
+  display: flex;
+  font-size: 0.5rem;
+  width: 100px;
+  @media screen and (max-width: 480px) {
+    max-width: 100px;
+    width: auto;
+  }
+`;

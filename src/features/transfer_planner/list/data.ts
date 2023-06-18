@@ -1,6 +1,6 @@
 import { shirts } from "../../../assets/shirts";
 
-export const teamsList = [
+export const TEAMS_LIST = [
   { value: "ARS", color: ["#EF0107", "#FFFFFF"], img: shirts.ARS },
   { value: "AVL", color: ["#95BFE5", "#670E36"], img: shirts.AVL },
   { value: "BOU", color: ["#B50E12", "#000000"], img: shirts.BOU },
@@ -21,9 +21,9 @@ export const teamsList = [
   { value: "TOT", color: "white", img: shirts.TOT },
   { value: "WHU", color: "#7A263A", img: shirts.WHU },
   { value: "WOL", color: "#FDB913", img: shirts.WOL },
-];
+] as const;
 
-export const roles = [
+export const ROLES = [
   {
     role: "GK",
     value: "Goalkeeper",
@@ -40,4 +40,4 @@ export const roles = [
     role: "FWD",
     value: "Forward",
   },
-];
+] as const;

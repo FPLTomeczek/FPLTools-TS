@@ -1,6 +1,6 @@
 import { Player } from "../interfaces/players";
 import AddPlayerToTeamButton from "./PlayerListItemButton";
-import PlayerListItemInfo from "./PlayerListItemData";
+import PlayerListItemData from "./PlayerListItemData";
 import PlayerTeamColor from "./PlayerListItemColor";
 
 const PlayerListItemButton = ({ player }: { player: Player }) => {
@@ -10,7 +10,7 @@ const PlayerListItemButton = ({ player }: { player: Player }) => {
         <AddPlayerToTeamButton player={player} />
         <PlayerTeamColor player={player} />
       </div>
-      <PlayerListItemInfo player={player} />
+      <PlayerListItemData player={player} />
     </li>
   );
 };

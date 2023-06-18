@@ -1,9 +1,10 @@
 import { Player } from "../interfaces/players";
-import { teamsList } from "./data";
+import { TEAMS_LIST } from "./data";
 
 const PlayerListItemColor = ({ player }: { player: Player }) => {
-  const foundTeam = teamsList.find((team) => team.value === player.team);
+  const foundTeam = TEAMS_LIST.find((team) => team.value === player.team);
   const color = foundTeam ? foundTeam.color : "#000000";
+
   return (
     <div
       className="team-color"
