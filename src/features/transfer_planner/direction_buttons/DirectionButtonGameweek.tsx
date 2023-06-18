@@ -36,6 +36,7 @@ const DirectionButtonGameweek = ({
       className="direction-button"
       onClick={() => handleSettingGameweeks(direction)}
       disabled={disabled}
+      aria-label={`${direction} gameweek`}
     >
       {direction === Direction.PREV ? <ArrowPrevIcon /> : <ArrowNextIcon />}
     </button>

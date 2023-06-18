@@ -26,11 +26,19 @@ const AddPlayerToTeamButton = ({ player }: { player: Player }) => {
     <AddPlayerToTeamButtonStyled>
       {managerPicks.find((pick) => pick.id === player.id) ||
       !availablePositions.includes(player.element_type) ? (
-        <button className="add-button disabled" disabled>
+        <button
+          className="add-button disabled"
+          disabled
+          aria-label="add player"
+        >
           <AddCircleIcon sx={{ color: "var(--disabled-color)" }} />
         </button>
       ) : (
-        <button className="add-button" onClick={addPlayerToTeam}>
+        <button
+          className="add-button"
+          onClick={addPlayerToTeam}
+          aria-label="add player"
+        >
           <AddCircleIcon color="success" />
         </button>
       )}

@@ -38,6 +38,7 @@ const DirectionButtonPage = ({
           callbackProps.numOfPages
         )
       }
+      aria-label={`${direction} page`}
     >
       {arrowIcon(direction)}
     </button>

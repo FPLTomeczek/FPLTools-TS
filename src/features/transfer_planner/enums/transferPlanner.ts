@@ -1,6 +1,6 @@
 export enum Direction {
   FIRST = "first",
-  PREV = "prev",
+  PREV = "previous",
   NEXT = "next",
   LAST = "last",
 }
