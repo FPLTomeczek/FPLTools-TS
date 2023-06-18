@@ -16,9 +16,17 @@
   --secondary-color-light: #fff395;
 
   --light-green: rgba(114, 207, 159, 0.9);
+
   --warning-color: #ff0f0f;
+  --disabled-color: #88919c;
 
   --primary-border-radius: 4px;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Regular.ttf) format("truetype"),
+    url(./assets/fonts/Poppins-Bold.ttf) format("truetype");
 }
 
 html {
@@ -34,7 +42,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: Poppins, serif;
   background: var(--primary-color);
   color: white;
 }
@@ -218,6 +226,15 @@ textarea {
 .direction-button:hover,
 .primary-button:hover {
   background-color: var(--secondary-color-dark);
+}
+
+.direction-button > svg {
+  font-size: 1rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
 }
 
 /**
