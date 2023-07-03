@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { filterPlayers } from "../../../store_features/players/playersSlice";
 import { TEAMS_LIST, ROLES } from "./data";
 import { FilterOptions } from "../interfaces/players";
-import { ListData } from "../interfaces/list";
-import ListButtons from "../direction_buttons/ListButtons";
+import { ListData } from "./list";
+import ListButtons from "./ListButtons";
 import { PlayersListFiltersStyled } from "./List.styled";
 
 enum Filter {

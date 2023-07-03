@@ -1,12 +1,12 @@
 import { Alert } from "@mui/material";
 import { useAppDispatch } from "../../../app/hooks";
-import { validatePicks as picksValidation } from "../validation/managerPicksValidations";
+import { validatePicks as picksValidation } from "../validation/picks";
 import { Pick } from "../interfaces/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
 } from "../../../store_features/drafts/draftsSlice";
-import { Direction } from "../enums/transferPlanner";
+import { Direction } from "../../../enums/direction";
 import {
   CURRENT_GW,
   LAST_GW,
@@ -14,7 +14,7 @@ import {
 } from "../../../constants";
 import { isEmpty } from "lodash";
 import { useDraft } from "../../../app/customHooks";
-import DirectionButtonGameweek from "../direction_buttons/DirectionButtonGameweek";
+import DirectionButtonGameweek from "./DirectionButtonGameweek";
 import { ManagerTeamInfoStyled } from "./Pitch.styled";
 
 const ManagerTeamInfo = () => {

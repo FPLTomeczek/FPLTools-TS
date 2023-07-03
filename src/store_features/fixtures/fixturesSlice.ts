@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../utils";
-import { Fixture } from "../../features/transfer_planner/interfaces/fixtures";
+import { Fixture } from "../../features/transfer_planner/fixtures/fixtures";
 
 export const fetchFixtures = createAsyncThunk(
   "fixtures/fetchFixtures",

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../app/hooks";
-import { Fixture } from "../interfaces/fixtures";
+import { Fixture } from "./fixtures";
 
 export function setBackgroundColor(difficulty: number) {
   switch (difficulty) {

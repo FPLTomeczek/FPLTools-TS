@@ -1,20 +1,20 @@
-import { Direction } from "../enums/transferPlanner";
-import { handleSettingPages } from "../list/utils";
-import { ListData } from "../interfaces/list";
+import { Direction } from "../../../enums/direction";
+import { handleSettingPages } from "./utils";
+import { ListData } from "./list";
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 import DoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import DoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
-interface DirectionButtonPage {
+interface DirectionButtonList {
   direction: Direction;
   callbackProps: ListData;
 }
 
-const DirectionButtonPage = ({
+const DirectionButtonList = ({
   direction,
   callbackProps,
-}: DirectionButtonPage) => {
+}: DirectionButtonList) => {
   const arrowIcon = (direction: Direction) => {
     switch (direction) {
       case Direction.FIRST:
@@ -45,4 +45,4 @@ const DirectionButtonPage = ({
   );
 };
 
-export default DirectionButtonPage;
+export default DirectionButtonList;

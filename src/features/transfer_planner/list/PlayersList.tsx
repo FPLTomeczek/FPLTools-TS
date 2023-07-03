@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { paginate, filterPlayers, sortPlayers } from "./utils";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
-import PlayersListForm from "./PlayersListFilters.tsx";
-import ListButtons from "../direction_buttons/ListButtons.tsx";
+import PlayersListFilters from "./PlayersListFilters.tsx";
+import ListButtons from "./ListButtons.tsx";
 import PlayerListItems from "./PlayerListItems";
 import { SortOptions, Player } from "../interfaces/players.ts";
 import { PlayersListStyled } from "./List.styled.ts";
@@ -43,7 +43,11 @@ const PlayersList = () => {
 
   return (
     <PlayersListStyled>
-      <PlayersListForm setPage={setPage} page={page} numOfPages={numOfPages} />
+      <PlayersListFilters
+        setPage={setPage}
+        page={page}
+        numOfPages={numOfPages}
+      />
       <PlayerListItems
         pagesData={pagesData}
         page={page}

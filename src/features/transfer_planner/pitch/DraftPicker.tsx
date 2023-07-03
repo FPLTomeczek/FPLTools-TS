@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { updateDraftNumber } from "../../../store_features/drafts/draftsSlice";
-import { DraftButtonsStyled } from "./Pitch.styled";
+import { DraftPickerStyled } from "./Pitch.styled";
 
-const DraftButtons = () => {
+const DraftPicker = () => {
   const draftNumber = useAppSelector((state) => state.drafts.draftNumber);
   const dispatch = useAppDispatch();
 
@@ -11,7 +11,7 @@ const DraftButtons = () => {
   };
 
   return (
-    <DraftButtonsStyled>
+    <DraftPickerStyled>
       <button
         className={`primary-button ${draftNumber === 0 ? "selected" : ""}`}
         onClick={() => handleDraftChange(0)}
@@ -24,8 +24,8 @@ const DraftButtons = () => {
       >
         Draft 2
       </button>
-    </DraftButtonsStyled>
+    </DraftPickerStyled>
   );
 };
 
-export default DraftButtons;
+export default DraftPicker;

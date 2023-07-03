@@ -1,11 +1,11 @@
 import ManagerTeamInfo from "./ManagerTeamInfo";
-import DraftButtons from "./DraftButtons";
+import DraftPicker from "./DraftPicker";
 import { PitchHeaderStyled } from "./Pitch.styled";
 
 const PitchHeader = () => {
   return (
     <PitchHeaderStyled>
-      <DraftButtons />
+      <DraftPicker />
       <ManagerTeamInfo />
     </PitchHeaderStyled>
   );

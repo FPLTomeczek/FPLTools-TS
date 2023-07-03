@@ -1,10 +1,10 @@
-import { getManagerTeam } from "../fetchDataUtils";
+import { getManagerTeam } from "../../service/getData";
 import { it, expect, describe } from "vitest";
 import { screen } from "@testing-library/react";
-import { renderComponent, proxyHandler } from "./utils";
-import PlayersList from "../list/PlayersList";
+import { renderComponent, proxyHandler } from "../../__tests__/utils";
+import PlayersList from "../PlayersList";
 import configureStore from "redux-mock-store";
-import { mockPlayer } from "./utils";
+import { mockPlayer } from "../../__tests__/utils";
 
 describe("fetching players", () => {
   it("team players are fetched", async () => {

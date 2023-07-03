@@ -1,4 +1,4 @@
-import { Fixture } from "../interfaces/fixtures";
+import { Fixture } from "./fixtures";
 import { FixtureItem } from "./Fixtures.styled";
 
 const DoubleFutureFixture = ({

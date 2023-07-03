@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import TransferPlannerContent from "../features/transfer_planner/TransferPlannerContent";
 import { Alert, Snackbar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { getManagerData } from "../features/transfer_planner/fetchDataUtils";
+import { getManagerData } from "../features/transfer_planner/service/getData";
 import { TransferPlannerStyled } from "./Pages.styled";
 
 const TransferPlanner = () => {

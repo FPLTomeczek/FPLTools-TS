@@ -116,7 +116,7 @@ export const GameweeksTransfersContainerStyled = styled.div`
   }
 `;
 
-export const DraftButtonsStyled = styled.div`
+export const DraftPickerStyled = styled.div`
   display: flex;
   justify-content: start;
   gap: 1rem;
