@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LAST_GW } from "../../constants";
+import { CURRENT_GW, LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
 import {
   ManagerHistory,
@@ -12,6 +12,7 @@ import {
   initialManagerTeamState,
   setManagerTeam,
 } from "./initializers";
+import { Chip } from "../../features/transfer_planner/chips/chipsEnums";
 
 interface Draft {
   managerTeam: ManagerTeamState[];
@@ -70,7 +71,8 @@ const draftSlice = createSlice({
         )
       ) {
         if (
-          draft.dataByGameweeks[draft.gameweek].chipByGameweek !== "wildcard"
+          draft.dataByGameweeks[draft.gameweek].chipByGameweek !==
+          (Chip.WILDCARD || Chip.FREE_HIT)
         ) {
           draft.dataByGameweeks[draft.gameweek].transfersByGameweek -= 1;
         }
@@ -122,7 +124,11 @@ const draftSlice = createSlice({
             ? retrievedPickByGameweek.sellCost
             : retrievedPickByGameweek.now_cost;
 
-        draft.dataByGameweeks[draft.gameweek].transfersByGameweek += 1;
+        if (
+          draft.dataByGameweeks[draft.gameweek].chipByGameweek !== "Wildcard"
+        ) {
+          draft.dataByGameweeks[draft.gameweek].transfersByGameweek += 1;
+        }
       }
     },
     addPick(state, action) {
@@ -233,16 +239,16 @@ const draftSlice = createSlice({
       //   )
       // );
 
-      const arr = dataByGameweeks.picksByGameweek;
-      console.log(arr);
-      console.log(picks);
-
       // update state after transfer
       for (let i = gameweek; i <= LAST_GW; i++) {
         draft.dataByGameweeks[i].picksByGameweek = picks;
         if (i != LAST_GW) {
           draft.dataByGameweeks[i + 1].transfersByGameweek =
-            draft.dataByGameweeks[i].transfersByGameweek < 1 ? 1 : 2;
+            draft.dataByGameweeks[i].transfersByGameweek < 1 ||
+            draft.dataByGameweeks[i].chipByGameweek ===
+              (Chip.WILDCARD || Chip.FREE_HIT)
+              ? 1
+              : 2;
         }
         if (i != gameweek) {
           draft.dataByGameweeks[i].initialPicksByGameweek = picks;
@@ -257,10 +263,32 @@ const draftSlice = createSlice({
     },
     setChip(state, action) {
       const draft = state.managerTeam[state.draftNumber];
-
-      const dataByGameweeks = draft.dataByGameweeks[draft.gameweek];
-
-      dataByGameweeks.chipByGameweek = action.payload;
+      const dataByGameweek = draft.dataByGameweeks[draft.gameweek];
+      const { chipName, activate } = action.payload;
+      if (!activate) {
+        //TODO: transferAmount
+        let transferAmount = dataByGameweek.transfersByGameweek;
+        //reset state from this GW
+        const picks =
+          draft.gameweek === CURRENT_GW
+            ? state.initManagerTeam.picks
+            : draft.dataByGameweeks[draft.gameweek - 1].picksByGameweek;
+        for (let i = draft.gameweek; i <= LAST_GW; i++) {
+          draft.picks = picks;
+          if (i === draft.gameweek + 1) transferAmount === 1;
+          draft.dataByGameweeks[i] = {
+            picksByGameweek: picks,
+            initialPicksByGameweek: picks,
+            removedPicksByGameweek: [],
+            addedPicksByGameweek: [],
+            transfersByGameweek: transferAmount,
+            chipByGameweek: "",
+          };
+          transferAmount = 2;
+        }
+      } else {
+        dataByGameweek.chipByGameweek = chipName;
+      }
     },
   },
 });

@@ -44,8 +44,8 @@ const ManagerTeamInfo = () => {
           picks,
           gameweek,
           transfers: dataByGameweeks[gameweek].transfersByGameweek,
-          initialpicksByGameweek:
-            dataByGameweeks[gameweek].initialpicksByGameweek,
+          initialPicksByGameweek:
+            dataByGameweeks[gameweek].initialPicksByGameweek,
         })
       );
   };

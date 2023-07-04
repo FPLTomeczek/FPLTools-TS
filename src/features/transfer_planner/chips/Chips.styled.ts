@@ -19,6 +19,22 @@ export const ChipsStyled = styled.div`
     cursor: default;
     background-color: var(--disabled-color);
   }
+  .chip-active {
+    animation: color-change 1s infinite;
+  }
+
+  @keyframes color-change {
+    0% {
+      background-color: var(--secondary-color);
+    }
+    50% {
+      background-color: var(--secondary-color-dark);
+    }
+    100% {
+      background-color: var(--secondary-color);
+    }
+  }
+
   @media screen and (max-width: 800px) {
     padding: 0 1rem;
     .chip-button {
