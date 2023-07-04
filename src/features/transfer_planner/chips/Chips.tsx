@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../../app/hooks";
 import SingleChip from "./SingleChip";
 import { ChipsStyled } from "./Chips.styled";
+import { chipNames } from "./constants";
 export interface FilteredChip {
   name: string;
   played: boolean;
@@ -9,15 +10,13 @@ export interface FilteredChip {
 const Chips = () => {
   const chips = useAppSelector((state) => state.drafts.managerHistory.chips);
 
-  const defaultValues = ["wildcard", "3xc", "bboost", "freehit"];
-
   const filteredChips: FilteredChip[] = [];
 
-  defaultValues.map((defaultChip) => {
-    if (!chips.find((chip) => chip.name === defaultChip)) {
-      filteredChips.push({ name: defaultChip, played: false });
+  chipNames.map((chipName) => {
+    if (!chips.find((chip) => chip.name === chipName)) {
+      filteredChips.push({ name: chipName, played: false });
     } else {
-      filteredChips.push({ name: defaultChip, played: true });
+      filteredChips.push({ name: chipName, played: true });
     }
   });
 

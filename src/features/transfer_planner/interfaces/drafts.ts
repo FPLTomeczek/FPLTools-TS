@@ -1,4 +1,5 @@
 import { Player } from "./players";
+import { Chip } from "../chips/chipsInterfaces";
 
 export interface Pick extends Player {
   position: number;
@@ -54,12 +55,6 @@ interface SeasonDetail {
   season_name: string;
   total_points: number;
   rank: number;
-}
-
-export interface Chip {
-  name: string;
-  time: string;
-  event: number;
 }
 
 export interface Transfer {

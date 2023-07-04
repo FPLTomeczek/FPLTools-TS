@@ -10,8 +10,8 @@ const GameweeksTransfersContainer = () => {
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     if (
-      dataByGameweeks[i]?.removedPicksByGameweeks.length > 0 &&
-      dataByGameweeks[i]?.addedPicksByGameweeks.length > 0
+      dataByGameweeks[i]?.removedPicksByGameweek.length > 0 &&
+      dataByGameweeks[i]?.addedPicksByGameweek.length > 0
     ) {
       gameweeksWithTransfers.push(i);
     }
@@ -23,8 +23,8 @@ const GameweeksTransfersContainer = () => {
         return (
           <GameweekTransfers
             key={gameweek}
-            removedPicks={dataByGameweeks[gameweek].removedPicksByGameweeks}
-            addedPicks={dataByGameweeks[gameweek].addedPicksByGameweeks}
+            removedPicks={dataByGameweeks[gameweek].removedPicksByGameweek}
+            addedPicks={dataByGameweeks[gameweek].addedPicksByGameweek}
             gameweek={gameweek}
           />
         );

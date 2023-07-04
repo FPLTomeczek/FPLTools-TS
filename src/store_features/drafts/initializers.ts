@@ -6,12 +6,12 @@ import {
 
 export interface DataByGameweeks {
   [gameweek: number]: {
-    picksByGameweeks: Pick[];
-    transfersByGameweeks: number;
-    initialPicksByGameweeks: Pick[];
-    removedPicksByGameweeks: Pick[];
-    addedPicksByGameweeks: Pick[];
-    chipByGameweeks: string;
+    picksByGameweek: Pick[];
+    transfersByGameweek: number;
+    initialPicksByGameweek: Pick[];
+    removedPicksByGameweek: Pick[];
+    addedPicksByGameweek: Pick[];
+    chipByGameweek: string;
   };
 }
 
@@ -46,12 +46,12 @@ const initializeDataByGameweeks = (
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     dataByGameweeks[i] = {
-      picksByGameweeks: picks,
-      initialPicksByGameweeks: picks,
-      removedPicksByGameweeks: [],
-      addedPicksByGameweeks: [],
-      transfersByGameweeks: transferAmount,
-      chipByGameweeks: "",
+      picksByGameweek: picks,
+      initialPicksByGameweek: picks,
+      removedPicksByGameweek: [],
+      addedPicksByGameweek: [],
+      transfersByGameweek: transferAmount,
+      chipByGameweek: "",
     };
     transferAmount = 2;
   }

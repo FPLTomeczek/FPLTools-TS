@@ -24,7 +24,7 @@ const ManagerTeamInfo = () => {
   const transfersArray = [];
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
-    transfersArray.push(dataByGameweeks[i]?.transfersByGameweeks);
+    transfersArray.push(dataByGameweeks[i]?.transfersByGameweek);
   }
 
   const cost =
@@ -43,9 +43,9 @@ const ManagerTeamInfo = () => {
         updatePicksByGameweekAndTransfers({
           picks,
           gameweek,
-          transfers: dataByGameweeks[gameweek].transfersByGameweeks,
-          initialPicksByGameweeks:
-            dataByGameweeks[gameweek].initialPicksByGameweeks,
+          transfers: dataByGameweeks[gameweek].transfersByGameweek,
+          initialpicksByGameweek:
+            dataByGameweeks[gameweek].initialpicksByGameweek,
         })
       );
   };
@@ -92,13 +92,13 @@ const ManagerTeamInfo = () => {
             Transfers:{" "}
             <span
               className={`${
-                dataByGameweeks[gameweek]?.transfersByGameweeks < 0
+                dataByGameweeks[gameweek]?.transfersByGameweek < 0
                   ? "error-value"
                   : ""
               } `}
             >
-              {dataByGameweeks[gameweek]?.transfersByGameweeks
-                ? dataByGameweeks[gameweek]?.transfersByGameweeks
+              {dataByGameweeks[gameweek]?.transfersByGameweek
+                ? dataByGameweeks[gameweek]?.transfersByGameweek
                 : 0}
             </span>
             /{MAX_AVAILABLE_FREE_TRANSFERS} <br />

@@ -65,17 +65,17 @@ const draftSlice = createSlice({
       const removedPickIndex = draft.picks.indexOf(pickToRemove);
 
       if (
-        draft.dataByGameweeks[draft.gameweek].initialPicksByGameweeks.find(
+        draft.dataByGameweeks[draft.gameweek].initialPicksByGameweek.find(
           (initialPick) => initialPick.id === id
         )
       ) {
         if (
-          draft.dataByGameweeks[draft.gameweek].chipByGameweeks !== "wildcard"
+          draft.dataByGameweeks[draft.gameweek].chipByGameweek !== "wildcard"
         ) {
-          draft.dataByGameweeks[draft.gameweek].transfersByGameweeks -= 1;
+          draft.dataByGameweeks[draft.gameweek].transfersByGameweek -= 1;
         }
 
-        draft.dataByGameweeks[draft.gameweek].removedPicksByGameweeks.push({
+        draft.dataByGameweeks[draft.gameweek].removedPicksByGameweek.push({
           ...draft.picks[removedPickIndex],
           removedPickIndex,
         });
@@ -97,7 +97,7 @@ const draftSlice = createSlice({
 
       const retrievedPickByGameweek = draft.dataByGameweeks[
         draft.gameweek
-      ].removedPicksByGameweeks.find(
+      ].removedPicksByGameweek.find(
         (removedPick) => removedPick.position === position
       ) as Pick;
 
@@ -109,11 +109,11 @@ const draftSlice = createSlice({
         draft.picks[index] = {
           ...retrievedPickByGameweek,
         };
-        const removedPicksByGameweeksIndex = draft.dataByGameweeks[
+        const removedPicksByGameweekIndex = draft.dataByGameweeks[
           draft.gameweek
-        ].removedPicksByGameweeks.indexOf(retrievedPickByGameweek);
-        draft.dataByGameweeks[draft.gameweek].removedPicksByGameweeks.splice(
-          removedPicksByGameweeksIndex,
+        ].removedPicksByGameweek.indexOf(retrievedPickByGameweek);
+        draft.dataByGameweeks[draft.gameweek].removedPicksByGameweek.splice(
+          removedPicksByGameweekIndex,
           1
         );
 
@@ -122,18 +122,18 @@ const draftSlice = createSlice({
             ? retrievedPickByGameweek.sellCost
             : retrievedPickByGameweek.now_cost;
 
-        draft.dataByGameweeks[draft.gameweek].transfersByGameweeks += 1;
+        draft.dataByGameweeks[draft.gameweek].transfersByGameweek += 1;
       }
     },
     addPick(state, action) {
       const draft = state.managerTeam[state.draftNumber];
-      const dataByGameweek =
+      const dataByGameweeks =
         state.managerTeam[state.draftNumber].dataByGameweeks[
           state.managerTeam[state.draftNumber].gameweek
         ];
 
       const newPlayer = action.payload;
-      const initialPicksIDs = dataByGameweek.initialPicksByGameweeks.map(
+      const initialPicksIDs = dataByGameweeks.initialPicksByGameweek.map(
         (pick) => pick.id
       );
 
@@ -197,10 +197,10 @@ const draftSlice = createSlice({
       const gameweek = action.payload;
 
       const draft = state.managerTeam[state.draftNumber];
-      const dataByGameweek =
+      const dataByGameweeks =
         state.managerTeam[state.draftNumber].dataByGameweeks[gameweek];
 
-      draft.picks = dataByGameweek.picksByGameweeks;
+      draft.picks = dataByGameweeks.picksByGameweek;
       draft.gameweek = gameweek;
       draft.validationError = {
         isError: false,
@@ -208,46 +208,46 @@ const draftSlice = createSlice({
       };
     },
     updatePicksByGameweekAndTransfers(state, action) {
-      const { picks, gameweek, transfers, initialPicksByGameweeks } =
+      const { picks, gameweek, transfers, initialPicksByGameweek } =
         action.payload;
 
       const draft = state.managerTeam[state.draftNumber];
 
-      const dataByGameweek =
+      const dataByGameweeks =
         state.managerTeam[state.draftNumber].dataByGameweeks[gameweek];
 
-      dataByGameweek.transfersByGameweeks = transfers;
+      dataByGameweeks.transfersByGameweek = transfers;
 
       const addedPlayers = picks.filter(
         (pick: Pick) =>
-          !initialPicksByGameweeks.some(
+          !initialPicksByGameweek.some(
             (initialPick: Pick) => initialPick._id === pick._id
           )
       );
 
-      dataByGameweek.addedPicksByGameweeks = addedPlayers;
+      dataByGameweeks.addedPicksByGameweek = addedPlayers;
 
       // console.log(
-      //   draft.dataByGameweeks[gameweek].picksByGameweeks.filter(
+      //   draft.dataByGameweeks[gameweek].picksByGameweek.filter(
       //     (pick) => !picks.includes(pick)
       //   )
       // );
 
-      const arr = dataByGameweek.picksByGameweeks;
+      const arr = dataByGameweeks.picksByGameweek;
       console.log(arr);
       console.log(picks);
 
       // update state after transfer
       for (let i = gameweek; i <= LAST_GW; i++) {
-        draft.dataByGameweeks[i].picksByGameweeks = picks;
+        draft.dataByGameweeks[i].picksByGameweek = picks;
         if (i != LAST_GW) {
-          draft.dataByGameweeks[i + 1].transfersByGameweeks =
-            draft.dataByGameweeks[i].transfersByGameweeks < 1 ? 1 : 2;
+          draft.dataByGameweeks[i + 1].transfersByGameweek =
+            draft.dataByGameweeks[i].transfersByGameweek < 1 ? 1 : 2;
         }
         if (i != gameweek) {
-          draft.dataByGameweeks[i].initialPicksByGameweeks = picks;
-          draft.dataByGameweeks[i].removedPicksByGameweeks = [];
-          draft.dataByGameweeks[i].addedPicksByGameweeks = [];
+          draft.dataByGameweeks[i].initialPicksByGameweek = picks;
+          draft.dataByGameweeks[i].removedPicksByGameweek = [];
+          draft.dataByGameweeks[i].addedPicksByGameweek = [];
         }
       }
       localStorage.setItem("drafts", JSON.stringify(state.managerTeam));
@@ -255,10 +255,12 @@ const draftSlice = createSlice({
     updateDraftNumber(state, action) {
       state.draftNumber = action.payload;
     },
-    setActiveChip(state, action) {
-      state.managerTeam[state.draftNumber].dataByGameweeks[
-        state.managerTeam[state.draftNumber].gameweek
-      ].chipByGameweeks = action.payload;
+    setChip(state, action) {
+      const draft = state.managerTeam[state.draftNumber];
+
+      const dataByGameweeks = draft.dataByGameweeks[draft.gameweek];
+
+      dataByGameweeks.chipByGameweek = action.payload;
     },
   },
 });
@@ -273,7 +275,7 @@ export const {
   updatePicks,
   updatePicksByGameweekAndTransfers,
   updateDraftNumber,
-  setActiveChip,
+  setChip,
 } = draftSlice.actions;
 
 export default draftSlice.reducer;
