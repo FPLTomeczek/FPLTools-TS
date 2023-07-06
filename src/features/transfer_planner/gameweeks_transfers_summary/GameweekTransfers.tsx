@@ -1,9 +1,10 @@
 import { Pick } from "../interfaces/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
-import styled from "styled-components";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useAppDispatch } from "../../../app/hooks";
 import { updateGameweeks } from "../../../store_features/drafts/draftsSlice";
+import { GameweekTransfersStyled } from "./GameweekTransfersSummary.styled";
+import { useDraft } from "../../../app/customHooks";
 
 const GameweekTransfers = ({
   removedPicks,
@@ -21,8 +22,10 @@ const GameweekTransfers = ({
     dispatch(updateGameweeks(gameweek));
   };
 
+  const currentChip = useDraft().dataByGameweeks[gameweek].chipByGameweek;
+
   return (
-    <Wrapper>
+    <GameweekTransfersStyled>
       <div className="gameweek-transfers-header">
         <h2>GW: {gameweek}</h2>
         <button
@@ -32,6 +35,7 @@ const GameweekTransfers = ({
           <KeyboardArrowUpIcon />
         </button>
       </div>
+      {currentChip ? <h3>Chip played: {currentChip}</h3> : null}
       <div className="gameweek-transfers-picks">
         <div className="removed-picks">
           <span id="picks-out" className="picks-transfer-status">
@@ -54,46 +58,8 @@ const GameweekTransfers = ({
           })}
         </div>
       </div>
-    </Wrapper>
+    </GameweekTransfersStyled>
   );
 };
-
-const Wrapper = styled.div`
-  padding: 2rem;
-  border: 2px solid var(--secondary-color);
-  border-radius: var(--primary-border-radius);
-  height: fit-content;
-  .gameweek-transfers-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  .gameweek-transfers-picks {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-  .picks-transfer-status {
-    padding: 0.5rem;
-    color: white;
-    text-transform: capitalize;
-    display: block;
-    max-width: 30px;
-    text-align: center;
-    border-radius: var(--primary-border-radius);
-    margin: 0 auto;
-    margin-bottom: 1rem;
-  }
-  #picks-in {
-    background-color: var(--light-green);
-  }
-  #picks-out {
-    background-color: var(--warning-color);
-  }
-  @media screen and (max-width: 800px) {
-    padding: 1rem;
-  }
-`;
 
 export default GameweekTransfers;

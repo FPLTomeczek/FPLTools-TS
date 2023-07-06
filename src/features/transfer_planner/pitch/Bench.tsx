@@ -9,7 +9,7 @@ const Bench = ({ picks }: { picks: IPick[] }) => {
   let playerStartIndex = FIRST_ELEVEN_PLAYERS;
   const gameweek = useDraft().gameweek;
   const currentChipIsBB =
-    useDraft().dataByGameweeks[gameweek].chipByGameweek === Chip.BENCH_BOOST;
+    useDraft().dataByGameweeks[gameweek]?.chipByGameweek === Chip.BENCH_BOOST;
 
   if (picks.length === 0) {
     return null;
