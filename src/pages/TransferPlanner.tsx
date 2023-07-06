@@ -4,6 +4,8 @@ import { Alert, Snackbar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { getManagerData } from "../features/transfer_planner/service/getData";
 import { TransferPlannerStyled } from "./Pages.styled";
+import Note from "../components/Note";
+import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../constants";
 
 const TransferPlanner = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,6 +28,7 @@ const TransferPlanner = () => {
 
   return (
     <TransferPlannerStyled>
+      <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         open={error.value}
