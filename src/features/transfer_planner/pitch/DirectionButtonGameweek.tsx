@@ -2,7 +2,7 @@ import { Direction } from "../../../enums/direction";
 import { useDraft } from "../../../app/customHooks";
 import { CURRENT_GW, LAST_GW } from "../../../constants";
 import { useAppDispatch } from "../../../app/hooks";
-import { updatePicks } from "../../../store_features/drafts/draftsSlice";
+import { updateGameweeks } from "../../../store_features/drafts/draftsSlice";
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 
@@ -22,11 +22,11 @@ const DirectionButtonGameweek = ({
   const handleSettingGameweeks = (direction: Direction) => {
     if (direction === Direction.PREV) {
       if (gameweek - 1 >= CURRENT_GW) {
-        dispatch(updatePicks(gameweek - 1));
+        dispatch(updateGameweeks(gameweek - 1));
       }
     } else if (direction === Direction.NEXT) {
       if (gameweek + 1 <= LAST_GW) {
-        dispatch(updatePicks(gameweek + 1));
+        dispatch(updateGameweeks(gameweek + 1));
       }
     }
   };

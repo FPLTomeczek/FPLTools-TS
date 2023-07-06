@@ -16,10 +16,13 @@ import { isEmpty } from "lodash";
 import { useDraft } from "../../../app/customHooks";
 import DirectionButtonGameweek from "./DirectionButtonGameweek";
 import { ManagerTeamInfoStyled } from "./Pitch.styled";
+import { Chip } from "../chips/chipsEnums";
 
 const ManagerTeamInfo = () => {
   const { bank, gameweek, picks, validationError, dataByGameweeks } =
     useDraft();
+
+  const currentChip = dataByGameweeks[gameweek]?.chipByGameweek;
 
   const transfersArray = [];
 
@@ -90,18 +93,27 @@ const ManagerTeamInfo = () => {
         <div className="info-container" id="transfers-info">
           <p>
             Transfers:{" "}
-            <span
-              className={`${
-                dataByGameweeks[gameweek]?.transfersByGameweek < 0
-                  ? "error-value"
-                  : ""
-              } `}
-            >
-              {dataByGameweeks[gameweek]?.transfersByGameweek
-                ? dataByGameweeks[gameweek]?.transfersByGameweek
-                : 0}
-            </span>
-            /{MAX_AVAILABLE_FREE_TRANSFERS} <br />
+            {currentChip === Chip.WILDCARD || currentChip === Chip.FREE_HIT ? (
+              <>
+                <span>∞</span>
+                <br />
+              </>
+            ) : (
+              <>
+                <span
+                  className={`${
+                    dataByGameweeks[gameweek]?.transfersByGameweek < 0
+                      ? "error-value"
+                      : ""
+                  } `}
+                >
+                  {dataByGameweeks[gameweek]?.transfersByGameweek
+                    ? dataByGameweeks[gameweek]?.transfersByGameweek
+                    : 0}
+                </span>
+                /{MAX_AVAILABLE_FREE_TRANSFERS} <br />
+              </>
+            )}
             Cost: {cost}
           </p>
         </div>

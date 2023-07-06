@@ -70,10 +70,8 @@ const draftSlice = createSlice({
           (initialPick) => initialPick.id === id
         )
       ) {
-        if (
-          draft.dataByGameweeks[draft.gameweek].chipByGameweek !==
-          (Chip.WILDCARD || Chip.FREE_HIT)
-        ) {
+        const chip = draft.dataByGameweeks[draft.gameweek].chipByGameweek;
+        if (chip !== Chip.WILDCARD && chip !== Chip.FREE_HIT) {
           draft.dataByGameweeks[draft.gameweek].transfersByGameweek -= 1;
         }
 
@@ -124,9 +122,8 @@ const draftSlice = createSlice({
             ? retrievedPickByGameweek.sellCost
             : retrievedPickByGameweek.now_cost;
 
-        if (
-          draft.dataByGameweeks[draft.gameweek].chipByGameweek !== "Wildcard"
-        ) {
+        const chip = draft.dataByGameweeks[draft.gameweek].chipByGameweek;
+        if (chip !== Chip.WILDCARD && Chip.FREE_HIT) {
           draft.dataByGameweeks[draft.gameweek].transfersByGameweek += 1;
         }
       }
@@ -199,7 +196,7 @@ const draftSlice = createSlice({
         };
       }
     },
-    updatePicks(state, action) {
+    updateGameweeks(state, action) {
       const gameweek = action.payload;
 
       const draft = state.managerTeam[state.draftNumber];
@@ -239,21 +236,29 @@ const draftSlice = createSlice({
       //   )
       // );
 
+      //update state after freeHit
+      if (draft.dataByGameweeks[gameweek].chipByGameweek === Chip.FREE_HIT) {
+        draft.dataByGameweeks[gameweek].picksByGameweek = picks;
+      }
       // update state after transfer
-      for (let i = gameweek; i <= LAST_GW; i++) {
-        draft.dataByGameweeks[i].picksByGameweek = picks;
-        if (i != LAST_GW) {
-          draft.dataByGameweeks[i + 1].transfersByGameweek =
-            draft.dataByGameweeks[i].transfersByGameweek < 1 ||
-            draft.dataByGameweeks[i].chipByGameweek ===
-              (Chip.WILDCARD || Chip.FREE_HIT)
-              ? 1
-              : 2;
-        }
-        if (i != gameweek) {
-          draft.dataByGameweeks[i].initialPicksByGameweek = picks;
-          draft.dataByGameweeks[i].removedPicksByGameweek = [];
-          draft.dataByGameweeks[i].addedPicksByGameweek = [];
+      else {
+        for (let i = gameweek; i <= LAST_GW; i++) {
+          draft.dataByGameweeks[i].picksByGameweek = picks;
+          if (i != LAST_GW) {
+            const chip = draft.dataByGameweeks[i].chipByGameweek;
+
+            draft.dataByGameweeks[i + 1].transfersByGameweek =
+              draft.dataByGameweeks[i].transfersByGameweek < 1 ||
+              chip === Chip.WILDCARD ||
+              chip === Chip.FREE_HIT
+                ? 1
+                : 2;
+          }
+          if (i != gameweek) {
+            draft.dataByGameweeks[i].initialPicksByGameweek = picks;
+            draft.dataByGameweeks[i].removedPicksByGameweek = [];
+            draft.dataByGameweeks[i].addedPicksByGameweek = [];
+          }
         }
       }
       localStorage.setItem("drafts", JSON.stringify(state.managerTeam));
@@ -300,7 +305,7 @@ export const {
   addPick,
   makeChange,
   validatePicks,
-  updatePicks,
+  updateGameweeks,
   updatePicksByGameweekAndTransfers,
   updateDraftNumber,
   setChip,

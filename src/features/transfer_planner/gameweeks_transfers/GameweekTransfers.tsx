@@ -3,7 +3,7 @@ import SingleGameweekTransfer from "./SingleGameweekTransfer";
 import styled from "styled-components";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useAppDispatch } from "../../../app/hooks";
-import { updatePicks } from "../../../store_features/drafts/draftsSlice";
+import { updateGameweeks } from "../../../store_features/drafts/draftsSlice";
 
 const GameweekTransfers = ({
   removedPicks,
@@ -18,7 +18,7 @@ const GameweekTransfers = ({
 
   const setGameweek = (gameweek: number) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    dispatch(updatePicks(gameweek));
+    dispatch(updateGameweeks(gameweek));
   };
 
   return (

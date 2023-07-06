@@ -95,11 +95,13 @@ export const PitchHeaderStyled = styled.div`
   }
 `;
 
-export const BenchStyled = styled.div`
+export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
   display: flex;
   justify-content: space-between;
   background-color: var(--light-green);
   padding: 1rem 2rem;
+  border: ${(props) =>
+    props.BBPlayed ? "6px solid rgb(2, 239, 255)" : "none"};
 `;
 
 export const GameweeksTransfersContainerStyled = styled.div`

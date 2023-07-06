@@ -5,6 +5,7 @@ import { GameweeksTransfersContainerStyled } from "../pitch/Pitch.styled";
 
 const GameweeksTransfersContainer = () => {
   const dataByGameweeks = useDraft().dataByGameweeks;
+  console.log(dataByGameweeks);
 
   const gameweeksWithTransfers = [];
 

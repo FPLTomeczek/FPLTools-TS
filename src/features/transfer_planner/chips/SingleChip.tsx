@@ -13,6 +13,8 @@ const SingleChip = ({ chip }: { chip: FilteredChip }) => {
   const chipName = switchChipName(chip.name);
 
   const handlePlayingChip = (chipName: string | undefined) => {
+    console.log(chipName);
+
     let activateChip;
     currentChipName === chipName
       ? (activateChip = false)
