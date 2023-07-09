@@ -2,10 +2,16 @@ import { useRef, useState } from "react";
 import TransferPlannerContent from "../features/transfer_planner/TransferPlannerContent";
 import { Alert, Snackbar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { getManagerData } from "../features/transfer_planner/service/getData";
+import {
+  getDemoManagerTeam,
+  getManagerData,
+} from "../features/transfer_planner/service/getData";
 import { TransferPlannerStyled } from "./Pages.styled";
 import Note from "../components/Note";
 import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../constants";
+import { setData } from "../store_features/drafts/draftsSlice";
+import managerTeam from "../assets/demo-data/manager-team-info.json";
+import managerHistory from "../assets/demo-data/managerHistory.json";
 
 const TransferPlanner = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -19,6 +25,11 @@ const TransferPlanner = () => {
 
   const dispatch = useAppDispatch();
 
+  const handlePlayingDemo = async () => {
+    const picks = await getDemoManagerTeam(managerTeam.picks);
+    dispatch(setData({ picks, managerHistory }));
+  };
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -28,7 +39,12 @@ const TransferPlanner = () => {
 
   return (
     <TransferPlannerStyled>
-      <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
+      <div className="transfer-planner-header">
+        <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
+        <button className="btn-primary" onClick={handlePlayingDemo}>
+          DEMO
+        </button>
+      </div>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         open={error.value}

@@ -17,13 +17,13 @@ export function roleToIndex(role: string) {
   }
 }
 
-export const assignPositionsToPlayers = (
+export const assignPositionsToPlayers: (
   positionObjects: {
     position: number;
     element: number;
   }[],
   playerObjects: Pick[]
-) => {
+) => Pick[] = (positionObjects, playerObjects) => {
   const ids = positionObjects.map((element) => {
     return element.element;
   });
