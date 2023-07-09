@@ -13,13 +13,13 @@ const DraftPicker = () => {
   return (
     <DraftPickerStyled>
       <button
-        className={`primary-button ${draftNumber === 0 ? "selected" : ""}`}
+        className={`btn-primary ${draftNumber === 0 ? "selected" : ""}`}
         onClick={() => handleDraftChange(0)}
       >
         Draft 1
       </button>
       <button
-        className={`primary-button ${draftNumber === 1 ? "selected" : ""}`}
+        className={`btn-primary ${draftNumber === 1 ? "selected" : ""}`}
         onClick={() => handleDraftChange(1)}
       >
         Draft 2

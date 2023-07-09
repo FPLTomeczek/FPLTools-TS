@@ -42,7 +42,7 @@ const TransferPlanner = () => {
       <form id="user-id-form">
         <input placeholder="Enter your ID" ref={inputRef} />
         <button
-          className="primary-button"
+          className="btn-primary"
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
         >
           Submit

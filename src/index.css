@@ -18,6 +18,7 @@
   --light-green: rgba(114, 207, 159, 0.9);
 
   --warning-color: #ff0f0f;
+  --warning-color-dark: rgba(254, 21, 21, 0.7);
   --disabled-color: #88919c;
 
   --primary-border-radius: 4px;
@@ -198,37 +199,46 @@ textarea {
   border-width: 0px;
 }
 
-.primary-button {
-  background-color: var(--secondary-color);
+button {
   color: var(--primary-color);
   font-weight: 500;
-  padding: 0.5rem;
   cursor: pointer;
 }
 
-.direction-button {
+.btn-primary {
+  background-color: var(--secondary-color);
+}
+
+.btn-direction {
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid var(--primary-color);
-  cursor: pointer;
-  padding: 0.5rem;
   background-color: var(--secondary-color);
-  color: var(--primary-color);
 }
 
-.primary-button,
-.direction-button {
+.btn-delete {
+  background-color: var(--warning-color);
+}
+
+.btn-primary,
+.btn-direction,
+.btn-delete {
   transition: background-color 0.3s;
+  padding: 0.5rem;
 }
 
-.direction-button:hover,
-.primary-button:hover {
+.btn-direction:hover,
+.btn-primary:hover {
   background-color: var(--secondary-color-dark);
 }
 
-.direction-button > svg {
+.btn-delete:hover {
+  background-color: var(--warning-color-dark);
+}
+
+.btn-direction > svg {
   font-size: 1rem;
 }
 

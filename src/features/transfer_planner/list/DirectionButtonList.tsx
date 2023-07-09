@@ -30,7 +30,7 @@ const DirectionButtonList = ({
 
   return (
     <button
-      className="direction-button"
+      className="btn-direction"
       onClick={() =>
         handleSettingPages(
           callbackProps.setPage,

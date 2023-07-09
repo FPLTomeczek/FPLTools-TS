@@ -28,10 +28,7 @@ const GameweekTransfers = ({
     <GameweekTransfersStyled>
       <div className="gameweek-transfers-header">
         <h2>GW: {gameweek}</h2>
-        <button
-          className="direction-button"
-          onClick={() => setGameweek(gameweek)}
-        >
+        <button className="btn-direction" onClick={() => setGameweek(gameweek)}>
           <KeyboardArrowUpIcon />
         </button>
       </div>

@@ -33,7 +33,7 @@ const DirectionButtonGameweek = ({
 
   return (
     <button
-      className="direction-button"
+      className="btn-direction"
       onClick={() => handleSettingGameweeks(direction)}
       disabled={disabled}
       aria-label={`${direction} gameweek`}

@@ -266,11 +266,12 @@ const draftSlice = createSlice({
     updateDraftNumber(state, action) {
       state.draftNumber = action.payload;
     },
-    setChip(state, action) {
+    setChip(state, action: { payload: { chipName: string }; type: string }) {
       const draft = state.managerTeam[state.draftNumber];
       const dataByGameweek = draft.dataByGameweeks[draft.gameweek];
-      const { chipName, activate } = action.payload;
-      if (!activate) {
+      const { chipName } = action.payload;
+
+      if (!chipName) {
         //TODO: transferAmount
         let transferAmount = dataByGameweek.transfersByGameweek;
         //reset state from this GW

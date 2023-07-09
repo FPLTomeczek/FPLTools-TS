@@ -62,7 +62,7 @@ const ManagerTeamInfo = () => {
           <Alert severity="success">{validationError.message}</Alert>
         ) : null}
         <button
-          className="primary-button"
+          className="btn-primary"
           onClick={() => validateSaveTeam(picks, bank)}
         >
           Save Team
