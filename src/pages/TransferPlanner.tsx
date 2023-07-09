@@ -40,10 +40,10 @@ const TransferPlanner = () => {
   return (
     <TransferPlannerStyled>
       <div className="transfer-planner-header">
-        <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
         <button className="btn-primary" onClick={handlePlayingDemo}>
           DEMO
         </button>
+        <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
       </div>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "left" }}

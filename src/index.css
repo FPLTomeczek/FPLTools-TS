@@ -98,7 +98,10 @@ pre {
  */
 
 a {
-  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  /* color: var(--primary-color); */
 }
 
 /**
