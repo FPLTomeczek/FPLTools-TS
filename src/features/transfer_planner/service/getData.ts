@@ -7,10 +7,10 @@ import { setData } from "../../../store_features/drafts/draftsSlice";
 
 interface APIPick {
   element: number;
-  position: 1;
-  multiplier: 1;
-  is_captain: false;
-  is_vice_captain: false;
+  position: number;
+  multiplier: number;
+  is_captain: boolean;
+  is_vice_captain: boolean;
 }
 
 export const getManagerData = async (
@@ -42,13 +42,13 @@ export const getManagerData = async (
     setIsLoading(false);
     return;
   }
-  const sellCosts = calculateSellingCost(
+  const playersSellCosts = calculateSellingCost(
     picks,
     transfersHistory,
     playersHistory
   );
   picks = picks.map((player: Pick, ind: number) => {
-    return { ...player, sellCost: sellCosts[ind] };
+    return { ...player, sellCost: playersSellCosts[ind] };
   });
   dispatch(setData({ picks, managerHistory }));
   setIsLoading(false);
@@ -62,6 +62,18 @@ export const getManagerTeam = async (id: number) => {
   const teamIDs = teamInfo.picks.map((pick: APIPick) => pick.element);
 
   const playersPositions = getPlayersPositions(teamInfo.picks);
+
+  const teamPicks: Pick[] = await getTeamPicks(teamIDs);
+
+  return assignPositionsToPlayers(playersPositions, teamPicks).sort(
+    (a, b) => a.position - b.position
+  );
+};
+
+export const getDemoManagerTeam = async (picks: APIPick[]) => {
+  const teamIDs = picks.map((pick: APIPick) => pick.element);
+
+  const playersPositions = getPlayersPositions(picks);
 
   const teamPicks: Pick[] = await getTeamPicks(teamIDs);
 

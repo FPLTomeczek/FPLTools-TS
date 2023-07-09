@@ -11,4 +11,4 @@ export const FIRST_ELEVEN_FWD_MAX = 3;
 export const MAX_AVAILABLE_FREE_TRANSFERS = 2;
 export const NEXT_FUTURE_FIXTURES = 5;
 export const NOTE_FETCHING_TEAM_UNAVAILABLE =
-  "FPL Season 23/24 has started on 5th July 2023, fetching your team (because you don't have team) is unavailable until start of 1st Gameweek on 11 August";
+  'FPL Season 23/24 has started on 5th July 2023, fetching your team (because you don\'t have team) is unavailable until start of 1st Gameweek on 11 August. You can try Demo version by clicking "DEMO" button.';
