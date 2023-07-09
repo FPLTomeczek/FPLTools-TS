@@ -6,10 +6,15 @@ import { switchChipName } from "./utils";
 
 const SingleChip = ({
   chip,
-  setIsModalOpen,
+  setModal,
 }: {
   chip: FilteredChip;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModal: React.Dispatch<
+    React.SetStateAction<{
+      isOpen: boolean;
+      newChipName: string;
+    }>
+  >;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -22,7 +27,9 @@ const SingleChip = ({
       return;
     }
 
-    currentChipName ? setIsModalOpen(true) : dispatch(setChip({ chipName }));
+    currentChipName
+      ? setModal({ isOpen: true, newChipName: chipName })
+      : dispatch(setChip({ chipName }));
   };
   return (
     <button

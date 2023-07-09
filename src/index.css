@@ -203,7 +203,6 @@ button {
   color: var(--primary-color);
   font-weight: 500;
   cursor: pointer;
-  padding: 0.5rem;
 }
 
 .btn-primary {
@@ -227,6 +226,7 @@ button {
 .btn-direction,
 .btn-delete {
   transition: background-color 0.3s;
+  padding: 0.5rem;
 }
 
 .btn-direction:hover,

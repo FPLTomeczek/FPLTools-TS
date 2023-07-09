@@ -2,7 +2,7 @@ import { useAppSelector } from "../../../app/hooks";
 import SingleChip from "./SingleChip";
 import { ChipsStyled } from "./Chips.styled";
 import { chipNames } from "./constants";
-import ChipsModal from "./ChipsModal";
+import ChipsModal from "./ChipsModalWrapper";
 import { useState } from "react";
 export interface FilteredChip {
   name: string;
@@ -10,7 +10,7 @@ export interface FilteredChip {
 }
 
 const Chips = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modal, setModal] = useState({ isOpen: false, newChipName: "" });
   const chips = useAppSelector((state) => state.drafts.managerHistory.chips);
 
   const filteredChips: FilteredChip[] = [];
@@ -26,9 +26,9 @@ const Chips = () => {
   return (
     <ChipsStyled>
       {filteredChips.map((chip, index) => (
-        <SingleChip chip={chip} key={index} setIsModalOpen={setIsModalOpen} />
+        <SingleChip chip={chip} key={index} setModal={setModal} />
       ))}
-      <ChipsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <ChipsModal modal={modal} setModal={setModal} />
     </ChipsStyled>
   );
 };
