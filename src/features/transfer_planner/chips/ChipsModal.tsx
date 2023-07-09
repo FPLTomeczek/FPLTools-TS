@@ -7,7 +7,7 @@ import { ChipsModalProps } from "./chipsInterfaces";
 const ChipsModal = ({ modal, setModal }: ChipsModalProps) => {
   const dispatch = useAppDispatch();
 
-  const currentChip = useThisGameweekData().chipByGameweek;
+  const currentChip = useThisGameweekData()?.chipByGameweek;
 
   return (
     <ChipsModalStyled onClick={(e) => e.stopPropagation()}>
