@@ -69,8 +69,8 @@ const PlayersListFilters = ({ setPage, page, numOfPages }: ListData) => {
             >
               <option value="ALL">-</option>
               {TEAMS_LIST.map((team) => (
-                <option value={team.value} key={team.value}>
-                  {team.value}
+                <option value={team.name} key={team.name}>
+                  {team.name}
                 </option>
               ))}
             </select>

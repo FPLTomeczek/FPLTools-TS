@@ -7,6 +7,7 @@ import {
   fetchPlayersHistory,
 } from "./store_features/players/playersSlice";
 import { fetchFixtures } from "./store_features/fixtures/fixturesSlice";
+import { fetchTeams } from "./store_features/teams/teamsSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
@@ -18,7 +19,8 @@ function App() {
     dispatch(fetchPlayers());
     dispatch(fetchPlayersHistory());
     dispatch(fetchFixtures());
-  }, []);
+    dispatch(fetchTeams());
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
