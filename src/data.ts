@@ -1,4 +1,4 @@
-import { shirts } from "../../../assets/shirts";
+import { shirts } from "./assets/shirts";
 
 export const TEAMS_LIST = [
   { name: "ARS", color: ["#EF0107", "#FFFFFF"], img: shirts.ARS },

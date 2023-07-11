@@ -31,6 +31,10 @@ export const TransferPlannerStyled = styled.div`
   }
 `;
 
+export const PlayerRankingsPageStyled = styled.div`
+  padding: 1rem;
+`;
+
 export const ErrorPageStyled = styled.div`
   display: flex;
   flex-direction: column;

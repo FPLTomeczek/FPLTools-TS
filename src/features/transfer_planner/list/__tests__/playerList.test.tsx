@@ -31,7 +31,7 @@ describe("list filtering", () => {
       ],
       status: "success",
       error: null,
-      filterOptions: { name: "", team: "BRE", role: "" },
+      PlayerFilters: { name: "", team: "BRE", role: "" },
       sortOptions: { type: "price", value: "desc" },
     },
     managerTeam: {
@@ -59,7 +59,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          filterOptions: { name: "", team: "ARS", role: "" },
+          PlayerFilters: { name: "", team: "ARS", role: "" },
         },
       });
 
@@ -77,7 +77,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          filterOptions: { name: "TRIP", team: "ALL", role: "" },
+          PlayerFilters: { name: "TRIP", team: "ALL", role: "" },
         },
       });
 
@@ -94,7 +94,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          filterOptions: { name: "RAYE", team: "ALL", role: "" },
+          PlayerFilters: { name: "RAYE", team: "ALL", role: "" },
         },
       });
 
@@ -135,7 +135,7 @@ describe("sorting table", () => {
       ],
       status: "success",
       error: null,
-      filterOptions: { name: "", team: "ALL", role: "ALL" },
+      PlayerFilters: { name: "", team: "ALL", role: "ALL" },
       sortOptions: { type: "points", value: "desc" },
     },
     managerTeam: {

@@ -1,17 +1,25 @@
-import { Direction } from "../../../enums/direction";
-import { Player, FilterOptions, SortOptions } from "../interfaces/players";
+import { Direction } from "../enums/direction";
+import {
+  Player,
+  PlayerFilters,
+  PlayerRankingsFilters,
+  SortOptions,
+} from "../interfaces/players";
 
-export const filterPlayers = (players: Player[], filters: FilterOptions) => {
+export const filterPlayers = <T extends PlayerFilters>(
+  players: Player[],
+  filters: T
+) => {
   return players
     .filter((player) => {
       if (filters.team === "ALL") {
-        return player;
+        return true;
       }
       return player.team === filters.team;
     })
     .filter((player) => {
       if (filters.name === "") {
-        return player;
+        return true;
       }
       return player.web_name
         .toLowerCase()
@@ -28,9 +36,16 @@ export const filterPlayers = (players: Player[], filters: FilterOptions) => {
     })
     .filter((player) => {
       if (filters.role === "ALL") {
-        return player;
+        return true;
       }
       return player.element_type === filters.role;
+    })
+    .filter((player) => {
+      if ("price" in filters && "probability" in filters) {
+        const playerFilters = filters as PlayerRankingsFilters;
+        return player.now_cost <= playerFilters.price;
+      }
+      return true;
     });
 };
 

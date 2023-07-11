@@ -1,5 +1,5 @@
 import { Direction } from "../../../enums/direction";
-import { handleSettingPages } from "./utils";
+import { handleSettingPages } from "../../../utils/filterPlayersUtils";
 import { ListData } from "./list";
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";

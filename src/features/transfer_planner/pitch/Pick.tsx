@@ -8,9 +8,9 @@ import {
   makeChange,
 } from "../../../store_features/drafts/draftsSlice";
 import blank from "../../../assets/shirts/blank.png";
-import { TEAMS_LIST } from "../list/data";
+import { TEAMS_LIST } from "../../../data";
 import { isEmpty } from "lodash";
-import { Pick as IPick } from "../interfaces/drafts";
+import { Pick as IPick } from "../../../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";
 import { useDraft } from "../../../app/customHooks";
@@ -42,7 +42,7 @@ const Pick = ({ player, index }: { player: IPick; index: number }) => {
     dispatch(makeChange(id));
   };
 
-  const shirt = TEAMS_LIST.find((teamItem) => teamItem.value === team)?.img;
+  const shirt = TEAMS_LIST.find((teamItem) => teamItem.name === team)?.img;
 
   return (
     <PickStyled>

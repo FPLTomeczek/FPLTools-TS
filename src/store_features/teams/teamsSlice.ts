@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../utils";
+import { axiosInstance } from "../../axiosConfig";
 
 interface Team {
   id: number;
