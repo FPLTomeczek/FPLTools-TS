@@ -1,4 +1,4 @@
-import { Pick } from "../interfaces/drafts";
+import { Pick } from "../../../interfaces/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useAppDispatch } from "../../../app/hooks";

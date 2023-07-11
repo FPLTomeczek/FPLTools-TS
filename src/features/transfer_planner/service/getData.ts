@@ -1,8 +1,8 @@
 import { assignPositionsToPlayers, calculateSellingCost } from "../utils";
-import { axiosInstance } from "../../../utils";
-import { ManagerHistory, Pick, Transfer } from "../interfaces/drafts";
+import { axiosInstance } from "../../../axiosConfig";
+import { ManagerHistory, Pick, Transfer } from "../../../interfaces/drafts";
 import { AppDispatch } from "../../../app/store";
-import { PlayerHistory } from "../interfaces/players";
+import { PlayerHistory } from "../../../interfaces/players";
 import { setData } from "../../../store_features/drafts/draftsSlice";
 
 interface APIPick {
@@ -55,7 +55,7 @@ export const getManagerData = async (
 };
 
 export const getManagerTeam = async (id: number) => {
-  const { data: teamInfo } = await axiosInstance.get("/team", {
+  const { data: teamInfo } = await axiosInstance.get("/picks", {
     params: { userID: id },
   });
 
@@ -110,7 +110,7 @@ export const getTeamPicks = async (teamIDs: number[]) => {
   const {
     data: { players: teamPicks },
   } = await axiosInstance.get(
-    `/players/getTeamManagerPlayers?ids=[${teamIDs.map((id) => id)}]`
+    `/players/manager-picks?ids=[${teamIDs.map((id) => id)}]`
   );
 
   return teamPicks;

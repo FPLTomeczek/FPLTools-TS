@@ -1,5 +1,5 @@
 import { Player } from "./players";
-import { Chip } from "../chips/chipsInterfaces";
+import { Chip } from "../features/transfer_planner/chips/chipsInterfaces";
 
 export interface Pick extends Player {
   position: number;
@@ -22,6 +22,7 @@ export const playerBlankTemplate: Pick = {
   position: -1,
   sellCost: -1,
   removedPickIndex: -1,
+  scoring_chance: 0,
 };
 
 export interface RemovedPick {

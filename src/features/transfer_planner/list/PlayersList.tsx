@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
-import { paginate, filterPlayers, sortPlayers } from "./utils";
+import {
+  paginate,
+  filterPlayers,
+  sortPlayers,
+} from "../../../utils/filterPlayersUtils.ts";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
 import PlayersListFilters from "./PlayersListFilters.tsx";
 import ListButtons from "./ListButtons.tsx";
 import PlayerListItems from "./PlayerListItems";
-import { SortOptions, Player } from "../interfaces/players.ts";
+import { SortOptions, Player } from "../../../interfaces/players.ts";
 import { PlayersListStyled } from "./List.styled.ts";
 import Loading from "../../../components/Loading.tsx";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
   const status = useAppSelector((state) => state.players.status);
-  const filters = useAppSelector((state) => state.players.filterOptions);
+  const filters = useAppSelector((state) => state.players.PlayerFilters);
   const sortOptions = useAppSelector((state) => state.players.sortOptions);
 
   const [page, setPage] = useState(1);

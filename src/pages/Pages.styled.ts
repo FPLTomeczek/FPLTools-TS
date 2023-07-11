@@ -23,4 +23,29 @@ export const TransferPlannerStyled = styled.div`
   #user-id-form > input {
     max-width: 200px;
   }
+
+  @media (max-width: 769px) {
+    .transfer-planner-header {
+      flex-direction: column;
+    }
+  }
+`;
+
+export const PlayerRankingsPageStyled = styled.div`
+  padding: 1rem;
+`;
+
+export const ErrorPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+  gap: 1rem;
+  text-align: center;
+  .return-to-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--primary-border-radius);
+  }
 `;

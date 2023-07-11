@@ -4,21 +4,22 @@ import {
   isAnyOf,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../utils";
+import { axiosInstance } from "../../axiosConfig";
 import {
   Player,
   PlayerHistory,
-  FilterOptions,
+  PlayerFilters,
   SortOptions,
-} from "../../features/transfer_planner/interfaces/players";
+} from "../../interfaces/players";
 
 interface PlayersSlice {
   playersList: Player[];
   playersHistory: PlayerHistory[];
   status: string;
   error: string | null;
-  filterOptions: FilterOptions;
+  PlayerFilters: PlayerFilters;
   sortOptions: SortOptions;
+  maxPrice: number;
 }
 
 const initialState: PlayersSlice = {
@@ -26,8 +27,9 @@ const initialState: PlayersSlice = {
   playersHistory: [],
   status: "idle",
   error: null,
-  filterOptions: { name: "", team: "ALL", role: "ALL" },
+  PlayerFilters: { name: "", team: "ALL", role: "ALL" },
   sortOptions: { type: "price", value: "desc" },
+  maxPrice: 0,
 };
 
 export const fetchPlayers = createAsyncThunk(
@@ -50,8 +52,8 @@ const playersSlice = createSlice({
   name: "players",
   initialState,
   reducers: {
-    filterPlayers(state, action: PayloadAction<FilterOptions>) {
-      state.filterOptions = action.payload;
+    filterPlayers(state, action: PayloadAction<PlayerFilters>) {
+      state.PlayerFilters = action.payload;
     },
     sortPlayers(state, action: PayloadAction<SortOptions>) {
       state.sortOptions = action.payload;
@@ -62,7 +64,11 @@ const playersSlice = createSlice({
       .addCase(
         fetchPlayers.fulfilled,
         (state, action: PayloadAction<Player[]>) => {
-          state.playersList = action.payload;
+          const players = action.payload;
+          state.playersList = players;
+          state.maxPrice = Math.max(
+            ...players.map((player) => player.now_cost)
+          );
         }
       )
       .addCase(

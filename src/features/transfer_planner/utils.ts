@@ -1,6 +1,6 @@
-import { Pick, Transfer } from "./interfaces/drafts";
+import { Pick, Transfer } from "../../interfaces/drafts";
 import { ensure } from "../../helper/helper";
-import { PlayerHistory } from "./interfaces/players";
+import { PlayerHistory } from "../../interfaces/players";
 
 export function roleToIndex(role: string) {
   switch (role) {

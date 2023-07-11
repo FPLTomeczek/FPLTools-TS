@@ -1,3 +1,15 @@
+type Enumerate<
+  N extends number,
+  Acc extends number[] = []
+> = Acc["length"] extends N
+  ? Acc[number]
+  : Enumerate<N, [...Acc, Acc["length"]]>;
+
+type Range<F extends number, T extends number> = Exclude<
+  Enumerate<T>,
+  Enumerate<F>
+>;
+
 export interface Player {
   _id: string;
   id: number;
@@ -9,6 +21,7 @@ export interface Player {
   total_points: number;
   now_cost: number;
   availability: number;
+  scoring_chance: Range<0, 101>;
   __v: number;
 }
 
@@ -19,10 +32,15 @@ export interface PlayerHistory {
   __v: number;
 }
 
-export interface FilterOptions {
+export interface PlayerFilters {
   name: string;
   team: string;
   role: string;
+}
+
+export interface PlayerRankingsFilters extends PlayerFilters {
+  probability: string;
+  price: number;
 }
 
 export interface SortOptions {

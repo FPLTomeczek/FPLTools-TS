@@ -1,9 +1,9 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useAppDispatch } from "../../../app/hooks";
 import { addPick } from "../../../store_features/drafts/draftsSlice";
-import { Player } from "../interfaces/players";
+import { Player } from "../../../interfaces/players";
 import { useDraft } from "../../../app/customHooks";
-import { Pick } from "../interfaces/drafts";
+import { Pick } from "../../../interfaces/drafts";
 import { AddPlayerToTeamButtonStyled } from "./List.styled";
 
 const AddPlayerToTeamButton = ({ player }: { player: Player }) => {

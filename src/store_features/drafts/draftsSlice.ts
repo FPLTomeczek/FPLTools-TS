@@ -5,7 +5,7 @@ import {
   ManagerHistory,
   Pick,
   playerBlankTemplate,
-} from "../../features/transfer_planner/interfaces/drafts";
+} from "../../interfaces/drafts";
 import {
   storage,
   ManagerTeamState,
@@ -229,12 +229,6 @@ const draftSlice = createSlice({
       );
 
       dataByGameweeks.addedPicksByGameweek = addedPlayers;
-
-      // console.log(
-      //   draft.dataByGameweeks[gameweek].picksByGameweek.filter(
-      //     (pick) => !picks.includes(pick)
-      //   )
-      // );
 
       //update state after freeHit
       if (draft.dataByGameweeks[gameweek].chipByGameweek === Chip.FREE_HIT) {

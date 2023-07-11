@@ -1,4 +1,4 @@
-import { Pick } from "../interfaces/drafts";
+import { Pick } from "../../../interfaces/drafts";
 import { splittingPicksByRoles } from "../utils";
 import {
   FIRST_ELEVEN_GK,
