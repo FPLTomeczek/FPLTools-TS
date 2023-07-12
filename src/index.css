@@ -263,7 +263,7 @@ input {
 
 input:focus-visible,
 button:focus-visible,
-a:focus-visible  {
+a:focus-visible {
   outline: 2px solid var(--secondary-color-dark);
 }
 
@@ -344,6 +344,17 @@ legend {
 
 progress {
   vertical-align: baseline;
+}
+
+/*
+  Scrollbar styling
+*/
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--primary-color-light);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
 }
 
 /**

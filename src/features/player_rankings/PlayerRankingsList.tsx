@@ -37,9 +37,14 @@ const PlayerRankingsList = () => {
       {listPlayers.map((player) => {
         return <PlayerRankingListItem player={player} key={player.id} />;
       })}
-      <button className="btn-primary" onClick={handleLoadingNewPlayers}>
-        Load More
-      </button>
+      <div className="load-more-btn-container">
+        <button
+          className="btn-primary load-more-btn"
+          onClick={handleLoadingNewPlayers}
+        >
+          Load More
+        </button>
+      </div>
     </PlayerRankingsListStyled>
   );
 };

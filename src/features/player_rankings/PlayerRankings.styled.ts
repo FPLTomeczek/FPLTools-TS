@@ -58,4 +58,13 @@ export const PlayerRankingsListStyled = styled.div`
   .player-scoring-chance {
     margin-left: 0.5rem;
   }
+  .load-more-btn-container {
+    display: flex;
+    justify-content: center;
+  }
+  @media screen and (max-width: 480px) {
+    .load-more-btn {
+      width: 100%;
+    }
+  }
 `;
