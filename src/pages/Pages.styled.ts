@@ -32,6 +32,9 @@ export const TransferPlannerStyled = styled.div`
 `;
 
 export const PlayerRankingsPageStyled = styled.div`
+  #player-rankings-header {
+    text-align: center;
+  }
   padding: 1rem;
 `;
 

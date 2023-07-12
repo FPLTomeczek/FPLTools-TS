@@ -6,12 +6,12 @@ import {
   Slide,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { styled as MuiStyled } from "@mui/material/styles";
-import { PlayerRankingsContext } from "./context/PlayerRankingsContext";
 import { PlayerRankingsFiltersStyled } from "./PlayerRankings.styled";
 import DialogInputs from "./dialog-inputs/DialogInputs";
 import { DialogFilter } from "./enums/playerRankingsEnums";
+import PlayerRankingsFilterButtons from "./PlayerRankingsFilterButtons";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -29,6 +29,8 @@ const DialogStyled = MuiStyled(Dialog)(() => ({
   "& .MuiDialog-paper": {
     margin: "0",
     width: "100%",
+    backgroundColor: "var(--primary-color)",
+    color: "white",
   },
 
   "& .MuiDialogActions-root": {
@@ -43,11 +45,8 @@ const PlayerRankingsFilters = () => {
   const [dialogFilter, setDialogFilter] = useState<DialogFilter | undefined>(
     undefined
   );
-  const { playersRankingsFilters, filterPlayerRankings } = useContext(
-    PlayerRankingsContext
-  );
 
-  const handleClickOpen = (dialogFilter: DialogFilter) => {
+  const handleOpenDialog = (dialogFilter: DialogFilter) => {
     setOpen(true);
     setDialogFilter(dialogFilter);
   };
@@ -58,19 +57,7 @@ const PlayerRankingsFilters = () => {
 
   return (
     <PlayerRankingsFiltersStyled>
-      <input
-        type="text"
-        placeholder="Salah"
-        onChange={(e) =>
-          filterPlayerRankings({
-            ...playersRankingsFilters,
-            name: e.target.value,
-          })
-        }
-      />
-      <button onClick={() => handleClickOpen(DialogFilter.PROBABILITY)}>
-        Show: {playersRankingsFilters.probability}%
-      </button>
+      <PlayerRankingsFilterButtons handleOpenDialog={handleOpenDialog} />
       <DialogStyled
         open={open}
         TransitionComponent={Transition}
@@ -79,7 +66,11 @@ const PlayerRankingsFilters = () => {
         sx={{ m: 0 }}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Select Metric"}</DialogTitle>
+        <DialogTitle>
+          {typeof dialogFilter !== "undefined"
+            ? dialogFilter?.charAt(0).toUpperCase() + dialogFilter?.slice(1)
+            : "NONE"}
+        </DialogTitle>
 
         <DialogContent>
           <DialogActions>
@@ -87,15 +78,6 @@ const PlayerRankingsFilters = () => {
           </DialogActions>
         </DialogContent>
       </DialogStyled>
-      <button onClick={() => handleClickOpen(DialogFilter.TEAM)}>
-        Teams: {playersRankingsFilters.team}
-      </button>
-      <button onClick={() => handleClickOpen(DialogFilter.ROLE)}>
-        Roles: {playersRankingsFilters.role}
-      </button>
-      <button onClick={() => handleClickOpen(DialogFilter.PRICE)}>
-        Price: {playersRankingsFilters.price}
-      </button>
     </PlayerRankingsFiltersStyled>
   );
 };

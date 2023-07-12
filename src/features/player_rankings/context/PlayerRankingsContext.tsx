@@ -2,20 +2,26 @@ import { createContext, useState } from "react";
 import { PlayerRankingsFilters } from "../../../interfaces/players";
 
 interface PlayerRankingsContext {
-  playersRankingsFilters: PlayerRankingsFilters;
-  filterPlayerRankings: (playerRankingsFilters: PlayerRankingsFilters) => void;
+  filters: PlayerRankingsFilters;
+  filter: (playerRankingsFilters: PlayerRankingsFilters) => void;
+  listCount: number;
+  updateListCount: (reset: boolean, value: number) => void;
 }
 
 export const PlayerRankingsContext = createContext<PlayerRankingsContext>({
-  playersRankingsFilters: {
+  filters: {
     name: "",
     team: "ALL",
     role: "ALL",
     probability: "scores",
     price: 0,
   },
-  filterPlayerRankings: () => {
-    // function initializer
+  filter: () => {
+    // function init
+  },
+  listCount: 10,
+  updateListCount: () => {
+    // function init
   },
 });
 
@@ -24,24 +30,29 @@ const PlayerRankingsProvider = ({
 }: {
   children?: React.ReactNode;
 }) => {
-  const [playersRankingsFilters, setPlayersRankingsFilters] =
-    useState<PlayerRankingsFilters>({
-      name: "",
-      team: "ALL",
-      role: "ALL",
-      probability: "Score",
-      price: 0,
-    });
+  const [filters, setfilters] = useState<PlayerRankingsFilters>({
+    name: "",
+    team: "ALL",
+    role: "ALL",
+    probability: "Score",
+    price: 0,
+  });
 
-  const filterPlayerRankings = (
-    playerRankingsFilters: PlayerRankingsFilters
-  ) => {
-    setPlayersRankingsFilters(playerRankingsFilters);
+  const [listCount, setlistCount] = useState(10);
+
+  const filter = (playerRankingsFilters: PlayerRankingsFilters) => {
+    setfilters(playerRankingsFilters);
+  };
+
+  const updateListCount = (reset: boolean, value: number) => {
+    reset ? setlistCount(value) : setlistCount((prev) => prev + value);
   };
 
   const playerRankingsContext: PlayerRankingsContext = {
-    playersRankingsFilters,
-    filterPlayerRankings,
+    filters,
+    filter,
+    listCount,
+    updateListCount,
   };
 
   return (

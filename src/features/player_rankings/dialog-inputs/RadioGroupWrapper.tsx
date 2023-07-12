@@ -10,7 +10,7 @@ const RadioGroupWrapper = ({
   children: React.ReactNode;
   dialogFilter: DialogFilter;
 }) => {
-  const { playersRankingsFilters, filterPlayerRankings } = useContext(
+  const { filters, filter, updateListCount } = useContext(
     PlayerRankingsContext
   );
 
@@ -19,24 +19,25 @@ const RadioGroupWrapper = ({
     dialogFilter: DialogFilter
   ) => {
     const value = e.target.value as string;
-    filterPlayerRankings({
-      ...playersRankingsFilters,
+    filter({
+      ...filters,
       [dialogFilter]: value,
     });
+    updateListCount(true, 10);
   };
 
   const getRadioGroupValue = (dialogFilter: DialogFilter) => {
     switch (dialogFilter) {
       case DialogFilter.NAME:
-        return playersRankingsFilters.name;
+        return filters.name;
       case DialogFilter.TEAM:
-        return playersRankingsFilters.team;
+        return filters.team;
       case DialogFilter.ROLE:
-        return playersRankingsFilters.role;
+        return filters.role;
       case DialogFilter.PROBABILITY:
-        return playersRankingsFilters.probability;
+        return filters.probability;
       case DialogFilter.PRICE:
-        return playersRankingsFilters.price;
+        return filters.price;
       default:
         return "";
     }
@@ -44,8 +45,8 @@ const RadioGroupWrapper = ({
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "end" }}>
       <RadioGroup
-        aria-labelledby="probability"
-        name="controlled-radio-buttons-probability"
+        aria-labelledby={`${dialogFilter}`}
+        name={`controlled-radio-buttons-${dialogFilter}`}
         value={getRadioGroupValue(dialogFilter)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChangeFilter(e, dialogFilter)
