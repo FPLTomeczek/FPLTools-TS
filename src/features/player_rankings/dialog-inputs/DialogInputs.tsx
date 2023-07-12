@@ -12,16 +12,14 @@ const DialogInputs = ({
 }: {
   dialogFilter: DialogFilter | undefined;
 }) => {
-  const { playersRankingsFilters, filterPlayerRankings } = useContext(
-    PlayerRankingsContext
-  );
+  const { filters, filter } = useContext(PlayerRankingsContext);
 
   const players = useAppSelector((state) => state.players.playersList);
   const playerPriceMax = Math.max(...players.map((player) => player.now_cost));
 
   useEffect(() => {
-    filterPlayerRankings({
-      ...playersRankingsFilters,
+    filter({
+      ...filters,
       price: playerPriceMax,
     });
   }, [playerPriceMax]);
