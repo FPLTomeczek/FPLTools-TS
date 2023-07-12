@@ -18,6 +18,10 @@ export const PlayerRankingsFilterButtonsStyled = styled.div`
     flex-shrink: 0;
     color: white;
   }
+  #reset-button {
+    min-width: fit-content;
+    display: flex;
+  }
 `;
 
 export const PlayerRankingsListStyled = styled.div`
