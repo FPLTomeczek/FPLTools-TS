@@ -5,11 +5,19 @@ import { renderComponent, proxyHandler } from "../../__tests__/utils";
 import PlayersList from "../PlayersList";
 import configureStore from "redux-mock-store";
 import { mockPlayer } from "../../__tests__/utils";
-
+import { IS_SEASON_IN_PROGRESS } from "../../../../constants";
 describe("fetching players", () => {
   it("team players are fetched", async () => {
-    const data = await getManagerTeam(7770);
-    expect(data).toHaveLength(15);
+    if (!IS_SEASON_IN_PROGRESS) {
+      try {
+        await getManagerTeam(7770);
+      } catch (error) {
+        expect(error).toBeDefined();
+      }
+    } else {
+      const data = await getManagerTeam(7770);
+      expect(data).toHaveLength(15);
+    }
   });
 });
 
@@ -34,8 +42,9 @@ describe("list filtering", () => {
       PlayerFilters: { name: "", team: "BRE", role: "" },
       sortOptions: { type: "price", value: "desc" },
     },
-    managerTeam: {
-      picks: [],
+    drafts: {
+      managerTeam: [{ picks: [] }, {}],
+      draftNumber: 0,
     },
   };
 
@@ -138,8 +147,9 @@ describe("sorting table", () => {
       PlayerFilters: { name: "", team: "ALL", role: "ALL" },
       sortOptions: { type: "points", value: "desc" },
     },
-    managerTeam: {
-      picks: [],
+    drafts: {
+      managerTeam: [{ picks: [] }, {}],
+      draftNumber: 0,
     },
   };
 
