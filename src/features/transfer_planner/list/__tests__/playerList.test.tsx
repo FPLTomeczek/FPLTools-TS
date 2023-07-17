@@ -1,10 +1,14 @@
 import { getManagerTeam } from "../../service/getData";
 import { it, expect, describe } from "vitest";
 import { screen } from "@testing-library/react";
-import { renderComponent, proxyHandler } from "../../__tests__/utils";
+import {
+  renderComponent,
+  proxyHandler,
+  getMockPlayersProxies,
+} from "../../../../tests/utils";
 import PlayersList from "../PlayersList";
 import configureStore from "redux-mock-store";
-import { mockPlayer } from "../../__tests__/utils";
+import { mockPlayer } from "../../../../tests/utils";
 import { IS_SEASON_IN_PROGRESS } from "../../../../constants";
 describe("fetching players", () => {
   it("team players are fetched", async () => {
@@ -32,14 +36,10 @@ describe("list filtering", () => {
 
   const initialState = {
     players: {
-      playersList: [
-        new Proxy(mockPlayers[0], proxyHandler),
-        new Proxy(mockPlayers[1], proxyHandler),
-        new Proxy(mockPlayers[2], proxyHandler),
-      ],
+      playersList: [...getMockPlayersProxies(mockPlayers)],
       status: "success",
       error: null,
-      PlayerFilters: { name: "", team: "BRE", role: "" },
+      playerFilters: { name: "", team: "BRE", role: "" },
       sortOptions: { type: "price", value: "desc" },
     },
     drafts: {
@@ -68,7 +68,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          PlayerFilters: { name: "", team: "ARS", role: "" },
+          playerFilters: { name: "", team: "ARS", role: "" },
         },
       });
 
@@ -86,7 +86,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          PlayerFilters: { name: "TRIP", team: "ALL", role: "" },
+          playerFilters: { name: "TRIP", team: "ALL", role: "" },
         },
       });
 
@@ -103,7 +103,7 @@ describe("list filtering", () => {
         ...initialState,
         players: {
           ...players,
-          PlayerFilters: { name: "RAYE", team: "ALL", role: "" },
+          playerFilters: { name: "RAYE", team: "ALL", role: "" },
         },
       });
 
@@ -144,7 +144,7 @@ describe("sorting table", () => {
       ],
       status: "success",
       error: null,
-      PlayerFilters: { name: "", team: "ALL", role: "ALL" },
+      playerFilters: { name: "", team: "ALL", role: "ALL" },
       sortOptions: { type: "points", value: "desc" },
     },
     drafts: {

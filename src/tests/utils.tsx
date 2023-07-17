@@ -3,7 +3,7 @@ import { RenderOptions, render } from "@testing-library/react";
 import { MockStoreEnhanced } from "redux-mock-store";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { PreloadedState } from "@reduxjs/toolkit";
-import { AppStore, RootState, setupStore } from "../../../app/store";
+import { AppStore, RootState, setupStore } from "../app/store";
 import { PropsWithChildren } from "react";
 
 export interface mockPlayer {
@@ -11,6 +11,14 @@ export interface mockPlayer {
   web_name: string;
   team: string;
 }
+
+export const getMockPlayersProxies = (mockPlayers: mockPlayer[]) => {
+  const proxiesArr = [];
+  for (const mockPlayer of mockPlayers) {
+    proxiesArr.push(new Proxy(mockPlayer, proxyHandler));
+  }
+  return proxiesArr;
+};
 
 export const proxyHandler = {
   get(obj: mockPlayer, prop: keyof mockPlayer) {
