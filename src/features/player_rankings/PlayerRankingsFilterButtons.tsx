@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { PlayerRankingsContext } from "./context/PlayerRankingsContext";
 import { DialogFilter } from "./enums/playerRankingsEnums";
 import { PlayerRankingsFilterButtonsStyled } from "./PlayerRankings.styled";
+import RestartIcon from "@mui/icons-material/RestartAlt";
+import { useAppSelector } from "../../app/hooks";
 
 const PlayerRankingsFilterButtons = ({
   handleOpenDialog,
@@ -9,9 +11,24 @@ const PlayerRankingsFilterButtons = ({
   handleOpenDialog: (dialogFilter: DialogFilter) => void;
 }) => {
   const { filters, filter } = useContext(PlayerRankingsContext);
+  const maxPrice = useAppSelector((state) => state.players.maxPrice);
 
   return (
     <PlayerRankingsFilterButtonsStyled>
+      <button
+        id="reset-button"
+        onClick={() =>
+          filter({
+            name: "",
+            team: "ALL",
+            role: "ALL",
+            probability: "Score",
+            price: maxPrice,
+          })
+        }
+      >
+        <RestartIcon />
+      </button>
       <input
         type="text"
         placeholder="Salah"

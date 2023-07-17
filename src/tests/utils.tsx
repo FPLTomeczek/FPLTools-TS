@@ -1,7 +1,10 @@
 import { Provider } from "react-redux";
-import { render } from "@testing-library/react";
+import { RenderOptions, render } from "@testing-library/react";
 import { MockStoreEnhanced } from "redux-mock-store";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
+import { PreloadedState } from "@reduxjs/toolkit";
+import { AppStore, RootState, setupStore } from "../app/store";
+import { PropsWithChildren } from "react";
 
 export interface mockPlayer {
   id: number;
@@ -9,11 +12,40 @@ export interface mockPlayer {
   team: string;
 }
 
+export const getMockPlayersProxies = (mockPlayers: mockPlayer[]) => {
+  const proxiesArr = [];
+  for (const mockPlayer of mockPlayers) {
+    proxiesArr.push(new Proxy(mockPlayer, proxyHandler));
+  }
+  return proxiesArr;
+};
+
 export const proxyHandler = {
   get(obj: mockPlayer, prop: keyof mockPlayer) {
     return prop in obj ? obj[prop] : "";
   },
 };
+interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
+  preloadedState?: PreloadedState<RootState>;
+  store?: AppStore;
+}
+
+export function renderWithProviders(
+  ui: React.ReactElement,
+  {
+    preloadedState = {},
+    // Automatically create a store instance if no store was passed in
+    store = setupStore(preloadedState),
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
+) {
+  function Wrapper({
+    children,
+  }: PropsWithChildren<NonNullable<unknown>>): JSX.Element {
+    return <Provider store={store}>{children}</Provider>;
+  }
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
 
 export const renderComponent = (
   children: JSX.Element,

@@ -59,6 +59,8 @@ export const getManagerTeam = async (id: number) => {
     params: { userID: id },
   });
 
+  if (Object.hasOwn(teamInfo, "msg")) throw new Error();
+
   const teamIDs = teamInfo.picks.map((pick: APIPick) => pick.element);
 
   const playersPositions = getPlayersPositions(teamInfo.picks);

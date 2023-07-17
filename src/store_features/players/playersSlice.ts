@@ -17,7 +17,7 @@ interface PlayersSlice {
   playersHistory: PlayerHistory[];
   status: string;
   error: string | null;
-  PlayerFilters: PlayerFilters;
+  playerFilters: PlayerFilters;
   sortOptions: SortOptions;
   maxPrice: number;
 }
@@ -27,7 +27,7 @@ const initialState: PlayersSlice = {
   playersHistory: [],
   status: "idle",
   error: null,
-  PlayerFilters: { name: "", team: "ALL", role: "ALL" },
+  playerFilters: { name: "", team: "ALL", role: "ALL" },
   sortOptions: { type: "price", value: "desc" },
   maxPrice: 0,
 };
@@ -53,7 +53,7 @@ const playersSlice = createSlice({
   initialState,
   reducers: {
     filterPlayers(state, action: PayloadAction<PlayerFilters>) {
-      state.PlayerFilters = action.payload;
+      state.playerFilters = action.payload;
     },
     sortPlayers(state, action: PayloadAction<SortOptions>) {
       state.sortOptions = action.payload;

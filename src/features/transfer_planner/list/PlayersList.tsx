@@ -16,7 +16,7 @@ import Loading from "../../../components/Loading.tsx";
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
   const status = useAppSelector((state) => state.players.status);
-  const filters = useAppSelector((state) => state.players.PlayerFilters);
+  const filters = useAppSelector((state) => state.players.playerFilters);
   const sortOptions = useAppSelector((state) => state.players.sortOptions);
 
   const [page, setPage] = useState(1);

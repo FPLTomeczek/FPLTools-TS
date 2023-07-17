@@ -18,6 +18,10 @@ export const PlayerRankingsFilterButtonsStyled = styled.div`
     flex-shrink: 0;
     color: white;
   }
+  #reset-button {
+    min-width: fit-content;
+    display: flex;
+  }
 `;
 
 export const PlayerRankingsListStyled = styled.div`
@@ -53,5 +57,14 @@ export const PlayerRankingsListStyled = styled.div`
   }
   .player-scoring-chance {
     margin-left: 0.5rem;
+  }
+  .load-more-btn-container {
+    display: flex;
+    justify-content: center;
+  }
+  @media screen and (max-width: 480px) {
+    .load-more-btn {
+      width: 100%;
+    }
   }
 `;

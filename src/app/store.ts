@@ -1,19 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import type { PreloadedState } from "@reduxjs/toolkit";
 import draftsReducer from "../store_features/drafts/draftsSlice";
 import playersReducer from "../store_features/players/playersSlice";
 import fixturesReducer from "../store_features/fixtures/fixturesSlice";
 import teamsReducer from "../store_features/teams/teamsSlice";
 
-const store = configureStore({
-  reducer: {
-    drafts: draftsReducer,
-    players: playersReducer,
-    fixtures: fixturesReducer,
-    teams: teamsReducer,
-  },
+const rootReducer = combineReducers({
+  drafts: draftsReducer,
+  players: playersReducer,
+  fixtures: fixturesReducer,
+  teams: teamsReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+};
 
-export default store;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];

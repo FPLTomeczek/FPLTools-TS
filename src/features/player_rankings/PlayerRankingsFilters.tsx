@@ -23,9 +23,12 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const DialogStyled = MuiStyled(Dialog)(() => ({
-  "& .MuiDialog-container": {
-    alignItems: "end",
+  "@media screen and (max-width: 480px)": {
+    "& .MuiDialog-container": {
+      alignItems: "end",
+    },
   },
+
   "& .MuiDialog-paper": {
     margin: "0",
     width: "100%",

@@ -32,10 +32,10 @@ export const TransferPlannerStyled = styled.div`
 `;
 
 export const PlayerRankingsPageStyled = styled.div`
+  padding: 1rem;
   #player-rankings-header {
     text-align: center;
   }
-  padding: 1rem;
 `;
 
 export const ErrorPageStyled = styled.div`
