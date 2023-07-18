@@ -12,6 +12,7 @@ import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../constants";
 import { setData } from "../store_features/drafts/draftsSlice";
 import managerTeam from "../assets/demo-data/manager-team-info.json";
 import managerHistory from "../assets/demo-data/managerHistory.json";
+import Hero from "../components/Hero";
 
 const TransferPlanner = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +40,8 @@ const TransferPlanner = () => {
 
   return (
     <TransferPlannerStyled>
-      <div className="transfer-planner-header">
+      <Hero text="Transfer Planner" />
+      <div className="transfer-planner-demo">
         <button className="btn-primary" onClick={handlePlayingDemo}>
           DEMO
         </button>

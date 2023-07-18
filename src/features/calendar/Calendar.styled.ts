@@ -1,7 +1,12 @@
 import styled from "styled-components";
-export const CalendarTableStyled = styled.table`
-  background-color: #272635;
+
+export const CalendarTableStyled = styled.div`
   text-align: center;
+  max-width: 100%;
+  overflow-x: auto;
+  & > table {
+    background-color: #272635;
+  }
   .calendar-thead {
     border-bottom: 1px solid gray;
   }

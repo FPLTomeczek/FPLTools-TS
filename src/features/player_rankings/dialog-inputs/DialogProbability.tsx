@@ -14,11 +14,11 @@ const DialogProbability = ({
         control={<Radio />}
         label="Scoring Chance"
       />
-      <FormControlLabel
+      {/* <FormControlLabel
         value="Assist"
         control={<Radio />}
         label="Assisting Chance"
-      />
+      /> */}
     </RadioGroupWrapper>
   );
 };

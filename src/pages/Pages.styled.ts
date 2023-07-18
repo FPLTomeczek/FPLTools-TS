@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const TransferPlannerStyled = styled.div`
-  margin-top: 2rem;
   display: flex;
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
-  .transfer-planner-header {
+  padding: 1rem;
+  .transfer-planner-demo {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -25,13 +26,16 @@ export const TransferPlannerStyled = styled.div`
   }
 
   @media (max-width: 769px) {
-    .transfer-planner-header {
+    .transfer-planner-demo {
       flex-direction: column;
     }
   }
 `;
 
 export const PlayerRankingsPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
   #player-rankings-header {
     text-align: center;
@@ -51,4 +55,11 @@ export const ErrorPageStyled = styled.div`
     align-items: center;
     border-radius: var(--primary-border-radius);
   }
+`;
+
+export const CalendarPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 `;

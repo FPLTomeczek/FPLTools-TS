@@ -5,15 +5,13 @@ export const TransferPlannerStyled = styled.div`
   align-items: start;
   padding: 2rem 0;
   width: 100%;
+  justify-content: space-around;
   .pitch-container {
     display: flex;
     justify-content: center;
     align-items: start;
-    width: 60%;
   }
-  .player-list {
-    width: 40%;
-  }
+
   .gameweek-transfer-container-m {
     display: none;
   }
