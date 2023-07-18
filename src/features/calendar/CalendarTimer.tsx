@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 
 import { useAppSelector } from "../../app/hooks";
+import { CalendarTimerStyled } from "./Calendar.styled";
 
 const CalendarTimer = () => {
   const deadline = useAppSelector((state) => state.gameweeks.deadline);
@@ -37,21 +37,21 @@ const CalendarTimer = () => {
   return (
     <CalendarTimerStyled>
       <h2>Next GW Deadline</h2>
-      <div>
-        <div className="days">
+      <div className="timer-countdown">
+        <div className="timer-countdown-item">
           <div>{differenceInDays}</div>
           <span className="time-desc">days</span>
         </div>
-        <div className="hours">
+        <div className="timer-countdown-item">
           <div>{differenceInHours} </div>
           <span className="time-desc">hours</span>
         </div>
 
-        <div className="minutes">
+        <div className="timer-countdown-item">
           <div>{differenceInMinutes}</div>
           <span className="time-desc">minutes</span>
         </div>
-        <div className="seconds">
+        <div className="timer-countdown-item">
           <div>{differenceInSeconds}</div>
           <span className="time-desc">seconds</span>
         </div>
@@ -59,24 +59,5 @@ const CalendarTimer = () => {
     </CalendarTimerStyled>
   );
 };
-
-const CalendarTimerStyled = styled.div`
-  text-align: center;
-  margin-bottom: 2rem;
-  & > div {
-    display: flex;
-    gap: 2rem;
-  }
-  & > div > div {
-    background-color: #272635;
-    padding: 0.5rem 2rem;
-    min-width: 50px;
-    border-radius: 8px;
-    font-size: 2rem;
-  }
-  .time-desc {
-    font-size: 0.8rem;
-  }
-`;
 
 export default CalendarTimer;

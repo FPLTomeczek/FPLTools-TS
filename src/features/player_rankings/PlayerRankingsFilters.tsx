@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Dialog,
   DialogActions,
@@ -6,8 +7,8 @@ import {
   Slide,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import React, { useState } from "react";
 import { styled as MuiStyled } from "@mui/material/styles";
+
 import { PlayerRankingsFiltersStyled } from "./PlayerRankings.styled";
 import DialogInputs from "./dialog-inputs/DialogInputs";
 import { DialogFilter } from "./enums/playerRankingsEnums";

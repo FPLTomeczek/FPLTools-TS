@@ -1,10 +1,11 @@
-import { Direction } from "../../../enums/direction";
-import { handleSettingPages } from "../../../utils/filterPlayersUtils";
-import { ListData } from "./list";
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 import DoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import DoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+
+import { Direction } from "../../../enums/direction";
+import { handleSettingPages } from "../../../utils/filterPlayersUtils";
+import { ListData } from "./list";
 
 interface DirectionButtonList {
   direction: Direction;

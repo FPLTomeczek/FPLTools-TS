@@ -1,6 +1,8 @@
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
+import { isEmpty } from "lodash";
+
 import { useAppDispatch } from "../../../app/hooks";
 import {
   removePick,
@@ -9,7 +11,6 @@ import {
 } from "../../../store_features/drafts/draftsSlice";
 import blank from "../../../assets/shirts/blank.png";
 import { TEAMS_LIST } from "../../../data";
-import { isEmpty } from "lodash";
 import { Pick as IPick } from "../../../interfaces/drafts";
 import FutureFixtures from "../fixtures/FutureFixtures";
 import NextFixture from "../fixtures/NextFixture";

@@ -21,3 +21,29 @@ export const CalendarTableStyled = styled.div`
     justify-content: space-around;
   }
 `;
+
+export const CalendarTimerStyled = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
+  .timer-countdown {
+    display: flex;
+    gap: 2rem;
+  }
+  .timer-countdown-item {
+    background-color: #272635;
+    padding: 0.5rem 2rem;
+    min-width: 50px;
+    border-radius: 8px;
+    font-size: 2rem;
+  }
+  .time-desc {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    .timer-countdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+`;

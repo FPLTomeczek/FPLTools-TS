@@ -1,9 +1,10 @@
+import { useState } from "react";
+
 import { useAppSelector } from "../../../app/hooks";
 import SingleChip from "./SingleChip";
 import { ChipsStyled } from "./Chips.styled";
 import { chipNames } from "./constants";
 import ChipsModal from "./ChipsModalWrapper";
-import { useState } from "react";
 export interface FilteredChip {
   name: string;
   played: boolean;

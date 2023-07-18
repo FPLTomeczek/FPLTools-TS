@@ -1,10 +1,11 @@
 import { Provider } from "react-redux";
+import { PropsWithChildren } from "react";
 import { RenderOptions, render } from "@testing-library/react";
 import { MockStoreEnhanced } from "redux-mock-store";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { PreloadedState } from "@reduxjs/toolkit";
+
 import { AppStore, RootState, setupStore } from "../app/store";
-import { PropsWithChildren } from "react";
 
 export interface mockPlayer {
   id: number;

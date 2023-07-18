@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CURRENT_GW, LAST_GW } from "../../constants";
 import { isEmpty } from "lodash";
+
+import { CURRENT_GW, LAST_GW } from "../../constants";
 import {
   ManagerHistory,
   Pick,
@@ -184,11 +185,55 @@ const draftSlice = createSlice({
     },
     validatePicks(state, action) {
       const { isError, message } = action.payload;
+      // const { isError, message, gameweek } = action.payload;
       if (isError) {
         Object.assign(state.managerTeam[state.draftNumber], {
           ...state.initManagerTeam,
           validationError: { isError, message },
         });
+
+        // validatePicks after gameweek switch w/o gameweek saving
+
+        // state.managerTeam[state.draftNumber].picks =
+        //   state.managerTeam[state.draftNumber].dataByGameweeks[
+        //     gameweek - 1
+        //   ].picksByGameweek;
+
+        // for (let i = gameweek; i <= LAST_GW; i++) {
+        //   state.managerTeam[state.draftNumber].dataByGameweeks[
+        //     i
+        //   ].picksByGameweek =
+        //     state.managerTeam[state.draftNumber].dataByGameweeks[
+        //       gameweek - 1
+        //     ].picksByGameweek;
+        // }
+
+        // state.managerTeam[state.draftNumber].validationError = {
+        //   isError,
+        //   message,
+        // };
+
+        // // reset bank value
+        // const resetBankValue = state.managerTeam[
+        //   state.draftNumber
+        // ].dataByGameweeks[gameweek].removedPicksByGameweek.reduce(
+        //   (acc, pick) => (acc += pick.now_cost),
+        //   0
+        // );
+
+        // state.managerTeam[state.draftNumber].bank -= resetBankValue;
+
+        // //reset transfer value
+        // state.managerTeam[state.draftNumber].dataByGameweeks[
+        //   gameweek
+        // ].transfersByGameweek +=
+        //   state.managerTeam[state.draftNumber].dataByGameweeks[
+        //     gameweek
+        //   ].removedPicksByGameweek.length;
+
+        // state.managerTeam[state.draftNumber].dataByGameweeks[
+        //   gameweek
+        // ].removedPicksByGameweek = [];
       } else {
         state.managerTeam[state.draftNumber].validationError = {
           isError,

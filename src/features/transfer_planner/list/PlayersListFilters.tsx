@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { filterPlayers } from "../../../store_features/players/playersSlice";
 import { TEAMS_LIST, ROLES } from "../../../data";
 import { PlayerFilters } from "../../../interfaces/players";

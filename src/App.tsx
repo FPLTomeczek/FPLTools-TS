@@ -1,6 +1,8 @@
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import TransferPlanner from "./pages/TransferPlanner";
 import PlayerRankings from "./pages/PlayerRankings";
-import { useEffect } from "react";
 import { useAppDispatch } from "./app/hooks";
 import {
   fetchPlayers,
@@ -8,7 +10,6 @@ import {
 } from "./store_features/players/playersSlice";
 import { fetchFixtures } from "./store_features/fixtures/fixturesSlice";
 import { fetchTeams } from "./store_features/teams/teamsSlice";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
 import Calendar from "./pages/Calendar";

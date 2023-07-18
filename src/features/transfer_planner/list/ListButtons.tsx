@@ -1,6 +1,7 @@
+import styled from "styled-components";
+
 import { Direction } from "../../../enums/direction";
 import { ListData } from "./list";
-import styled from "styled-components";
 import DirectionButtonList from "./DirectionButtonList";
 
 const ListButtons = (props: ListData) => {

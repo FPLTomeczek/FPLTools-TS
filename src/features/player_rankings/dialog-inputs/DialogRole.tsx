@@ -1,5 +1,6 @@
-import RadioGroupWrapper from "./RadioGroupWrapper";
 import { FormControlLabel, Radio } from "@mui/material";
+
+import RadioGroupWrapper from "./RadioGroupWrapper";
 import { ROLES } from "../../../data";
 import { DialogFilter } from "../enums/playerRankingsEnums";
 

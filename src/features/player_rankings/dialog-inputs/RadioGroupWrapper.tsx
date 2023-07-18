@@ -1,6 +1,7 @@
 import { Box, RadioGroup } from "@mui/material";
-import { DialogFilter } from "../enums/playerRankingsEnums";
 import { useContext } from "react";
+
+import { DialogFilter } from "../enums/playerRankingsEnums";
 import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 
 const RadioGroupWrapper = ({

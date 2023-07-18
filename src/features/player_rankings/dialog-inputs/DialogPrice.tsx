@@ -1,7 +1,8 @@
 import { Slider } from "@mui/material";
 import { useContext } from "react";
-import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 import styled from "styled-components";
+
+import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 
 const DialogPrice = ({ maxPrice }: { maxPrice: number }) => {
   const { filters, filter } = useContext(PlayerRankingsContext);

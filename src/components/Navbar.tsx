@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
 const navbarList = [
   { url: "/", name: "FPLTools" },
@@ -17,6 +18,14 @@ const Navbar = () => {
             <Link to={li.url}>{li.name}</Link>
           </li>
         ))}
+      </ul>
+      <ul className="nav-list mobile">
+        <li>
+          <Link to="/">FPLTools</Link>
+        </li>
+        <li>
+          <FormatListBulletedIcon />
+        </li>
       </ul>
     </NavbarStyled>
   );
@@ -37,6 +46,19 @@ const NavbarStyled = styled.nav`
   }
   .nav-list a:visited {
     color: white;
+  }
+  .mobile {
+    display: none;
+  }
+  @media screen and (max-width: 900px) {
+    .nav-list {
+      display: none;
+    }
+    .mobile {
+      margin: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
 

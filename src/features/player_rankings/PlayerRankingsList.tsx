@@ -1,5 +1,6 @@
-import { useAppSelector } from "../../app/hooks";
 import { useContext } from "react";
+
+import { useAppSelector } from "../../app/hooks";
 import { PlayerRankingsContext } from "./context/PlayerRankingsContext";
 import { filterPlayers } from "../../utils/filterPlayersUtils";
 import { PlayerRankingsListStyled } from "./PlayerRankings.styled";

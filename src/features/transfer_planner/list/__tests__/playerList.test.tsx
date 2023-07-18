@@ -1,15 +1,17 @@
-import { getManagerTeam } from "../../service/getData";
 import { it, expect, describe } from "vitest";
 import { screen } from "@testing-library/react";
+import configureStore from "redux-mock-store";
+
+import { getManagerTeam } from "../../service/getData";
 import {
   renderComponent,
   proxyHandler,
   getMockPlayersProxies,
 } from "../../../../tests/utils";
 import PlayersList from "../PlayersList";
-import configureStore from "redux-mock-store";
 import { mockPlayer } from "../../../../tests/utils";
 import { IS_SEASON_IN_PROGRESS } from "../../../../constants";
+
 describe("fetching players", () => {
   it("team players are fetched", async () => {
     if (!IS_SEASON_IN_PROGRESS) {

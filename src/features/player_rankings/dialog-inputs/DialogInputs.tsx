@@ -1,10 +1,11 @@
+import { useContext, useEffect } from "react";
+
 import { DialogFilter } from "../enums/playerRankingsEnums";
 import DialogProbability from "./DialogProbability";
 import DialogTeam from "./DialogTeam";
 import DialogRole from "./DialogRole";
 import DialogPrice from "./DialogPrice";
 import { useAppSelector } from "../../../app/hooks";
-import { useContext, useEffect } from "react";
 import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 
 const DialogInputs = ({

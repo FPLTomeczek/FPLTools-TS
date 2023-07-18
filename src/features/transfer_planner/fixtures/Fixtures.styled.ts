@@ -1,5 +1,6 @@
-import { setFixtureBackgroundColor } from "../../utils";
 import styled from "styled-components";
+
+import { setFixtureBackgroundColor } from "../../utils";
 
 interface FixtureItemProps {
   isHome: boolean;
