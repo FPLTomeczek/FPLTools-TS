@@ -11,6 +11,8 @@ import { fetchTeams } from "./store_features/teams/teamsSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
+import Calendar from "./pages/Calendar";
+import { fetchGameweeks } from "./store_features/gameweeks/gameweeksSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,6 +22,7 @@ function App() {
     dispatch(fetchPlayersHistory());
     dispatch(fetchFixtures());
     dispatch(fetchTeams());
+    dispatch(fetchGameweeks());
   }, [dispatch]);
 
   return (
@@ -28,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<TransferPlanner />} />
         <Route path="/player-rankings" element={<PlayerRankings />} />
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import { setBackgroundColor } from "./utils";
+import { setFixtureBackgroundColor } from "../../utils";
 import styled from "styled-components";
 
 interface FixtureItemProps {
@@ -10,8 +10,8 @@ export const FixtureItem = styled.p<FixtureItemProps>`
   text-transform: ${(props) => (props.isHome ? "none" : "lowercase")};
   background-color: ${(props) =>
     props.isHome
-      ? setBackgroundColor(props.difficulty)
-      : setBackgroundColor(props.difficulty)};
+      ? setFixtureBackgroundColor(props.difficulty)
+      : setFixtureBackgroundColor(props.difficulty)};
   font-weight: 700;
   width: 20px;
   box-sizing: border-box;

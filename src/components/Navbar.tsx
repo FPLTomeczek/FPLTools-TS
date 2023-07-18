@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const navbarList = [
+  { url: "/", name: "FPLTools" },
+  { url: "/", name: "Planner" },
+  { url: "/player-rankings", name: "Players" },
+  { url: "/calendar", name: "Calendar" },
+];
+
 const Navbar = () => {
   return (
     <NavbarStyled>
       <ul className="nav-list">
-        <li>
-          <Link to="/">FPLTools</Link>
-        </li>
-        <li>
-          <Link to="/">Planner </Link>
-        </li>
-        <li>
-          <Link to="/player-rankings">Players</Link>
-        </li>
+        {navbarList.map((li) => (
+          <li key={li.name}>
+            <Link to={li.url}>{li.name}</Link>
+          </li>
+        ))}
       </ul>
     </NavbarStyled>
   );

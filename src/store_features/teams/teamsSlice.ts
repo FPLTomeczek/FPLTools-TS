@@ -1,9 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axiosConfig";
 
+export type TeamFixture = {
+  opponent: string;
+  difficulty: number;
+  isHome: boolean;
+};
+
 interface Team {
   id: number;
   name: string;
+  fixtures: TeamFixture[];
 }
 
 interface TeamsSlice {

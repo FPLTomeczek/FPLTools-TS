@@ -7,7 +7,7 @@ export const TEAMS_LIST = [
   { name: "BRE", color: ["#D20000", "#FFFFFF"], img: shirts.BRE },
   { name: "BHA", color: ["#0057B8", "#FFFFFF"], img: shirts.BHA },
   { name: "CFC", color: ["#034694"], img: shirts.CFC },
-  { name: "CRY", color: ["#1B458F", "#C4122E"], img: shirts.CRY },
+  { name: "CRY", color: ["#C4122E", "#1B458F"], img: shirts.CRY },
   { name: "EVE", color: ["#003399", "#FFFFFF"], img: shirts.EVE },
   { name: "FUL", color: ["#FFFFFF", "#000000"], img: shirts.FUL },
   { name: "LEE", color: ["#FFCD00", "#1D428A"], img: shirts.LEE },
