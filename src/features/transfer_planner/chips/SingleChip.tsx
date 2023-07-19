@@ -1,5 +1,5 @@
-import { useThisGameweekData } from "../../../app/customHooks";
-import { useAppDispatch } from "../../../app/hooks";
+import { useThisGameweekData } from "../../../store/customHooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { setChip } from "../../../store_features/drafts/draftsSlice";
 import { FilteredChip } from "./Chips";
 import { switchChipName } from "./utils";

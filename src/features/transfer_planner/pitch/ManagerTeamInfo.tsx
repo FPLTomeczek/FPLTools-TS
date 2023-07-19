@@ -1,20 +1,20 @@
 import { Alert } from "@mui/material";
 
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { validatePicks as picksValidation } from "../validation/picks";
-import { Pick } from "../../../interfaces/drafts";
+import { Pick } from "../../../store_features/drafts/drafts";
 import {
   validatePicks,
   updatePicksByGameweekAndTransfers,
 } from "../../../store_features/drafts/draftsSlice";
-import { Direction } from "../../../enums/direction";
+import { Direction } from "../../../shared/ui/Buttons/enums/direction";
 import {
   CURRENT_GW,
   LAST_GW,
   MAX_AVAILABLE_FREE_TRANSFERS,
-} from "../../../constants";
+} from "../../../shared/utils/constants";
 import { isEmpty } from "lodash";
-import { useDraft } from "../../../app/customHooks";
+import { useDraft } from "../../../store/customHooks";
 import DirectionButtonGameweek from "./DirectionButtonGameweek";
 import { ManagerTeamInfoStyled } from "./Pitch.styled";
 import { Chip } from "../chips/chipsEnums";

@@ -1,6 +1,6 @@
-import { useDraft } from "../../../app/customHooks";
-import { useAppSelector } from "../../../app/hooks";
-import { FIRST_ELEVEN_PLAYERS } from "../../../constants";
+import { useDraft } from "../../../store/customHooks";
+import { useAppSelector } from "../../../store/hooks";
+import { FIRST_ELEVEN_PLAYERS } from "../../../shared/utils/constants";
 
 const NextFixture = ({
   team,

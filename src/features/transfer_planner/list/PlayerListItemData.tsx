@@ -1,4 +1,4 @@
-import { Player } from "../../../interfaces/players";
+import { Player } from "../../../store_features/players/players";
 
 const PlayerListItemData = ({ player }: { player: Player }) => {
   return (

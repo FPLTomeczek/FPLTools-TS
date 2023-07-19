@@ -1,7 +1,7 @@
 import { FormControlLabel, Radio } from "@mui/material";
 
 import RadioGroupWrapper from "./RadioGroupWrapper";
-import { ROLES } from "../../../data";
+import { ROLES } from "../../../shared/utils/data";
 import { DialogFilter } from "../enums/playerRankingsEnums";
 
 const DialogRole = ({ dialogFilter }: { dialogFilter: DialogFilter }) => {

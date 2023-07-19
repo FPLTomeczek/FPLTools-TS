@@ -1,5 +1,5 @@
-import { CURRENT_GW, LAST_GW } from "../../constants";
-import { ManagerHistory, Pick } from "../../interfaces/drafts";
+import { CURRENT_GW, LAST_GW } from "../../shared/utils/constants";
+import { ManagerHistory, Pick } from "./drafts";
 
 export interface DataByGameweeks {
   [gameweek: number]: {

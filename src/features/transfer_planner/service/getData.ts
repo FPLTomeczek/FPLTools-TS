@@ -1,8 +1,12 @@
 import { assignPositionsToPlayers, calculateSellingCost } from "../utils";
-import { axiosInstance } from "../../../axiosConfig";
-import { ManagerHistory, Pick, Transfer } from "../../../interfaces/drafts";
-import { AppDispatch } from "../../../app/store";
-import { PlayerHistory } from "../../../interfaces/players";
+import { axiosInstance } from "../../../shared/utils/axiosConfig";
+import {
+  ManagerHistory,
+  Pick,
+  Transfer,
+} from "../../../store_features/drafts/drafts";
+import { AppDispatch } from "../../../store/store";
+import { PlayerHistory } from "../../../store_features/players/players";
 import { setData } from "../../../store_features/drafts/draftsSlice";
 
 interface APIPick {

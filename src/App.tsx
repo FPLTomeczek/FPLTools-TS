@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TransferPlanner from "./pages/TransferPlanner";
 import PlayerRankings from "./pages/PlayerRankings";
-import { useAppDispatch } from "./app/hooks";
+import { useAppDispatch } from "./store/hooks";
 import {
   fetchPlayers,
   fetchPlayersHistory,
@@ -11,7 +11,7 @@ import {
 import { fetchFixtures } from "./store_features/fixtures/fixturesSlice";
 import { fetchTeams } from "./store_features/teams/teamsSlice";
 import Error from "./pages/Error";
-import Navbar from "./components/Navbar";
+import Navbar from "./layouts/components/Navbar";
 import Calendar from "./pages/Calendar";
 import { fetchGameweeks } from "./store_features/gameweeks/gameweeksSlice";
 

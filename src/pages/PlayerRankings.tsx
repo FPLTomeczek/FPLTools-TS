@@ -9,7 +9,7 @@ import PlayerRankingsFilters from "../features/player_rankings/PlayerRankingsFil
 import PlayerRankingsList from "../features/player_rankings/PlayerRankingsList";
 import PlayerRankingsProvider from "../features/player_rankings/context/PlayerRankingsContext";
 import { PlayerRankingsPageStyled } from "./Pages.styled";
-import Hero from "../components/Hero";
+import Hero from "../layouts/components/Hero";
 
 const themeObj: ThemeOptions = {
   components: {

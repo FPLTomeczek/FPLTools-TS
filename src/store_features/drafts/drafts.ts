@@ -1,5 +1,5 @@
-import { Player } from "./players";
-import { Chip } from "../features/transfer_planner/chips/chipsInterfaces";
+import { Player } from "../players/players";
+import { Chip } from "../../features/transfer_planner/chips/chipsInterfaces";
 
 export interface Pick extends Player {
   position: number;

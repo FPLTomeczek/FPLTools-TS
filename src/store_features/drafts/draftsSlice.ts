@@ -1,12 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
 
-import { CURRENT_GW, LAST_GW } from "../../constants";
-import {
-  ManagerHistory,
-  Pick,
-  playerBlankTemplate,
-} from "../../interfaces/drafts";
+import { CURRENT_GW, LAST_GW } from "../../shared/utils/constants";
+import { ManagerHistory, Pick, playerBlankTemplate } from "./drafts";
 import {
   storage,
   ManagerTeamState,

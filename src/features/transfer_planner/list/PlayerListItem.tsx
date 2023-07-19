@@ -1,4 +1,4 @@
-import { Player } from "../../../interfaces/players";
+import { Player } from "../../../store_features/players/players";
 import AddPlayerToTeamButton from "./PlayerListItemButton";
 import PlayerListItemData from "./PlayerListItemData";
 import PlayerListItemColor from "./PlayerListItemColor";

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { updateDraftNumber } from "../../../store_features/drafts/draftsSlice";
 import { DraftPickerStyled } from "./Pitch.styled";
 

@@ -1,8 +1,8 @@
 import Pick from "./Pick";
-import { Pick as IPick } from "../../../interfaces/drafts";
+import { Pick as IPick } from "../../../store_features/drafts/drafts";
 import { BenchStyled } from "./Pitch.styled";
-import { FIRST_ELEVEN_PLAYERS } from "../../../constants";
-import { useThisGameweekData } from "../../../app/customHooks";
+import { FIRST_ELEVEN_PLAYERS } from "../../../shared/utils/constants";
+import { useThisGameweekData } from "../../../store/customHooks";
 import { Chip } from "../chips/chipsEnums";
 
 const Bench = ({ picks }: { picks: IPick[] }) => {

@@ -5,7 +5,7 @@ import DialogProbability from "./DialogProbability";
 import DialogTeam from "./DialogTeam";
 import DialogRole from "./DialogRole";
 import DialogPrice from "./DialogPrice";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 
 const DialogInputs = ({

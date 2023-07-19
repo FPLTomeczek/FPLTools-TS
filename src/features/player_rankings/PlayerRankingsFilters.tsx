@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Slide,
 } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
 import { styled as MuiStyled } from "@mui/material/styles";
 
 import { PlayerRankingsFiltersStyled } from "./PlayerRankings.styled";
 import DialogInputs from "./dialog-inputs/DialogInputs";
 import { DialogFilter } from "./enums/playerRankingsEnums";
 import PlayerRankingsFilterButtons from "./PlayerRankingsFilterButtons";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { Transition } from "../../shared/ui/Dialog/Transition";
 
 const DialogStyled = MuiStyled(Dialog)(() => ({
   "@media screen and (max-width: 480px)": {

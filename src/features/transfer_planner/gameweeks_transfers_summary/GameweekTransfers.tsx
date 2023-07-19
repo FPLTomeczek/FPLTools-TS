@@ -1,11 +1,11 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-import { Pick } from "../../../interfaces/drafts";
+import { Pick } from "../../../store_features/drafts/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { updateGameweeks } from "../../../store_features/drafts/draftsSlice";
 import { GameweekTransfersStyled } from "./GameweekTransfersSummary.styled";
-import { useDraft } from "../../../app/customHooks";
+import { useDraft } from "../../../store/customHooks";
 
 const GameweekTransfers = ({
   removedPicks,

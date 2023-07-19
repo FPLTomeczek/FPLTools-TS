@@ -1,11 +1,11 @@
 import FirstEleven from "./FirstEleven";
 import Bench from "./Bench";
-import { useDraft } from "../../../app/customHooks";
+import { useDraft } from "../../../store/customHooks";
 import PitchHeader from "./PitchHeader";
 import GameweeksTransfersContainer from "../gameweeks_transfers_summary/GameweeksTransfersContainer";
 import Chips from "../chips/Chips";
 import { PitchStyled } from "./Pitch.styled";
-import Loading from "../../../components/Loading";
+import Loading from "../../../shared/ui/Loading/Loading";
 
 const Pitch = ({ isLoading }: { isLoading: boolean }) => {
   const picks = useDraft().picks;

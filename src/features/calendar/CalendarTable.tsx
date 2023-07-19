@@ -1,6 +1,6 @@
-import { useAppSelector } from "../../app/hooks";
-import { LAST_GW } from "../../constants";
-import { TEAMS_LIST } from "../../data";
+import { useAppSelector } from "../../store/hooks";
+import { LAST_GW } from "../../shared/utils/constants";
+import { TEAMS_LIST } from "../../shared/utils/data";
 import { setFixtureBackgroundColor } from "../utils";
 import { TeamFixture } from "../../store_features/teams/teamsSlice";
 import { CalendarTableStyled } from "./Calendar.styled";

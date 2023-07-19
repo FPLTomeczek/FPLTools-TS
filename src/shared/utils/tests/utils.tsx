@@ -5,7 +5,7 @@ import { MockStoreEnhanced } from "redux-mock-store";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { PreloadedState } from "@reduxjs/toolkit";
 
-import { AppStore, RootState, setupStore } from "../app/store";
+import { AppStore, RootState, setupStore } from "../../../store/store";
 
 export interface mockPlayer {
   id: number;

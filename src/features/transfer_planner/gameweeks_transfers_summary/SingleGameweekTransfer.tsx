@@ -1,5 +1,5 @@
-import { Pick } from "../../../interfaces/drafts";
-import { TEAMS_LIST } from "../../../data";
+import { Pick } from "../../../store_features/drafts/drafts";
+import { TEAMS_LIST } from "../../../shared/utils/data";
 import { SingleGameweekTransferStyled } from "./GameweekTransfersSummary.styled";
 
 const SingleGameweekTransfer = ({ pick }: { pick: Pick }) => {

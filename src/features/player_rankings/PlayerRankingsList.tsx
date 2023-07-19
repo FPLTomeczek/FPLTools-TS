@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { PlayerRankingsContext } from "./context/PlayerRankingsContext";
-import { filterPlayers } from "../../utils/filterPlayersUtils";
+import { filterPlayers } from "../../shared/utils/filterPlayersUtils";
 import { PlayerRankingsListStyled } from "./PlayerRankings.styled";
-import { Player } from "../../interfaces/players";
+import { Player } from "../../store_features/players/players";
 
 const PlayerRankingsList = () => {
   const players = useAppSelector((state) => state.players.playersList);

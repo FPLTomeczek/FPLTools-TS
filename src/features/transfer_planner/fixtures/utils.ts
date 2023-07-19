@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { Fixture } from "./fixtures";
 
 export function useNextFixtures(

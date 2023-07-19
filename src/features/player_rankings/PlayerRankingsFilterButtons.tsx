@@ -4,7 +4,7 @@ import { PlayerRankingsContext } from "./context/PlayerRankingsContext";
 import { DialogFilter } from "./enums/playerRankingsEnums";
 import { PlayerRankingsFilterButtonsStyled } from "./PlayerRankings.styled";
 import RestartIcon from "@mui/icons-material/RestartAlt";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../store/hooks";
 
 const PlayerRankingsFilterButtons = ({
   handleOpenDialog,

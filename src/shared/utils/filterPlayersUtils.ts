@@ -1,10 +1,10 @@
-import { Direction } from "../enums/direction";
+import { Direction } from "../ui/Buttons/enums/direction";
 import {
   Player,
   PlayerFilters,
   PlayerRankingsFilters,
   SortOptions,
-} from "../interfaces/players";
+} from "../../store_features/players/players";
 
 export const filterPlayers = <T extends PlayerFilters>(
   players: Player[],

@@ -1,5 +1,5 @@
-import { NEXT_FUTURE_FIXTURES } from "../../../constants";
-import { useDraft } from "../../../app/customHooks";
+import { NEXT_FUTURE_FIXTURES } from "../../../shared/utils/constants";
+import { useDraft } from "../../../store/customHooks";
 import FutureFixture from "./SingleFutureFixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 import { FutureFixturesStyled } from "./Fixtures.styled";

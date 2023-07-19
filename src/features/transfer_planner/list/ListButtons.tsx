@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Direction } from "../../../enums/direction";
+import { Direction } from "../../../shared/ui/Buttons/enums/direction";
 import { ListData } from "./list";
 import DirectionButtonList from "./DirectionButtonList";
 

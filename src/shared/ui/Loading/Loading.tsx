@@ -1,10 +1,15 @@
 import { CircularProgress } from "@mui/material";
+import styled from "styled-components";
 
+const LoadingStyled = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const Loading = () => {
   return (
-    <div className="loading-container">
+    <LoadingStyled>
       <CircularProgress sx={{ color: "var(--secondary-color)" }} />
-    </div>
+    </LoadingStyled>
   );
 };
 

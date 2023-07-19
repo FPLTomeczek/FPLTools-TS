@@ -1,10 +1,10 @@
 import ArrowPrevIcon from "@mui/icons-material/ArrowBack";
 import ArrowNextIcon from "@mui/icons-material/ArrowForward";
 
-import { Direction } from "../../../enums/direction";
-import { useDraft } from "../../../app/customHooks";
-import { CURRENT_GW, LAST_GW } from "../../../constants";
-import { useAppDispatch } from "../../../app/hooks";
+import { Direction } from "../../../shared/ui/Buttons/enums/direction";
+import { useDraft } from "../../../store/customHooks";
+import { CURRENT_GW, LAST_GW } from "../../../shared/utils/constants";
+import { useAppDispatch } from "../../../store/hooks";
 import { updateGameweeks } from "../../../store_features/drafts/draftsSlice";
 
 interface DirectionButtonList {

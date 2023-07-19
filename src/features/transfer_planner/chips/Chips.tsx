@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import SingleChip from "./SingleChip";
 import { ChipsStyled } from "./Chips.styled";
 import { chipNames } from "./constants";

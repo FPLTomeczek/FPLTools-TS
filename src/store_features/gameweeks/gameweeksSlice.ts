@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { axiosInstance } from "../../axiosConfig";
+import { axiosInstance } from "../../shared/utils/axiosConfig";
 
 interface Gameweek {
   id: number;

@@ -2,18 +2,18 @@ import { useRef, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
 
 import TransferPlannerContent from "../features/transfer_planner/TransferPlannerContent";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   getDemoManagerTeam,
   getManagerData,
 } from "../features/transfer_planner/service/getData";
 import { TransferPlannerStyled } from "./Pages.styled";
-import Note from "../components/Note";
-import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../constants";
+import Note from "../features/transfer_planner/Note";
+import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../shared/utils/constants";
 import { setData } from "../store_features/drafts/draftsSlice";
-import managerTeam from "../assets/demo-data/manager-team-info.json";
-import managerHistory from "../assets/demo-data/managerHistory.json";
-import Hero from "../components/Hero";
+import managerTeam from "../shared/assets/demo-data/manager-team-info.json";
+import managerHistory from "../shared/assets/demo-data/managerHistory.json";
+import Hero from "../layouts/components/Hero";
 
 const TransferPlanner = () => {
   const inputRef = useRef<HTMLInputElement>(null);

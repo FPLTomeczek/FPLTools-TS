@@ -2,7 +2,7 @@ import { FormControlLabel, Radio } from "@mui/material";
 
 import { DialogFilter } from "../enums/playerRankingsEnums";
 import RadioGroupWrapper from "./RadioGroupWrapper";
-import { TEAMS_LIST } from "../../../data";
+import { TEAMS_LIST } from "../../../shared/utils/data";
 
 const DialogTeam = ({ dialogFilter }: { dialogFilter: DialogFilter }) => {
   return (

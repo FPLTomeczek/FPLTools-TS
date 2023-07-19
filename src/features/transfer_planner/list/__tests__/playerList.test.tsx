@@ -7,10 +7,10 @@ import {
   renderComponent,
   proxyHandler,
   getMockPlayersProxies,
-} from "../../../../tests/utils";
+} from "../../../../shared/utils/tests/utils";
 import PlayersList from "../PlayersList";
-import { mockPlayer } from "../../../../tests/utils";
-import { IS_SEASON_IN_PROGRESS } from "../../../../constants";
+import { mockPlayer } from "../../../../shared/utils/tests/utils";
+import { IS_SEASON_IN_PROGRESS } from "../../../../shared/utils/constants";
 
 describe("fetching players", () => {
   it("team players are fetched", async () => {

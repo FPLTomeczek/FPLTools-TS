@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { CalendarTimerStyled } from "./Calendar.styled";
 
 const CalendarTimer = () => {

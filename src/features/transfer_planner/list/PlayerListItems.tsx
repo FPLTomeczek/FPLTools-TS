@@ -1,5 +1,5 @@
 import PlayerListItem from "./PlayerListItem";
-import { SortOptions, Player } from "../../../interfaces/players";
+import { SortOptions, Player } from "../../../store_features/players/players";
 import PlayerListItemsHeader from "./PlayerListItemsHeader";
 import { PlayersListItemsStyled } from "./List.styled";
 
