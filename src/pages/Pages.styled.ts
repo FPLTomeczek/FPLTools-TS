@@ -6,28 +6,22 @@ export const TransferPlannerStyled = styled.div`
   flex-direction: column;
   max-width: 100vw;
   padding: 1rem;
-  .transfer-planner-demo {
-    margin-top: 2rem;
+`;
+
+export const TransferPlannerContentStyled = styled.div`
+  width: 100%;
+  .pitch-playerlist-container {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  input {
-    background: "white";
-    padding: 0.5rem;
-    margin-right: 1rem;
-  }
-  #user-id-form {
-    display: flex;
-  }
-  #user-id-form > input {
-    max-width: 200px;
+    align-items: start;
+    padding: 2rem 0;
+    width: 100%;
+    justify-content: space-around;
   }
 
-  @media (max-width: 769px) {
-    .transfer-planner-demo {
+  @media screen and (max-width: 1400px) {
+    .pitch-playerlist-container {
       flex-direction: column;
+      align-items: center;
     }
   }
 `;

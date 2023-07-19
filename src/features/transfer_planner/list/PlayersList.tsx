@@ -5,7 +5,7 @@ import {
   paginate,
   filterPlayers,
   sortPlayers,
-} from "../../../shared/utils/filterPlayersUtils.ts";
+} from "../../../shared/helper/filterPlayers.ts";
 import { sortPlayers as sortPlayersSlice } from "../../../store_features/players/playersSlice";
 import PlayersListFilters from "./PlayersListFilters.tsx";
 import ListButtons from "./ListButtons.tsx";
@@ -19,7 +19,7 @@ import Loading from "../../../shared/ui/Loading/Loading.tsx";
 
 const PlayersList = () => {
   const players = useAppSelector((state) => state.players.playersList);
-  const status = useAppSelector((state) => state.players.status);
+  const playersStatus = useAppSelector((state) => state.players.status);
   const filters = useAppSelector((state) => state.players.playerFilters);
   const sortOptions = useAppSelector((state) => state.players.sortOptions);
 
@@ -37,15 +37,15 @@ const PlayersList = () => {
     dispatch(sortPlayersSlice({ ...sortOptions }));
   };
 
-  if (status === "loading") {
+  if (playersStatus === "loading") {
     return <Loading />;
   }
 
-  if (status === "error") {
+  if (playersStatus === "error") {
     return <p>Error</p>;
   }
 
-  if (status === "idle") {
+  if (playersStatus === "idle") {
     return <p>Idle</p>;
   }
 

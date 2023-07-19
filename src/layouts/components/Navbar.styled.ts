@@ -6,31 +6,28 @@ export const NavbarStyled = styled.nav`
     margin-left: 1rem;
     display: flex;
     gap: 2rem;
+    justify-content: flex-start;
   }
   .nav-list > li {
     padding: 0.5rem;
   }
-  .nav-list a {
-    color: white;
-  }
+  .nav-list a,
   .nav-list a:visited {
     color: white;
   }
-  .mobile {
+  .list-item-navbar-mobile {
     display: none;
-  }
-  .mobile > li {
-    display: flex;
-    align-items: center;
   }
   @media screen and (max-width: 900px) {
     .nav-list {
+      justify-content: space-between;
+      align-items: center;
+    }
+    .list-item-navbar {
       display: none;
     }
-    .mobile {
-      margin: 0 2rem;
-      display: flex;
-      justify-content: space-between;
+    .list-item-navbar-mobile {
+      display: block;
     }
   }
 `;

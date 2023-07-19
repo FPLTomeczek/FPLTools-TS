@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { filterPlayers } from "../../../store_features/players/playersSlice";
-import { TEAMS_LIST, ROLES } from "../../../shared/utils/data";
+import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
+import { ROLES } from "../../../shared/utils/data/rolesData";
 import { PlayerFilters } from "../../../store_features/players/players";
 import { ListData } from "./list";
 import ListButtons from "./ListButtons";

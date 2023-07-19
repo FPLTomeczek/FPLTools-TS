@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { axiosInstance } from "../../shared/utils/axiosConfig";
+import { axiosInstance } from "../../shared/utils/config/axiosConfig";
 
 export type TeamFixture = {
   opponent: string;

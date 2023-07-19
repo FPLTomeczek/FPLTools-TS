@@ -13,16 +13,14 @@ const Navbar = () => {
     <NavbarStyled>
       <ul className="nav-list">
         {navbarList.map((li) => (
-          <li key={li.name}>
+          <li className="list-item-navbar" key={li.name}>
             <Link to={li.url}>{li.name}</Link>
           </li>
         ))}
-      </ul>
-      <ul className="nav-list mobile">
-        <li>
+        <li className="list-item-navbar-mobile">
           <Link to="/">FPLTools</Link>
         </li>
-        <li>
+        <li className="list-item-navbar-mobile">
           <FullScreenDialog listItems={navbarList} />
         </li>
       </ul>

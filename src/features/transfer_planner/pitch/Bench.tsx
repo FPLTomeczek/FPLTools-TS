@@ -3,7 +3,7 @@ import { Pick as IPick } from "../../../store_features/drafts/drafts";
 import { BenchStyled } from "./Pitch.styled";
 import { FIRST_ELEVEN_PLAYERS } from "../../../shared/utils/constants";
 import { useThisGameweekData } from "../../../store/customHooks";
-import { Chip } from "../chips/chipsEnums";
+import { Chip } from "../chips/enums/chipsEnums";
 
 const Bench = ({ picks }: { picks: IPick[] }) => {
   let playerStartIndex = FIRST_ELEVEN_PLAYERS;

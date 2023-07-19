@@ -10,10 +10,10 @@ import {
   makeChange,
 } from "../../../store_features/drafts/draftsSlice";
 import blank from "../../../shared/assets/shirts/blank.png";
-import { TEAMS_LIST } from "../../../shared/utils/data";
+import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
 import { Pick as IPick } from "../../../store_features/drafts/drafts";
-import FutureFixtures from "../fixtures/FutureFixtures";
-import NextFixture from "../fixtures/NextFixture";
+import FutureFixtures from "../fixtures/components/FutureFixtures";
+import NextFixture from "../fixtures/components/NextFixture";
 import { useDraft } from "../../../store/customHooks";
 import { PickStyled } from "./Pitch.styled";
 

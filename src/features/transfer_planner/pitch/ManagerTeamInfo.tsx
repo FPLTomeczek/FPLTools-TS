@@ -17,7 +17,7 @@ import { isEmpty } from "lodash";
 import { useDraft } from "../../../store/customHooks";
 import DirectionButtonGameweek from "./DirectionButtonGameweek";
 import { ManagerTeamInfoStyled } from "./Pitch.styled";
-import { Chip } from "../chips/chipsEnums";
+import { Chip } from "../chips/enums/chipsEnums";
 
 const ManagerTeamInfo = () => {
   const { bank, gameweek, picks, validationError, dataByGameweeks } =

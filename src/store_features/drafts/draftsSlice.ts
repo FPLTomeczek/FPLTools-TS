@@ -9,7 +9,7 @@ import {
   initialManagerTeamState,
   setManagerTeam,
 } from "./initializers";
-import { Chip } from "../../features/transfer_planner/chips/chipsEnums";
+import { Chip } from "../../features/transfer_planner/chips/enums/chipsEnums";
 
 interface Draft {
   managerTeam: ManagerTeamState[];
@@ -53,26 +53,29 @@ const draftSlice = createSlice({
     removePick(state, action) {
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
       const draft = state.managerTeam[state.draftNumber];
+      const dataByGameweek = draft.dataByGameweeks[draft.gameweek];
 
+      //check if pick is ready to change
       if (draft.pickToChange.id === id) {
         draft.pickToChange = {};
       }
 
       const pickToRemove = draft.picks.find((pick) => pick.id === id) as Pick;
-
       const removedPickIndex = draft.picks.indexOf(pickToRemove);
 
+      // if pick to remove found in initialPicks for gameweek
       if (
-        draft.dataByGameweeks[draft.gameweek].initialPicksByGameweek.find(
+        dataByGameweek.initialPicksByGameweek.find(
           (initialPick) => initialPick.id === id
         )
       ) {
-        const chip = draft.dataByGameweeks[draft.gameweek].chipByGameweek;
+        //then subtract transfer
+        const chip = dataByGameweek.chipByGameweek;
         if (chip !== Chip.WILDCARD && chip !== Chip.FREE_HIT) {
-          draft.dataByGameweeks[draft.gameweek].transfersByGameweek -= 1;
+          dataByGameweek.transfersByGameweek -= 1;
         }
 
-        draft.dataByGameweeks[draft.gameweek].removedPicksByGameweek.push({
+        dataByGameweek.removedPicksByGameweek.push({
           ...draft.picks[removedPickIndex],
           removedPickIndex,
         });

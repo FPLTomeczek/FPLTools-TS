@@ -4,7 +4,7 @@ import DoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import DoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 import { Direction } from "../../../shared/ui/Buttons/enums/direction";
-import { handleSettingPages } from "../../../shared/utils/filterPlayersUtils";
+import { handleSettingPages } from "../../../shared/helper/filterPlayers";
 import { ListData } from "./list";
 
 interface DirectionButtonList {

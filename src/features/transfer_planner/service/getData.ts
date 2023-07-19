@@ -1,5 +1,5 @@
 import { assignPositionsToPlayers, calculateSellingCost } from "../utils";
-import { axiosInstance } from "../../../shared/utils/axiosConfig";
+import { axiosInstance } from "../../../shared/utils/config/axiosConfig";
 import {
   ManagerHistory,
   Pick,

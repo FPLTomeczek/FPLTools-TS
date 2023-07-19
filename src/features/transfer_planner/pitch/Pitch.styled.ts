@@ -1,42 +1,8 @@
 import styled from "styled-components";
 
-export const TransferPlannerStyled = styled.div`
-  display: flex;
-  align-items: start;
-  padding: 2rem 0;
-  width: 100%;
-  justify-content: space-around;
-  .pitch-container {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-  }
-
-  .gameweek-transfer-container-m {
-    display: none;
-  }
-
-  @media screen and (max-width: 1400px) {
-    flex-direction: column;
-    .player-list,
-    .pitch-container {
-      width: 100%;
-    }
-    .gameweek-transfer-container-m {
-      display: block;
-      width: 100%;
-    }
-  }
-`;
-
 export const PitchStyled = styled.div`
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  .planner-picks {
-    max-width: 800px;
-    width: 100%;
-  }
+  max-width: 800px;
+  width: 100%;
 
   @media screen and (max-width: 1400px) {
     .gameweek-transfer-container-planner-picks {
@@ -100,6 +66,9 @@ export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
   padding: 1rem 2rem;
   border: ${(props) =>
     props.BBPlayed ? "6px solid rgb(2, 239, 255)" : "none"};
+  @media screen and (max-width: 600px) {
+    padding: 1rem 0.5rem;
+  }
 `;
 
 export const GameweeksTransfersContainerStyled = styled.div`
@@ -108,7 +77,7 @@ export const GameweeksTransfersContainerStyled = styled.div`
   padding: 1rem 0;
   flex-wrap: wrap;
   gap: 1rem;
-  width: 80vw;
+  width: 100%;
   overflow: visible;
   @media screen and (max-width: 1400px) {
     width: 100%;

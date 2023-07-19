@@ -17,7 +17,7 @@ import { styled as MuiStyled } from "@mui/material/styles";
 import { Transition } from "./Transition";
 
 const DialogStyled = MuiStyled(Dialog)(() => ({
-  "& .MuiDialog-container": {
+  "& .MuiPaper-root": {
     backgroundColor: "var(--primary-color)",
   },
 
@@ -63,12 +63,7 @@ export const FullScreenDialog = ({
           }}
         >
           <Toolbar sx={{ backgroundColor: "var(--secondary-color)" }}>
-            <IconButton
-              edge="start"
-              color="black"
-              onClick={handleClose}
-              aria-label="close"
-            >
+            <IconButton edge="start" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
           </Toolbar>
@@ -76,15 +71,13 @@ export const FullScreenDialog = ({
         <List>
           {listItems.map((li) => {
             return (
-              <>
-                <ListItem>
-                  <Button>
-                    <Link to={li.url} onClick={handleClose}>
-                      <ListItemText primary={li.name} />
-                    </Link>
-                  </Button>
-                </ListItem>
-              </>
+              <ListItem key={li.name}>
+                <Button>
+                  <Link to={li.url} onClick={handleClose}>
+                    <ListItemText primary={li.name} />
+                  </Link>
+                </Button>
+              </ListItem>
             );
           })}
         </List>
