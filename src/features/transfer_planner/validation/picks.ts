@@ -1,4 +1,4 @@
-import { Pick } from "../../../interfaces/drafts";
+import { Pick } from "../../../store_features/drafts/drafts";
 import { splittingPicksByRoles } from "../utils";
 import {
   FIRST_ELEVEN_GK,
@@ -7,7 +7,7 @@ import {
   FIRST_ELEVEN_MID_MIN,
   FIRST_ELEVEN_MID_MAX,
   FIRST_ELEVEN_FWD_MAX,
-} from "../../../constants";
+} from "../../../shared/utils/constants";
 
 type Teams = {
   [key: string]: number;

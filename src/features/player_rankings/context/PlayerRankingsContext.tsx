@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import { PlayerRankingsFilters } from "../../../interfaces/players";
 
+import { PlayerRankingsFilters } from "../../../store_features/players/players";
 interface PlayerRankingsContext {
   filters: PlayerRankingsFilters;
   filter: (playerRankingsFilters: PlayerRankingsFilters) => void;

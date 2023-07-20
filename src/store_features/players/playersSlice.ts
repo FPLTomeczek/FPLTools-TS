@@ -4,13 +4,9 @@ import {
   isAnyOf,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../axiosConfig";
-import {
-  Player,
-  PlayerHistory,
-  PlayerFilters,
-  SortOptions,
-} from "../../interfaces/players";
+
+import { axiosInstance } from "../../shared/utils/config/axiosConfig";
+import { Player, PlayerHistory, PlayerFilters, SortOptions } from "./players";
 
 interface PlayersSlice {
   playersList: Player[];

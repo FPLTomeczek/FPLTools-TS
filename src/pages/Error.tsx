@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
+
 import { ErrorPageStyled } from "./Pages.styled";
+
 const Error = () => {
   return (
     <ErrorPageStyled>

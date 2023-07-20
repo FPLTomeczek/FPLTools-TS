@@ -1,15 +1,13 @@
-import { CURRENT_GW, LAST_GW } from "../../constants";
-import { ManagerHistory, Pick } from "../../interfaces/drafts";
+import { CURRENT_GW, LAST_GW } from "../../shared/utils/constants";
+import { ManagerHistory, Pick } from "./drafts";
 
-export interface DataByGameweeks {
-  [gameweek: number]: {
-    picksByGameweek: Pick[];
-    transfersByGameweek: number;
-    initialPicksByGameweek: Pick[];
-    removedPicksByGameweek: Pick[];
-    addedPicksByGameweek: Pick[];
-    chipByGameweek: string;
-  };
+export interface DataByGameweek {
+  picksByGameweek: Pick[];
+  transfersByGameweek: number;
+  initialPicksByGameweek: Pick[];
+  removedPicksByGameweek: Pick[];
+  addedPicksByGameweek: Pick[];
+  chipByGameweek: string;
 }
 
 type ValidationError = {
@@ -22,7 +20,7 @@ export interface ManagerTeamState {
   gameweek: number;
   bank: number;
   pickToChange: Pick | Record<string, never>;
-  dataByGameweeks: DataByGameweeks;
+  dataByGameweeks: DataByGameweek[];
   validationError: ValidationError;
 }
 
@@ -39,7 +37,7 @@ const initializeDataByGameweeks = (
   let transferAmount =
     managerHistory.current[CURRENT_GW - 2].event_transfers > 0 ? 1 : 2;
 
-  const dataByGameweeks: DataByGameweeks = [];
+  const dataByGameweeks: DataByGameweek[] = [];
 
   for (let i = CURRENT_GW; i <= LAST_GW; i++) {
     dataByGameweeks[i] = {

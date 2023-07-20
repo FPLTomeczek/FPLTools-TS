@@ -1,69 +1,43 @@
-import { useRef, useState } from "react";
-import TransferPlannerContent from "../features/transfer_planner/TransferPlannerContent";
-import { Alert, Snackbar } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useState } from "react";
+
 import {
-  getDemoManagerTeam,
-  getManagerData,
-} from "../features/transfer_planner/service/getData";
-import { TransferPlannerStyled } from "./Pages.styled";
-import Note from "../components/Note";
-import { NOTE_FETCHING_TEAM_UNAVAILABLE } from "../constants";
-import { setData } from "../store_features/drafts/draftsSlice";
-import managerTeam from "../assets/demo-data/manager-team-info.json";
-import managerHistory from "../assets/demo-data/managerHistory.json";
+  TransferPlannerContentStyled,
+  TransferPlannerStyled,
+} from "./Pages.styled";
+import Hero from "../layouts/components/Hero";
+import SnackbarWrapper from "../shared/ui/Snackbar/SnackbarWrapper";
+import UserIDForm from "../shared/ui/Form/UserIDForm";
+import TransferPlannerDemo from "../features/transfer_planner/demo/TransferPlannerDemo";
+import Pitch from "../features/transfer_planner/pitch/Pitch";
+import PlayersList from "../features/transfer_planner/list/components/PlayersList";
+import GameweeksTransfersContainer from "../features/transfer_planner/gameweeks_transfers_summary/components/GameweeksTransfersContainer";
+
+const TransferPlannerContent = ({ isLoading }: { isLoading: boolean }) => {
+  return (
+    <TransferPlannerContentStyled>
+      <div className="pitch-playerlist-container">
+        <Pitch isLoading={isLoading} />
+        <PlayersList />
+      </div>
+      <GameweeksTransfersContainer />
+    </TransferPlannerContentStyled>
+  );
+};
 
 const TransferPlanner = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const [error, setError] = useState({ value: false, msg: "" });
   const [isLoading, setIsLoading] = useState(false);
 
-  const playersHistory = useAppSelector(
-    (state) => state.players.playersHistory
-  );
-
-  const dispatch = useAppDispatch();
-
-  const handlePlayingDemo = async () => {
-    const picks = await getDemoManagerTeam(managerTeam.picks);
-    dispatch(setData({ picks, managerHistory }));
-  };
-
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    const id = inputRef.current ? Number(inputRef.current.value) : 0;
-    getManagerData(id, dispatch, playersHistory, setError, setIsLoading);
+  const handleSetError = (value: boolean, msg: string) => {
+    setError({ value, msg });
   };
 
   return (
     <TransferPlannerStyled>
-      <div className="transfer-planner-header">
-        <button className="btn-primary" onClick={handlePlayingDemo}>
-          DEMO
-        </button>
-        <Note text={NOTE_FETCHING_TEAM_UNAVAILABLE} />
-      </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
-        open={error.value}
-        autoHideDuration={6000}
-        onClose={() => setError({ value: false, msg: "" })}
-      >
-        <Alert variant="filled" severity="error">
-          {error.msg}
-        </Alert>
-      </Snackbar>
-      <form id="user-id-form">
-        <input placeholder="Enter your ID" ref={inputRef} />
-        <button
-          className="btn-primary"
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
-        >
-          Submit
-        </button>
-      </form>
+      <SnackbarWrapper error={error} handleSetError={handleSetError} />
+      <Hero text="Transfer Planner" />
+      <TransferPlannerDemo />
+      <UserIDForm setError={setError} setIsLoading={setIsLoading} />
       <TransferPlannerContent isLoading={isLoading} />
     </TransferPlannerStyled>
   );
