@@ -1,9 +1,9 @@
 import { Direction } from "../../../../../shared/ui/Buttons/enums/direction";
-import { ListData } from "../filters/PlayersListFilters";
 import { ListButtonsStyled } from "../PlayersList.styled";
 import DirectionButton from "../../../../../shared/ui/Buttons/enums/DirectionButton";
 import ArrowIcon from "../../../../../shared/ui/Icons/ArrowIcon";
 import React from "react";
+import { ListData } from "../types";
 
 const directions = Object.values(Direction);
 
