@@ -31,7 +31,7 @@ const UserIDForm = ({
 
   return (
     <UserIDFormStyled>
-      <input placeholder="Enter your ID" ref={inputRef} />
+      <input placeholder="1234" ref={inputRef} />
       <button
         className="btn-primary"
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
@@ -45,9 +45,6 @@ const UserIDForm = ({
 const UserIDFormStyled = styled.form`
   display: flex;
   & > input {
-    max-width: 200px;
-    background: "white";
-    padding: 0.5rem;
     margin-right: 1rem;
   }
 `;

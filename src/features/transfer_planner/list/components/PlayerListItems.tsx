@@ -1,20 +1,24 @@
 import PlayerListItem from "./PlayerListItem";
-import { SortOptions, Player } from "../../../store_features/players/players";
+import {
+  SortOptions,
+  Player,
+} from "../../../../store_features/players/players";
 import PlayerListItemsHeader from "./PlayerListItemsHeader";
-import { PlayersListItemsStyled } from "./List.styled";
+import { PlayersListItemsStyled } from "./PlayersList.styled";
+import { useAppSelector } from "../../../../store/hooks";
 
 type PlayerListItemsProps = {
   pagesData: Array<Array<Player>>;
   page: number;
-  sortOptions: SortOptions;
   handleSortChange: (sortOptions: SortOptions) => void;
 };
 const PlayerListItems = ({
   pagesData,
   page,
-  sortOptions,
   handleSortChange,
 }: PlayerListItemsProps) => {
+  const sortOptions = useAppSelector((state) => state.players.sortOptions);
+
   return (
     <PlayersListItemsStyled data-testid="player-list-items">
       <PlayerListItemsHeader

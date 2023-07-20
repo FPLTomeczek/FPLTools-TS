@@ -9,7 +9,7 @@ import SnackbarWrapper from "../shared/ui/Snackbar/SnackbarWrapper";
 import UserIDForm from "../shared/ui/Form/UserIDForm";
 import TransferPlannerDemo from "../features/transfer_planner/demo/TransferPlannerDemo";
 import Pitch from "../features/transfer_planner/pitch/Pitch";
-import PlayersList from "../features/transfer_planner/list/PlayersList";
+import PlayersList from "../features/transfer_planner/list/components/PlayersList";
 import GameweeksTransfersContainer from "../features/transfer_planner/gameweeks_transfers_summary/components/GameweeksTransfersContainer";
 
 const TransferPlannerContent = ({ isLoading }: { isLoading: boolean }) => {

@@ -1,7 +1,7 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
-import { SortOptions } from "../../../store_features/players/players";
+import { SortOptions } from "../../../../store_features/players/players";
 
 const PlayerListItemsHeader = ({
   sortOptions,

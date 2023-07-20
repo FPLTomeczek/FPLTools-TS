@@ -8,7 +8,7 @@ import {
   proxyHandler,
   getMockPlayersProxies,
 } from "../../../../shared/utils/tests/utils";
-import PlayersList from "../PlayersList";
+import PlayersList from "../components/PlayersList";
 import { mockPlayer } from "../../../../shared/utils/tests/utils";
 import { IS_SEASON_IN_PROGRESS } from "../../../../shared/utils/constants";
 
