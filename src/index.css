@@ -159,7 +159,7 @@ sup {
 img {
   border-style: none;
 }
-.player-shirt {
+.pick-shirt {
   width: 50px;
 }
 
@@ -191,44 +191,6 @@ button {
   font-weight: 500;
   cursor: pointer;
 }
-
-.btn-primary {
-  background-color: var(--secondary-color);
-}
-
-.btn-direction {
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--primary-color);
-  background-color: var(--secondary-color);
-}
-
-.btn-delete {
-  background-color: var(--warning-color);
-}
-
-.btn-primary,
-.btn-direction,
-.btn-delete {
-  transition: background-color 0.3s;
-  padding: 0.5rem;
-}
-
-.btn-direction:hover,
-.btn-primary:hover {
-  background-color: var(--secondary-color-dark);
-}
-
-.btn-delete:hover {
-  background-color: var(--warning-color-dark);
-}
-
-.btn-direction > svg {
-  font-size: 1rem;
-}
-
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.

@@ -5,6 +5,7 @@ import { PlayerRankingsContext } from "../context/PlayerRankingsContext";
 import { filterPlayers } from "../../../shared/helper/filterPlayers";
 import { PlayerRankingsListStyled } from "./PlayerRankings.styled";
 import { Player } from "../../../store_features/players/players";
+import { Button } from "../../../shared/ui/Buttons/Button";
 
 const PlayerRankingsList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -39,12 +40,9 @@ const PlayerRankingsList = () => {
         return <PlayerRankingListItem player={player} key={player.id} />;
       })}
       <div className="load-more-btn-container">
-        <button
-          className="btn-primary load-more-btn"
-          onClick={handleLoadingNewPlayers}
-        >
+        <Button className="load-more-btn" onClick={handleLoadingNewPlayers}>
           Load More
-        </button>
+        </Button>
       </div>
     </PlayerRankingsListStyled>
   );

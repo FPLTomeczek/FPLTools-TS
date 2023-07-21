@@ -145,13 +145,11 @@ export const ManagerTeamInfoStyled = styled.div`
 `;
 
 export const PickStyled = styled.div`
-  .player-pick {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-  }
-  .player-pick-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  .pick-text {
     min-width: 100px;
     box-sizing: border-box;
     text-align: center;
@@ -159,19 +157,16 @@ export const PickStyled = styled.div`
     padding: 0.25rem;
     margin: 2px 0;
   }
-  .player-pick > i {
+  .pick > i {
     font-size: 4rem;
   }
   .change-pick {
     background-color: yellow;
   }
-  .manipulate-player-buttons {
+  .manipulate-pick-buttons {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.25rem;
-  }
-  button {
-    cursor: pointer;
   }
   .player-pick-price {
     position: absolute;
