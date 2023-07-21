@@ -3,6 +3,8 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { setChip } from "../../../../store_features/drafts/draftsSlice";
 import { ChipsModalStyled } from "./Chips.styled";
 import { ChipsModalProps } from "../interfaces/chipsInterfaces";
+import { Button } from "../../../../shared/ui/Buttons/Button";
+import { DeleteButton } from "../../../../shared/ui/Buttons/DeleteButton";
 
 const ChipsModal = ({ modal, setModal }: ChipsModalProps) => {
   const dispatch = useAppDispatch();
@@ -16,8 +18,7 @@ const ChipsModal = ({ modal, setModal }: ChipsModalProps) => {
         state from current gameweek onwards?
       </p>
       <div className="chips-modal-btns">
-        <button
-          className="btn-delete"
+        <DeleteButton
           onClick={() => {
             dispatch(setChip({ chipName: "" }));
             if (currentChip !== modal.newChipName) {
@@ -27,13 +28,10 @@ const ChipsModal = ({ modal, setModal }: ChipsModalProps) => {
           }}
         >
           Delete
-        </button>
-        <button
-          className="btn-primary"
-          onClick={() => setModal({ ...modal, isOpen: false })}
-        >
+        </DeleteButton>
+        <Button onClick={() => setModal({ ...modal, isOpen: false })}>
           Cancel
-        </button>
+        </Button>
       </div>
     </ChipsModalStyled>
   );

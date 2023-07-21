@@ -28,7 +28,7 @@ const NextFixture = ({
   });
 
   return (
-    <p className="player-pick-text" id="player-pick-next-fixture">
+    <p className="pick-text" id="player-pick-next-fixture">
       {nextFixtureText.join(", ")}
       {sellCost > 0 ? (
         <span

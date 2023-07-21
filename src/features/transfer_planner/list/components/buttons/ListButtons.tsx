@@ -1,9 +1,10 @@
-import { Direction } from "../../../../../shared/ui/Buttons/enums/direction";
-import { ListData } from "../filters/PlayersListFilters";
-import { ListButtonsStyled } from "../PlayersList.styled";
-import DirectionButton from "../../../../../shared/ui/Buttons/enums/DirectionButton";
-import ArrowIcon from "../../../../../shared/ui/Icons/ArrowIcon";
 import React from "react";
+
+import { Direction } from "../../../../../shared/ui/Buttons/enums/direction";
+import { ListButtonsStyled } from "../PlayersList.styled";
+import ArrowIcon from "../../../../../shared/ui/Icons/ArrowIcon";
+import { ListData } from "../types";
+import { DirectionButton } from "../../../../../shared/ui/Buttons/DirectionButton";
 
 const directions = Object.values(Direction);
 
@@ -14,9 +15,8 @@ const ListButtons = ({ handleSetPage, page, numOfPages }: ListData) => {
         return (
           <React.Fragment key={direction}>
             <DirectionButton
-              direction={direction}
-              onClick={handleSetPage}
-              ariaLabel={`${direction} page`}
+              onClick={() => handleSetPage(direction)}
+              aria-label={`${direction} page`}
             >
               <ArrowIcon direction={direction} />
             </DirectionButton>
