@@ -18,6 +18,14 @@ export const NavbarStyled = styled.nav`
   .list-item-navbar-mobile {
     display: none;
   }
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-logo {
+    width: 32px;
+  }
   @media screen and (max-width: 900px) {
     .nav-list {
       justify-content: space-between;

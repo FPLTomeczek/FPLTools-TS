@@ -11,10 +11,13 @@ export const CalendarTableStyled = styled.div`
     border-bottom: 1px solid gray;
   }
   .calendar-th {
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
   .calendar-th > span {
     font-size: 0.625rem;
+  }
+  .calendar-th-logo {
+    max-width: 48px;
   }
   .content-td {
     display: flex;
