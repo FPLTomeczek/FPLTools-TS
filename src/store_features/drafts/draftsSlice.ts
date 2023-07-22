@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
 
 import { CURRENT_GW, LAST_GW } from "../../shared/utils/constants";
@@ -10,6 +10,7 @@ import {
   setManagerTeam,
 } from "./initializers";
 import { Chip } from "../../features/transfer_planner/chips/enums/chipsEnums";
+import { Player } from "../players/players";
 
 interface Draft {
   managerTeam: ManagerTeamState[];
@@ -38,7 +39,10 @@ const draftSlice = createSlice({
   name: "draftTeam",
   initialState,
   reducers: {
-    setData(state, action) {
+    setData(
+      state,
+      action: PayloadAction<{ picks: Pick[]; managerHistory: ManagerHistory }>
+    ) {
       const { picks, managerHistory } = action.payload;
       const managerTeam: ManagerTeamState = setManagerTeam(
         picks,
@@ -50,7 +54,16 @@ const draftSlice = createSlice({
       state.initManagerTeam = managerTeam;
       state.managerHistory = managerHistory;
     },
-    removePick(state, action) {
+    removePick(
+      state,
+      action: PayloadAction<{
+        id: number;
+        position: number;
+        element_type: string;
+        sellCost: number;
+        cost: number;
+      }>
+    ) {
       const { id, position, element_type, sellCost = 0, cost } = action.payload;
       const draft = state.managerTeam[state.draftNumber];
       const dataByGameweek = draft.dataByGameweeks[draft.gameweek];
@@ -91,7 +104,7 @@ const draftSlice = createSlice({
         removedPickIndex,
       };
     },
-    retrievePick(state, action) {
+    retrievePick(state, action: PayloadAction<number>) {
       const position = action.payload;
       const draft = state.managerTeam[state.draftNumber];
 
@@ -128,7 +141,7 @@ const draftSlice = createSlice({
         }
       }
     },
-    addPick(state, action) {
+    addPick(state, action: PayloadAction<Player>) {
       const draft = state.managerTeam[state.draftNumber];
       const dataByGameweeks =
         state.managerTeam[state.draftNumber].dataByGameweeks[
@@ -152,6 +165,7 @@ const draftSlice = createSlice({
           draft.picks[blankPlayerMatchRole.removedPickIndex] = {
             ...newPlayer,
             position,
+            sellCost: newPlayer.now_cost,
           };
           if (initialPicksIDs.includes(newPlayer.id)) {
             draftSlice.caseReducers.retrievePick(state, {
@@ -164,7 +178,7 @@ const draftSlice = createSlice({
         }
       }
     },
-    makeChange(state, action) {
+    makeChange(state, action: PayloadAction<number>) {
       const draft = state.managerTeam[state.draftNumber];
       const id = action.payload;
       const index = state.managerTeam[state.draftNumber].picks
@@ -182,7 +196,10 @@ const draftSlice = createSlice({
       }
       draft.pickToChange = draft.picks[index];
     },
-    validatePicks(state, action) {
+    validatePicks(
+      state,
+      action: PayloadAction<{ isError: boolean; message: string }>
+    ) {
       const { isError, message } = action.payload;
       // const { isError, message, gameweek } = action.payload;
       if (isError) {
@@ -240,7 +257,7 @@ const draftSlice = createSlice({
         };
       }
     },
-    updateGameweeks(state, action) {
+    updateGameweeks(state, action: PayloadAction<number>) {
       const gameweek = action.payload;
 
       const draft = state.managerTeam[state.draftNumber];
@@ -254,7 +271,15 @@ const draftSlice = createSlice({
         message: "",
       };
     },
-    updatePicksByGameweekAndTransfers(state, action) {
+    updatePicksByGameweekAndTransfers(
+      state,
+      action: PayloadAction<{
+        picks: Pick[];
+        gameweek: number;
+        transfers: number;
+        initialPicksByGameweek: Pick[];
+      }>
+    ) {
       const { picks, gameweek, transfers, initialPicksByGameweek } =
         action.payload;
 
@@ -301,10 +326,10 @@ const draftSlice = createSlice({
       }
       localStorage.setItem("drafts", JSON.stringify(state.managerTeam));
     },
-    updateDraftNumber(state, action) {
+    updateDraftNumber(state, action: PayloadAction<number>) {
       state.draftNumber = action.payload;
     },
-    setChip(state, action: { payload: { chipName: string }; type: string }) {
+    setChip(state, action: PayloadAction<{ chipName: string }>) {
       const draft = state.managerTeam[state.draftNumber];
       const dataByGameweek = draft.dataByGameweeks[draft.gameweek];
       const { chipName } = action.payload;
