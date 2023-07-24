@@ -6,6 +6,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { updateGameweeks } from "../../../../store_features/drafts/draftsSlice";
 import { GameweekTransfersStyled } from "./GameweekTransfersSummary.styled";
 import { useDraft } from "../../../../store/customHooks";
+import { DirectionButton } from "../../../../shared/ui/Buttons/DirectionButton";
 
 const GameweekTransfers = ({
   removedPicks,
@@ -29,9 +30,9 @@ const GameweekTransfers = ({
     <GameweekTransfersStyled>
       <div className="gameweek-transfers-header">
         <h2>GW: {gameweek}</h2>
-        <button className="btn-direction" onClick={() => setGameweek(gameweek)}>
+        <DirectionButton onClick={() => setGameweek(gameweek)}>
           <KeyboardArrowUpIcon />
-        </button>
+        </DirectionButton>
       </div>
       {currentChip ? <h3>Chip played: {currentChip}</h3> : null}
       <div className="gameweek-transfers-picks">

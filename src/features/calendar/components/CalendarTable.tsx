@@ -4,6 +4,8 @@ import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
 import { setFixtureBackgroundColor } from "../../../shared/helper/setFixtureBackgroundColor";
 import { TeamFixture } from "../../../store_features/teams/teamsSlice";
 import { CalendarTableStyled } from "./Calendar.styled";
+import logo from "../../../shared/assets/logos/fpltools_logo.png";
+import styled from "styled-components";
 
 const gwArray = Array.from({ length: LAST_GW }, (_, i) => i + 1);
 
@@ -14,11 +16,13 @@ const CalendarTable = () => {
   );
 
   return (
-    <CalendarTableStyled style={{ maxWidth: "100%", overflowX: "auto" }}>
+    <CalendarTableStyled>
       <table>
         <thead className="calendar-thead">
           <tr>
-            <th className="calendar-th">FPLTools</th>
+            <th className="calendar-th">
+              <img className="calendar-th-logo" src={logo} alt="logo" />
+            </th>
             {gwArray.map((gw) => {
               const date = gameweeksList[gw - 1]?.deadline_time.split("T")[0];
               return (
@@ -37,7 +41,7 @@ const CalendarTable = () => {
             });
             const color = teamFiltered[0].color[0];
             return (
-              <CalendarTableDataRow
+              <CalendarTableRow
                 key={name}
                 fixtures={fixtures}
                 color={color}
@@ -51,7 +55,7 @@ const CalendarTable = () => {
   );
 };
 
-const CalendarTableDataRow = ({
+const CalendarTableRow = ({
   fixtures,
   color,
   name,
@@ -61,32 +65,40 @@ const CalendarTableDataRow = ({
   name: string;
 }) => {
   return (
-    <tr>
-      <td
-        style={{
-          borderBottom: `20px solid ${color}`,
-        }}
-      >
-        {name}
-      </td>
+    <CalendarTableRowStyled color={color}>
+      <td className="team-td">{name}</td>
       {fixtures.map((fixture, index) => (
-        <td
-          className="opponent-td"
+        <CalendarTableDataStyled
+          fixture={fixture}
+          setFixtureBackgroundColor={setFixtureBackgroundColor}
           key={index}
-          style={{
-            backgroundColor: setFixtureBackgroundColor(fixture.difficulty),
-            color: "black",
-            padding: "0.75rem 1rem",
-          }}
         >
           <div className="content-td">
             <span>{fixture.opponent}</span>
             <span>{fixture.isHome ? "(H)" : "(A)"}</span>
           </div>
-        </td>
+        </CalendarTableDataStyled>
       ))}
-    </tr>
+    </CalendarTableRowStyled>
   );
 };
+
+const CalendarTableRowStyled = styled.tr<{
+  color: string;
+}>`
+  .team-td {
+    border-bottom: 20px solid ${(props) => props.color};
+  }
+`;
+
+const CalendarTableDataStyled = styled.td<{
+  fixture: TeamFixture;
+  setFixtureBackgroundColor: (difficulty: number) => string | undefined;
+}>`
+  background-color: ${(props) =>
+    props.setFixtureBackgroundColor(props.fixture.difficulty)};
+  color: black;
+  padding: 0.75rem 1rem;
+`;
 
 export default CalendarTable;

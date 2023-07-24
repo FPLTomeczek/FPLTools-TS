@@ -1,4 +1,4 @@
-import { assignPositionsToPlayers, calculateSellingCost } from "../utils";
+import { assignPositionsToPlayers, calculateSellingCost } from "./utils/index";
 import { axiosInstance } from "../../../shared/utils/config/axiosConfig";
 import {
   ManagerHistory,

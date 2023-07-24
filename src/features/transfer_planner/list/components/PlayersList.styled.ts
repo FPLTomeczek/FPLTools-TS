@@ -2,20 +2,17 @@ import styled from "styled-components";
 
 export const PlayersListStyled = styled.div`
   width: 100%;
-  max-width: 700px;
   margin-left: 2rem;
+  margin-top: 2rem;
   box-sizing: border-box;
 
   @media screen and (max-width: 1400px) {
-    padding: 1rem 4rem;
     margin-left: 0;
-  }
-  @media screen and (max-width: 800px) {
-    padding: 1rem;
   }
 `;
 
 export const PlayersListItemsStyled = styled.div`
+  margin-bottom: 1rem;
   .player-list-header {
     display: flex;
     align-items: center;

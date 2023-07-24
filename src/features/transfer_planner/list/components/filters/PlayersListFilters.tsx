@@ -1,12 +1,15 @@
-import ListButtons from "../buttons/ListButtons";
 import { SelectFilter } from "./SelectFilter";
 import { InputFilter } from "./InputFilter";
-import { ListData } from "../types";
 import { Filter } from "./enums";
 import { usePlayersListFilters } from "./hooks/usePlayersListFilters";
 import { PlayersListFiltersStyled } from "./PlayersListFilters.styled";
+import { Direction } from "../../../../../shared/ui/Buttons/enums/direction";
 
-const PlayersListFilters = ({ handleSetPage, page, numOfPages }: ListData) => {
+const PlayersListFilters = ({
+  handleSetPage,
+}: {
+  handleSetPage: (direction: Direction) => void;
+}) => {
   const { filterValues, handleChangeEvent } =
     usePlayersListFilters(handleSetPage);
 
@@ -33,11 +36,6 @@ const PlayersListFilters = ({ handleSetPage, page, numOfPages }: ListData) => {
           />
         </div>
       </div>
-      <ListButtons
-        handleSetPage={handleSetPage}
-        page={page}
-        numOfPages={numOfPages}
-      />
     </PlayersListFiltersStyled>
   );
 };

@@ -13,9 +13,8 @@ export const TransferPlannerContentStyled = styled.div`
   .pitch-playerlist-container {
     display: flex;
     align-items: start;
-    padding: 2rem 0;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   @media screen and (max-width: 1400px) {

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { getManagerData } from "../../../features/transfer_planner/service/getData";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import styled from "styled-components";
+import { Button } from "../Buttons/Button";
 
 const UserIDForm = ({
   setError,
@@ -32,20 +33,29 @@ const UserIDForm = ({
   return (
     <UserIDFormStyled>
       <input placeholder="1234" ref={inputRef} />
-      <button
-        className="btn-primary"
+      <Button
+        className="submit-user-id-btn"
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
       >
         Submit
-      </button>
+      </Button>
     </UserIDFormStyled>
   );
 };
 
 const UserIDFormStyled = styled.form`
   display: flex;
+  margin-top: 2rem;
   & > input {
     margin-right: 1rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    justify-content: space-between;
+    .submit-user-id-btn {
+      width: 100%;
+    }
   }
 `;
 
