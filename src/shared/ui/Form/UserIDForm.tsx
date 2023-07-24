@@ -45,6 +45,7 @@ const UserIDForm = ({
 
 const UserIDFormStyled = styled.form`
   display: flex;
+  margin-top: 2rem;
   & > input {
     margin-right: 1rem;
   }

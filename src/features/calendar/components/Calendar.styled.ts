@@ -28,6 +28,9 @@ export const CalendarTableStyled = styled.div`
 export const CalendarTimerStyled = styled.div`
   text-align: center;
   margin-bottom: 2rem;
+  & > h2 {
+    margin-top: 2rem;
+  }
   .timer-countdown {
     display: flex;
     gap: 2rem;
