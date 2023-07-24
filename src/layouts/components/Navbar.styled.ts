@@ -8,8 +8,11 @@ export const NavbarStyled = styled.nav`
     gap: 2rem;
     justify-content: flex-start;
   }
-  .nav-list > li {
+  .list-item-navbar {
     padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .nav-list a,
   .nav-list a:visited {
@@ -18,10 +21,20 @@ export const NavbarStyled = styled.nav`
   .list-item-navbar-mobile {
     display: none;
   }
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-logo {
+    width: 32px;
+    padding: 0.5rem;
+  }
   @media screen and (max-width: 900px) {
     .nav-list {
       justify-content: space-between;
       align-items: center;
+      margin-right: 1rem;
     }
     .list-item-navbar {
       display: none;

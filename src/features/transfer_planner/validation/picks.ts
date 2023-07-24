@@ -1,5 +1,5 @@
 import { Pick } from "../../../store_features/drafts/drafts";
-import { splittingPicksByRoles } from "../utils";
+import { splittingPicksByRoles } from "../utils/utils";
 import {
   FIRST_ELEVEN_GK,
   FIRST_ELEVEN_DEF_MIN,

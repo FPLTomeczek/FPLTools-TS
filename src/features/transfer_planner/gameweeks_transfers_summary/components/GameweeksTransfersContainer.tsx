@@ -1,7 +1,7 @@
 import { useDraft } from "../../../../store/customHooks";
 import { CURRENT_GW, LAST_GW } from "../../../../shared/utils/constants";
 import GameweekTransfers from "./GameweekTransfers";
-import { GameweeksTransfersContainerStyled } from "../../pitch/Pitch.styled";
+import { GameweeksTransfersContainerStyled } from "../../pitch/components/Pitch.styled";
 
 const GameweeksTransfersContainer = () => {
   const dataByGameweeks = useDraft().dataByGameweeks;

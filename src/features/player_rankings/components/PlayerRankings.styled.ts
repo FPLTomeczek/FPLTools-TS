@@ -2,15 +2,16 @@ import styled from "styled-components";
 
 export const PlayerRankingsFiltersStyled = styled.div`
   max-width: 100%;
-  overflow-x: auto;
+  margin-top: 2rem;
 `;
 
 export const PlayerRankingsFilterButtonsStyled = styled.div`
   position: relative;
-  padding: 1rem 2px;
+  padding: 0.5rem 2px;
   display: flex;
   gap: 0.25rem;
   overflow-x: auto;
+
   & > * {
     padding: 0.25rem 0.5rem;
     min-width: 100px;
@@ -29,7 +30,7 @@ export const PlayerRankingsListStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   width: 100%;
 
   & p {

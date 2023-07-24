@@ -10,7 +10,7 @@ export interface DataByGameweek {
   chipByGameweek: string;
 }
 
-type ValidationError = {
+export type ValidationError = {
   isError: boolean;
   message: string;
 };

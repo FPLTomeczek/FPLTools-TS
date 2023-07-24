@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PitchStyled = styled.div`
   max-width: 800px;
   width: 100%;
-
+  margin-top: 2rem;
   @media screen and (max-width: 1400px) {
     .gameweek-transfer-container-planner-picks {
       display: none;
@@ -53,12 +53,6 @@ export const FirstElevenStyled = styled.div<{ imageURL: string }>`
   }
 `;
 
-export const PitchHeaderStyled = styled.div`
-  @media screen and (max-width: 800px) {
-    padding: 0 1rem;
-  }
-`;
-
 export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
   display: flex;
   justify-content: space-between;
@@ -74,7 +68,7 @@ export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
 export const GameweeksTransfersContainerStyled = styled.div`
   display: flex;
   justify-content: start;
-  padding: 1rem 0;
+  margin-top: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
@@ -145,13 +139,11 @@ export const ManagerTeamInfoStyled = styled.div`
 `;
 
 export const PickStyled = styled.div`
-  .player-pick {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-  }
-  .player-pick-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  .pick-text {
     min-width: 100px;
     box-sizing: border-box;
     text-align: center;
@@ -159,19 +151,16 @@ export const PickStyled = styled.div`
     padding: 0.25rem;
     margin: 2px 0;
   }
-  .player-pick > i {
+  .pick > i {
     font-size: 4rem;
   }
   .change-pick {
     background-color: yellow;
   }
-  .manipulate-player-buttons {
+  .manipulate-pick-buttons {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.25rem;
-  }
-  button {
-    cursor: pointer;
   }
   .player-pick-price {
     position: absolute;
@@ -188,7 +177,7 @@ export const PickStyled = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    .player-pick-text {
+    .pick-text {
       font-size: 0.75rem;
       max-width: 100px;
       min-width: auto;

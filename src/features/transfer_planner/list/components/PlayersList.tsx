@@ -25,11 +25,7 @@ const PlayersList = () => {
 
   return (
     <PlayersListStyled>
-      <PlayersListFilters
-        handleSetPage={handleSetPage}
-        page={page}
-        numOfPages={numOfPages}
-      />
+      <PlayersListFilters handleSetPage={handleSetPage} />
       <PlayerListItems
         pagesData={pagesData}
         page={page}
