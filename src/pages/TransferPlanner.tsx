@@ -15,11 +15,13 @@ import GameweeksTransfersContainer from "../features/transfer_planner/gameweeks_
 const TransferPlannerContent = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <TransferPlannerContentStyled>
-      <div className="pitch-playerlist-container">
-        <Pitch isLoading={isLoading} />
-        <PlayersList />
+      <div>
+        <div className="pitch-playerlist-container">
+          <Pitch isLoading={isLoading} />
+          <PlayersList />
+        </div>
+        <GameweeksTransfersContainer />
       </div>
-      <GameweeksTransfersContainer />
     </TransferPlannerContentStyled>
   );
 };

@@ -36,7 +36,6 @@ export const ChipsStyled = styled.div`
   }
 
   @media screen and (max-width: 800px) {
-    padding: 0 1rem;
     .chip-button {
       padding: 1rem;
     }

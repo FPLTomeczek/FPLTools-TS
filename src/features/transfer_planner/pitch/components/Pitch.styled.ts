@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PitchStyled = styled.div`
   max-width: 800px;
   width: 100%;
-
+  margin-top: 2rem;
   @media screen and (max-width: 1400px) {
     .gameweek-transfer-container-planner-picks {
       display: none;
@@ -53,12 +53,6 @@ export const FirstElevenStyled = styled.div<{ imageURL: string }>`
   }
 `;
 
-export const PitchHeaderStyled = styled.div`
-  @media screen and (max-width: 800px) {
-    padding: 0 1rem;
-  }
-`;
-
 export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
   display: flex;
   justify-content: space-between;
@@ -74,7 +68,7 @@ export const BenchStyled = styled.div<{ BBPlayed: boolean }>`
 export const GameweeksTransfersContainerStyled = styled.div`
   display: flex;
   justify-content: start;
-  padding: 1rem 0;
+  margin-top: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
@@ -183,7 +177,7 @@ export const PickStyled = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    .player-pick-text {
+    .pick-text {
       font-size: 0.75rem;
       max-width: 100px;
       min-width: auto;

@@ -13,9 +13,11 @@ const Navbar = () => {
   return (
     <NavbarStyled>
       <ul className="nav-list">
-        <Link to="/">
-          <img src={logo} alt="logo" className="navbar-logo" />
-        </Link>
+        <li className="list-item-navbar">
+          <Link to="/">
+            <img src={logo} alt="logo" className="navbar-logo" />
+          </Link>
+        </li>
         {navbarList.map((li) => (
           <li className="list-item-navbar" key={li.name}>
             <Link to={li.url}>{li.name}</Link>

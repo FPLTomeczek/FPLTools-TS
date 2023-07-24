@@ -7,8 +7,7 @@ export const PlayersListFiltersStyled = styled.div`
   .filters-container {
     display: flex;
     gap: 1rem;
-    align-items: start;
-    flex-direction: column;
+    align-items: end;
   }
   .select-filters-container {
     display: flex;
@@ -19,6 +18,9 @@ export const PlayersListFiltersStyled = styled.div`
     flex-direction: column;
     text-transform: capitalize;
   }
+  .player-list-filter > select {
+    height: 40px;
+  }
 
   .select-filter > label {
     margin-bottom: 4px;
@@ -28,6 +30,8 @@ export const PlayersListFiltersStyled = styled.div`
     align-items: start;
     .filters-container {
       margin-bottom: 1rem;
+      flex-direction: column;
+      align-items: start;
     }
   }
 `;

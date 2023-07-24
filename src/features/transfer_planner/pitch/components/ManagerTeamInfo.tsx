@@ -47,7 +47,7 @@ const ManagerTeamInfo = () => {
           >
             <ArrowIcon direction={Direction.PREV} />
           </DirectionButton>
-          <p>Gameweek: {gameweek}</p>
+          <p>GW: {gameweek}</p>
           <DirectionButton
             disabled={isEmpty(picks)}
             onClick={() => handleUpdateGameweeks(gameweek + 1)}
