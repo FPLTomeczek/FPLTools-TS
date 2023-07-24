@@ -31,12 +31,12 @@ Link to backend project: [FPLTools backend](https://github.com/FPLTomeczek/Backe
 
 ### Transfer Planner
 
-![Transfer-Planner](./assets/images/readme/tf.png)<br/>
+![Transfer-Planner](./assets/images/readme/tf.png?raw=true)<br/>
 
 ### Player Rankings
 
-![Player-Rankings](./assets/images/readme/player-rankings.png)<br/>
+![Player-Rankings](./assets/images/readme/player-rankings.png?raw=true)<br/>
 
 ### Calendar
 
-![FDR-Schedule](./assets/images/readme/calendar.png)<br/>
+![FDR-Schedule](./assets/images/readme/calendar.png?raw=true)<br/>

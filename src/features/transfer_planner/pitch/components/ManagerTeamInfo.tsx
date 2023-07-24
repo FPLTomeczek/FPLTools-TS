@@ -43,6 +43,7 @@ const ManagerTeamInfo = () => {
         <div className="gameweek-container">
           <DirectionButton
             disabled={isEmpty(picks)}
+            aria-label="prev gameweek"
             onClick={() => handleUpdateGameweeks(gameweek - 1)}
           >
             <ArrowIcon direction={Direction.PREV} />
@@ -50,6 +51,7 @@ const ManagerTeamInfo = () => {
           <p>GW: {gameweek}</p>
           <DirectionButton
             disabled={isEmpty(picks)}
+            aria-label="next gameweek"
             onClick={() => handleUpdateGameweeks(gameweek + 1)}
           >
             <ArrowIcon direction={Direction.NEXT} />

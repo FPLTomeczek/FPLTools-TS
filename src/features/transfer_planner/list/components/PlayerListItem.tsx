@@ -5,13 +5,13 @@ import PlayerListItemColor from "./PlayerListItemColor";
 
 const PlayerListItem = ({ player }: { player: Player }) => {
   return (
-    <div className="player-list-header player-list-border">
+    <li className="player-list-header player-list-border">
       <div className="player-add-button-color">
         <PlayerListItemAddButton player={player} />
         <PlayerListItemColor player={player} />
       </div>
       <PlayerListItemData player={player} />
-    </div>
+    </li>
   );
 };
 

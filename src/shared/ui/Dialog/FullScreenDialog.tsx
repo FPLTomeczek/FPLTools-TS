@@ -46,6 +46,7 @@ export const FullScreenDialog = ({
     <div>
       <Button
         variant="contained"
+        aria-label="open navbar"
         onClick={handleClickOpen}
         sx={{ backgroundColor: "var(--secondary-color)" }}
       >
