@@ -63,7 +63,7 @@ const ManagerTeamInfo = () => {
             Transfers:{" "}
             {currentChip === Chip.WILDCARD || currentChip === Chip.FREE_HIT ? (
               <>
-                <span>∞</span>
+                <span data-testid="infinite-transfers-span">∞</span>
                 <br />
               </>
             ) : (
@@ -74,6 +74,7 @@ const ManagerTeamInfo = () => {
                       ? "error-value"
                       : ""
                   } `}
+                  data-testid="transfers-value-span"
                 >
                   {dataByGameweeks[gameweek]?.transfersByGameweek
                     ? dataByGameweeks[gameweek]?.transfersByGameweek

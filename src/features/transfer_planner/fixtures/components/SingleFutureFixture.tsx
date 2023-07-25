@@ -1,6 +1,6 @@
 import { FixtureItem } from "./Fixtures.styled";
 
-const FutureFixture = ({
+const SingleFutureFixture = ({
   opponent,
   isHome,
   difficulty,
@@ -16,4 +16,4 @@ const FutureFixture = ({
   );
 };
 
-export default FutureFixture;
+export default SingleFutureFixture;

@@ -15,7 +15,7 @@ const Bench = ({ picks }: { picks: IPick[] }) => {
   }
 
   return (
-    <BenchStyled BBPlayed={currentChipIsBB}>
+    <BenchStyled BBPlayed={currentChipIsBB} data-testid="bench">
       {picks.map((pick) => {
         return (
           <Pick key={pick.position} pick={pick} index={pickStartIndex++} />
