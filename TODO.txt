@@ -1,0 +1,34 @@
+Done
+- Responsive Styling X 
+- README X
+
+
+Backlog:
+- a lot of tests (single future fixture, single gameweek transfer, change pick, make transfer, save gameweek)
+- pagespeed (think about nextjs)
+- navbar highlight color onClick
+- README z installem zobacz co z env?
+- TF Logic
+- validation: after error reset all GWs from current onwards
+- make containers/components structure
+- Layout For Page
+- store picks as cookies?
+- Theme
+- CMS System
+- Private Routes (Register, Login)
+- Players Chances To Score values
+- Player Rankings: filter by score and assist at the end
+- FDR (rethink updating fixtures for players in transfer_planner):
+- Change variable IS_SEASON_IN_PROGRESS dynamically by date, some script?
+- Add Chips to user Draft, Redux
+- chips:
+    - TC: Mark TC (available after captain feature)
+    - Tests
+    - disable gameweek change when some picks are blank or reset picks to initial state when changing gameweek
+    - disable multiple chips, i.e. wildcard in every gameweek
+- Refactor (drafts slice)
+
+Bugs: 
+- Scroll select going up and color should be changed
+
+

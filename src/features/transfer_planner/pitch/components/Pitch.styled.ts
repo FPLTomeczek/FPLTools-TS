@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PitchStyled = styled.div`
   max-width: 800px;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: calc(2rem + 25px);
   @media screen and (max-width: 1400px) {
     .gameweek-transfer-container-planner-picks {
       display: none;

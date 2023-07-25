@@ -14,10 +14,6 @@ export const NavbarStyled = styled.nav`
     justify-content: center;
     align-items: center;
   }
-  .nav-list a,
-  .nav-list a:visited {
-    color: white;
-  }
   .list-item-navbar-mobile {
     display: none;
   }
@@ -25,10 +21,17 @@ export const NavbarStyled = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: color 0.3s ease-out;
+  }
+  & a:hover {
+    color: var(--secondary-color);
   }
   .navbar-logo {
     width: 32px;
     padding: 0.5rem;
+  }
+  .text-secondary-light {
+    color: var(--secondary-color-light);
   }
   @media screen and (max-width: 900px) {
     .nav-list {

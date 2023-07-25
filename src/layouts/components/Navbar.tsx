@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FullScreenDialog } from "../../shared/ui/Dialog/FullScreenDialog";
 import { NavbarStyled } from "./Navbar.styled";
 import logo from "../../shared/assets/logos/fpltools_logo.png";
+import { useState } from "react";
 
 const navbarList = [
   { url: "/", name: "Planner" },
@@ -10,6 +11,12 @@ const navbarList = [
 ];
 
 const Navbar = () => {
+  const [activePage, setActivePage] = useState(navbarList[0].name);
+
+  const handleSettingActivePage = (name: string) => {
+    setActivePage(name);
+  };
+
   return (
     <NavbarStyled>
       <ul className="nav-list">
@@ -19,8 +26,19 @@ const Navbar = () => {
           </Link>
         </li>
         {navbarList.map((li) => (
-          <li className="list-item-navbar" key={li.name}>
-            <Link to={li.url}>{li.name}</Link>
+          <li
+            className="list-item-navbar"
+            key={li.name}
+            onClick={() => handleSettingActivePage(li.name)}
+          >
+            <Link
+              className={`${
+                activePage === li.name ? "text-secondary-light" : ""
+              }`}
+              to={li.url}
+            >
+              {li.name}
+            </Link>
           </li>
         ))}
         <li className="list-item-navbar-mobile">
@@ -29,7 +47,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="list-item-navbar-mobile">
-          <FullScreenDialog listItems={navbarList} />
+          <FullScreenDialog
+            listItems={navbarList}
+            activePage={activePage}
+            handleSettingActivePage={handleSettingActivePage}
+          />
         </li>
       </ul>
     </NavbarStyled>
