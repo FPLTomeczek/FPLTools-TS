@@ -8,13 +8,15 @@ interface PlayerRankingsContext {
   updateListCount: (reset: boolean, value: number) => void;
 }
 
+const DEFAULT_MAX_PRICE = 150;
+
 export const PlayerRankingsContext = createContext<PlayerRankingsContext>({
   filters: {
     name: "",
     team: "ALL",
     role: "ALL",
     probability: "scores",
-    price: 0,
+    price: DEFAULT_MAX_PRICE,
   },
   filter: () => {
     // function init
@@ -35,7 +37,7 @@ const PlayerRankingsProvider = ({
     team: "ALL",
     role: "ALL",
     probability: "Score",
-    price: 0,
+    price: DEFAULT_MAX_PRICE,
   });
 
   const [listCount, setlistCount] = useState(10);

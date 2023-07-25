@@ -6,14 +6,9 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { PreloadedState } from "@reduxjs/toolkit";
 
 import { AppStore, RootState, setupStore } from "../../../store/store";
+import { Player } from "../../../store_features/players/players";
 
-export interface mockPlayer {
-  id: number;
-  web_name: string;
-  team: string;
-}
-
-export const getMockPlayersProxies = (mockPlayers: mockPlayer[]) => {
+export const getMockPlayersProxies = (mockPlayers: Partial<Player>[]) => {
   const proxiesArr = [];
   for (const mockPlayer of mockPlayers) {
     proxiesArr.push(new Proxy(mockPlayer, proxyHandler));
@@ -22,7 +17,7 @@ export const getMockPlayersProxies = (mockPlayers: mockPlayer[]) => {
 };
 
 export const proxyHandler = {
-  get(obj: mockPlayer, prop: keyof mockPlayer) {
+  get(obj: Partial<Player>, prop: keyof Partial<Player>) {
     return prop in obj ? obj[prop] : "";
   },
 };
