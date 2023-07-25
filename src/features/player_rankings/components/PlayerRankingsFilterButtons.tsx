@@ -18,6 +18,7 @@ const PlayerRankingsFilterButtons = ({
     <PlayerRankingsFilterButtonsStyled>
       <button
         id="reset-button"
+        data-testid="reset-filters-button"
         onClick={() =>
           filter({
             name: "",

@@ -52,7 +52,7 @@ const PlayerRankingListItem = ({ player }: { player: Player }) => {
   const { web_name, scoring_chance } = player;
 
   return (
-    <div className="player-ranking-item">
+    <div data-testid="player-ranking-item" className="player-ranking-item">
       <div className="player-ranking-item-desc">
         <p>{web_name}</p>
       </div>
@@ -68,7 +68,12 @@ const PlayerRankingListItem = ({ player }: { player: Player }) => {
                     0,1 )`,
             }}
           ></div>
-          <span className="player-scoring-chance">{scoring_chance}</span>
+          <span
+            className="player-scoring-chance"
+            data-testid="player-scoring-chance"
+          >
+            {scoring_chance}
+          </span>
         </div>
       </div>
     </div>
