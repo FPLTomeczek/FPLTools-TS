@@ -1,3 +1,4 @@
+import { Range } from "../../../../shared/utils/types/range";
 import { FixtureItem } from "./Fixtures.styled";
 
 const SingleFutureFixture = ({
@@ -7,10 +8,14 @@ const SingleFutureFixture = ({
 }: {
   opponent: string;
   isHome: boolean;
-  difficulty: number;
+  difficulty: Range<2, 6>;
 }) => {
   return (
-    <FixtureItem isHome={isHome} difficulty={difficulty}>
+    <FixtureItem
+      data-testid="single-fixture-item"
+      isHome={isHome}
+      difficulty={difficulty}
+    >
       {opponent}
     </FixtureItem>
   );

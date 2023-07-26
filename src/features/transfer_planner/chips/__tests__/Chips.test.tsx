@@ -1,8 +1,9 @@
-import { findByTestId, screen, waitFor } from "@testing-library/react";
-import TransferPlanner from "../../../../pages/TransferPlanner";
-import { renderWithProviders } from "../../../../shared/utils/tests/utils";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect } from "vitest";
+
+import TransferPlanner from "../../../../pages/TransferPlanner";
+import { renderWithProviders } from "../../../../shared/utils/tests/utils";
 
 describe("check app behavior after activating chip", () => {
   it("should make transfers unlimited by clicking wildcard chip", async () => {

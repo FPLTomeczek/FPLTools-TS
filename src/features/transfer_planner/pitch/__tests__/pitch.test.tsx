@@ -1,51 +1,43 @@
-// import { screen, waitFor } from "@testing-library/react";
-// import { describe, it, expect } from "vitest";
-// import configureStore from "redux-mock-store";
-// import Pitch from "../pitch/Pitch";
-// import { renderComponent, picks } from "./utils";
-// import userEvent from "@testing-library/user-event";
-// import realStore from "../../../../app/store";
+import userEvent from "@testing-library/user-event";
+import { screen, waitFor } from "@testing-library/react";
 
-// describe("make change", () => {
-//   // const mockStore = configureStore();
+import { renderWithProviders } from "../../../../shared/utils/tests/utils";
+import TransferPlanner from "../../../../pages/TransferPlanner";
 
-//   // const initialState = {
-//   //   managerTeam: {
-//   //     picks,
-//   //     pickToChange: {},
-//   //   },
-//   //   fixtures: {
-//   //     fixtureList: [],
-//   //   },
-//   // };
+describe("make picks manipulation", () => {
+  beforeEach(async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<TransferPlanner />);
+    const demoButton = screen.getByRole("button", { name: /demo/i });
+    await user.click(demoButton);
+  });
 
-//   it("should change player between first eleven and bench", async () => {
-//     const user = userEvent.setup();
-//     const enterIDInput = screen.getByRole("textbox", {
-//       name: /enter your id/i,
-//     });
-//     user.click(enterIDInput);
-//     user.type(enterIDInput, "7770");
-//     user.click(screen.getByRole("button", { name: /submit/i }));
+  it("should remove player from picks", async () => {
+    await waitFor(() => {
+      expect(screen.getByTestId("RemoveIcon-0")).toBeInTheDocument();
+    });
+    const user = userEvent.setup();
+    const removeIcon = screen.getByTestId("RemoveIcon-0");
+    await user.click(removeIcon);
+    expect(screen.getByText(/blank/i)).toBeInTheDocument();
+  });
 
-//     await waitFor(() =>
-//       expect(screen.getByTestId("pitch")).toBeInTheDocument()
-//     );
-//     renderComponent(<Pitch isLoading={false} />, realStore);
-//     const changePlayer0Button = await screen.findByTestId("change-button-0");
-//     const changePlayer11Button = await screen.findByTestId("change-button-11");
-
-//     console.log(realStore);
-
-//     await user.click(changePlayer0Button);
-//     await user.click(changePlayer11Button);
-
-//     const player0Name = screen.getByTestId("player-name-0");
-//     const player11Name = screen.getByTestId("player-name-11");
-
-//     expect(
-//       player0Name.textContent === "Arrizabalaga" &&
-//         player11Name.textContent === "Raya"
-//     ).toBe(true);
-//   });
-// });
+  it("should switch picks between bench and first eleven", async () => {
+    await waitFor(() => {
+      expect(screen.getByTestId("SwitchIcon-1")).toBeInTheDocument();
+    });
+    const user = userEvent.setup();
+    const firstElevenPlayerName = screen.getByTestId("pick-name-1").textContent;
+    const benchPlayerName = screen.getByTestId("pick-name-14").textContent;
+    const switchIconFirstElevenPick = screen.getByTestId("SwitchIcon-1");
+    await user.click(switchIconFirstElevenPick);
+    const switchIconBenchPick = screen.getByTestId("SwitchIcon-14");
+    await user.click(switchIconBenchPick);
+    expect(screen.getByTestId("pick-name-1").textContent).toEqual(
+      benchPlayerName
+    );
+    expect(screen.getByTestId("pick-name-14").textContent).toEqual(
+      firstElevenPlayerName
+    );
+  });
+});
