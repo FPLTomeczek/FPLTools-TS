@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -31,6 +32,7 @@ const DialogStyled = MuiStyled(Dialog)(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
+    justifyContent: "center",
   },
 }));
 
@@ -60,12 +62,19 @@ const PlayerRankingsFilters = () => {
         sx={{ m: 0 }}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>
-          {typeof dialogFilter !== "undefined"
-            ? dialogFilter?.charAt(0).toUpperCase() + dialogFilter?.slice(1)
-            : "NONE"}
-        </DialogTitle>
-
+        <div
+          className="dialog-header"
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <DialogTitle>
+            {typeof dialogFilter !== "undefined"
+              ? dialogFilter?.charAt(0).toUpperCase() + dialogFilter?.slice(1)
+              : "NONE"}
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </div>
         <DialogContent>
           <DialogActions>
             <DialogInputs dialogFilter={dialogFilter} />

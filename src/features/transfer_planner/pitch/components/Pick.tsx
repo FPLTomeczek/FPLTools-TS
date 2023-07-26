@@ -1,6 +1,6 @@
-import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
-import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
+import SwitchIcon from "@mui/icons-material/ChangeCircle";
+import RemoveIcon from "@mui/icons-material/Cancel";
+import ReturnIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 
 import { TEAMS_LIST } from "../../../../shared/utils/data/teamsData";
 import { Pick as IPick } from "../../../../store_features/drafts/drafts";
@@ -24,16 +24,16 @@ const Pick = ({ pick, index }: { pick: IPick; index: number }) => {
         {name !== "Blank" ? (
           <div className="manipulate-pick-buttons">
             <PickActionButton onClick={handleMakeChange}>
-              <ChangeCircleIcon color="warning" />
+              <SwitchIcon color="warning" data-testid={`SwitchIcon-${index}`} />
             </PickActionButton>
 
             <PickActionButton onClick={handleRemovePick}>
-              <CancelIcon color="error" />
+              <RemoveIcon color="error" data-testid={`RemoveIcon-${index}`} />
             </PickActionButton>
           </div>
         ) : (
           <PickActionButton onClick={handleRetrievePick}>
-            <ArrowCircleLeftRoundedIcon color="action" />
+            <ReturnIcon color="action" />
           </PickActionButton>
         )}
       </div>

@@ -1,6 +1,6 @@
 import { NEXT_FUTURE_FIXTURES } from "../../../../shared/utils/constants";
 import { useDraft } from "../../../../store/customHooks";
-import FutureFixture from "./SingleFutureFixture";
+import SingleFutureFixture from "./SingleFutureFixture";
 import DoubleFutureFixture from "./DoubleFutureFixture";
 import { FutureFixturesStyled } from "./Fixtures.styled";
 import { findDoubleFixtures } from "../utils";
@@ -43,7 +43,7 @@ const FutureFixtures = ({ team }: { team: string }) => {
           }
         } else {
           return (
-            <FutureFixture
+            <SingleFutureFixture
               key={id}
               opponent={team_a === team ? team_h : team_a}
               isHome={team_a !== team}

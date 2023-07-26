@@ -8,11 +8,8 @@ interface FixtureItemProps {
 }
 
 export const FixtureItem = styled.p<FixtureItemProps>`
-  text-transform: ${(props) => (props.isHome ? "none" : "lowercase")};
-  background-color: ${(props) =>
-    props.isHome
-      ? setFixtureBackgroundColor(props.difficulty)
-      : setFixtureBackgroundColor(props.difficulty)};
+  text-transform: ${(props) => (props.isHome ? "uppercase" : "lowercase")};
+  background-color: ${(props) => setFixtureBackgroundColor(props.difficulty)};
   font-weight: 700;
   width: 20px;
   box-sizing: border-box;

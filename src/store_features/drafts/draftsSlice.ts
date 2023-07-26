@@ -356,7 +356,9 @@ const draftSlice = createSlice({
           transferAmount = 2;
         }
       } else {
-        dataByGameweek.chipByGameweek = chipName;
+        if (typeof dataByGameweek !== "undefined") {
+          dataByGameweek.chipByGameweek = chipName;
+        }
       }
     },
   },

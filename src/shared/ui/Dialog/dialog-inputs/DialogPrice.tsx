@@ -27,6 +27,7 @@ const DialogPrice = ({ maxPrice }: { maxPrice: number }) => {
         onChange={handlePriceChange}
         max={maxPrice}
         sx={{ color: "var(--secondary-color)" }}
+        data-testid="slider-price-input"
       />
     </DialogPriceStyled>
   );

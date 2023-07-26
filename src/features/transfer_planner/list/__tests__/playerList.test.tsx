@@ -9,8 +9,8 @@ import {
   getMockPlayersProxies,
 } from "../../../../shared/utils/tests/utils";
 import PlayersList from "../components/PlayersList";
-import { mockPlayer } from "../../../../shared/utils/tests/utils";
 import { IS_SEASON_IN_PROGRESS } from "../../../../shared/utils/constants";
+import { Player } from "../../../../store_features/players/players";
 
 describe("fetching players", () => {
   it("team players are fetched", async () => {
@@ -30,7 +30,7 @@ describe("fetching players", () => {
 describe("list filtering", () => {
   const mockStore = configureStore();
 
-  const mockPlayers: mockPlayer[] = [
+  const mockPlayers: Partial<Player>[] = [
     { id: 1, web_name: "Raya", team: "BRE" },
     { id: 2, web_name: "Trippier", team: "NEW" },
     { id: 3, web_name: "Estupiñán", team: "BHA" },
