@@ -1,6 +1,6 @@
 import { Alert } from "@mui/material";
 
-import { ValidationError } from "../../../store_features/drafts/initializers";
+import { ValidationError } from "../../../store_features/drafts/helpers/initializers";
 
 export const AlertWrapper = ({
   validationError,

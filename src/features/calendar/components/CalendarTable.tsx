@@ -4,7 +4,7 @@ import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
 import { setFixtureBackgroundColor } from "../../../shared/helper/setFixtureBackgroundColor";
 import { TeamFixture } from "../../../store_features/teams/teamsSlice";
 import { CalendarTableStyled } from "./Calendar.styled";
-import logo from "../../../shared/assets/logos/fpltools_logo.png";
+import logo from "../../../shared/assets/logos/fpltools_logo.webp";
 import styled from "styled-components";
 
 const gwArray = Array.from({ length: LAST_GW }, (_, i) => i + 1);

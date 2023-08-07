@@ -19,6 +19,7 @@
   font-family: "Poppins";
   src: url(./shared/assets/fonts/Poppins-Regular.ttf) format("truetype"),
     url(./shared/assets/fonts/Poppins-Bold.ttf) format("truetype");
+  font-display: swap;
 }
 
 html {
@@ -30,6 +31,7 @@ body {
   font-family: Poppins, serif;
   background: var(--primary-color);
   color: white;
+  box-sizing: border-box;
 }
 
 /**
@@ -83,6 +85,7 @@ pre {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 a:visited {
   color: white;

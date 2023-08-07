@@ -1,4 +1,4 @@
-import { Pick } from "../../../../store_features/drafts/drafts";
+import { Pick } from "../../../../store_features/drafts/interfaces/drafts";
 import { TEAMS_LIST } from "../../../../shared/utils/data/teamsData";
 import { SingleGameweekTransferStyled } from "./GameweekTransfersSummary.styled";
 

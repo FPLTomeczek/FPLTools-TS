@@ -1,7 +1,7 @@
 import { CURRENT_GW, LAST_GW } from "../../../../shared/utils/constants";
 import { useDraft } from "../../../../store/customHooks";
 import { useAppDispatch } from "../../../../store/hooks";
-import { Pick } from "../../../../store_features/drafts/drafts";
+import { Pick } from "../../../../store_features/drafts/interfaces/drafts";
 import {
   updateGameweeks,
   updatePicksByGameweekAndTransfers,

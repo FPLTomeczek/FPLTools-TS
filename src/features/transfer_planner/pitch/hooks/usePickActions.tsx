@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../../store/hooks";
-import { Pick } from "../../../../store_features/drafts/drafts";
+import { Pick } from "../../../../store_features/drafts/interfaces/drafts";
 import {
   makeChange,
   removePick,

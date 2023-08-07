@@ -1,5 +1,8 @@
 import { ensure } from "../../../../shared/helper/ensure";
-import { Pick, Transfer } from "../../../../store_features/drafts/drafts";
+import {
+  Pick,
+  Transfer,
+} from "../../../../store_features/drafts/interfaces/drafts";
 import { PlayerHistory } from "../../../../store_features/players/players";
 
 export const assignPositionsToPlayers: (

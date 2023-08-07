@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
 
 import { CURRENT_GW, LAST_GW } from "../../shared/utils/constants";
-import { ManagerHistory, Pick, playerBlankTemplate } from "./drafts";
+import { ManagerHistory, Pick, playerBlankTemplate } from "./interfaces/drafts";
 import {
   storage,
   ManagerTeamState,
   initialManagerTeamState,
   setManagerTeam,
-} from "./initializers";
+} from "./helpers/initializers";
 import { Chip } from "../../features/transfer_planner/chips/enums/chipsEnums";
 import { Player } from "../players/players";
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FullScreenDialog } from "../../shared/ui/Dialog/FullScreenDialog";
 import { NavbarStyled } from "./Navbar.styled";
-import logo from "../../shared/assets/logos/fpltools_logo.png";
+import logo from "../../shared/assets/logos/fpltools_logo.webp";
 import { useState } from "react";
 
 const navbarList = [

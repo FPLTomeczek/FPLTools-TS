@@ -1,6 +1,6 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-import { Pick } from "../../../../store_features/drafts/drafts";
+import { Pick } from "../../../../store_features/drafts/interfaces/drafts";
 import SingleGameweekTransfer from "./SingleGameweekTransfer";
 import { useAppDispatch } from "../../../../store/hooks";
 import { updateGameweeks } from "../../../../store_features/drafts/draftsSlice";

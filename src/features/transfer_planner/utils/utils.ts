@@ -1,4 +1,4 @@
-import { Pick } from "../../../store_features/drafts/drafts";
+import { Pick } from "../../../store_features/drafts/interfaces/drafts";
 
 function roleToIndex(role: string) {
   switch (role) {

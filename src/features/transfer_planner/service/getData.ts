@@ -4,7 +4,7 @@ import {
   ManagerHistory,
   Pick,
   Transfer,
-} from "../../../store_features/drafts/drafts";
+} from "../../../store_features/drafts/interfaces/drafts";
 import { AppDispatch } from "../../../store/store";
 import { PlayerHistory } from "../../../store_features/players/players";
 import { setData } from "../../../store_features/drafts/draftsSlice";
@@ -66,9 +66,7 @@ export const getManagerTeam = async (id: number) => {
   if (Object.hasOwn(teamInfo, "msg")) throw new Error();
 
   const teamIDs = teamInfo.picks.map((pick: APIPick) => pick.element);
-
   const playersPositions = getPlayersPositions(teamInfo.picks);
-
   const teamPicks: Pick[] = await getTeamPicks(teamIDs);
 
   return assignPositionsToPlayers(playersPositions, teamPicks).sort(

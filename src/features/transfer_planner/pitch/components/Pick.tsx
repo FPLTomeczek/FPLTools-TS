@@ -3,7 +3,7 @@ import RemoveIcon from "@mui/icons-material/Cancel";
 import ReturnIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 
 import { TEAMS_LIST } from "../../../../shared/utils/data/teamsData";
-import { Pick as IPick } from "../../../../store_features/drafts/drafts";
+import { Pick as IPick } from "../../../../store_features/drafts/interfaces/drafts";
 import FutureFixtures from "../../fixtures/components/FutureFixtures";
 import NextFixture from "../../fixtures/components/NextFixture";
 import { PickStyled } from "./Pitch.styled";

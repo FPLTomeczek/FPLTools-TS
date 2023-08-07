@@ -1,7 +1,7 @@
 import { isEmpty } from "lodash";
 import blank from "../../../../shared/assets/shirts/blank.png";
 import { useDraft } from "../../../../store/customHooks";
-import { Pick } from "../../../../store_features/drafts/drafts";
+import { Pick } from "../../../../store_features/drafts/interfaces/drafts";
 
 export const PickShirt = ({
   src,

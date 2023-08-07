@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const NavbarStyled = styled.nav`
-  border-bottom: 1px solid var(--secondary-color);
   .nav-list {
     margin-left: 1rem;
     display: flex;
@@ -28,6 +27,7 @@ export const NavbarStyled = styled.nav`
   }
   .navbar-logo {
     width: 32px;
+    height: 32px;
     padding: 0.5rem;
   }
   .text-secondary-light {

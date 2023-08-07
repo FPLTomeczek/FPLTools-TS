@@ -1,5 +1,5 @@
 import Pick from "./Pick";
-import { Pick as IPick } from "../../../../store_features/drafts/drafts";
+import { Pick as IPick } from "../../../../store_features/drafts/interfaces/drafts";
 import { BenchStyled } from "./Pitch.styled";
 import { FIRST_ELEVEN_PLAYERS } from "../../../../shared/utils/constants";
 import { useThisGameweekData } from "../../../../store/customHooks";

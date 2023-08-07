@@ -5,7 +5,6 @@ export const TransferPlannerStyled = styled.div`
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
-  padding: 1rem;
 `;
 
 export const TransferPlannerContentStyled = styled.div`
@@ -29,7 +28,6 @@ export const PlayerRankingsPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
   #player-rankings-header {
     text-align: center;
   }
@@ -54,5 +52,4 @@ export const CalendarPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
 `;
