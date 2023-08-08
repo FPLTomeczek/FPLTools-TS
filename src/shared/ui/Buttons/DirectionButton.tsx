@@ -6,7 +6,6 @@ const StyledDirectionButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--primary-color);
   background-color: var(--secondary-color);
   transition: background-color 0.3s;
   padding: 0.5rem;

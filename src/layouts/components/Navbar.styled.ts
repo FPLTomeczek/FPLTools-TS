@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const NavbarStyled = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 2rem;
   .nav-list {
     margin-left: 1rem;
     display: flex;
@@ -12,6 +16,7 @@ export const NavbarStyled = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${(props) => props.theme.colors.text};
   }
   .list-item-navbar-mobile {
     display: none;
@@ -24,6 +29,9 @@ export const NavbarStyled = styled.nav`
   }
   & a:hover {
     color: var(--secondary-color);
+  }
+  & a:visited {
+    color: ${(props) => props.theme.colors.text};
   }
   .navbar-logo {
     width: 32px;

@@ -4,7 +4,7 @@ const StyledButton = styled.button`
   background-color: var(--secondary-color);
   transition: background-color 0.3s;
   padding: 0.5rem;
-  & :hover {
+  &:hover {
     background-color: var(--secondary-color-dark);
   }
 `;

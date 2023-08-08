@@ -6,6 +6,7 @@ import { filterPlayers } from "../../../shared/helper/filterPlayers";
 import { PlayerRankingsListStyled } from "./PlayerRankings.styled";
 import { Player } from "../../../store_features/players/players";
 import { Button } from "../../../shared/ui/Buttons/Button";
+import { useTheme } from "../../../shared/theme/ThemeProvider";
 
 const PlayerRankingsList = () => {
   const players = useAppSelector((state) => state.players.playersList);
@@ -13,6 +14,8 @@ const PlayerRankingsList = () => {
   const { filters, listCount, updateListCount } = useContext(
     PlayerRankingsContext
   );
+
+  const { darkMode } = useTheme();
 
   const filteredPlayers = filters ? filterPlayers(players, filters) : players;
 
@@ -35,7 +38,7 @@ const PlayerRankingsList = () => {
   };
 
   return (
-    <PlayerRankingsListStyled>
+    <PlayerRankingsListStyled darkMode={darkMode}>
       {listPlayers.map((player) => {
         return <PlayerRankingListItem player={player} key={player.id} />;
       })}
@@ -59,6 +62,7 @@ const PlayerRankingListItem = ({ player }: { player: Player }) => {
       <div className="player-ranking-item-probability">
         <div className="probability-bar">
           <div
+            id="probability-value"
             style={{
               width: `${scoring_chance}%`,
               height: "inherit",

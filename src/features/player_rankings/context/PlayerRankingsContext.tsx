@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 import { PlayerRankingsFilters } from "../../../store_features/players/players";
-interface PlayerRankingsContext {
+interface IPlayerRankingsContext {
   filters: PlayerRankingsFilters;
   filter: (playerRankingsFilters: PlayerRankingsFilters) => void;
   listCount: number;
@@ -10,7 +10,7 @@ interface PlayerRankingsContext {
 
 const DEFAULT_MAX_PRICE = 150;
 
-export const PlayerRankingsContext = createContext<PlayerRankingsContext>({
+export const PlayerRankingsContext = createContext<IPlayerRankingsContext>({
   filters: {
     name: "",
     team: "ALL",
@@ -50,7 +50,7 @@ const PlayerRankingsProvider = ({
     reset ? setlistCount(value) : setlistCount((prev) => prev + value);
   };
 
-  const playerRankingsContext: PlayerRankingsContext = {
+  const playerRankingsContext: IPlayerRankingsContext = {
     filters,
     filter,
     listCount,

@@ -59,7 +59,7 @@ export const ChipsModalContainerStyled = styled.div<{ isModalOpen: boolean }>`
 `;
 
 export const ChipsModalStyled = styled.div`
-  background-color: var(--primary-color);
+  background-color: ${(props) => props.theme.colors.background};
   border: 4px solid var(--secondary-color);
   border-radius: var(--primary-border-radius);
   margin: 0 auto;

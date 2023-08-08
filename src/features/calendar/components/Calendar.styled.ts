@@ -5,7 +5,7 @@ export const CalendarTableStyled = styled.div`
   max-width: 100%;
   overflow-x: auto;
   & > table {
-    background-color: #272635;
+    background-color: ${(props) => props.theme.colors.slightContrast};
   }
   .calendar-thead {
     border-bottom: 1px solid gray;
@@ -36,7 +36,7 @@ export const CalendarTimerStyled = styled.div`
     gap: 2rem;
   }
   .timer-countdown-item {
-    background-color: #272635;
+    background-color: ${(props) => props.theme.colors.slightContrast};
     padding: 0.5rem 2rem;
     min-width: 50px;
     border-radius: 8px;

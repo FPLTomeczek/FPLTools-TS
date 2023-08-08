@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { setChip } from "../../../../store_features/drafts/draftsSlice";
 import { FilteredChip } from "./Chips";
 import { switchChipName } from "../utils";
+import { Button } from "../../../../shared/ui/Buttons/Button";
 
 const SingleChip = ({
   chip,
@@ -32,7 +33,7 @@ const SingleChip = ({
       : dispatch(setChip({ chipName }));
   };
   return (
-    <button
+    <Button
       disabled={chip.played}
       className={`chip-button ${
         chip.played ? "chip-unavailable" : "chip-available"
@@ -40,7 +41,7 @@ const SingleChip = ({
       onClick={() => handlePlayingChip(chipName)}
     >
       {chipName}
-    </button>
+    </Button>
   );
 };
 
