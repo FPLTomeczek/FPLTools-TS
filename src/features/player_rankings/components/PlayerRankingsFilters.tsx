@@ -15,37 +15,34 @@ import PlayerRankingsFilterButtons from "./PlayerRankingsFilterButtons";
 import { Transition } from "../../../shared/ui/Dialog/Transition";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
 
-const DialogStyled = MuiStyled(Dialog)(
-  ({ darkMode }: { darkMode: boolean }) => ({
+const DialogStyled = MuiStyled(Dialog)(() => {
+  const { darkMode } = useTheme();
+  return {
     "@media screen and (max-width: 480px)": {
       "& .MuiDialog-container": {
         alignItems: "end",
       },
     },
-
     "& .MuiDialog-paper": {
       margin: "0",
       width: "100%",
       backgroundColor: darkMode ? "var(--primary-color)" : "#ffffff",
       color: darkMode ? "#ffffff" : "#000000",
     },
-
     "& .MuiDialogActions-root": {
       display: "flex",
       flexDirection: "column",
       alignItems: "start",
       justifyContent: "center",
     },
-  })
-);
+  };
+});
 
 const PlayerRankingsFilters = () => {
   const [open, setOpen] = useState(false);
   const [dialogFilter, setDialogFilter] = useState<DialogFilter | undefined>(
     undefined
   );
-
-  const { darkMode } = useTheme();
 
   const handleOpenDialog = (dialogFilter: DialogFilter) => {
     setOpen(true);
@@ -60,7 +57,6 @@ const PlayerRankingsFilters = () => {
     <PlayerRankingsFiltersStyled>
       <PlayerRankingsFilterButtons handleOpenDialog={handleOpenDialog} />
       <DialogStyled
-        darkMode={darkMode}
         open={open}
         TransitionComponent={Transition}
         keepMounted

@@ -51,7 +51,6 @@ const Switch = styled.label`
   display: inline-block;
   width: 48px;
   height: 24px;
-  background-color: #ff0000;
   border-radius: 15px;
   & ${Input} {
     opacity: 0;

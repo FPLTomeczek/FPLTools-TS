@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 import { ThemeProvider as DefaultThemeProvider } from "styled-components";
+import { useLocalStorage } from "usehooks-ts";
+import { isEqual } from "lodash";
+
 import GlobalStyle from "./GlobalStyle";
 
 interface IThemeContext {
@@ -65,23 +68,23 @@ const UseThemeContext: React.Context<IThemeContext> =
   });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState(darkTheme);
-  const [darkMode, setDarkMode] = useState(true);
+  const [theme, setTheme] = useLocalStorage("theme", {
+    theme: darkTheme,
+    darkMode: true,
+  });
 
   const toggleTheme = () => {
-    if (theme === lightTheme) {
-      setTheme(darkTheme);
-      setDarkMode(true);
+    if (isEqual(theme.theme, lightTheme)) {
+      setTheme({ theme: darkTheme, darkMode: true });
     } else {
-      setTheme(lightTheme);
-      setDarkMode(false);
+      setTheme({ theme: lightTheme, darkMode: false });
     }
   };
 
   return (
-    <UseThemeContext.Provider value={{ toggleTheme, darkMode }}>
-      <DefaultThemeProvider theme={theme}>
-        <GlobalStyle theme={theme} />
+    <UseThemeContext.Provider value={{ toggleTheme, darkMode: theme.darkMode }}>
+      <DefaultThemeProvider theme={theme.theme}>
+        <GlobalStyle theme={theme.theme} />
         {children}
       </DefaultThemeProvider>
     </UseThemeContext.Provider>

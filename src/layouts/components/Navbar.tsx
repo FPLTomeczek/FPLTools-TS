@@ -4,8 +4,6 @@ import { useState } from "react";
 import { FullScreenDialog } from "../../shared/ui/Dialog/FullScreenDialog";
 import { NavbarStyled } from "./Navbar.styled";
 import logo from "../../shared/assets/logos/fpltools_logo.webp";
-import { Button } from "../../shared/ui/Buttons/Button";
-import { useTheme } from "../../shared/theme/ThemeProvider";
 import DefaultSwitch from "../../shared/ui/Switch/DefaultSwitch";
 
 const navbarList = [
@@ -21,7 +19,6 @@ const Navbar = () => {
     setActivePage(name);
   };
 
-  const { toggleTheme } = useTheme();
   return (
     <NavbarStyled>
       <ul className="nav-list">
