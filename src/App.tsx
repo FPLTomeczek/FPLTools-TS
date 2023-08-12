@@ -10,10 +10,12 @@ import { fetchFixtures } from "./store_features/fixtures/fixturesSlice";
 import { fetchTeams } from "./store_features/teams/teamsSlice";
 import { fetchGameweeks } from "./store_features/gameweeks/gameweeksSlice";
 import AppRoutes from "./Routes";
+import { ThemeProvider } from "./shared/theme/ThemeProvider";
 
 function App() {
   const dispatch = useAppDispatch();
 
+  // TODO: FIX THIS
   useEffect(() => {
     dispatch(fetchPlayers());
     dispatch(fetchPlayersHistory());
@@ -24,7 +26,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

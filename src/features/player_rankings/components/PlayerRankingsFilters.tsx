@@ -13,28 +13,30 @@ import DialogInputs from "../../../shared/ui/Dialog/dialog-inputs/DialogInputs";
 import { DialogFilter } from "../enums/playerRankingsEnums";
 import PlayerRankingsFilterButtons from "./PlayerRankingsFilterButtons";
 import { Transition } from "../../../shared/ui/Dialog/Transition";
+import { useTheme } from "../../../shared/theme/ThemeProvider";
 
-const DialogStyled = MuiStyled(Dialog)(() => ({
-  "@media screen and (max-width: 480px)": {
-    "& .MuiDialog-container": {
-      alignItems: "end",
+const DialogStyled = MuiStyled(Dialog)(() => {
+  const { darkMode } = useTheme();
+  return {
+    "@media screen and (max-width: 480px)": {
+      "& .MuiDialog-container": {
+        alignItems: "end",
+      },
     },
-  },
-
-  "& .MuiDialog-paper": {
-    margin: "0",
-    width: "100%",
-    backgroundColor: "var(--primary-color)",
-    color: "white",
-  },
-
-  "& .MuiDialogActions-root": {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-    justifyContent: "center",
-  },
-}));
+    "& .MuiDialog-paper": {
+      margin: "0",
+      width: "100%",
+      backgroundColor: darkMode ? "var(--primary-color)" : "#ffffff",
+      color: darkMode ? "#ffffff" : "#000000",
+    },
+    "& .MuiDialogActions-root": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "start",
+      justifyContent: "center",
+    },
+  };
+});
 
 const PlayerRankingsFilters = () => {
   const [open, setOpen] = useState(false);

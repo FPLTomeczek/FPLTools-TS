@@ -15,25 +15,34 @@ import { Link } from "react-router-dom";
 import { styled as MuiStyled } from "@mui/material/styles";
 
 import { Transition } from "./Transition";
+import { useTheme } from "../../theme/ThemeProvider";
 
-const DialogStyled = MuiStyled(Dialog)(() => ({
-  "& .MuiPaper-root": {
-    backgroundColor: "var(--primary-color)",
-  },
+const DialogStyled = MuiStyled(Dialog)(() => {
+  const { darkMode } = useTheme();
+  return {
+    "& .MuiPaper-root": {
+      backgroundColor: darkMode ? "var(--primary-color)" : "#ffffff",
+    },
 
-  "& .MuiListItem-root": {
-    display: "flex",
-    justifyContent: "center",
-  },
+    "& .MuiListItem-root": {
+      display: "flex",
+      justifyContent: "center",
+    },
 
-  "& a": {
-    transition: "color 0.3s ease-out",
-  },
+    "& a": {
+      transition: "color 0.3s ease-out",
+      color: darkMode ? "#ffffff" : "#000000",
+    },
 
-  "& a:hover": {
-    color: "var(--secondary-color)",
-  },
-}));
+    "& a:hover": {
+      color: "var(--secondary-color)",
+    },
+
+    ".list-item-navbar-active": {
+      color: darkMode ? "var(--secondary-color-light)" : "#b77601",
+    },
+  };
+});
 
 export const FullScreenDialog = ({
   listItems,
@@ -88,13 +97,9 @@ export const FullScreenDialog = ({
                   <Link to={li.url} onClick={handleClose}>
                     <ListItemText
                       primary={li.name}
-                      sx={{
-                        color: `${
-                          activePage === li.name
-                            ? "var(--secondary-color-light)"
-                            : ""
-                        }`,
-                      }}
+                      className={`${
+                        activePage === li.name ? "list-item-navbar-active" : ""
+                      }`}
                     />
                   </Link>
                 </Button>

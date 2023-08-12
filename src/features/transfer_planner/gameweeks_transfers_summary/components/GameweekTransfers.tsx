@@ -20,7 +20,9 @@ const GameweekTransfers = ({
   const dispatch = useAppDispatch();
 
   const setGameweek = (gameweek: number) => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document
+      .querySelector(".pitch-playerlist-container")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
     dispatch(updateGameweeks(gameweek));
   };
 

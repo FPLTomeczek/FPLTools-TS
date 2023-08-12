@@ -5,7 +5,9 @@ export const PlayerRankingsFiltersStyled = styled.div`
   margin-top: 2rem;
 `;
 
-export const PlayerRankingsFilterButtonsStyled = styled.div`
+export const PlayerRankingsFilterButtonsStyled = styled.div<{
+  darkMode: boolean;
+}>`
   position: relative;
   padding: 0.5rem 2px;
   display: flex;
@@ -16,9 +18,9 @@ export const PlayerRankingsFilterButtonsStyled = styled.div`
     padding: 0.25rem 0.5rem;
     min-width: 100px;
     white-space: nowrap;
-    background-color: black;
+    background-color: ${(props) => (props.darkMode ? "#000000" : "#f0f0f0")};
     flex-shrink: 0;
-    color: white;
+    color: ${(props) => props.theme.colors.text};
   }
   #reset-button {
     min-width: fit-content;
@@ -26,7 +28,7 @@ export const PlayerRankingsFilterButtonsStyled = styled.div`
   }
 `;
 
-export const PlayerRankingsListStyled = styled.div`
+export const PlayerRankingsListStyled = styled.div<{ darkMode: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -53,7 +55,7 @@ export const PlayerRankingsListStyled = styled.div`
   }
   .probability-bar {
     display: flex;
-    background-color: black;
+    background-color: ${(props) => (props.darkMode ? "#000000" : "#f0f0f0")};
     width: 100%;
     height: inherit;
   }

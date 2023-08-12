@@ -17,25 +17,21 @@ const CalendarTimer = () => {
     <CalendarTimerStyled>
       <h2>Next GW Deadline</h2>
       <div className="timer-countdown">
-        <div className="timer-countdown-item">
-          <div>{days}</div>
-          <span className="time-desc">days</span>
-        </div>
-        <div className="timer-countdown-item">
-          <div>{hours} </div>
-          <span className="time-desc">hours</span>
-        </div>
-
-        <div className="timer-countdown-item">
-          <div data-testid="timer-minutes">{minutes}</div>
-          <span className="time-desc">minutes</span>
-        </div>
-        <div className="timer-countdown-item">
-          <div data-testid="timer-seconds">{seconds}</div>
-          <span className="time-desc">seconds</span>
-        </div>
+        <CalendarTimerItem time={days} name="days" />
+        <CalendarTimerItem time={hours} name="hours" />
+        <CalendarTimerItem time={minutes} name="minutes" />
+        <CalendarTimerItem time={seconds} name="seconds" />
       </div>
     </CalendarTimerStyled>
+  );
+};
+
+const CalendarTimerItem = ({ time, name }: { time: number; name: string }) => {
+  return (
+    <div className="timer-countdown-item">
+      <div>{time}</div>
+      <span className="time-desc">{name}</span>
+    </div>
   );
 };
 

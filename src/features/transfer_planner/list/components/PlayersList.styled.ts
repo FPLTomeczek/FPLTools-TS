@@ -44,9 +44,14 @@ export const PlayersListItemsStyled = styled.div`
 
 export const PlayerListItemColorStyled = styled.div<{
   listItemColor: string[];
+  darkMode: boolean;
 }>`
   width: 20px;
   border-radius: 50%;
+  border: ${(props) =>
+    props.listItemColor.includes("#FFFFFF") && !props.darkMode
+      ? "1px solid black"
+      : "none"};
   background-color: black;
   background: ${(props) =>
     props.listItemColor.length > 1

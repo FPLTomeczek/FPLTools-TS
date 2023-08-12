@@ -4,9 +4,10 @@ import Navbar from "./components/Navbar";
 const ViewWrapper = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-
+  padding-bottom: 1rem;
   @media screen and (max-width: 1400px) {
     padding: 0 1rem;
+    padding-bottom: 1rem;
   }
 `;
 

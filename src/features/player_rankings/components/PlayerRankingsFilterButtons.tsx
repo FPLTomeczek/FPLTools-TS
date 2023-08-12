@@ -5,6 +5,7 @@ import { DialogFilter } from "../enums/playerRankingsEnums";
 import { PlayerRankingsFilterButtonsStyled } from "./PlayerRankings.styled";
 import RestartIcon from "@mui/icons-material/RestartAlt";
 import { useAppSelector } from "../../../store/hooks";
+import { useTheme } from "../../../shared/theme/ThemeProvider";
 
 const PlayerRankingsFilterButtons = ({
   handleOpenDialog,
@@ -13,9 +14,10 @@ const PlayerRankingsFilterButtons = ({
 }) => {
   const { filters, filter } = useContext(PlayerRankingsContext);
   const maxPrice = useAppSelector((state) => state.players.maxPrice);
+  const { darkMode } = useTheme();
 
   return (
-    <PlayerRankingsFilterButtonsStyled>
+    <PlayerRankingsFilterButtonsStyled darkMode={darkMode}>
       <button
         id="reset-button"
         data-testid="reset-filters-button"
