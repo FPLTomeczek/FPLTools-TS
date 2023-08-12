@@ -87,9 +87,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-a:visited {
-  color: white;
-}
 
 /**
  * 1. Remove the bottom border in Chrome 57-

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavbarStyled = styled.nav`
+export const NavbarStyled = styled.nav<{ darkMode: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +18,7 @@ export const NavbarStyled = styled.nav`
     align-items: center;
     color: ${(props) => props.theme.colors.text};
   }
-  .list-item-navbar-mobile {
+  .mobile-visible {
     display: none;
   }
   & a {
@@ -28,18 +28,22 @@ export const NavbarStyled = styled.nav`
     transition: color 0.3s ease-out;
   }
   & a:hover {
-    color: var(--secondary-color);
-  }
-  & a:visited {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) =>
+      props.darkMode ? "var(--secondary-color)" : "#7b4f01"};
   }
   .navbar-logo {
     width: 32px;
     height: 32px;
     padding: 0.5rem;
   }
-  .text-secondary-light {
-    color: var(--secondary-color-light);
+  .list-item-navbar-active {
+    color: ${(props) =>
+      props.darkMode ? "var(--secondary-color-light)" : "#b77601"};
+  }
+  .navbar-mobile-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
   @media screen and (max-width: 900px) {
     .nav-list {
@@ -50,7 +54,7 @@ export const NavbarStyled = styled.nav`
     .list-item-navbar {
       display: none;
     }
-    .list-item-navbar-mobile {
+    .mobile-visible {
       display: block;
     }
   }

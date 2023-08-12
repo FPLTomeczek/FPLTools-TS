@@ -34,6 +34,7 @@ export const FirstElevenStyled = styled.div<{ imageURL: string }>`
     display: flex;
     justify-content: space-around;
     padding: 2rem 0;
+    gap: 2px;
   }
   .picks-row > * {
     flex: 1;

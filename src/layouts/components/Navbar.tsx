@@ -5,6 +5,7 @@ import { FullScreenDialog } from "../../shared/ui/Dialog/FullScreenDialog";
 import { NavbarStyled } from "./Navbar.styled";
 import logo from "../../shared/assets/logos/fpltools_logo.webp";
 import DefaultSwitch from "../../shared/ui/Switch/DefaultSwitch";
+import { useTheme } from "../../shared/theme/ThemeProvider";
 
 const navbarList = [
   { url: "/", name: "Planner" },
@@ -15,12 +16,14 @@ const navbarList = [
 const Navbar = () => {
   const [activePage, setActivePage] = useState(navbarList[0].name);
 
+  const { darkMode } = useTheme();
+
   const handleSettingActivePage = (name: string) => {
     setActivePage(name);
   };
 
   return (
-    <NavbarStyled>
+    <NavbarStyled darkMode={darkMode}>
       <ul className="nav-list">
         <li className="list-item-navbar">
           <Link to="/">
@@ -35,7 +38,7 @@ const Navbar = () => {
           >
             <Link
               className={`${
-                activePage === li.name ? "text-secondary-light" : ""
+                activePage === li.name ? "list-item-navbar-active" : ""
               }`}
               to={li.url}
             >
@@ -43,20 +46,22 @@ const Navbar = () => {
             </Link>
           </li>
         ))}
-        <li className="list-item-navbar-mobile">
+        <li className="mobile-visible">
           <Link to="/">
             <img src={logo} alt="logo" className="navbar-logo" />
           </Link>
         </li>
-        <li className="list-item-navbar-mobile">
+      </ul>
+      <div className="navbar-mobile-content">
+        <DefaultSwitch />
+        <div className="mobile-visible">
           <FullScreenDialog
             listItems={navbarList}
             activePage={activePage}
             handleSettingActivePage={handleSettingActivePage}
           />
-        </li>
-      </ul>
-      <DefaultSwitch />
+        </div>
+      </div>
     </NavbarStyled>
   );
 };
