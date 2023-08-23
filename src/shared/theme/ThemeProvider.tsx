@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { ThemeProvider as DefaultThemeProvider } from "styled-components";
 import { useLocalStorage } from "usehooks-ts";
 import { isEqual } from "lodash";
