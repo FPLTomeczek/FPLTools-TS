@@ -67,21 +67,40 @@ const CalendarTableRow = ({
   color: string;
   name: string;
 }) => {
+  const gws = Array.from({ length: LAST_GW }, (_, i) => 1 + i * 1);
+
   return (
     <CalendarTableRowStyled color={color}>
       <td className="team-td">{name}</td>
-      {fixtures.map((fixture, index) => (
-        <CalendarTableDataStyled
-          fixture={fixture}
-          setFixtureBackgroundColor={setFixtureBackgroundColor}
-          key={index}
-        >
-          <div className="content-td">
-            <span>{fixture.opponent}</span>
-            <span>{fixture.isHome ? "(H)" : "(A)"}</span>
-          </div>
-        </CalendarTableDataStyled>
-      ))}
+
+      {gws.map((gw) => {
+        const fixture = fixtures.filter((fixture) => fixture.event === gw);
+        if (fixture.length === 1) {
+          return (
+            <CalendarTableDataStyled
+              fixture={fixture[0]}
+              setFixtureBackgroundColor={setFixtureBackgroundColor}
+              key={`${gw}-${fixture[0].opponent}`}
+            >
+              <div className="content-td">
+                <span>{fixture[0].opponent}</span>
+                <span>{fixture[0].isHome ? "(H)" : "(A)"}</span>
+              </div>
+            </CalendarTableDataStyled>
+          );
+        } else if (fixture.length > 1) {
+          // Double GW Compionent
+          return;
+        } else {
+          return (
+            <td key={`${gw}-blank`}>
+              <div className="content-td">
+                <span>-</span>
+              </div>
+            </td>
+          );
+        }
+      })}
     </CalendarTableRowStyled>
   );
 };
