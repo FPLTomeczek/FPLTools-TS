@@ -67,9 +67,11 @@ export const CalendarTableRowStyled = styled.tr<{
 export const CalendarTableDataStyled = styled.td<{
   fixture: TeamFixture;
   setFixtureBackgroundColor: (difficulty: number) => string | undefined;
+  done: boolean;
 }>`
   background-color: ${(props) =>
     props.setFixtureBackgroundColor(props.fixture.difficulty)};
+  opacity: ${(props) => (props.done ? 0.3 : 1)};
   color: black;
   padding: 0.75rem 1rem;
 `;
