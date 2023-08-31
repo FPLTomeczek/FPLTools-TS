@@ -6,6 +6,7 @@ export type TeamFixture = {
   opponent: string;
   difficulty: number;
   isHome: boolean;
+  event: number;
 };
 
 interface Team {

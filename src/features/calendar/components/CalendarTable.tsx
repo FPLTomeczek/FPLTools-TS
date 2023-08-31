@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../store/hooks";
-import { LAST_GW } from "../../../shared/utils/constants";
+import { CURRENT_GW, LAST_GW } from "../../../shared/utils/constants";
 import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
 import { setFixtureBackgroundColor } from "../../../shared/helper/setFixtureBackgroundColor";
 import { TeamFixture } from "../../../store_features/teams/teamsSlice";
@@ -9,6 +9,8 @@ import {
   CalendarTableStyled,
 } from "./Calendar.styled";
 import logo from "../../../shared/assets/logos/fpltools_logo.webp";
+import { useEffect } from "react";
+import useCalendarTable from "../hooks/useCalendarTable";
 
 const gwArray = Array.from({ length: LAST_GW }, (_, i) => i + 1);
 
@@ -17,9 +19,14 @@ const CalendarTable = () => {
   const gameweeksList = useAppSelector(
     (state) => state.gameweeks.gameweeksList
   );
+  const { offsetScrollbarToCurrentGw } = useCalendarTable();
+
+  useEffect(() => {
+    offsetScrollbarToCurrentGw();
+  }, []);
 
   return (
-    <CalendarTableStyled>
+    <CalendarTableStyled id="table-calendar">
       <table>
         <thead className="calendar-thead">
           <tr>
@@ -67,21 +74,41 @@ const CalendarTableRow = ({
   color: string;
   name: string;
 }) => {
+  const gws = Array.from({ length: LAST_GW }, (_, i) => 1 + i * 1);
+
   return (
     <CalendarTableRowStyled color={color}>
       <td className="team-td">{name}</td>
-      {fixtures.map((fixture, index) => (
-        <CalendarTableDataStyled
-          fixture={fixture}
-          setFixtureBackgroundColor={setFixtureBackgroundColor}
-          key={index}
-        >
-          <div className="content-td">
-            <span>{fixture.opponent}</span>
-            <span>{fixture.isHome ? "(H)" : "(A)"}</span>
-          </div>
-        </CalendarTableDataStyled>
-      ))}
+
+      {gws.map((gw) => {
+        const fixture = fixtures.filter((fixture) => fixture.event === gw);
+        if (fixture.length === 1) {
+          return (
+            <CalendarTableDataStyled
+              fixture={fixture[0]}
+              setFixtureBackgroundColor={setFixtureBackgroundColor}
+              key={`${gw}-${fixture[0].opponent}`}
+              done={fixture[0].event < CURRENT_GW}
+            >
+              <div className="content-td">
+                <span>{fixture[0].opponent}</span>
+                <span>{fixture[0].isHome ? "(H)" : "(A)"}</span>
+              </div>
+            </CalendarTableDataStyled>
+          );
+        } else if (fixture.length > 1) {
+          // Double GW Compionent
+          return;
+        } else {
+          return (
+            <td key={`${gw}-blank`}>
+              <div className="content-td">
+                <span>-</span>
+              </div>
+            </td>
+          );
+        }
+      })}
     </CalendarTableRowStyled>
   );
 };
