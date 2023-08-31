@@ -7,7 +7,6 @@ import {
 import Hero from "../layouts/components/Hero";
 import SnackbarWrapper from "../shared/ui/Snackbar/SnackbarWrapper";
 import UserIDForm from "../shared/ui/Form/UserIDForm";
-import TransferPlannerDemo from "../features/transfer_planner/demo/components/TransferPlannerDemo";
 import Pitch from "../features/transfer_planner/pitch/components/Pitch";
 import PlayersList from "../features/transfer_planner/list/components/PlayersList";
 import GameweeksTransfersContainer from "../features/transfer_planner/gameweeks_transfers_summary/components/GameweeksTransfersContainer";
@@ -39,7 +38,6 @@ const TransferPlanner = () => {
       <SnackbarWrapper error={error} handleSetError={handleSetError} />
       <Hero text="Transfer Planner" />
       <UserIDForm setError={setError} setIsLoading={setIsLoading} />
-      <TransferPlannerDemo />
       <TransferPlannerContent isLoading={isLoading} />
     </TransferPlannerStyled>
   );

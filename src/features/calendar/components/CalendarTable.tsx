@@ -3,9 +3,12 @@ import { LAST_GW } from "../../../shared/utils/constants";
 import { TEAMS_LIST } from "../../../shared/utils/data/teamsData";
 import { setFixtureBackgroundColor } from "../../../shared/helper/setFixtureBackgroundColor";
 import { TeamFixture } from "../../../store_features/teams/teamsSlice";
-import { CalendarTableStyled } from "./Calendar.styled";
+import {
+  CalendarTableDataStyled,
+  CalendarTableRowStyled,
+  CalendarTableStyled,
+} from "./Calendar.styled";
 import logo from "../../../shared/assets/logos/fpltools_logo.webp";
-import styled from "styled-components";
 
 const gwArray = Array.from({ length: LAST_GW }, (_, i) => i + 1);
 
@@ -82,23 +85,5 @@ const CalendarTableRow = ({
     </CalendarTableRowStyled>
   );
 };
-
-const CalendarTableRowStyled = styled.tr<{
-  color: string;
-}>`
-  .team-td {
-    border-bottom: 20px solid ${(props) => props.color};
-  }
-`;
-
-const CalendarTableDataStyled = styled.td<{
-  fixture: TeamFixture;
-  setFixtureBackgroundColor: (difficulty: number) => string | undefined;
-}>`
-  background-color: ${(props) =>
-    props.setFixtureBackgroundColor(props.fixture.difficulty)};
-  color: black;
-  padding: 0.75rem 1rem;
-`;
 
 export default CalendarTable;

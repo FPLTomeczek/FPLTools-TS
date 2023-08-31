@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { TeamFixture } from "../../../store_features/teams/teamsSlice";
+
 export const CalendarTableStyled = styled.div`
   text-align: center;
   max-width: 100%;
@@ -52,4 +54,22 @@ export const CalendarTimerStyled = styled.div`
       grid-template-columns: 1fr 1fr;
     }
   }
+`;
+
+export const CalendarTableRowStyled = styled.tr<{
+  color: string;
+}>`
+  .team-td {
+    border-bottom: 20px solid ${(props) => props.color};
+  }
+`;
+
+export const CalendarTableDataStyled = styled.td<{
+  fixture: TeamFixture;
+  setFixtureBackgroundColor: (difficulty: number) => string | undefined;
+}>`
+  background-color: ${(props) =>
+    props.setFixtureBackgroundColor(props.fixture.difficulty)};
+  color: black;
+  padding: 0.75rem 1rem;
 `;

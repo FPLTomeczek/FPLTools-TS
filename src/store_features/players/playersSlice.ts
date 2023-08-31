@@ -49,6 +49,7 @@ const playersSlice = createSlice({
   initialState,
   reducers: {
     filterPlayers(state, action: PayloadAction<PlayerFilters>) {
+      console.log(action.payload);
       state.playerFilters = action.payload;
     },
     sortPlayers(state, action: PayloadAction<SortOptions>) {
