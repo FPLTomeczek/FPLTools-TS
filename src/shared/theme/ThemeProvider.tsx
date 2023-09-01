@@ -36,6 +36,7 @@ const lightTheme = {
       background: "#f0f0f0",
     },
     slightContrast: "#f0f0f0",
+    highContrast: "var(--secondary-color-dark)",
   },
 };
 
@@ -51,6 +52,7 @@ const darkTheme = {
       background: "#ffffff",
     },
     slightContrast: " #272635",
+    highContrast: "var(--secondary-color)",
   },
 };
 

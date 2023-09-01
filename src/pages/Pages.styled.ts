@@ -53,3 +53,9 @@ export const CalendarPageStyled = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const NewsPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

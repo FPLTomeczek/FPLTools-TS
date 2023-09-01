@@ -36,7 +36,7 @@ const TransferPlanner = () => {
   return (
     <TransferPlannerStyled>
       <SnackbarWrapper error={error} handleSetError={handleSetError} />
-      <Hero text="Transfer Planner" />
+      <Hero>Transfer Planner</Hero>
       <UserIDForm setError={setError} setIsLoading={setIsLoading} />
       <TransferPlannerContent isLoading={isLoading} />
     </TransferPlannerStyled>

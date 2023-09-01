@@ -5,6 +5,8 @@ import TransferPlanner from "./pages/TransferPlanner";
 import PlayerRankings from "./pages/PlayerRankings";
 import Calendar from "./pages/Calendar";
 import Error from "./pages/Error";
+import News from "./pages/News";
+import SingleNews from "./pages/SingleNews";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +32,22 @@ const AppRoutes = () => {
         element={
           <DefaultLayout>
             <Calendar />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/news"
+        element={
+          <DefaultLayout>
+            <News />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/news/:id"
+        element={
+          <DefaultLayout>
+            <SingleNews />
           </DefaultLayout>
         }
       />
