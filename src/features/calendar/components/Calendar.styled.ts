@@ -13,7 +13,12 @@ export const CalendarTableStyled = styled.div`
     border-bottom: 1px solid gray;
   }
   .calendar-th {
+    box-sizing: border-box;
     padding: 0.5rem;
+    min-width: 100px;
+  }
+  .calendar-th:first-child {
+    min-width: 50px;
   }
   .calendar-th > span {
     font-size: 0.625rem;
@@ -60,7 +65,11 @@ export const CalendarTableRowStyled = styled.tr<{
   color: string;
 }>`
   .team-td {
+    background-color: ${(props) => props.theme.colors.slightContrast};
+    position: sticky;
     border-bottom: 20px solid ${(props) => props.color};
+    left: 0;
+    z-index: 10;
   }
 `;
 

@@ -27,5 +27,10 @@ function convertGetTime(ms: number) {
     ms / 1000 - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60
   );
 
-  return { days, hours, minutes, seconds };
+  return {
+    days: isNaN(days) ? 0 : days,
+    hours: isNaN(hours) ? 0 : hours,
+    minutes: isNaN(minutes) ? 0 : minutes,
+    seconds: isNaN(seconds) ? 0 : seconds,
+  };
 }
