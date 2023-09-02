@@ -1,13 +1,24 @@
-import { Link } from "react-router-dom";
-
-import { SinglePostStyled } from "./News.styled";
-import { Post, posts } from "./data";
 import { useEffect, useState } from "react";
+
+import { getPosts } from "../api/getPosts";
+import SinglePost from "./SinglePost";
 import Loading from "../../../shared/ui/Loading/Loading";
 
+export type Post = {
+  _id: number;
+  title: string;
+  updatedAt: Date;
+  text: string;
+  image: {
+    data: Buffer;
+    type: string;
+  };
+};
+
 const NewsList = () => {
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [postsNumber, setPostsNumber] = useState(2);
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
 
   function checkScrollBottom() {
     const scrollTriggerPX =
@@ -16,20 +27,21 @@ const NewsList = () => {
     if (isPostsLoading || postsNumber === posts.length) return;
 
     if (window.scrollY >= scrollTriggerPX) {
-      console.log("loading");
+      console.log("window.scrollY >= scrollTriggerPX");
 
       setIsPostsLoading(true);
-      setTimeout(() => {
-        setPostsNumber((state) => {
-          if (state + 2 <= posts.length) {
-            return (state += 2);
-          }
-          return (state = posts.length);
-        });
-        setIsPostsLoading(false);
-      }, 2000);
+      setPostsNumber((state) => state + 2);
     }
   }
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const posts = await getPosts(postsNumber);
+      setPosts(posts);
+    };
+    fetchPosts();
+    setIsPostsLoading(false);
+  }, [postsNumber]);
 
   useEffect(() => {
     document.addEventListener("scroll", checkScrollBottom);
@@ -38,38 +50,11 @@ const NewsList = () => {
 
   return (
     <div>
-      {posts.slice(0, postsNumber).map((post) => {
-        return <SinglePost key={post.id} {...post} />;
+      {posts.map((post) => {
+        return <SinglePost {...post} key={post._id} />;
       })}
       {isPostsLoading ? <Loading /> : null}
     </div>
-  );
-};
-
-const SinglePost = ({ id, title, date, text, image }: Post) => {
-  return (
-    <SinglePostStyled>
-      <div className="post-img-container">
-        <img src={image} alt="post-image" />
-      </div>
-      <div className="post-header">
-        <h2>{title}</h2>
-        <span>
-          {date.toLocaleDateString("en-us", {
-            weekday: "long",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </span>
-      </div>
-      <p>
-        {text.slice(0, 1000)}...{" "}
-        <Link to={`/news/${id}`}>
-          <span className="post-read-more">Read More</span>
-        </Link>
-      </p>
-    </SinglePostStyled>
   );
 };
 

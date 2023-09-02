@@ -59,3 +59,9 @@ export const NewsPageStyled = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const SingleNewsPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

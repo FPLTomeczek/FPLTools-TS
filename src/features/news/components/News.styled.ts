@@ -5,8 +5,7 @@ export const SinglePostStyled = styled.div`
   padding: 4rem 0;
   .post-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
   }
   .post-img-container {
     width: 100%;
@@ -16,9 +15,10 @@ export const SinglePostStyled = styled.div`
     margin-left: 1rem;
     color: ${(props) => props.theme.colors.highContrast};
   }
-  p {
+  .post-text {
     color: var(--primary-color-light);
   }
+
   img {
     width: 100%;
     object-fit: cover;
@@ -27,5 +27,12 @@ export const SinglePostStyled = styled.div`
   }
   img:hover {
     transform: scale(1.1);
+  }
+  @media screen and (min-width: 480px) {
+    .post-header {
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+    }
   }
 `;
