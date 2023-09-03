@@ -18,7 +18,7 @@ export const SinglePostStyled = styled.div`
     color: ${(props) => props.theme.colors.highContrast};
   }
   .post-text {
-    color: var(--primary-color-light);
+    color: var(--grey-color);
   }
 
   img {

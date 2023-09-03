@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-export const TransferPlannerStyled = styled.div`
+export const TransferPlannerPageStyled = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   max-width: 100vw;
-`;
-
-export const TransferPlannerContentStyled = styled.div`
-  width: 100%;
-  .pitch-playerlist-container {
+  .transfer-planer-content__container {
+    width: 100%;
+  }
+  .pitch-playerlist__container {
     display: flex;
     align-items: start;
     width: 100%;
@@ -17,7 +16,7 @@ export const TransferPlannerContentStyled = styled.div`
   }
 
   @media screen and (max-width: 1400px) {
-    .pitch-playerlist-container {
+    .pitch-playerlist__container {
       flex-direction: column;
       align-items: center;
     }
@@ -73,4 +72,11 @@ export const SingleNewsPageStyled = styled.div`
   @media screen and (min-width: 1400px) {
     flex-direction: row;
   }
+`;
+
+export const LoginPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 `;

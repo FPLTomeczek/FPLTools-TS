@@ -17,7 +17,7 @@ export const ChipsStyled = styled.div`
   }
   .chip-unavailable {
     cursor: default;
-    background-color: var(--disabled-color);
+    background-color: var(--grey-color);
   }
   .chip-active {
     animation: color-change 1s infinite;

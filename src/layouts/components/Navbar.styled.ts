@@ -45,6 +45,12 @@ export const NavbarStyled = styled.nav<{ darkMode: boolean }>`
     align-items: center;
     gap: 2rem;
   }
+  .account-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+  }
   @media screen and (max-width: 900px) {
     .nav-list {
       justify-content: space-between;

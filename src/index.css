@@ -1,6 +1,7 @@
 :root {
   --primary-color: #101820;
-  --primary-color-light: #88919c;
+  --primary-color-dark: #030507;
+  --primary-color-light: #151f29;
 
   --secondary-color: #fee715;
   --secondary-color-dark: #fba200;
@@ -10,7 +11,9 @@
 
   --warning-color: #ff0f0f;
   --warning-color-dark: rgba(254, 21, 21, 0.7);
-  --disabled-color: #88919c;
+
+  --grey-color: #88919c;
+  --grey-color: #88919c;
 
   --primary-border-radius: 4px;
 }
@@ -37,6 +40,9 @@ body {
 /**
  * Render the `main` element consistently in IE.
  */
+[role="alert"] {
+  color: var(--warning-color);
+}
 
 main {
   display: block;
@@ -209,7 +215,6 @@ a:focus-visible {
 }
 
 input {
-  max-width: 200px;
   padding: 0.5rem;
 }
 
@@ -297,7 +302,7 @@ progress {
 */
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: var(--primary-color-light);
+  background-color: var(--grey-color);
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--secondary-color);

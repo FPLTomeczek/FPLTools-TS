@@ -7,6 +7,7 @@ import Calendar from "./pages/Calendar";
 import Error from "./pages/Error";
 import News from "./pages/News";
 import SingleNews from "./pages/SingleNews";
+import Login from "./pages/Login";
 
 const AppRoutes = () => {
   return (
@@ -48,6 +49,14 @@ const AppRoutes = () => {
         element={
           <DefaultLayout>
             <SingleNews />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <DefaultLayout>
+            <Login />
           </DefaultLayout>
         }
       />

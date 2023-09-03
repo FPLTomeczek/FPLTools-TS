@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { FullScreenDialog } from "../../shared/ui/Dialog/FullScreenDialog";
 import { NavbarStyled } from "./Navbar.styled";
@@ -55,6 +56,12 @@ const Navbar = () => {
       </ul>
       <div className="navbar-mobile-content">
         <DefaultSwitch />
+        <Link to="/login">
+          <div className="account-container">
+            <AccountCircleIcon />
+            <span>Login</span>
+          </div>
+        </Link>
         <div className="mobile-visible">
           <FullScreenDialog
             listItems={navbarList}
