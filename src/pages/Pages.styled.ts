@@ -63,5 +63,8 @@ export const NewsPageStyled = styled.div`
 export const SingleNewsPageStyled = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 2rem;
+  @media screen and (min-width: 1400px) {
+    flex-direction: row;
+  }
 `;

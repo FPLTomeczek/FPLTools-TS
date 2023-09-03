@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { getPosts } from "../api/getPosts";
+import { getPosts } from "../api/posts";
 import SinglePost from "./SinglePost";
 import Loading from "../../../shared/ui/Loading/Loading";
 
 export type Post = {
-  _id: number;
+  _id: string;
   title: string;
   updatedAt: Date;
   text: string;
@@ -18,17 +18,15 @@ export type Post = {
 const NewsList = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [postsNumber, setPostsNumber] = useState(2);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  const [isPostsLoading, setIsPostsLoading] = useState(true);
 
   function checkScrollBottom() {
     const scrollTriggerPX =
       document.documentElement.scrollHeight - window.innerHeight;
 
-    if (isPostsLoading || postsNumber === posts.length) return;
+    if (isPostsLoading) return;
 
     if (window.scrollY >= scrollTriggerPX) {
-      console.log("window.scrollY >= scrollTriggerPX");
-
       setIsPostsLoading(true);
       setPostsNumber((state) => state + 2);
     }
@@ -37,10 +35,12 @@ const NewsList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       const posts = await getPosts(postsNumber);
-      setPosts(posts);
+      if (posts) {
+        setPosts(posts);
+        setIsPostsLoading(false);
+      }
     };
     fetchPosts();
-    setIsPostsLoading(false);
   }, [postsNumber]);
 
   useEffect(() => {
@@ -53,7 +53,11 @@ const NewsList = () => {
       {posts.map((post) => {
         return <SinglePost {...post} key={post._id} />;
       })}
-      {isPostsLoading ? <Loading /> : null}
+      {isPostsLoading ? (
+        <div style={{ marginTop: "4rem" }}>
+          <Loading />
+        </div>
+      ) : null}
     </div>
   );
 };

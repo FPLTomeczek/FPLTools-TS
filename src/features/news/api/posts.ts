@@ -1,6 +1,7 @@
 import { axiosInstance } from "../../../shared/utils/config/axiosConfig";
+import { Post } from "../components/NewsList";
 
-export async function getPosts(value?: number) {
+export async function getPosts(value?: number): Promise<Post[] | undefined> {
   try {
     const { data } = await axiosInstance.get(
       `/posts${value ? `?count=${value}` : ""}`
@@ -11,7 +12,7 @@ export async function getPosts(value?: number) {
   }
 }
 
-export async function getPost(id: string) {
+export async function getPost(id: string): Promise<Post | undefined> {
   try {
     const { data } = await axiosInstance.get(`/posts/${id}`);
     return data;
