@@ -25,8 +25,6 @@ const FutureFixtures = ({ team }: { team: string }) => {
         const { event, team_a, team_h, team_a_difficulty, team_h_difficulty } =
           fixture;
 
-        console.log(fixture);
-
         if (doubleFixtures.includes(fixture)) {
           doubleEventCounter++;
           if (doubleEventCounter === 2) {
