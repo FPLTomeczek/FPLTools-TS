@@ -5,14 +5,18 @@ import { FIRST_ELEVEN_PLAYERS } from "../../../../shared/utils/constants";
 import { useThisGameweekData } from "../../../../store/customHooks";
 import { Chip } from "../../chips/enums/chipsEnums";
 
-const Bench = ({ picks }: { picks: IPick[] }) => {
+const Bench = ({
+  picks,
+  isLoading,
+}: {
+  picks: IPick[];
+  isLoading: boolean;
+}) => {
   const currentChipIsBB =
     useThisGameweekData()?.chipByGameweek === Chip.BENCH_BOOST;
   let pickStartIndex = FIRST_ELEVEN_PLAYERS;
 
-  if (picks.length === 0) {
-    return null;
-  }
+  if (picks.length === 0 || isLoading) return null;
 
   return (
     <BenchStyled BBPlayed={currentChipIsBB} data-testid="bench">

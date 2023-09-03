@@ -26,11 +26,11 @@ const SingleNews = () => {
   if (post) {
     return (
       <SingleNewsPageStyled>
-        <div>
+        <div className="single-news__post-container">
           <Hero>{post.title}</Hero>
           <SinglePost {...post} />
         </div>
-        <div>
+        <div className="single-news__recent-posts-container">
           <RecentPosts />
         </div>
       </SingleNewsPageStyled>

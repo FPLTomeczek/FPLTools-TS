@@ -35,6 +35,9 @@ const DialogStyled = MuiStyled(Dialog)(() => {
       alignItems: "start",
       justifyContent: "center",
     },
+    "& .MuiButton-text": {
+      color: darkMode ? "var(--secondary-color)" : "var(--primary-color)",
+    },
   };
 });
 

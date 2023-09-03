@@ -10,7 +10,7 @@ import Hero from "../../../layouts/components/Hero";
 const RecentPosts = () => {
   const [recentPosts, setRecentPosts] = useState<Post[]>();
   const { id } = useParams();
-  const visibleRecentPosts = 3;
+  const visibleRecentPosts = 5;
 
   useEffect(() => {
     const fetchPosts = async () => {

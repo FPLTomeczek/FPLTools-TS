@@ -64,6 +64,12 @@ export const SingleNewsPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  .single-news__post-container,
+  .single-news__recent-posts-container {
+    margin: 0 auto;
+  }
+
   @media screen and (min-width: 1400px) {
     flex-direction: row;
   }

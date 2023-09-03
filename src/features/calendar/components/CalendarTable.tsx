@@ -28,14 +28,10 @@ const CalendarTable = () => {
       currentGameweekRef.current &&
       firstColumnRef.current
     ) {
-      console.log("if");
-
       const offset =
         currentGameweekRef.current.offsetLeft -
         firstColumnRef.current.offsetWidth;
       tableRef.current.scrollLeft = offset;
-    } else {
-      console.log("else");
     }
   }, []);
 

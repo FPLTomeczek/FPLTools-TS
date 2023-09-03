@@ -43,6 +43,13 @@ export const RecentPostsStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 380px;
+
+  @media screen and (min-width: 480px) {
+    width: 380px;
+    max-width: none;
+  }
+
   .recent-posts__hero-container {
     display: flex;
     justify-content: center;

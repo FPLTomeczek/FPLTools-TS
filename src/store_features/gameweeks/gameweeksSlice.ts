@@ -26,6 +26,18 @@ export const fetchGameweeks = createAsyncThunk(
   }
 );
 
+function getDeadline(gameweeks: Gameweek[]): string {
+  for (let i = 0; i < gameweeks.length; i++) {
+    if (
+      gameweeks[i].finished === false &&
+      new Date(gameweeks[i].deadline_time).getTime() > Date.now()
+    ) {
+      return gameweeks[i].deadline_time;
+    }
+  }
+  return "";
+}
+
 const gameweeksSlice = createSlice({
   name: "gameweeks",
   initialState,
@@ -36,10 +48,9 @@ const gameweeksSlice = createSlice({
       (state, action: PayloadAction<Gameweek[]>) => {
         const gameweeks = action.payload;
         state.gameweeksList = gameweeks;
-        const deadline = gameweeks.find(
-          (gw) => gw.finished === false
-        )?.deadline_time;
-        state.deadline = deadline ? deadline : "";
+
+        const deadline = getDeadline(gameweeks);
+        state.deadline = deadline;
       }
     );
   },
