@@ -9,8 +9,7 @@ import {
   CalendarTableStyled,
 } from "./Calendar.styled";
 import logo from "../../../shared/assets/logos/fpltools_logo.webp";
-import { useEffect } from "react";
-import useCalendarTable from "../hooks/useCalendarTable";
+import { useEffect, useRef } from "react";
 
 const gwArray = Array.from({ length: LAST_GW }, (_, i) => i + 1);
 
@@ -19,24 +18,43 @@ const CalendarTable = () => {
   const gameweeksList = useAppSelector(
     (state) => state.gameweeks.gameweeksList
   );
-  const { offsetScrollbarToCurrentGw } = useCalendarTable();
+  const tableRef = useRef<HTMLTableElement>(null);
+  const currentGameweekRef = useRef<HTMLTableHeaderCellElement>(null);
+  const firstColumnRef = useRef<HTMLTableHeaderCellElement>(null);
 
   useEffect(() => {
-    offsetScrollbarToCurrentGw();
+    if (
+      tableRef.current &&
+      currentGameweekRef.current &&
+      firstColumnRef.current
+    ) {
+      console.log("if");
+
+      const offset =
+        currentGameweekRef.current.offsetLeft -
+        firstColumnRef.current.offsetWidth;
+      tableRef.current.scrollLeft = offset;
+    } else {
+      console.log("else");
+    }
   }, []);
 
   return (
-    <CalendarTableStyled id="table-calendar">
+    <CalendarTableStyled id="table-calendar" ref={tableRef}>
       <table>
         <thead className="calendar-thead">
           <tr>
-            <th className="calendar-th">
+            <th className="calendar-th" ref={firstColumnRef}>
               <img className="calendar-th-logo" src={logo} alt="logo" />
             </th>
             {gwArray.map((gw) => {
               const date = gameweeksList[gw - 1]?.deadline_time.split("T")[0];
               return (
-                <th className="calendar-th" key={gw}>
+                <th
+                  className="calendar-th"
+                  ref={gw === CURRENT_GW ? currentGameweekRef : null}
+                  key={gw}
+                >
                   <div>GW{gw}</div> <span>{date}</span>
                 </th>
               );
