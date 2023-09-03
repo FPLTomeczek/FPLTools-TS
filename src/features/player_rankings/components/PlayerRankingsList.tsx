@@ -43,9 +43,11 @@ const PlayerRankingsList = () => {
         return <PlayerRankingListItem player={player} key={player.id} />;
       })}
       <div className="load-more-btn-container">
-        <Button className="load-more-btn" onClick={handleLoadingNewPlayers}>
-          Load More
-        </Button>
+        {filteredPlayers.length !== listCount ? (
+          <Button className="load-more-btn" onClick={handleLoadingNewPlayers}>
+            Load More
+          </Button>
+        ) : null}
       </div>
     </PlayerRankingsListStyled>
   );
