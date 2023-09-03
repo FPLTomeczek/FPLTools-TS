@@ -29,7 +29,7 @@ const CalendarTimer = () => {
 const CalendarTimerItem = ({ time, name }: { time: number; name: string }) => {
   return (
     <div className="timer-countdown-item">
-      <div>{time}</div>
+      <div>{typeof time === "number" ? time : 0}</div>
       <span className="time-desc">{name}</span>
     </div>
   );
