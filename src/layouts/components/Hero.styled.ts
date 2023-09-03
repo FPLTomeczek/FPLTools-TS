@@ -5,6 +5,7 @@ export const HeroStyled = styled.div`
   flex-direction: column;
   align-items: center;
   width: fit-content;
+  margin: 0 auto;
   .underline {
     width: 100%;
     height: 5px;

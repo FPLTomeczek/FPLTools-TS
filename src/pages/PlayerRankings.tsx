@@ -31,7 +31,7 @@ const PlayerRankings = () => {
     <ThemeProvider theme={theme}>
       <PlayerRankingsProvider>
         <PlayerRankingsPageStyled>
-          <Hero text="Player Rankings" />
+          <Hero>Player Rankings</Hero>
           <PlayerRankingsFilters />
           <PlayerRankingsList />
         </PlayerRankingsPageStyled>

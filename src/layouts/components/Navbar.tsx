@@ -11,6 +11,7 @@ const navbarList = [
   { url: "/", name: "Planner" },
   { url: "/player-rankings", name: "Players" },
   { url: "/calendar", name: "Calendar" },
+  { url: "/news", name: "News" },
 ];
 
 const Navbar = () => {

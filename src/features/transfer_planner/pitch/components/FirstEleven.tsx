@@ -2,7 +2,7 @@ import Pick from "./Pick";
 import { FirstElevenStyled } from "./Pitch.styled";
 import { splittingPicksByRoles } from "../../utils/utils";
 import { Pick as IPick } from "../../../../store_features/drafts/interfaces/drafts";
-import pitch_img from "../../../../shared/assets/pitch-image/FOOTBALL_FIELD_portrait.webp";
+import pitch_img from "../../../../shared/assets/images/FOOTBALL_FIELD_portrait.webp";
 
 const FirstEleven = ({ picks }: { picks: IPick[] }) => {
   const picksByRole = splittingPicksByRoles(picks);

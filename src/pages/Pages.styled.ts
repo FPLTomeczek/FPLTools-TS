@@ -53,3 +53,18 @@ export const CalendarPageStyled = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const NewsPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SingleNewsPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  @media screen and (min-width: 1400px) {
+    flex-direction: row;
+  }
+`;

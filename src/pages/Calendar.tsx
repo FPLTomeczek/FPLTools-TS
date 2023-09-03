@@ -6,7 +6,7 @@ import { CalendarPageStyled } from "./Pages.styled";
 const Calendar = () => {
   return (
     <CalendarPageStyled>
-      <Hero text="Calendar" />
+      <Hero>Calendar</Hero>
       <CalendarTimer />
       <CalendarTable />
     </CalendarPageStyled>
