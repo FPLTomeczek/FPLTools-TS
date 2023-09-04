@@ -16,6 +16,7 @@ export const FirstElevenStyled = styled.div<{ imageURL: string }>`
   justify-content: center;
 
   .pitch {
+    min-height: 600px;
     width: 800px;
     background-size: cover;
     background-repeat: no-repeat;

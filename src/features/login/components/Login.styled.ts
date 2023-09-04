@@ -11,7 +11,9 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
     display: flex;
     flex-direction: column;
   }
-
+  .input-container > label {
+    text-transform: capitalize;
+  }
   .input-container > input {
     width: 100%;
     background-color: ${(props) =>
@@ -21,5 +23,11 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
     color: ${(props) => (props.darkMode ? "#FFFFFF" : "#000000")};
     border: 2px solid var(--secondary-color);
     box-sizing: border-box;
+  }
+  .register-text {
+    color: ${(props) =>
+      props.darkMode
+        ? "var(--secondary-color)"
+        : "var(--secondary-color-dark)"};
   }
 `;

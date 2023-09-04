@@ -2,14 +2,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginFormStyled } from "./Login.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
-import LoginInputError from "./LoginInputError";
 import { noWhitespaceRegex } from "../../../shared/utils/regex";
 import { Link } from "react-router-dom";
-
-interface ILoginFormInput {
-  login: string;
-  password: string;
-}
+import ValidatedInput from "./ValidatedInput";
+import { ILoginFormInput } from "../interface";
 
 const LoginForm = () => {
   const {
@@ -22,38 +18,32 @@ const LoginForm = () => {
 
   return (
     <LoginFormStyled onSubmit={handleSubmit(onSubmit)} darkMode={darkMode}>
-      <div className="input-container">
-        <label htmlFor="login">Login</label>
-        <input
-          id="login"
-          {...register("login", {
-            required: true,
-            maxLength: 30,
-            pattern: noWhitespaceRegex,
-          })}
-        />
-        {errors.login?.type && <LoginInputError type={errors.login.type} />}
-      </div>
-      <div className="input-container">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", {
-            required: true,
-            maxLength: 30,
-            pattern: noWhitespaceRegex,
-          })}
-        />
-        {errors.password?.type && (
-          <LoginInputError type={errors.password.type} />
-        )}
-      </div>
-      <Button type="submit">Submit</Button>
+      <ValidatedInput
+        name="login"
+        register={register}
+        errors={errors}
+        validationOptions={{
+          required: true,
+          maxLength: 30,
+          pattern: noWhitespaceRegex,
+          minLength: 5,
+        }}
+      />
+      <ValidatedInput
+        name="password"
+        register={register}
+        errors={errors}
+        validationOptions={{
+          required: true,
+          maxLength: 30,
+          pattern: noWhitespaceRegex,
+        }}
+      />
+      <Button type="submit">Login</Button>
       <span>
         Not a member?{" "}
         <Link to="/register">
-          <span>Register In</span>
+          <span className="register-text">Register In</span>
         </Link>
       </span>
     </LoginFormStyled>
