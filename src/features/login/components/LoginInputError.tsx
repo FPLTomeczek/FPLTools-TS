@@ -1,10 +1,10 @@
 type LoginInputProps = {
   type: any;
   message?: any;
-  value?: number;
+  input?: string;
 };
 
-const LoginInputError = ({ type, message, value }: LoginInputProps) => {
+const LoginInputError = ({ type, message, input }: LoginInputProps) => {
   if (type === "manual") {
     return <span role="alert">{message}</span>;
   }
@@ -14,11 +14,11 @@ const LoginInputError = ({ type, message, value }: LoginInputProps) => {
       case "required":
         return "Field is required";
       case "pattern":
-        return "No trailing or leading spaces allowed";
+        return "No spaces allowed";
       case "minLength":
-        return `Min ${value} Characters`;
+        return `Min ${input === "username" ? "5" : "8"} Characters`;
       case "maxLength":
-        return `Max ${value} Characters`;
+        return `Max 30 Characters`;
       default:
         return "Validation Error";
     }

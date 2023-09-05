@@ -259,7 +259,7 @@ const draftSlice = createSlice({
     },
     updateGameweeks(state, action: PayloadAction<number>) {
       const gameweek = action.payload;
-      if (gameweek < CURRENT_GW) return;
+      if (gameweek < CURRENT_GW || gameweek > LAST_GW) return;
       const draft = state.managerTeam[state.draftNumber];
       const dataByGameweeks =
         state.managerTeam[state.draftNumber].dataByGameweeks[gameweek];

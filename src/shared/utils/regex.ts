@@ -1,4 +1,4 @@
-export const noWhitespaceRegex = new RegExp(/^[\S]+(?:\s+[\S]+)*$/, "g");
+export const noWhitespaceRegex = new RegExp(/^\S*$/, "g");
 export const emailRegex = new RegExp(
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
 );

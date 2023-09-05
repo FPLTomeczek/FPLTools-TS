@@ -48,6 +48,8 @@ const NewsList = () => {
     return () => document.removeEventListener("scroll", checkScrollBottom);
   }, [postsNumber, isPostsLoading]);
 
+  if (!posts) return <Loading />;
+
   return (
     <div>
       {posts.map((post) => {
