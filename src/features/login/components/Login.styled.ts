@@ -23,6 +23,20 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
     color: ${(props) => (props.darkMode ? "#FFFFFF" : "#000000")};
     border: 2px solid var(--secondary-color);
     box-sizing: border-box;
+    &:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-text-fill-color: ${(props) =>
+        props.darkMode ? "#FFFFFF" : "#000000"};
+      -webkit-box-shadow: 0 0 0px 1000px
+        ${(props) =>
+          props.darkMode
+            ? "var(--primary-color-light)"
+            : "var(--secondary-color-light)"}
+        inset;
+    }
   }
   .register-text {
     color: ${(props) =>

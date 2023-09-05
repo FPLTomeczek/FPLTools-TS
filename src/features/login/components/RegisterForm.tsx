@@ -11,7 +11,7 @@ import {
   ValidResponse,
   registerUser,
 } from "../api/auth";
-import LoginInputError from "./LoginInputError";
+import AuthInputError from "./AuthInputError";
 
 function isValidResponse(response: any): response is ValidResponse {
   return response && "user" in response && "token" in response;
@@ -34,24 +34,24 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<IRegisterFormInput> = async (data) => {
     if (data.password !== data.password2) {
       setError("password2", {
-        type: "manual",
+        type: "passwordMatch",
         message: "Passwords do not match",
       });
-      return;
     }
     const response = await registerUser(data);
-    console.log(response);
 
     if (isValidResponse(response)) {
       console.log("This is a valid response", response);
     } else if (isRegisterInvalidResponse(response)) {
       console.log("This is an invalid registration response", response);
-      response.fields.map((field) => {
-        setError(field, {
-          type: "manual",
-          message: response.msg,
+      if (response.msg === "Duplicate values.") {
+        response.fields.map((field) => {
+          setError(field, {
+            type: "duplicate",
+            message: response.msg,
+          });
         });
-      });
+      }
     }
   };
 
@@ -72,21 +72,20 @@ const RegisterForm = () => {
           })}
         />
         {errors.username?.type && (
-          <LoginInputError type={errors.username.type} input="username" />
+          <AuthInputError type={errors.username.type} input="username" />
         )}
       </div>
       <div className="input-container">
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          type="email"
           {...register("email", {
             required: true,
             pattern: emailRegex,
           })}
         />
         {errors.email?.type && (
-          <LoginInputError type={errors.email.type} input="email" />
+          <AuthInputError type={errors.email.type} input="email" />
         )}
       </div>
       <div className="input-container">
@@ -98,12 +97,11 @@ const RegisterForm = () => {
           {...register("password", {
             required: true,
             minLength: 8,
-            maxLength: 30,
             pattern: noWhitespaceRegex,
           })}
         />
         {errors.password?.type && (
-          <LoginInputError type={errors.password.type} input="password" />
+          <AuthInputError type={errors.password.type} input="password" />
         )}
       </div>
       <div className="input-container">
@@ -115,12 +113,11 @@ const RegisterForm = () => {
           {...register("password2", {
             required: true,
             minLength: 8,
-            maxLength: 30,
             pattern: noWhitespaceRegex,
           })}
         />
         {errors.password2?.type && (
-          <LoginInputError type={errors.password2.type} input="password" />
+          <AuthInputError type={errors.password2.type} input="password2" />
         )}
       </div>
       <Button type="submit">Sign In</Button>
