@@ -47,7 +47,7 @@ const gameweeksSlice = createSlice({
       fetchGameweeks.fulfilled,
       (state, action: PayloadAction<Gameweek[]>) => {
         const gameweeks = action.payload;
-        state.gameweeksList = gameweeks;
+        state.gameweeksList = gameweeks.sort((a, b) => a.id - b.id);
 
         const deadline = getDeadline(gameweeks);
         state.deadline = deadline;
