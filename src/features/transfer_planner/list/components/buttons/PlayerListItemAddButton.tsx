@@ -16,7 +16,7 @@ export const PlayerListItemAddButton = ({ player }: { player: Player }) => {
       >
         <AddCircleIcon
           sx={{
-            color: `${isPlayerAvailable ? "green" : "var(--disabled-color)"}`,
+            color: `${isPlayerAvailable ? "green" : "var(--grey-color)"}`,
           }}
         />
       </button>

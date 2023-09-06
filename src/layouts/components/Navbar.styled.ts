@@ -21,13 +21,13 @@ export const NavbarStyled = styled.nav<{ darkMode: boolean }>`
   .mobile-visible {
     display: none;
   }
-  & a {
+  .list-item-navbar__link {
     display: flex;
     justify-content: center;
     align-items: center;
     transition: color 0.3s ease-out;
   }
-  & a:hover {
+  .list-item-navbar__link:hover {
     color: ${(props) =>
       props.darkMode ? "var(--secondary-color)" : "#7b4f01"};
   }
@@ -36,14 +36,23 @@ export const NavbarStyled = styled.nav<{ darkMode: boolean }>`
     height: 32px;
     padding: 0.5rem;
   }
-  .list-item-navbar-active {
+  .list-item-navbar__link__active {
     color: ${(props) =>
       props.darkMode ? "var(--secondary-color-light)" : "#b77601"};
   }
-  .navbar-mobile-content {
+  .navbar-right-content {
     display: flex;
     align-items: center;
     gap: 2rem;
+  }
+  .navbar-right-content__auth {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+  }
+  .navbar-right-content__auth__button {
+    color: ${(props) => (props.darkMode ? "#FFFFFF" : "#000000")};
   }
   @media screen and (max-width: 900px) {
     .nav-list {

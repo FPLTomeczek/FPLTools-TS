@@ -1,9 +1,6 @@
 import { useState } from "react";
 
-import {
-  TransferPlannerContentStyled,
-  TransferPlannerStyled,
-} from "./Pages.styled";
+import { TransferPlannerPageStyled } from "./Pages.styled";
 import Hero from "../layouts/components/Hero";
 import SnackbarWrapper from "../shared/ui/Snackbar/SnackbarWrapper";
 import UserIDForm from "../shared/ui/Form/UserIDForm";
@@ -13,15 +10,13 @@ import GameweeksTransfersContainer from "../features/transfer_planner/gameweeks_
 
 const TransferPlannerContent = ({ isLoading }: { isLoading: boolean }) => {
   return (
-    <TransferPlannerContentStyled>
-      <div>
-        <div className="pitch-playerlist-container">
-          <Pitch isLoading={isLoading} />
-          <PlayersList />
-        </div>
-        <GameweeksTransfersContainer />
+    <div className="transfer-planer-content__container">
+      <div className="pitch-playerlist__container">
+        <Pitch isLoading={isLoading} />
+        <PlayersList />
       </div>
-    </TransferPlannerContentStyled>
+      <GameweeksTransfersContainer />
+    </div>
   );
 };
 
@@ -34,12 +29,12 @@ const TransferPlanner = () => {
   };
 
   return (
-    <TransferPlannerStyled>
+    <TransferPlannerPageStyled>
       <SnackbarWrapper error={error} handleSetError={handleSetError} />
       <Hero>Transfer Planner</Hero>
       <UserIDForm setError={setError} setIsLoading={setIsLoading} />
       <TransferPlannerContent isLoading={isLoading} />
-    </TransferPlannerStyled>
+    </TransferPlannerPageStyled>
   );
 };
 
