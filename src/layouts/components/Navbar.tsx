@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -17,11 +17,19 @@ const navbarList = [
 
 const Navbar = () => {
   const [activePage, setActivePage] = useState(navbarList[0].name);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
 
   const { darkMode } = useTheme();
 
   const handleSettingActivePage = (name: string) => {
     setActivePage(name);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -32,6 +40,7 @@ const Navbar = () => {
             <img src={logo} alt="logo" className="navbar-logo" />
           </Link>
         </li>
+
         {navbarList.map((li) => (
           <li
             className="list-item-navbar"
@@ -39,8 +48,8 @@ const Navbar = () => {
             onClick={() => handleSettingActivePage(li.name)}
           >
             <Link
-              className={`${
-                activePage === li.name ? "list-item-navbar-active" : ""
+              className={`list-item-navbar__link${
+                activePage === li.name ? "__active" : ""
               }`}
               to={li.url}
             >
@@ -53,22 +62,27 @@ const Navbar = () => {
             <img src={logo} alt="logo" className="navbar-logo" />
           </Link>
         </li>
-      </ul>
-      <div className="navbar-mobile-content">
-        <DefaultSwitch />
-        <Link to="/login">
-          <div className="account-container">
-            <AccountCircleIcon />
-            <span>Login</span>
-          </div>
-        </Link>
-        <div className="mobile-visible">
+        <li className="mobile-visible">
           <FullScreenDialog
             listItems={navbarList}
             activePage={activePage}
             handleSettingActivePage={handleSettingActivePage}
           />
-        </div>
+        </li>
+      </ul>
+      <div className="navbar-right-content">
+        <DefaultSwitch />
+        <Link to="/login">
+          <div className="navbar-right-content__auth">
+            <AccountCircleIcon />
+            <button
+              className="navbar-right-content__auth__button"
+              onClick={logout}
+            >
+              <span>{token ? "Logout" : "Login"}</span>
+            </button>
+          </div>
+        </Link>
       </div>
     </NavbarStyled>
   );

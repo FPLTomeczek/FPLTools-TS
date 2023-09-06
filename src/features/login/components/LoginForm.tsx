@@ -1,4 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import { LoginFormStyled } from "./Login.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
@@ -15,6 +17,8 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<ILoginFormInput>();
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
     const response = await loginUser(data);
     if (typeof response === "string") {
@@ -23,7 +27,8 @@ const LoginForm = () => {
         message: response,
       });
     } else {
-      console.log(data);
+      localStorage.setItem("token", response.token);
+      navigate("/");
     }
   };
   const { darkMode } = useTheme();

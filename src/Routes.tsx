@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import DefaultLayout from "./layouts/DefaultLayout";
 import TransferPlanner from "./pages/TransferPlanner";
@@ -56,17 +56,25 @@ const AppRoutes = () => {
       <Route
         path="/login"
         element={
-          <DefaultLayout>
-            <Login />
-          </DefaultLayout>
+          localStorage.getItem("token") ? (
+            <Navigate to="/" />
+          ) : (
+            <DefaultLayout>
+              <Login />
+            </DefaultLayout>
+          )
         }
       />
       <Route
         path="/register"
         element={
-          <DefaultLayout>
-            <Register />
-          </DefaultLayout>
+          localStorage.getItem("token") ? (
+            <Navigate to="/" />
+          ) : (
+            <DefaultLayout>
+              <Register />
+            </DefaultLayout>
+          )
         }
       />
       <Route
