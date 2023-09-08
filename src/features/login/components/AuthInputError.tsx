@@ -1,11 +1,12 @@
 type LoginInputProps = {
   type: any;
   input?: string;
+  message?: string;
 };
 
-const AuthInputError = ({ type, input }: LoginInputProps) => {
+const AuthInputError = ({ type, input, message }: LoginInputProps) => {
   if (type === "credentials") {
-    return <span role="alert">Invalid Credentials</span>;
+    return <span role="alert">{message}</span>;
   }
 
   if (type === "duplicate") {

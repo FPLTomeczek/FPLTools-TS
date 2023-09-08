@@ -7,8 +7,9 @@ import Calendar from "./pages/Calendar";
 import Error from "./pages/Error";
 import News from "./pages/News";
 import SingleNews from "./pages/SingleNews";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import VerifyEmail from "./pages/auth/VerifyEmail";
 
 const AppRoutes = () => {
   return (
@@ -73,6 +74,18 @@ const AppRoutes = () => {
           ) : (
             <DefaultLayout>
               <Register />
+            </DefaultLayout>
+          )
+        }
+      />
+      <Route
+        path="/verify/:userID/:emailToken"
+        element={
+          localStorage.getItem("token") ? (
+            <Navigate to="/" />
+          ) : (
+            <DefaultLayout>
+              <VerifyEmail />
             </DefaultLayout>
           )
         }

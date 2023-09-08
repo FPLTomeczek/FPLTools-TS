@@ -26,7 +26,7 @@ export type Theme = {
 
 const lightTheme = {
   colors: {
-    background: "#ffffff",
+    background: "#F8FAFC",
     text: "var(--primary-color)",
     button: {
       text: "var(--primary-color)",

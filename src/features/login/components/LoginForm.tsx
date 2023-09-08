@@ -52,7 +52,9 @@ const LoginForm = () => {
           {...register("password")}
         />
       </div>
-      {errors.root?.type && <AuthInputError type={errors.root?.type} />}
+      {errors.root?.type && (
+        <AuthInputError type={errors.root.type} message={errors.root.message} />
+      )}
       <Button type="submit">Login</Button>
       <span>
         Not a member?{" "}

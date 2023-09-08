@@ -9,7 +9,6 @@ export type ValidResponse = {
     email: string;
     __v: number;
   };
-  token: string;
 };
 
 export type RegisterInvalidResponse = {
