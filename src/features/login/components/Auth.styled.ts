@@ -4,7 +4,6 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 600px;
   gap: 1rem;
 
   .input-container {
@@ -44,4 +43,12 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
         ? "var(--secondary-color)"
         : "var(--secondary-color-dark)"};
   }
+`;
+
+export const EmailVerificationRedirectStyled = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 `;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Navbar from "./components/Navbar";
 
-const DefaultView = styled.div`
-  max-width: 1400px;
+const AuthView = styled.div`
+  max-width: 600px;
   margin: 0 auto;
   padding-bottom: 1rem;
   @media screen and (max-width: 1400px) {
@@ -11,13 +11,13 @@ const DefaultView = styled.div`
   }
 `;
 
-const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <DefaultView>{children}</DefaultView>
+      <AuthView>{children}</AuthView>
     </>
   );
 };
 
-export default DefaultLayout;
+export default AuthLayout;

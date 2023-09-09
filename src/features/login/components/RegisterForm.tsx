@@ -1,7 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Alert } from "@mui/material";
+import { useState } from "react";
 
-import { LoginFormStyled as RegisterFormStyled } from "./Login.styled";
+import { LoginFormStyled as RegisterFormStyled } from "./Auth.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
 import { emailRegex, noWhitespaceRegex } from "../../../shared/utils/regex";
@@ -14,9 +16,8 @@ import {
 import AuthInputError from "./AuthInputError";
 
 function isValidResponse(response: any): response is ValidResponse {
-  return response && "user" in response && "token" in response;
+  return response && "user" in response;
 }
-
 function isRegisterInvalidResponse(
   response: any
 ): response is RegisterInvalidResponse {
@@ -31,6 +32,8 @@ const RegisterForm = () => {
     setError,
   } = useForm<IRegisterFormInput>();
 
+  const [isResponseValid, setIsResponseValid] = useState(false);
+
   const onSubmit: SubmitHandler<IRegisterFormInput> = async (data) => {
     if (data.password !== data.password2) {
       setError("password2", {
@@ -42,7 +45,9 @@ const RegisterForm = () => {
 
     if (isValidResponse(response)) {
       console.log("This is a valid response", response);
+      setIsResponseValid(true);
     } else if (isRegisterInvalidResponse(response)) {
+      setIsResponseValid(false);
       console.log("This is an invalid registration response", response);
       if (response.msg === "Duplicate values.") {
         response.fields.map((field) => {
@@ -120,7 +125,12 @@ const RegisterForm = () => {
           <AuthInputError type={errors.password2.type} input="password2" />
         )}
       </div>
-      <Button type="submit">Sign In</Button>
+      {isResponseValid ? (
+        <Alert severity="info">Verification link send to your email</Alert>
+      ) : null}
+      <Button type="submit" onClick={() => setIsResponseValid(true)}>
+        Sign In
+      </Button>
       <span>
         Already a member?{" "}
         <Link to="/login">
