@@ -35,17 +35,19 @@ const RegisterForm = () => {
   const [isResponseValid, setIsResponseValid] = useState(false);
 
   const onSubmit: SubmitHandler<IRegisterFormInput> = async (data) => {
+    setIsResponseValid(false);
     if (data.password !== data.password2) {
       setError("password2", {
         type: "passwordMatch",
         message: "Passwords do not match",
       });
     }
+    // Optimistic Email Verification Rendering
+    setIsResponseValid(true);
     const response = await registerUser(data);
 
     if (isValidResponse(response)) {
       console.log("This is a valid response", response);
-      setIsResponseValid(true);
     } else if (isRegisterInvalidResponse(response)) {
       setIsResponseValid(false);
       console.log("This is an invalid registration response", response);
@@ -128,9 +130,7 @@ const RegisterForm = () => {
       {isResponseValid ? (
         <Alert severity="info">Verification link send to your email</Alert>
       ) : null}
-      <Button type="submit" onClick={() => setIsResponseValid(true)}>
-        Sign In
-      </Button>
+      <Button type="submit">Sign In</Button>
       <span>
         Already a member?{" "}
         <Link to="/login">
