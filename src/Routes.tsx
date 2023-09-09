@@ -10,6 +10,7 @@ import SingleNews from "./pages/SingleNews";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import VerifyEmail from "./pages/auth/VerifyEmail";
+import AuthLayout from "./layouts/AuthLayout";
 
 const AppRoutes = () => {
   return (
@@ -60,9 +61,9 @@ const AppRoutes = () => {
           localStorage.getItem("token") ? (
             <Navigate to="/" />
           ) : (
-            <DefaultLayout>
+            <AuthLayout>
               <Login />
-            </DefaultLayout>
+            </AuthLayout>
           )
         }
       />
@@ -72,9 +73,9 @@ const AppRoutes = () => {
           localStorage.getItem("token") ? (
             <Navigate to="/" />
           ) : (
-            <DefaultLayout>
+            <AuthLayout>
               <Register />
-            </DefaultLayout>
+            </AuthLayout>
           )
         }
       />
@@ -84,9 +85,9 @@ const AppRoutes = () => {
           localStorage.getItem("token") ? (
             <Navigate to="/" />
           ) : (
-            <DefaultLayout>
+            <AuthLayout>
               <VerifyEmail />
-            </DefaultLayout>
+            </AuthLayout>
           )
         }
       />

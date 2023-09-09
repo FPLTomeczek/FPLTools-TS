@@ -80,3 +80,9 @@ export const LoginPageStyled = styled.div`
   align-items: center;
   gap: 2rem;
 `;
+
+export const VerifyEmailPageStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

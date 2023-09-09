@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Alert } from "@mui/material";
 import { useState } from "react";
 
-import { LoginFormStyled as RegisterFormStyled } from "./Login.styled";
+import { LoginFormStyled as RegisterFormStyled } from "./Auth.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
 import { emailRegex, noWhitespaceRegex } from "../../../shared/utils/regex";
@@ -47,6 +47,7 @@ const RegisterForm = () => {
       console.log("This is a valid response", response);
       setIsResponseValid(true);
     } else if (isRegisterInvalidResponse(response)) {
+      setIsResponseValid(false);
       console.log("This is an invalid registration response", response);
       if (response.msg === "Duplicate values.") {
         response.fields.map((field) => {
@@ -127,7 +128,9 @@ const RegisterForm = () => {
       {isResponseValid ? (
         <Alert severity="info">Verification link send to your email</Alert>
       ) : null}
-      <Button type="submit">Sign In</Button>
+      <Button type="submit" onClick={() => setIsResponseValid(true)}>
+        Sign In
+      </Button>
       <span>
         Already a member?{" "}
         <Link to="/login">

@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { LoginFormStyled } from "./Login.styled";
+import { LoginFormStyled } from "./Auth.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
 import { Link } from "react-router-dom";
