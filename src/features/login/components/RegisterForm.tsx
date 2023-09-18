@@ -3,30 +3,20 @@ import { Link } from "react-router-dom";
 import { Alert } from "@mui/material";
 import { useState } from "react";
 
-import { LoginFormStyled as RegisterFormStyled } from "./Auth.styled";
+import { AuthFormStyled as RegisterFormStyled } from "./Auth.styled";
 import { Button } from "../../../shared/ui/Buttons/Button";
 import { useTheme } from "../../../shared/theme/ThemeProvider";
-import { emailRegex, noWhitespaceRegex } from "../../../shared/utils/regex";
 import { IRegisterFormInput } from "../interface";
-import {
-  RegisterInvalidResponse,
-  ValidResponse,
-  registerUser,
-} from "../api/auth";
-import AuthInputError from "./AuthInputError";
+import { ValidResponse, registerUser } from "../api/auth";
+import { AuthInputContainer } from "./AuthInputContainer";
 
 function isValidResponse(response: any): response is ValidResponse {
   return response && "user" in response;
 }
-function isRegisterInvalidResponse(
-  response: any
-): response is RegisterInvalidResponse {
-  return response && "msg" in response && "fields" in response;
-}
 
 const RegisterForm = () => {
   const {
-    register,
+    register: registerRegister,
     handleSubmit,
     formState: { errors },
     setError,
@@ -40,15 +30,15 @@ const RegisterForm = () => {
         type: "passwordMatch",
         message: "Passwords do not match",
       });
+      setIsResponseValid(false);
+      return;
     }
     const response = await registerUser(data);
 
     if (isValidResponse(response)) {
-      console.log("This is a valid response", response);
       setIsResponseValid(true);
-    } else if (isRegisterInvalidResponse(response)) {
+    } else {
       setIsResponseValid(false);
-      console.log("This is an invalid registration response", response);
       if (response.msg === "Duplicate values.") {
         response.fields.map((field) => {
           setError(field, {
@@ -64,77 +54,52 @@ const RegisterForm = () => {
 
   return (
     <RegisterFormStyled onSubmit={handleSubmit(onSubmit)} darkMode={darkMode}>
-      <div className="input-container">
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          autoComplete="username"
-          {...register("username", {
-            required: true,
-            minLength: 5,
-            maxLength: 30,
-            pattern: noWhitespaceRegex,
-          })}
-        />
-        {errors.username?.type && (
-          <AuthInputError type={errors.username.type} input="username" />
-        )}
-      </div>
-      <div className="input-container">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          {...register("email", {
-            required: true,
-            pattern: emailRegex,
-          })}
-        />
-        {errors.email?.type && (
-          <AuthInputError type={errors.email.type} input="email" />
-        )}
-      </div>
-      <div className="input-container">
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          autoComplete="new-password"
-          {...register("password", {
-            required: true,
-            minLength: 8,
-            pattern: noWhitespaceRegex,
-          })}
-        />
-        {errors.password?.type && (
-          <AuthInputError type={errors.password.type} input="password" />
-        )}
-      </div>
-      <div className="input-container">
-        <label htmlFor="password2">Repeat Password</label>
-        <input
-          id="password2"
-          type="password"
-          autoComplete="new-password"
-          {...register("password2", {
-            required: true,
-            minLength: 8,
-            pattern: noWhitespaceRegex,
-          })}
-        />
-        {errors.password2?.type && (
-          <AuthInputError type={errors.password2.type} input="password2" />
-        )}
-      </div>
-      {isResponseValid ? (
-        <Alert severity="info">Verification link send to your email</Alert>
-      ) : null}
+      <AuthInputContainer
+        label="Username"
+        id="username"
+        type="text"
+        register={registerRegister}
+        name="username"
+        validationOn={true}
+        errors={errors as Record<keyof IRegisterFormInput, any>}
+      />
+      <AuthInputContainer
+        label="Email"
+        id="email"
+        type="email"
+        register={registerRegister}
+        name="email"
+        validationOn={true}
+        errors={errors as Record<keyof IRegisterFormInput, any>}
+      />
+      <AuthInputContainer
+        label="Password"
+        id="password"
+        type="password"
+        autoComplete="new-password"
+        register={registerRegister}
+        validationOn={true}
+        name="password"
+        errors={errors as Record<keyof IRegisterFormInput, any>}
+      />
+      <AuthInputContainer
+        label="Repeat Password"
+        id="password2"
+        type="password"
+        autoComplete="new-password"
+        register={registerRegister}
+        name="password2"
+        validationOn={true}
+        errors={errors as Record<keyof IRegisterFormInput, any>}
+      />
+      {isResponseValid ? <Alert severity="info">Verification link send to your email</Alert> : null}
       <Button type="submit" onClick={() => setIsResponseValid(true)}>
         Sign In
       </Button>
       <span>
         Already a member?{" "}
         <Link to="/login">
-          <span className="register-text">Log In</span>
+          <span className="form-footer-element-link__text">Log In</span>
         </Link>
       </span>
     </RegisterFormStyled>

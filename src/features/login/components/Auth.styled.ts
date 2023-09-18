@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
+export const AuthFormStyled = styled.form<{ darkMode: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,10 +15,7 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
   }
   .input-container > input {
     width: 100%;
-    background-color: ${(props) =>
-      props.darkMode
-        ? "var(--primary-color-light)"
-        : "var(--secondary-color-light)"};
+    background-color: ${(props) => (props.darkMode ? "var(--primary-color-light)" : "var(--secondary-color-light)")};
     color: ${(props) => (props.darkMode ? "#FFFFFF" : "#000000")};
     border: 2px solid var(--secondary-color);
     box-sizing: border-box;
@@ -27,21 +24,12 @@ export const LoginFormStyled = styled.form<{ darkMode: boolean }>`
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-      -webkit-text-fill-color: ${(props) =>
-        props.darkMode ? "#FFFFFF" : "#000000"};
-      -webkit-box-shadow: 0 0 0px 1000px
-        ${(props) =>
-          props.darkMode
-            ? "var(--primary-color-light)"
-            : "var(--secondary-color-light)"}
-        inset;
+      -webkit-text-fill-color: ${(props) => (props.darkMode ? "#FFFFFF" : "#000000")};
+      -webkit-box-shadow: 0 0 0px 1000px ${(props) => (props.darkMode ? "var(--primary-color-light)" : "var(--secondary-color-light)")} inset;
     }
   }
-  .register-text {
-    color: ${(props) =>
-      props.darkMode
-        ? "var(--secondary-color)"
-        : "var(--secondary-color-dark)"};
+  .form-footer-element-link__text {
+    color: ${(props) => (props.darkMode ? "var(--secondary-color)" : "var(--secondary-color-dark)")};
   }
 `;
 
@@ -51,4 +39,14 @@ export const EmailVerificationRedirectStyled = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+`;
+
+export const LoginFormFooterStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const LoginFormFooterElementStyled = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
